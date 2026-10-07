@@ -1,7 +1,7 @@
 # theluxuryliners.com: Master Plan (Draft 2)
 
 > The project manager's synthesis of the five approved research files (`research/01`–`05`), their data files (`data/releases.json`, `data/legacy-urls.json`, `data/assets.json`) and their critiques (`critiques/`). It is modelled on `/home/user/foxymorons.com/plan/00-master-plan.md` and on the daviddewese.com architecture (`/home/user/daviddewese.com/daviddewese-com/architecture/ARCHITECTURE.md`, cited as `DD-ARCH`).
-> Written 2026-10-07. **Status: Draft 2** (round 2), revised after `critiques/plan-round1.md` (7.5/10, 1 blocking issue; every item is answered in the revision log at the end). Awaiting the critic (approval bar 8/10, no blocking issues), **then Carly's answers** (`QUESTIONS-FOR-CARLY.md`). Nothing here is final.
+> Written 2026-10-07. **Status: Draft 2** (round 2), revised after `critiques/plan-round1.md` (7.5/10, 1 blocking issue; every item is answered in the revision log at the end). **Approved by the critic, 8.5/10, no blocking issues (`critiques/plan-round2.md`)**; now awaiting **Carly's answers** (`QUESTIONS-FOR-CARLY.md`). Nothing here is final.
 
 **Source keys used in this file**
 
