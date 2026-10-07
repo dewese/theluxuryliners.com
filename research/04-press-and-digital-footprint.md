@@ -346,7 +346,7 @@ Ordered by impact on what engines say, then by effort. "Who" = who can do it. No
 - **`sameAs` holds only profiles that are (a) this band, (b) verified, and (c) stable.** Never the official site itself (that is `url`), never a single video, never a release page, never a collision (§5), never MySpace / NoiseTrade / isawtheocean.com (P5) / Big Cartel.
 - **Bandcamp is David's account,** not the band's: link Bandcamp album URLs from each `MusicAlbum` (`offers` / `url`), not from the band's `sameAs`.
 - **People:** Person nodes for the four forever members with **name and band role only** (`OrganizationRole` with `roleName` and `startDate`/`endDate`). No `sameAs`, no images without consent, no personal social links for Chad, Scott or Larry. David's node points to `https://daviddewese.com/#person`.
-- **Founders:** `founder` = David Dewese and Chad Edgington (F4). `foundingDate` 1997. `foundingLocation` Nashville, Tennessee follows F4's "1997 (Nashville)"; see Discrepancy D2. Note that daviddewese.com's JSON-LD deliberately **leaves `foundingLocation` out** until the Texas-college vs Nashville wording is settled with David (dd research/03 line 551). The two sites must match: either both publish Nashville or both omit it (open question §10.2 Q10).
+- **Founders:** `founder` = David Dewese and Chad Edgington (F4). `foundingDate` 1997. `foundingLocation` **Texas** (owner decision LL-5, 2026-10-07; supersedes F4's "1997 (Nashville)" for this field); see Discrepancy D2. Note that daviddewese.com's JSON-LD deliberately **leaves `foundingLocation` out** until the Texas-college vs Nashville wording is settled with David (dd research/03 line 551). The two sites must match: either both publish Nashville or both omit it (open question §10.2 Q10).
 - Use the same canonical description string everywhere (site meta, JSON-LD `description`, Wikidata description, DSP bios, Discogs profile, Last.fm wiki).
 
 ### 8.2 Recommended `sameAs` list
@@ -383,10 +383,10 @@ Ordered by impact on what engines say, then by effort. "Who" = who can do it. No
       "name": "The Luxury Liners",
       "alternateName": "Luxury Liners",
       "url": "https://theluxuryliners.com/",
-      "description": "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. Chad left Nashville in 2001, and David has carried the band on since.",
+      "description": "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together.",
       "disambiguatingDescription": "Not Emmylou Harris's album Luxury Liner, and not Carter Tanton's recording name Luxury Liners.",
       "foundingDate": "1997",
-      "foundingLocation": { "@type": "Place", "name": "Nashville, Tennessee" },
+      "foundingLocation": { "@type": "Place", "name": "Texas" },
       "founder": [ { "@id": "https://daviddewese.com/#person" }, { "@id": "https://theluxuryliners.com/#chad-edgington" } ],
       "genre": ["Power pop", "Pop rock"],
       "member": [

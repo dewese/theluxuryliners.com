@@ -384,7 +384,7 @@ daviddewese.com already carries the 7 Luxury Liners releases in its own `data/re
 | Field | Value | Source |
 |---|---|---|
 | Name | **The Luxury Liners** (alternate: "Luxury Liners") | `LL04` D7 |
-| One-line description | "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. Chad left Nashville in 2001, and David has carried the band on since." | daviddewese.com `LUXURY_LINERS_LINE` (`site/src/lib/site.ts` line 26); F4. Carly approves its use here (A8) |
+| One-line description | "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together." | daviddewese.com `LUXURY_LINERS_LINE` (`site/src/lib/site.ts` line 26); F4. Carly approves its use here (A8) |
 | Name story | "The name comes from the Gram Parsons song 'Luxury Liner'." | same line; `LL01` §2.3 |
 | Members | David Dewese, Chad Edgington, Scott Carpenter, David "Larry" Wilstermann (forever members) | P8 |
 | Status | active (2021 and 2026 releases) | F6; `LL04` D5 |
@@ -395,7 +395,7 @@ The same strings go into the site meta, JSON-LD `description`, `llms.txt`, the W
 
 - `MusicGroup` with `@id` `https://theluxuryliners.com/#band`; `url` the home page; `foundingDate` 1997; `founder` David (`https://daviddewese.com/#person`) and Chad (`https://theluxuryliners.com/#chad-edgington`, a `Person` with **name only**); `member` as `OrganizationRole` with `roleName`, `startDate` and, for Chad only, `endDate` 2001 (forever members otherwise have no end date); `genre` power pop, pop rock; `disambiguatingDescription`.
 - **Membership modelling is deliberate.** Chad's `endDate` 2001 follows F4 and P23. Scott and Larry have no `endDate` because no source gives one, not because the site claims they play in the band today (B2 is open). P8's "forever" is the band's word for the friendship, not a membership record. A later worker must not "fix" this by removing Chad's end date or by adding end dates for Scott and Larry without an owner answer to B2.
-- **`foundingLocation` is omitted** until Carly answers A7, matching daviddewese.com, which omits it today (`LL04` §8.1 and critic N4).
+- **`foundingLocation` is Texas** (owner decision LL-5, 2026-10-07); `foundingDate` 1997. daviddewese.com should add the same value so both sites match.
 - `MusicAlbum` per release with `@id` `https://theluxuryliners.com/music/<slug>/#album`, `byArtist` the band, `datePublished` (P6), `numTracks`, `track` list, `recordLabel`, `image` (cover), and Bandcamp, Spotify and Apple links as `url`/`offers`, not as band `sameAs` (`LL04` §8.1).
 - daviddewese.com's band page and its Luxury Liners release pages reference these `@id`s once this site is live (`LL04` §7 #10).
 - `FAQPage` only for questions whose answers are visible on the Facts page.
@@ -528,7 +528,7 @@ All owner questions, in priority order with a proposed default for each, are in 
 2. **A2** Design direction (after the Phase 1 samples).
 3. **A3** Phase timing: start the build after daviddewese.com launches, and aim for a spring-2027 launch in the band's 30th year?
 4. **A5** Separate repository from the daviddewese.com template?
-5. **A7** `foundingLocation`: Nashville on both sites, or omitted on both?
+5. ~~**A7** `foundingLocation`~~ answered: Texas (LL-5).
 6. **A11** Source of truth for Luxury Liners release data.
 7. **B2** Who plays on the 2021 and 2026 recordings?
 8. **C1** Consent of Chad, Scott and Larry.
