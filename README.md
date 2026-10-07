@@ -4,7 +4,7 @@ The working folder for a new website for **The Luxury Liners**, the power-pop ba
 
 It runs in the same **multi-agent gauntlet** format as daviddewese.com, foxymorons.com and normaltownusa.com: every deliverable is written by a worker and reviewed by a harsh critic before anyone relies on it.
 
-**Status (2026-10-07):** research complete (5 tracks, all approved). The master plan scored 7.5/10 in round 1 (1 blocking issue: it implied Chad is still in the band); Draft 2 fixes that and every non-blocking item and is back with the critic, then goes to Carly. No site code yet. Nothing in this folder has been committed to git.
+**Status (2026-10-07):** research complete (5 tracks, all critic-approved at 8.5–8.6/10) and the master plan approved (8.5/10, round 2). Carly answered the first four owner questions the same day ([`DECISIONS-2026-10-07.md`](DECISIONS-2026-10-07.md)): core first; launch sooner, now proposed for **2026-11-20**; this repository is the master for the band's release data; and the founding story (named over spring break 1997, moved to Nashville in May 1997). **Next: the rest of Tier 1 in [`QUESTIONS-FOR-CARLY.md`](QUESTIONS-FOR-CARLY.md), starting with A7b and A8.** No site code yet.
 
 ---
 
@@ -13,6 +13,7 @@ It runs in the same **multi-agent gauntlet** format as daviddewese.com, foxymoro
 | Path | What it is |
 |---|---|
 | `plan/00-master-plan.md` | **Start here.** Mission and success measures, ground rules, state of research, the story spine, information architecture and page list, three design directions, technology, authority and AI visibility, launch phases with exit criteria, risks, discrepancies |
+| `DECISIONS-2026-10-07.md` | **Owner decisions (authoritative).** Carly's answers LL-1 to LL-4; they override any file here that disagrees |
 | `QUESTIONS-FOR-CARLY.md` | Every owner question, in priority order (4 tiers), each with why it matters and a proposed default |
 | `research/01-band-history-and-people.md` | History 1997–2026: origin under F4, the name, eras, line-ups, people tables (with a public-OK column), year-by-year timeline, labels, shows, the Nashville scene, links to The Foxymorons, anecdotes, "needs a browser" list |
 | `research/02-discography.md` | Every release, appearance and archive item, with per-track writers, ISRCs, UPCs, platform IDs; all public dates checked live against Spotify (P6) |

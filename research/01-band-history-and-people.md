@@ -60,6 +60,8 @@ David told it this way on his own site, 2012–2024: *"I moved to Nashville with
 
 The Foxymorons oral history (Carly, 2026-10-07) agrees: *"Spring 1997: David moved to Nashville to start a working band, The Luxury Liners, with a college friend."* (`OH-FM`; confirmed-owner.)
 
+**Owner account, 2026-10-07 (`DECISIONS-2026-10-07.md` LL-4; confirmed-owner; authoritative).** Chad and David corresponded by email in the winter and spring of 1997, while Chad was finishing college and David was living in Mesquite, Texas. They came up with the band name over spring break 1997, when they met up to record a ton of songs together on a 4-track. They moved to Nashville in **May 1997**, after Chad's graduation. This matches the 2005 roster (David from May 1997) and David's own "I moved to Nashville with my college buddy … to start this band". It does **not** match the 2005 site's talent-show account of the name (below), which stays archive lore only (Q1/B1). (The place of the spring-break sessions is private and is never named.)
+
 ### 2.2 Other accounts (archive records; show as context, not as the origin story)
 
 | Account | What it says | Source | Confidence |

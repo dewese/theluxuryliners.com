@@ -2,6 +2,8 @@
 
 Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every question now has a "why it matters" line and a proposed default; B2 also asks who is in the band now) for the new theluxuryliners.com, from the five approved research files (`research/01`–`05`) and the master plan (`plan/00-master-plan.md`).
 
+**Answered so far:** A1, A3, A11 and A7 (2026-10-07), recorded in [`DECISIONS-2026-10-07.md`](DECISIONS-2026-10-07.md).
+
 **How to answer.** Each question has a **proposed default**. If a default is fine, a reply of "OK" (or nothing, by the date the phase needs it) is enough, and the site follows the default. Answers are recorded the way the daviddewese.com decisions were (`DECISIONS-2026-09-29.md`), as new owner decisions that override the research.
 
 **Already settled (not asked again).** From the daviddewese.com decisions file: David co-founded the band with Chad Edgington in 1997 and carried it on after Chad left Nashville in 2001 (F4); "Great Day" 2026-02-13 and "New Beginning" 2026-04-17 (F6); Spotify dates are the public dates (P6); the four forever members and the "Larry" nickname (P8); the exact caption for the 2002 photo of all four (P22, P23); "Shake It Up" is an original and track 3 of the *Believe* EP is Cher's "Believe" (P27); isawtheocean.com is never linked (P5); the band keeps its own site (L1); photo credits and no licence requests (R1, P14, P17); the cover-art rights line (P40); the X1 exclusion.
@@ -14,9 +16,9 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 
 | Tier | When we need it | Questions |
 |---|---|---|
-| **1** | Before Phase 0 work goes further (October–November 2026) | A1, A3, C1, E1, A11, A7, A8, B2, A5, A6, B1 |
-| **2** | Before the Story and release pages are written (by late November 2026) | B3, B4, B12, B5, B8, B6, B7, B9, B10, B11, C2, C3, C4, C5, E5, D1, D2, D3, A12, A2 (at the Phase 1 review) |
-| **3** | Before launch (target 2027-03-01) | A4, A9, A10, A13, A14, D4, D5, D7, D8, D9, E2, E3, E4, E6, E7, V1, V2, V4, V6, V7, V8, B13, B14, B15 |
+| **1** | Before Phase 0 work goes further (by 2026-10-16) | ~~A1~~, ~~A3~~, C1, E1, ~~A11~~, ~~A7~~, **A7b**, A8, B2, A5, A6, B1 (struck = answered 2026-10-07, `DECISIONS-2026-10-07.md`) |
+| **2** | Before the Story and release pages are written (by 2026-10-30) | B3, B4, B12, B5, B8, B6, B7, B9, B10, B11, C2, C3, C4, C5, E5, D1, D2, D3, A12, A2 (at the Phase 1 review) |
+| **3** | Before launch (target 2026-11-20) | A4, A9, A10, A13, A14, D4, D5, D7, D8, D9, E2, E3, E4, E6, E7, V1, V2, V4, V6, V7, V8, B13, B14, B15 |
 | **4** | Nice to know; feeds the depth layers after launch | V3, V5, D6, B16, B17, B18, B19 |
 
 ---
@@ -26,10 +28,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **A1. Launch strategy.** Is it OK to launch an "authoritative core" first (Home, Story, Music with a page per release, People, Press, Shows, Vault starter, Photos, Facts, EPK, Listen, Contact) and add depth in layers afterwards (full journal, lyrics, song pages, show archive, more audio)?
 - *Why it matters:* waiting for everything (unread archive pages, David's audio files, lyrics approvals) could push the launch back by months, while the current one-sentence Carrd page keeps telling search engines the band is "one-time".
 - *Proposed default:* **yes, core first** (plan §9).
+- **ANSWERED 2026-10-07 (LL-1: yes, core first).**
 
 **A3. Timing and the 30th anniversary.** Do the research and owner questions now (Phase 0), start the design samples and the build **after daviddewese.com's launch go/no-go (2026-12-11)**, hold the design review with you and David in the week of 2027-01-11, and aim to launch around **2027-03-01**: before the domain renews on 2027-03-19, and in the band's 30th year (1997–2027)?
 - *Why it matters:* the same team runs both sites; the 30th year is a natural, honest reason to launch and to say something new.
 - *Proposed default:* **yes**, with exit criteria, not dates, deciding when each phase ends.
+- **ANSWERED 2026-10-07 (LL-2: sooner; new proposed launch 2026-11-20, see plan §9).**
 
 **C1. Consent: Chad, Scott and Larry.** May the site name Chad Edgington, Scott Carpenter and David "Larry" Wilstermann with their band roles and years, show band photos of them from 1998–2009, and tell the "Larry" story? Would any of them like to give a quote or a memory for the Story?
 - *Why it matters:* they are private people. The research found sources about their lives outside the band, which the site will never use; we want each of them comfortable with how they appear.
@@ -42,10 +46,16 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **A11. One source of truth for the band's release data.** daviddewese.com and this site both list the 7 Luxury Liners releases. This project's research corrected some writer and producer credits from Discogs (for example, "Mine" on *Sound As Ever* and "Restless" on *Overbored*). Should this site's data file become the master for Luxury Liners releases, with daviddewese.com copying from it?
 - *Why it matters:* two copies drift apart; then the two sites disagree, and engines notice.
 - *Proposed default:* **yes**: theluxuryliners.com is the master for the band's releases; daviddewese.com syncs, and both sites run a check that fails if they differ.
+- **ANSWERED 2026-10-07 (LL-3: yes, this repository is the master).**
 
 **A7. Where the band was founded, for structured data.** The decision F4 says "1997 (Nashville)". Old sources say the band started in Texas (the band's 2005 history page; Discogs: "Originally formed in 1997 in Texas"). daviddewese.com currently leaves "founding location" out of its search-engine data. What should both sites say?
 - *Why it matters:* Wikidata, Discogs and AI answers will copy whatever we publish; the two sites must match.
 - *Proposed default:* **leave the founding place out of the structured data on both sites**, and in text say "co-founded in 1997 by David Dewese and Chad Edgington, who took the band to Nashville" (the wording daviddewese.com already uses).
+- **ANSWERED 2026-10-07 (LL-4: conceived in Texas in spring 1997, the name chosen over spring break, moved to Nashville in May 1997; one detail left, A7b).**
+
+**A7b. One detail for the search data (new, after LL-4).** Was Chad's parents' house, where you two picked the name over spring break 1997, in Texas?
+- *Why it matters:* if it was, both sites can say in their search data that the band was **formed in Texas** (the place the name and the first songs came from), with Nashville as its home from May 1997; Discogs already says "formed in 1997 in Texas", so everything would agree. The town is never named, for Chad's family's privacy.
+- *Proposed default:* if it was in Texas, the search data says "founded in Texas, 1997" and the text says "came up with the name over spring break 1997 and moved to Nashville that May"; if not, the founding place stays out of the search data.
 
 **A8. The canonical one-liner.** May the site (and the Spotify bio, Wikidata, Discogs and Last.fm) use daviddewese.com's line: "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. Chad left Nashville in 2001, and David has carried the band on since. The name comes from the Gram Parsons song 'Luxury Liner'."? And should the current site's "Forever brosephs that formed in 1997…" stay as a friendly second line?
 - *Why it matters:* the current site says two different things (the body says "Forever brosephs…"; the hidden description says "One-time Nashville rock band, now scattered across the country"). Engines need one consistent sentence.

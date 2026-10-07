@@ -429,12 +429,20 @@ In order of impact (`LL04` §7):
 
 ## 9. Launch phases
 
-Each phase ends on its **exit criteria**, not on a date. The same team runs both sites, so the dates below are set against daviddewese.com's milestones (M3 content and approvals to 2026-12-04, **M4 launch go/no-go 2026-12-11**, M5 post-launch to 2027-01-29; `DD-ARCH` §14.1):
+Each phase ends on its **exit criteria**, not on a date.
 
-- **Phase 0** is research and asynchronous owner questions only. Tier 1 questions go out in October so that answers can arrive before dd's M3 crunch; nothing in Phase 0 needs a meeting with David.
-- **No Luxury Liners review meeting or build work happens before dd's M4 (2026-12-11).** Phase 1 starts 2026-12-14 and its review with Carly and David is held in January.
-- **Phase 2 overlaps dd's M5** (post-launch: weekly 404 review, one 30–60-minute follow-up session). Phase 2 is developer work; the only thing it asks of Carly's team is one test release in Decap, which can follow the M5 follow-up session. This overlap is a known load, not an avoided one.
-- **Domain check:** nameservers change at the start of Phase 2 (about 2027-01-11), so the zone has been Active for 7 days by about 2027-01-20; the cutover at launch (2027-03-01) leaves 18 days before the 2027-03-19 renewal date.
+**Schedule (owner decision LL-2, 2026-10-07: launch sooner than March 2027).** The earlier draft queued every phase behind daviddewese.com's launch (go/no-go 2026-12-11) so Carly's team would never carry both sites at once. The work itself is about six weeks, because this site reuses daviddewese.com's code, checks, editor and handbook. The new proposed schedule runs the phases in parallel and **launches before daviddewese.com's cutover week**:
+
+| Phase | Proposed dates | Needs from Carly and David |
+|---|---|---|
+| 0 Truth, access, material | 2026-10-08 to 2026-10-16 | Tier 1 answers; consent asks to Chad, Scott and Larry; account access |
+| 1 Look | 2026-10-12 to 2026-10-30 (review in the week of 2026-10-26) | One 45-minute review |
+| 2 Skeleton | 2026-10-12 to 2026-11-06 (runs alongside Phase 1) | One test release in the editor |
+| 3 v1.0 core | 2026-11-02 to **launch Friday 2026-11-20** (before Thanksgiving) | Copy approvals; Tier 2–3 answers or their defaults |
+| Fallback | launch 2026-12-04 if a gate fails | — |
+
+- **Shared load with daviddewese.com, handled by sharing work:** one Cloudflare nameserver change for both domains in October (dd's M1 already schedules it); one handbook (daviddewese.com's, plus a short Luxury Liners appendix); the training session can cover both sites, or this site's team test can come after launch.
+- The dated phase headings below are from the earlier draft; **the table above supersedes them.**
 
 ### Phase 0: Truth, access and material (no website) — proposed 2026-10-08 to 2026-12-11
 
@@ -461,7 +469,7 @@ Each phase ends on its **exit criteria**, not on a date. The same team runs both
 - Add the zone to Cloudflare (DNS-only), change nameservers, wait for Active; attach `staging.theluxuryliners.com`.
 - **Exit criteria:** the redirect suite passes on staging (675/675 rows give their expected result, 0 chains); the Decap zero-diff round trip passes; a test contact message arrives and the address appears nowhere in `dist/`; Carly's team drafts a test release on its own; the zone has been Active for at least 7 days.
 
-### Phase 3: v1.0, "the authoritative core" — target launch 2027-03-01
+### Phase 3: v1.0, "the authoritative core" — target launch 2026-11-20 (LL-2; was 2027-03-01)
 
 - Everything marked v1.0 in §5.1, with approved copy (`approvals.json`), credits and captions; the Vault's first items (old sites, the journal months that have passed their privacy pass, the *Trunk Box* originals if approved, the IA recording embed if approved); JSON-LD, `llms.txt`, sitemap, statements.
 - Handbook finished; training held; manual screen-reader pass (Carly's team, with the dd checklist, as in P43).
