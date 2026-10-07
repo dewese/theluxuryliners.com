@@ -1,0 +1,2480 @@
+[
+ {
+  "id": "luxury-liners-2000-sound-as-ever",
+  "artist": "The Luxury Liners",
+  "title": "Sound As Ever",
+  "type": "album",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2000-05-01",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2000-05-01",
+  "release_date_candidates_internal": [
+   {
+    "date": "2000-05-01",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/6qzUYiUTCQvsgP1NbGY4lD"
+   },
+   {
+    "date": "2000-05-01",
+    "source": "Bandcamp (release date entered by artist; see Bandcamp caveat)",
+    "url": "https://daviddewese.bandcamp.com/album/sound-as-ever"
+   },
+   {
+    "date": "2000-05-01",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/sound-as-ever/529281147"
+   },
+   {
+    "date": "2000-01-01,2000-05-01",
+    "source": "Apple Music track-level releaseDate(s)",
+    "url": "https://music.apple.com/us/album/sound-as-ever/529281147"
+   },
+   {
+    "date": "2000-05-01",
+    "source": "Deezer release_date",
+    "url": "https://www.deezer.com/album/7189504"
+   },
+   {
+    "date": "2000-01-01",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/31180549"
+   },
+   {
+    "date": "2000-05-00",
+    "source": "Discogs release 6768612 \"released\"",
+    "url": "https://www.discogs.com/release/6768612"
+   }
+  ],
+  "label": "Echomusic / Litterbug Records",
+  "catalog_number": "EMLLCD1001",
+  "formats": [
+   "CD",
+   "Digital",
+   "LP reissue 2026 (see editions)"
+  ],
+  "upc": "635759200625",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": null,
+   "musicbrainz_release_mbid": null,
+   "discogs_master_id": null,
+   "discogs_release_id": 6768612,
+   "apple_music_album_id": 529281147,
+   "spotify_album_id": "6qzUYiUTCQvsgP1NbGY4lD",
+   "deezer_album_id": 7189504,
+   "tidal_album_id": 31180549,
+   "bandcamp_album_id": 2083883374,
+   "isrc": null
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/6qzUYiUTCQvsgP1NbGY4lD",
+   "apple_music": "https://music.apple.com/us/album/sound-as-ever/529281147",
+   "bandcamp": "https://daviddewese.bandcamp.com/album/sound-as-ever",
+   "youtube_music": "https://music.youtube.com/browse/MPREb_bzXGIht8w0Q",
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/31180549",
+   "deezer": "https://www.deezer.com/album/7189504"
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "found",
+    "method": "bandcamp.com/api/mobile/24/band_details + tralbum_details, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "found",
+    "method": "api.deezer.com/artist/<id>/albums + /album/<id>, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "open.spotify.com track/album page meta (music:album, og:title, og:restrictions US) fetched with curl 2026-09-28"
+   },
+   "youtube_music": {
+    "result": "found",
+    "method": "YouTube Music youtubei 'next' endpoint (WEB_REMIX, signed out) for art track 9zpOlWVxNHM (\"The International Submarine Band\") from the official 'The Luxury Liners - Topic' channel RSS feed; its byline links album \"Sound As Ever\" (2000) to browse ID MPREb_bzXGIht8w0Q, 2026-09-28"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "total_duration": "52:14",
+  "tracklist_source": "Bandcamp (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "Think She's Coming Around",
+    "duration": "3:13",
+    "duration_seconds": 193,
+    "isrc": "USEC40500197"
+   },
+   {
+    "number": 2,
+    "title": "Fresh Start",
+    "duration": "3:30",
+    "duration_seconds": 210,
+    "isrc": "USEC40500198"
+   },
+   {
+    "number": 3,
+    "title": "Just A Girl",
+    "duration": "3:15",
+    "duration_seconds": 195,
+    "isrc": "USEC40500199"
+   },
+   {
+    "number": 4,
+    "title": "Since You Met Me",
+    "duration": "2:38",
+    "duration_seconds": 158,
+    "isrc": "USEC40500200"
+   },
+   {
+    "number": 5,
+    "title": "When We're Alone",
+    "duration": "4:18",
+    "duration_seconds": 258,
+    "isrc": "USEC40500201"
+   },
+   {
+    "number": 6,
+    "title": "The Duke Of Gloucester",
+    "duration": "4:03",
+    "duration_seconds": 243,
+    "isrc": "USEC40500202"
+   },
+   {
+    "number": 7,
+    "title": "Pecan Valley Blues",
+    "duration": "3:24",
+    "duration_seconds": 204,
+    "isrc": "USEC40500203"
+   },
+   {
+    "number": 8,
+    "title": "Breezy",
+    "duration": "3:38",
+    "duration_seconds": 218,
+    "isrc": "USEC40500204"
+   },
+   {
+    "number": 9,
+    "title": "Mine",
+    "duration": "2:35",
+    "duration_seconds": 155,
+    "isrc": "USEC40500205"
+   },
+   {
+    "number": 10,
+    "title": "Serengeti Summer",
+    "duration": "3:36",
+    "duration_seconds": 216,
+    "isrc": "USEC40500206"
+   },
+   {
+    "number": 11,
+    "title": "User's Guide",
+    "duration": "3:47",
+    "duration_seconds": 227,
+    "isrc": "USEC40500207"
+   },
+   {
+    "number": 12,
+    "title": "How Do I Say Goodbye",
+    "duration": "4:22",
+    "duration_seconds": 262,
+    "isrc": "USEC40500208",
+    "title_alt": {
+     "apple_music": "How Do I Say Goodbye?"
+    }
+   },
+   {
+    "number": 13,
+    "title": "Precious",
+    "duration": "3:19",
+    "duration_seconds": 199,
+    "isrc": "USEC40500209",
+    "title_alt": {
+     "apple_music": "Precious to My Heart"
+    },
+    "hidden_track": true,
+    "note": "Hidden track 1 of 3 (\"three unreleased hidden bonus tracks\", band site 2005). Reissued on Fireworks Vol. 3 (2025) as \"Precious To My Heart\" (3:16 on Discogs)."
+   },
+   {
+    "number": 14,
+    "title": "The Loneliest Boy In Town",
+    "duration": "2:46",
+    "duration_seconds": 166,
+    "isrc": "USEC40500210",
+    "title_alt": {
+     "apple_music": "Loneliest Boy in Town"
+    },
+    "hidden_track": true
+   },
+   {
+    "number": 15,
+    "title": "The International Submarine Band",
+    "duration": "3:50",
+    "duration_seconds": 230,
+    "isrc": "USEC40500211",
+    "hidden_track": true,
+    "note": "Title is the name of Gram Parsons' 1960s band; an original title here, not a cover (no cover credit in any source)."
+   }
+  ],
+  "songwriting": {
+   "summary": "Discogs 6768612 credits \"written-by\" to David Dewese and Chad Edgington (release-level; no per-track split published).",
+   "per_track_known": false,
+   "confidence": "single-source"
+  },
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "performer (guitar, bass, vocals per band roster); co-writer"
+   },
+   {
+    "name": "Chad Edgington",
+    "role": "performer (guitar, bass, vocals per band roster); co-writer"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "performer (drums; joined Aug 1998)"
+   }
+  ],
+  "personnel_note": "Discogs lists the three as performers. David \"Larry\" Wilstermann joined in Dec 2000, after this record (roster, history/story.html 2005).",
+  "production": {
+   "producers": [
+    "Mike Poole",
+    "Mark Montgomery"
+   ],
+   "recorded_mixed": "Mike Poole, Nashville",
+   "studio": null,
+   "mastering": null
+  },
+  "cover_art": {
+   "description": "Illustration of four pairs of blue trouser legs and red shoes on a pale blue pattern; \"the luxury liners\" on a blue bar, \"Sound as ever...\" script; \"STEREO EMLLCD1001\" tag.",
+   "credit": "Design: Mark Montgomery (Discogs 6768612). LP reissue art direction: David Dewese & Mark Montgomery (Discogs 37658859, printed \"DeWeese\").",
+   "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/soundasever.jpg (1400x1400)",
+   "confidence": "single-source"
+  },
+  "editions": [
+   {
+    "name": "Original CD",
+    "country": "US",
+    "label": "Echomusic / Litterbug Records",
+    "catalog_number": "EMLLCD1001",
+    "barcode": "635759200625",
+    "discogs_release_id": 6768612,
+    "track_count": 15
+   },
+   {
+    "name": "Digital",
+    "label": "Litterbug Records (Deezer/Tidal label field)",
+    "upc": "635759200625",
+    "track_count": 15
+   },
+   {
+    "name": "Deluxe LP reissue (remastered)",
+    "see_release_id": "luxury-liners-2026-sound-as-ever-lp"
+   }
+  ],
+  "other_links": {
+   "amazon_cd_unverified": "https://www.amazon.com/Sound-As-Ever-Luxury-Liners/dp/B00004U073",
+   "bigcartel_store_unverified": "https://daviddewese.bigcartel.com/product/sound-as-ever",
+   "discogs": "https://www.discogs.com/release/6768612"
+  },
+  "notes": [
+   "Debut album. Apple copyright line: (P) 2000 The Luxury Liners.",
+   "Tracks 13-15 are hidden bonus tracks; the 2026 LP omits them.",
+   "Hosted on daviddewese.bandcamp.com with artist field \"The Luxury Liners\".",
+   "Digital ISRCs are 2005 registrations (USEC405...), i.e. the digital edition was set up in 2005, not 2000."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Tracklist/durations/ISRCs agree across Bandcamp, Apple, Deezer, Tidal (dd catalog 2026-09-28); UPC = Discogs barcode; public date per P6.",
+   "web_corroboration_2026_10_07": "WebSearch surfaced daviddewese.bandcamp.com listing \"Sound As Ever, The Luxury Liners\", May 2000, 15 tracks.",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "url": "https://daviddewese.bandcamp.com/album/sound-as-ever"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=529281147&entity=song"
+   },
+   {
+    "url": "https://api.deezer.com/album/7189504"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/31180549/tracks?countryCode=US"
+   },
+   {
+    "url": "https://open.spotify.com/album/6qzUYiUTCQvsgP1NbGY4lD"
+   },
+   {
+    "url": "https://www.discogs.com/release/6768612"
+   },
+   {
+    "url": "https://web.archive.org/web/20050321225645/http://theluxuryliners.com/history/music.html",
+    "what": "band site 2005: \"Litterbug Records, May 2000\", producers, hidden tracks (via daviddewese research/04 §5.2)"
+   },
+   {
+    "url": "https://www.amazon.com/Sound-As-Ever-Luxury-Liners/dp/B00004U073",
+    "what": "Amazon CD ASIN, from a WebSearch result recorded in foxymorons.com/research/01-discography.md; page not opened"
+   },
+   {
+    "url": "https://daviddewese.bigcartel.com/product/sound-as-ever",
+    "what": "WebSearch result 2026-10-07 titled \"David Dewese — Sound As Ever\"; page not opened (blocked)"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2026-sound-as-ever-lp",
+  "artist": "The Luxury Liners",
+  "title": "Sound As Ever",
+  "type": "album",
+  "release_role": "reissue",
+  "parent_release_id": "luxury-liners-2000-sound-as-ever",
+  "is_commercial_release": true,
+  "release_date": "2026-05-27",
+  "release_date_precision": "day",
+  "release_date_basis": "Discogs 37658859 (not on Spotify as a separate release; P6 fallback to best source)",
+  "spotify_release_date": null,
+  "label": "Sound Asleep Records (Sweden)",
+  "catalog_number": "ZZZ056",
+  "formats": [
+   "LP, limited edition of 100, marbled maroon vinyl, remastered"
+  ],
+  "upc": null,
+  "tracklist": [
+   {
+    "side": "A",
+    "position": "A1",
+    "title": "Think She's Coming Around",
+    "cd_track": 1,
+    "duration": null
+   },
+   {
+    "side": "A",
+    "position": "A2",
+    "title": "Fresh Start",
+    "cd_track": 2,
+    "duration": null
+   },
+   {
+    "side": "A",
+    "position": "A3",
+    "title": "Just A Girl",
+    "cd_track": 3,
+    "duration": null
+   },
+   {
+    "side": "A",
+    "position": "A4",
+    "title": "Since You Met Me",
+    "cd_track": 4,
+    "duration": null
+   },
+   {
+    "side": "A",
+    "position": "A5",
+    "title": "When We're Alone",
+    "cd_track": 5,
+    "duration": null
+   },
+   {
+    "side": "A",
+    "position": "A6",
+    "title": "The Duke Of Gloucester",
+    "cd_track": 6,
+    "duration": null
+   },
+   {
+    "side": "B",
+    "position": "B1",
+    "title": "Pecan Valley Blues",
+    "cd_track": 7,
+    "duration": null
+   },
+   {
+    "side": "B",
+    "position": "B2",
+    "title": "Breezy",
+    "cd_track": 8,
+    "duration": null
+   },
+   {
+    "side": "B",
+    "position": "B3",
+    "title": "Mine",
+    "cd_track": 9,
+    "duration": null
+   },
+   {
+    "side": "B",
+    "position": "B4",
+    "title": "Serengeti Summer",
+    "cd_track": 10,
+    "duration": null
+   },
+   {
+    "side": "B",
+    "position": "B5",
+    "title": "User's Guide",
+    "cd_track": 11,
+    "duration": null
+   },
+   {
+    "side": "B",
+    "position": "B6",
+    "title": "How Do I Say Goodbye",
+    "cd_track": 12,
+    "duration": null
+   }
+  ],
+  "total_duration": null,
+  "tracklist_source": "Discogs 37658859 (A1-B6 = CD tracks 1-12)",
+  "production": {
+   "remastered_by": "Anders Peterson"
+  },
+  "cover_art": {
+   "credit": "Art direction: David Dewese & Mark Montgomery (Discogs credit printed \"David DeWeese\")",
+   "confidence": "single-source"
+  },
+  "identifiers": {
+   "discogs_release_id": 37658859
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/37658859"
+  },
+  "notes": [
+   "First vinyl pressing of the debut; no hidden tracks.",
+   "Described on daviddewese.com as a \"deluxe\" reissue; exact Discogs wording not re-read this round."
+  ],
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Discogs 37658859 only (read via API 2026-09-28 by dd catalog worker; critic match catalog-fix-round1 #8). No label page or shop listing re-found: WebSearch 2026-10-07 found the Sound Asleep label pages (Discogs label 451138, Facebook, Instagram) but not this item.",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "url": "https://www.discogs.com/release/37658859"
+   },
+   {
+    "url": "https://www.discogs.com/label/451138-Sound-Asleep-Records",
+    "what": "label, found by WebSearch 2026-10-07"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2001-believe-ep",
+  "artist": "The Luxury Liners",
+  "title": "Believe EP",
+  "type": "ep",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2001-03-01",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2001-03-01",
+  "release_date_candidates_internal": [
+   {
+    "date": "2001-03-01",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/0b8te1vh6pqC1vcUrzmVD5"
+   },
+   {
+    "date": "2001-01-21",
+    "source": "Bandcamp (release date entered by artist; see Bandcamp caveat)",
+    "url": "https://daviddewese.bandcamp.com/album/believe-ep"
+   },
+   {
+    "date": "2001-03-01",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/believe-single/483219017"
+   },
+   {
+    "date": "2001-03-01",
+    "source": "Deezer release_date",
+    "url": "https://www.deezer.com/album/1372240"
+   },
+   {
+    "date": "2001-01-01",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/31180579"
+   },
+   {
+    "date": "2001-03-00",
+    "source": "Discogs release 6768660 \"released\"",
+    "url": "https://www.discogs.com/release/6768660"
+   }
+  ],
+  "label": "Echomusic",
+  "catalog_number": "EMLLCDP1002",
+  "formats": [
+   "Enhanced CD EP",
+   "Digital"
+  ],
+  "upc": "635759201127",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": null,
+   "musicbrainz_release_mbid": null,
+   "discogs_master_id": null,
+   "discogs_release_id": 6768660,
+   "apple_music_album_id": 483219017,
+   "spotify_album_id": "0b8te1vh6pqC1vcUrzmVD5",
+   "deezer_album_id": 1372240,
+   "tidal_album_id": 31180579,
+   "bandcamp_album_id": 4159017568,
+   "isrc": null
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/0b8te1vh6pqC1vcUrzmVD5",
+   "apple_music": "https://music.apple.com/us/album/believe-single/483219017",
+   "bandcamp": "https://daviddewese.bandcamp.com/album/believe-ep",
+   "youtube_music": null,
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/31180579",
+   "deezer": "https://www.deezer.com/album/1372240"
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "found",
+    "method": "bandcamp.com/api/mobile/24/band_details + tralbum_details, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "found",
+    "method": "api.deezer.com/artist/<id>/albums + /album/<id>, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "open.spotify.com track/album page meta (music:album, og:title, og:restrictions US) fetched with curl 2026-09-28"
+   },
+   "youtube_music": {
+    "result": "not_checked",
+    "method": "not_checked: YouTube Music album IDs were resolved in round 5 only for releases with a track among the 15 newest uploads in the artist's 'Topic' channel RSS feed (youtubei 'next' byline -> MPREb browse ID). For this title no art track could be reached: signed-out youtubei search returns no song/album results from this network, and the Topic channels' upload lists and releases tabs come back empty. Unknown, not absent; resolve in a signed-in browser"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "other_links": {
+   "amazon_cd": "https://www.amazon.com/Believe-P-Luxury-Liners/dp/B000065T3A",
+   "spotify_duplicate_unavailable": "https://open.spotify.com/album/4d8xq6q2H9a9VpwPrOmgLz"
+  },
+  "total_duration": "8:55",
+  "tracklist_source": "Bandcamp (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "It's You",
+    "duration": "3:28",
+    "duration_seconds": 208,
+    "isrc": "USQ7J1000012",
+    "writers": [
+     "Chad Edgington",
+     "David Dewese",
+     "Scott Carpenter"
+    ],
+    "note": "A different recording of \"It's You\" (3:24, ISRC USEC40500239) closes Overbored (2003)."
+   },
+   {
+    "number": 2,
+    "title": "Shake It Up",
+    "duration": "2:37",
+    "duration_seconds": 157,
+    "isrc": "USQ7J1000013",
+    "writers": [
+     "Chad Edgington",
+     "David Dewese",
+     "Scott Carpenter"
+    ],
+    "note": "Original Luxury Liners song, first released here (P27). Not the Cars song. Live version released as a single in 2021."
+   },
+   {
+    "number": 3,
+    "title": "Believe",
+    "duration": "2:50",
+    "duration_seconds": 170,
+    "isrc": "USQ7J1000014",
+    "title_alt": {
+     "bandcamp": "Believe (Cher Cover)",
+     "apple_music": "Believe"
+    },
+    "writers": null,
+    "cover_of": {
+     "title": "Believe",
+     "original_artist": "Cher"
+    },
+    "note": "Bandcamp title \"Believe (Cher Cover)\"; credit Cher as original artist (P27). Songwriter credits of the original are not printed in any source read here."
+   }
+  ],
+  "songwriting": {
+   "summary": "Tracks 1-2: Edgington / Dewese / Carpenter (Discogs 6768660). Track 3: cover of Cher.",
+   "confidence": "single-source (writers); confirmed-owner (Shake It Up original, Believe = Cher cover, P27)"
+  },
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "performer; co-writer (1-2)"
+   },
+   {
+    "name": "Chad Edgington",
+    "role": "performer; co-writer (1-2)"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "performer; co-writer (1-2)"
+   }
+  ],
+  "personnel_note": "Discogs credits the three. Wilstermann had joined in Dec 2000; whether he plays on the EP is not stated anywhere (open question).",
+  "production": {
+   "producers": [
+    "Mark Montgomery"
+   ],
+   "engineers": [
+    "Mark Montgomery",
+    "Chris Milfred"
+   ],
+   "mixed_by": "Shane D. Wilson",
+   "mastered_by": "Chris Milfred",
+   "studio": null
+  },
+  "cover_art": {
+   "description": "Red cover, black silhouette of a leaping guitarist over a white ring; \"THE LUXURY LINERS\" top, \"BELIEVE EP\" small.",
+   "credit": null,
+   "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/believe.jpg (1400x1400)",
+   "confidence": "unverified (no credit found)"
+  },
+  "editions": [
+   {
+    "name": "Enhanced CD EP",
+    "label": "Echomusic",
+    "catalog_number": "EMLLCDP1002",
+    "barcode": "635759201127",
+    "discogs_release_id": 6768660,
+    "extras": "QuickTime \"It's You\" video, interview video/EPK, desktop images (Discogs; band albums page 2001)"
+   },
+   {
+    "name": "Digital",
+    "label": "Litterbug Records (Deezer/Tidal)",
+    "upc": "635759201127"
+   }
+  ],
+  "notes": [
+   "Apple files it as \"Believe - Single\"; Bandcamp and the band call it the Believe EP.",
+   "Spotify duplicate 4d8xq6q2H9a9VpwPrOmgLz (\"Believe EP\", dated 2010-12-14) is not available in the US; do not link it.",
+   "Digital ISRCs USQ7J1000012-14 are 2010 registrations under the same registrant as David's solo catalogue, i.e. the digital edition was (re)issued c. 2010.",
+   "\"Shake It Up\" was also handed out on the SESAC SXSW 2001 promo CD."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "dd catalog 2026-09-28 (Bandcamp, Apple, Deezer, Tidal, Discogs agree on tracks); P27 owner facts; public date P6.",
+   "web_corroboration_2026_10_07": "WebSearch surfaced daviddewese.bandcamp.com/album/believe-ep (Bandcamp date January 21, 2001) and Apple album 483219017 \"Believe - Single\".",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "url": "https://daviddewese.bandcamp.com/album/believe-ep"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=483219017&entity=song"
+   },
+   {
+    "url": "https://api.deezer.com/album/1372240"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/31180579/tracks?countryCode=US"
+   },
+   {
+    "url": "https://open.spotify.com/album/0b8te1vh6pqC1vcUrzmVD5"
+   },
+   {
+    "url": "https://www.discogs.com/release/6768660"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/DECISIONS-2026-09-29.md",
+    "what": "P27"
+   },
+   {
+    "url": "https://web.archive.org/web/20011212092215/http://theluxuryliners.com/albums.html",
+    "what": "band albums page 2001 (via research/04)"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2003-overbored",
+  "artist": "The Luxury Liners",
+  "title": "Overbored",
+  "type": "album",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2003-05-01",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2003-05-01",
+  "release_date_candidates_internal": [
+   {
+    "date": "2003-05-01",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/1pRDTqjcjnt4zDm9pPUaEC"
+   },
+   {
+    "date": "2003-04-01",
+    "source": "Bandcamp (release date entered by artist; see Bandcamp caveat)",
+    "url": "https://daviddewese.bandcamp.com/album/overbored"
+   },
+   {
+    "date": "2003-05-01",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/overbored/529876344"
+   },
+   {
+    "date": "2003-04-01",
+    "source": "Apple Music track-level releaseDate(s)",
+    "url": "https://music.apple.com/us/album/overbored/529876344"
+   },
+   {
+    "date": "2003-05-01",
+    "source": "Deezer release_date",
+    "url": "https://www.deezer.com/album/3230601"
+   },
+   {
+    "date": "2003-01-01",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/31180536"
+   },
+   {
+    "date": "2003-04-16",
+    "source": "Discogs release 14391955 \"released\"",
+    "url": "https://www.discogs.com/release/14391955"
+   }
+  ],
+  "label": "Litterbug Records",
+  "catalog_number": "LLCD1003",
+  "formats": [
+   "CD",
+   "Digital"
+  ],
+  "upc": "635759145124",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": "110c4bd6-6ef3-3297-a99c-a334213cb228",
+   "musicbrainz_release_mbid": "d9d3ebdd-3f01-4a19-9918-80efaf6aaf6b",
+   "discogs_master_id": null,
+   "discogs_release_id": 14391955,
+   "apple_music_album_id": 529876344,
+   "spotify_album_id": "1pRDTqjcjnt4zDm9pPUaEC",
+   "deezer_album_id": 3230601,
+   "tidal_album_id": 31180536,
+   "bandcamp_album_id": 404979016,
+   "isrc": null
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/1pRDTqjcjnt4zDm9pPUaEC",
+   "apple_music": "https://music.apple.com/us/album/overbored/529876344",
+   "bandcamp": "https://daviddewese.bandcamp.com/album/overbored",
+   "youtube_music": null,
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/31180536",
+   "deezer": "https://www.deezer.com/album/3230601"
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "found",
+    "method": "bandcamp.com/api/mobile/24/band_details + tralbum_details, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "found",
+    "method": "api.deezer.com/artist/<id>/albums + /album/<id>, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "open.spotify.com track/album page meta (music:album, og:title, og:restrictions US) fetched with curl 2026-09-28"
+   },
+   "youtube_music": {
+    "result": "not_checked",
+    "method": "not_checked: YouTube Music album IDs were resolved in round 5 only for releases with a track among the 15 newest uploads in the artist's 'Topic' channel RSS feed (youtubei 'next' byline -> MPREb browse ID). For this title no art track could be reached: signed-out youtubei search returns no song/album results from this network, and the Topic channels' upload lists and releases tabs come back empty. Unknown, not absent; resolve in a signed-in browser"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "total_duration": "36:23",
+  "tracklist_source": "Bandcamp (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "Sunshine",
+    "duration": "3:05",
+    "duration_seconds": 185,
+    "isrc": "USEC40500231",
+    "placement": "Theme of FOX Sports \"US Youth Soccer Show\" (David's site, 2010)"
+   },
+   {
+    "number": 2,
+    "title": "Restless",
+    "duration": "3:41",
+    "duration_seconds": 221,
+    "isrc": "USEC40500232"
+   },
+   {
+    "number": 3,
+    "title": "Dreaming",
+    "duration": "4:39",
+    "duration_seconds": 279,
+    "isrc": "USEC40500233",
+    "placement": "One Tree Hill S1E15 \"Suddenly Everything Has Changed\" (The WB, 2004-02-24)"
+   },
+   {
+    "number": 4,
+    "title": "Overbored",
+    "duration": "4:12",
+    "duration_seconds": 252,
+    "isrc": "USEC40500234"
+   },
+   {
+    "number": 5,
+    "title": "Waiting For The Sun",
+    "duration": "3:24",
+    "duration_seconds": 204,
+    "isrc": "USEC40500235"
+   },
+   {
+    "number": 6,
+    "title": "Woman",
+    "duration": "3:48",
+    "duration_seconds": 228,
+    "isrc": "USEC40500236"
+   },
+   {
+    "number": 7,
+    "title": "Equasue",
+    "duration": "3:35",
+    "duration_seconds": 215,
+    "isrc": "USEC40500237",
+    "note": "Title spelled \"Equasue\" in every store and on the band site (Nashville Rage review also prints \"Equasue\")."
+   },
+   {
+    "number": 8,
+    "title": "Fifteen Again",
+    "duration": "3:40",
+    "duration_seconds": 220,
+    "isrc": "USEC40500238"
+   },
+   {
+    "number": 9,
+    "title": "It's You",
+    "duration": "3:24",
+    "duration_seconds": 204,
+    "isrc": "USEC40500239",
+    "note": "Re-recording of the Believe EP opener? Different ISRC and duration (3:24 vs 3:28). Unconfirmed."
+   },
+   {
+    "number": 10,
+    "title": "Constellation Invitation",
+    "duration": "2:55",
+    "duration_seconds": 175,
+    "isrc": "USEC40500240"
+   }
+  ],
+  "songwriting": {
+   "summary": "Discogs: written by David Dewese (most tracks); per-track exceptions not listed.",
+   "confidence": "single-source"
+  },
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "guitar, vocals"
+   },
+   {
+    "name": "David \"Larry\" Wilstermann",
+    "role": "bass"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "drums"
+   },
+   {
+    "name": "Paul Seykora",
+    "role": "keyboards (3, 6)"
+   }
+  ],
+  "production": {
+   "producers": [],
+   "recorded_by": "Doug Nightwine",
+   "mixed_by": "Chris Henning",
+   "studio": null,
+   "producer_note": "No producer credit found."
+  },
+  "cover_art": {
+   "description": "Painting of three upside-down figures in coats on off-white; small \"THE LUXURY LINERS OVERBORED\".",
+   "credit": null,
+   "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/overbored.jpg (1400x1400)",
+   "confidence": "unverified (no credit found)"
+  },
+  "editions": [
+   {
+    "name": "CD",
+    "label": "Litterbug Records",
+    "catalog_number": "LLCD1003",
+    "barcode": "635759145124",
+    "discogs_release_id": 14391955
+   },
+   {
+    "name": "Digital",
+    "upc": "635759145124"
+   }
+  ],
+  "notes": [
+   "First album after Chad Edgington left (Apr 2001); the trio is David, Wilstermann, Carpenter.",
+   "Press (band press page 2005): Performing Songwriter 7-04, Metroland 6-03 (Erik Hage), Nashville Rage 10-03, Kool Kat 7-03, Splendid, Lost At Sea, Southeast Performer, Impact Press, Aiding and Abetting.",
+   "Band site had a one-sheet PDF (/downloads/luxury_liners_onesheet.pdf, 2003) and full lyrics and chords (lyrics.html).",
+   "Tidal listing noted as incomplete in 2026-09-28 read (tracks missing).",
+   "Round-3 \"2024\" Bandcamp dates were promotion dates, not a reissue."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "dd catalog 2026-09-28: Bandcamp, Apple, Discogs, Deezer, MusicBrainz agree; public date P6.",
+   "web_corroboration_2026_10_07": "WebSearch surfaced daviddewese.bandcamp.com/album/overbored: 10 tracks, Bandcamp date April 1, 2003, same track order.",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "url": "https://daviddewese.bandcamp.com/album/overbored"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=529876344&entity=song"
+   },
+   {
+    "url": "https://api.deezer.com/album/3230601"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/31180536/tracks?countryCode=US"
+   },
+   {
+    "url": "https://open.spotify.com/album/1pRDTqjcjnt4zDm9pPUaEC"
+   },
+   {
+    "url": "https://www.discogs.com/release/14391955"
+   },
+   {
+    "url": "https://musicbrainz.org/release/d9d3ebdd-3f01-4a19-9918-80efaf6aaf6b"
+   },
+   {
+    "url": "https://web.archive.org/web/20051225072849/http://www.theluxuryliners.com/press.html",
+    "what": "press page 2005 (via research/04)"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/site/data/placements.json",
+    "what": "placements"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2006-nonetheless",
+  "artist": "The Luxury Liners",
+  "title": "Nonetheless",
+  "type": "album",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2006-10-01",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2006-10-01",
+  "release_date_candidates_internal": [
+   {
+    "date": "2006-10-01",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/05AMwlnQPNb4UpHSpIAna7"
+   },
+   {
+    "date": "2006-10-01",
+    "source": "Bandcamp (release date entered by artist; see Bandcamp caveat)",
+    "url": "https://daviddewese.bandcamp.com/album/nonetheless"
+   },
+   {
+    "date": "2006-10-01",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/nonetheless/529282730"
+   },
+   {
+    "date": "2006-09-01",
+    "source": "Apple Music track-level releaseDate(s)",
+    "url": "https://music.apple.com/us/album/nonetheless/529282730"
+   },
+   {
+    "date": "2006-10-01",
+    "source": "Deezer release_date",
+    "url": "https://www.deezer.com/album/8406852"
+   },
+   {
+    "date": "2006-10-01",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/31180946"
+   },
+   {
+    "date": "2006-10-00",
+    "source": "Discogs release 14401612 \"released\"",
+    "url": "https://www.discogs.com/release/14401612"
+   }
+  ],
+  "label": "Litterbug Records",
+  "catalog_number": "LLCD1004",
+  "formats": [
+   "CD",
+   "Digital"
+  ],
+  "upc": "789577513228",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": "f45d4be4-6850-3b8e-aae9-3fe518ad8403",
+   "musicbrainz_release_mbid": "589245ab-ab46-4a7f-af70-e9d6e90b564a",
+   "discogs_master_id": null,
+   "discogs_release_id": 14401612,
+   "apple_music_album_id": 529282730,
+   "spotify_album_id": "05AMwlnQPNb4UpHSpIAna7",
+   "deezer_album_id": 8406852,
+   "tidal_album_id": 31180946,
+   "bandcamp_album_id": 54140699,
+   "isrc": null
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/05AMwlnQPNb4UpHSpIAna7",
+   "apple_music": "https://music.apple.com/us/album/nonetheless/529282730",
+   "bandcamp": "https://daviddewese.bandcamp.com/album/nonetheless",
+   "youtube_music": null,
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/31180946",
+   "deezer": "https://www.deezer.com/album/8406852"
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "found",
+    "method": "bandcamp.com/api/mobile/24/band_details + tralbum_details, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "found",
+    "method": "api.deezer.com/artist/<id>/albums + /album/<id>, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "api.spotify.com/v1/search?q=upc:789577513228&type=album and /v1/artists/<id>/albums (all groups), using the anonymous web-player token served by the open.spotify.com/embed page, 2026-09-28; UPC 789577513228 returned album 05AMwlnQPNb4UpHSpIAna7 (label \"Litterbug Records\", release_date 2006-10-01), the only hit, credited to the same Spotify artist as the band's other releases"
+   },
+   "youtube_music": {
+    "result": "not_checked",
+    "method": "not_checked: YouTube Music album IDs were resolved in round 5 only for releases with a track among the 15 newest uploads in the artist's 'Topic' channel RSS feed (youtubei 'next' byline -> MPREb browse ID). For this title no art track could be reached: signed-out youtubei search returns no song/album results from this network, and the Topic channels' upload lists and releases tabs come back empty. Unknown, not absent; resolve in a signed-in browser"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "total_duration": "44:35",
+  "tracklist_source": "Bandcamp (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "Circles",
+    "duration": "2:47",
+    "duration_seconds": 167,
+    "isrc": "USEC40600624",
+    "note": "Debuted live Oct 2003 (band journal)."
+   },
+   {
+    "number": 2,
+    "title": "Breaking Out",
+    "duration": "4:11",
+    "duration_seconds": 251,
+    "isrc": "USEC40600625",
+    "note": "Played live from May 2002 (band journal); a 12th & Porter live take (7/18/02) was on the band site."
+   },
+   {
+    "number": 3,
+    "title": "Fallen Star",
+    "duration": "3:04",
+    "duration_seconds": 184,
+    "isrc": "USEC40600626"
+   },
+   {
+    "number": 4,
+    "title": "Sing A Song For You",
+    "duration": "4:02",
+    "duration_seconds": 242,
+    "isrc": "USEC40600627"
+   },
+   {
+    "number": 5,
+    "title": "Bluebonnet Sunrise",
+    "duration": "3:56",
+    "duration_seconds": 236,
+    "isrc": "USEC40600628"
+   },
+   {
+    "number": 6,
+    "title": "How It Should Be",
+    "duration": "3:15",
+    "duration_seconds": 195,
+    "isrc": "USEC40600629"
+   },
+   {
+    "number": 7,
+    "title": "Disengage Your Doubt",
+    "duration": "4:19",
+    "duration_seconds": 259,
+    "isrc": "USEC40600630"
+   },
+   {
+    "number": 8,
+    "title": "Crash And Burn",
+    "duration": "3:37",
+    "duration_seconds": 217,
+    "isrc": "USEC40600631"
+   },
+   {
+    "number": 9,
+    "title": "So In Love",
+    "duration": "3:28",
+    "duration_seconds": 208,
+    "isrc": "USEC40600632"
+   },
+   {
+    "number": 10,
+    "title": "Just To Dream",
+    "duration": "3:56",
+    "duration_seconds": 236,
+    "isrc": "USEC40600633"
+   },
+   {
+    "number": 11,
+    "title": "Sold Out",
+    "duration": "3:14",
+    "duration_seconds": 194,
+    "isrc": "USEC40600634",
+    "personnel_extra": "Erika Proegler (violin), Brent Milligan (cello)"
+   },
+   {
+    "number": 12,
+    "title": "The Cards You Dealt Me",
+    "duration": "4:46",
+    "duration_seconds": 286,
+    "isrc": "USEC40600635"
+   }
+  ],
+  "songwriting": {
+   "summary": "Not published in any source read. Presumed David Dewese; unconfirmed.",
+   "confidence": "unverified"
+  },
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "vocals, guitar"
+   },
+   {
+    "name": "David \"Larry\" Wilstermann",
+    "role": "bass, keyboards, vocals"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "drums, percussion, vocals"
+   },
+   {
+    "name": "Ryan Gilbert",
+    "role": "keyboards, vocals"
+   },
+   {
+    "name": "Gary Ishee",
+    "role": "guitar (2, 6)"
+   },
+   {
+    "name": "Erika Proegler",
+    "role": "violin (11)"
+   },
+   {
+    "name": "Brent Milligan",
+    "role": "cello (11)"
+   }
+  ],
+  "production": {
+   "producers": [],
+   "mixed_mastered_by": "Chris Henning, The Den, Ferndale CA",
+   "producer_note": "No producer credit found."
+  },
+  "cover_art": {
+   "description": "Painting of a long dark dress on a hanger on an off-white ground; \"THE LUXURY LINERS NONETHELESS\" across the top.",
+   "credit": null,
+   "photography": "Band photos: Kristen Barlowe (daviddewese.com discography page 2010)",
+   "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/nonetheless.jpg (1400x1400)",
+   "confidence": "single-source (photo credit); cover painter unknown"
+  },
+  "editions": [
+   {
+    "name": "CD",
+    "label": "Litterbug Records",
+    "catalog_number": "LLCD1004",
+    "barcode": "789577513228",
+    "discogs_release_id": 14401612
+   },
+   {
+    "name": "Digital",
+    "upc": "789577513228"
+   }
+  ],
+  "other_links": {
+   "band_store_2008_wayback": "https://web.archive.org/web/20080930021214/http://theluxuryliners.com/store/product/5/Nonetheless"
+  },
+  "press": [
+   {
+    "outlet": "Absolute Power Pop",
+    "note": "Top 100 Releases of 2006, #100 (band site 2007)"
+   },
+   {
+    "outlet": "Carligula",
+    "note": "Top Five Nashville Releases of 2006, #3 (band site 2007)"
+   }
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "dd catalog 2026-09-28: Bandcamp, Apple, Deezer, Tidal, Discogs, MusicBrainz; Spotify ID via UPC search (round 5); public date P6.",
+   "web_corroboration_2026_10_07": "WebSearch surfaced Apple album 529282730 \"Nonetheless by The Luxury Liners\".",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "notes": [
+   "Apple copyright: (P) 2006 The Luxury Liners."
+  ],
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "url": "https://daviddewese.bandcamp.com/album/nonetheless"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=529282730&entity=song"
+   },
+   {
+    "url": "https://api.deezer.com/album/8406852"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/31180946/tracks?countryCode=US"
+   },
+   {
+    "url": "https://www.discogs.com/release/14401612"
+   },
+   {
+    "url": "https://musicbrainz.org/release/589245ab-ab46-4a7f-af70-e9d6e90b564a"
+   },
+   {
+    "url": "https://open.spotify.com/album/05AMwlnQPNb4UpHSpIAna7"
+   },
+   {
+    "url": "https://web.archive.org/web/20070205211156/http://theluxuryliners.com/",
+    "what": "band home 2007, year-end lists (via research/04)"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2021-shake-it-up-live",
+  "artist": "The Luxury Liners",
+  "title": "Shake It Up (Live at the Texas Music Café)",
+  "type": "single",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2021-08-27",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2021-08-27",
+  "release_date_candidates_internal": [
+   {
+    "date": "2021-08-27",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/1G91ruQwVVxJezHwWFox1H"
+   },
+   {
+    "date": "2021-08-27",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/shake-it-up-live-at-the-texas-music-cafe-single/1581823464"
+   },
+   {
+    "date": "2021-08-27",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/194647039"
+   }
+  ],
+  "label": "Texas Music Café",
+  "catalog_number": null,
+  "formats": [
+   "Digital"
+  ],
+  "upc": "662582233728",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": null,
+   "musicbrainz_release_mbid": null,
+   "discogs_master_id": null,
+   "discogs_release_id": null,
+   "apple_music_album_id": 1581823464,
+   "spotify_album_id": "1G91ruQwVVxJezHwWFox1H",
+   "deezer_album_id": null,
+   "tidal_album_id": 194647039,
+   "bandcamp_album_id": null,
+   "isrc": "US2762100919"
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/1G91ruQwVVxJezHwWFox1H",
+   "apple_music": "https://music.apple.com/us/album/shake-it-up-live-at-the-texas-music-cafe-single/1581823464",
+   "bandcamp": null,
+   "youtube_music": "https://music.youtube.com/browse/MPREb_5KpVxToLXAJ",
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/194647039",
+   "deezer": null
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "searched_not_found",
+    "method": "Not in bandcamp.com/api/mobile/24/band_details discography for the artist, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "searched_not_found",
+    "method": "Not in api.deezer.com/artist/<id>/albums, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "open.spotify.com track/album page meta (music:album, og:title, og:restrictions US) fetched with curl 2026-09-28"
+   },
+   "youtube_music": {
+    "result": "found",
+    "method": "YouTube Music youtubei 'next' endpoint (WEB_REMIX, signed out) for art track MPSCBxVjzDw (\"Shake It Up (Live at The Texas Music Cafe)\") from the official 'The Luxury Liners - Topic' channel RSS feed; its byline links album \"Shake It Up (Live at The Texas Music Cafe)\" (2021) to browse ID MPREb_5KpVxToLXAJ, 2026-09-28"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "total_duration": "3:10",
+  "tracklist_source": "Apple Music (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "Shake It Up (Live at the Texas Music Café)",
+    "duration": "3:10",
+    "duration_seconds": 190,
+    "isrc": "US2762100919",
+    "writers": [
+     "Chad Edgington",
+     "David Dewese",
+     "Scott Carpenter"
+    ]
+   }
+  ],
+  "songwriting": {
+   "summary": "Original Luxury Liners song (P27); writers per Believe EP Discogs credit.",
+   "confidence": "confirmed-owner (original) / single-source (writers)"
+  },
+  "personnel": [],
+  "personnel_note": "Line-up and recording date not stated anywhere (open question).",
+  "production": {
+   "released_by": "Texas Music Café (Waco, TX), live TV/radio series"
+  },
+  "cover_art": {
+   "credit": null,
+   "master_file": null,
+   "reference_url": "https://i.scdn.co/image/ab67616d0000b27339732e51fd05e75ebe9fd74d",
+   "confidence": "unverified; no master supplied (P28)"
+  },
+  "notes": [
+   "A different live recording of the song (ISRC US2762202822, 3:12) is on the 2023 Texas Music Cafe compilation."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Apple, Tidal, Spotify agree (dd 2026-09-28); P27.",
+   "web_corroboration_2026_10_07": "none surfaced (search returned only the venue).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=1581823464&entity=song"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/194647039/tracks?countryCode=US"
+   },
+   {
+    "url": "https://open.spotify.com/album/1G91ruQwVVxJezHwWFox1H"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2026-great-day",
+  "artist": "The Luxury Liners",
+  "title": "Great Day",
+  "type": "single",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2026-02-13",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2026-02-13",
+  "release_date_candidates_internal": [
+   {
+    "date": "2026-02-13",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/7jEU9cDDgHh7IWUAXlJ9RF"
+   },
+   {
+    "date": "2026-02-13",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/great-day-single/1870665916"
+   },
+   {
+    "date": "2026-02-13",
+    "source": "Deezer release_date",
+    "url": "https://www.deezer.com/album/902290832"
+   },
+   {
+    "date": "2026-02-13",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/491176925"
+   }
+  ],
+  "label": "Litterbug Records",
+  "catalog_number": null,
+  "formats": [
+   "Digital"
+  ],
+  "upc": "199900557513",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": null,
+   "musicbrainz_release_mbid": null,
+   "discogs_master_id": null,
+   "discogs_release_id": null,
+   "apple_music_album_id": 1870665916,
+   "spotify_album_id": "7jEU9cDDgHh7IWUAXlJ9RF",
+   "deezer_album_id": 902290832,
+   "tidal_album_id": 491176925,
+   "bandcamp_album_id": null,
+   "isrc": "USQ7J2600001"
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/7jEU9cDDgHh7IWUAXlJ9RF",
+   "apple_music": "https://music.apple.com/us/album/great-day-single/1870665916",
+   "bandcamp": null,
+   "youtube_music": "https://music.youtube.com/browse/MPREb_S37jYFP6dDr",
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/491176925",
+   "deezer": "https://www.deezer.com/album/902290832"
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "searched_not_found",
+    "method": "Not in bandcamp.com/api/mobile/24/band_details discography for the artist, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "found",
+    "method": "api.deezer.com/artist/<id>/albums + /album/<id>, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "open.spotify.com track/album page meta (music:album, og:title, og:restrictions US) fetched with curl 2026-09-28"
+   },
+   "youtube_music": {
+    "result": "found",
+    "method": "YouTube Music youtubei 'next' endpoint (WEB_REMIX, signed out) for art track qjZaiwO7KXI (\"Great Day\") from the official 'The Luxury Liners - Topic' channel RSS feed; its byline links album \"Great Day\" (2026) to browse ID MPREb_S37jYFP6dDr, 2026-09-28"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "total_duration": "3:22",
+  "tracklist_source": "Apple Music (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "Great Day",
+    "duration": "3:22",
+    "duration_seconds": 202,
+    "isrc": "USQ7J2600001"
+   }
+  ],
+  "songwriting": {
+   "summary": "Not published. A 2008 Luxury Liners demo of \"Great Day\" is on the Make The Best Of It Kool Kat bonus disc.",
+   "confidence": "unverified"
+  },
+  "personnel": [],
+  "personnel_note": "Who plays on it is not stated (open question).",
+  "production": {},
+  "cover_art": {
+   "description": "Red kite on a long string against a blue gradient sky; \"Great Day\" in white serif.",
+   "credit": null,
+   "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/great-day-1-upscale.png (3000x3000, upscaled)",
+   "confidence": "unverified"
+  },
+  "other_links": {
+   "spotify_track": "https://open.spotify.com/track/5VN9RMk9n83auNJvD8FF9G"
+  },
+  "notes": [
+   "Owner-confirmed as David's band and a 2026 release (F6). Apple/Tidal copyright (P) 2026 The Luxury Liners.",
+   "Spotify track ID 5VN9RMk9n83auNJvD8FF9G surfaced in WebSearch 2026-10-07 (\"Great Day - song and lyrics by The Luxury Liners\"); not opened."
+  ],
+  "verification": "confirmed-owner",
+  "verification_detail": {
+   "basis": "F6 owner decision; Apple, Deezer, Tidal, Spotify agree (dd 2026-09-28).",
+   "web_corroboration_2026_10_07": "WebSearch surfaced the Spotify track page.",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/DECISIONS-2026-09-29.md",
+    "what": "F6"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=1870665916&entity=song"
+   },
+   {
+    "url": "https://api.deezer.com/album/902290832"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/491176925/tracks?countryCode=US"
+   },
+   {
+    "url": "https://open.spotify.com/album/7jEU9cDDgHh7IWUAXlJ9RF"
+   },
+   {
+    "url": "https://open.spotify.com/track/5VN9RMk9n83auNJvD8FF9G",
+    "what": "WebSearch result 2026-10-07"
+   }
+  ]
+ },
+ {
+  "id": "luxury-liners-2026-new-beginning",
+  "artist": "The Luxury Liners",
+  "title": "New Beginning",
+  "type": "single",
+  "release_role": "primary",
+  "is_commercial_release": true,
+  "release_date": "2026-04-17",
+  "release_date_precision": "day",
+  "release_date_basis": "P6 owner rule: public date = Spotify listed release date (read 2026-09-29 by the daviddewese.com catalog worker; re-read blocked 2026-10-07)",
+  "spotify_release_date": "2026-04-17",
+  "release_date_candidates_internal": [
+   {
+    "date": "2026-04-17",
+    "source": "Spotify album page release date (open.spotify.com, rendered 2026-09-29; precision DAY). P6 public date",
+    "url": "https://open.spotify.com/album/0r4RvQu4V4jKhSAlwBm7Fz"
+   },
+   {
+    "date": "2026-04-17",
+    "source": "Apple Music album releaseDate",
+    "url": "https://music.apple.com/us/album/new-beginning-single/1888874973"
+   },
+   {
+    "date": "2026-02-13,2026-04-10",
+    "source": "Apple Music track-level releaseDate(s)",
+    "url": "https://music.apple.com/us/album/new-beginning-single/1888874973"
+   },
+   {
+    "date": "2026-04-17",
+    "source": "Deezer release_date",
+    "url": "https://www.deezer.com/album/949841901"
+   },
+   {
+    "date": "2026-04-10",
+    "source": "Tidal releaseDate",
+    "url": "https://tidal.com/browse/album/511031499"
+   },
+   {
+    "date": "2026-04-10",
+    "source": "Apple track-level releaseDate for \"New Beginning\"",
+    "url": "https://music.apple.com/us/album/new-beginning-single/1888874973"
+   }
+  ],
+  "label": "Litterbug Records",
+  "catalog_number": null,
+  "formats": [
+   "Digital"
+  ],
+  "upc": "991043318712",
+  "identifiers": {
+   "musicbrainz_release_group_mbid": null,
+   "musicbrainz_release_mbid": null,
+   "discogs_master_id": null,
+   "discogs_release_id": null,
+   "apple_music_album_id": 1888874973,
+   "spotify_album_id": "0r4RvQu4V4jKhSAlwBm7Fz",
+   "deezer_album_id": 949841901,
+   "tidal_album_id": 511031499,
+   "bandcamp_album_id": null,
+   "isrc": null
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/0r4RvQu4V4jKhSAlwBm7Fz",
+   "apple_music": "https://music.apple.com/us/album/new-beginning-single/1888874973",
+   "bandcamp": null,
+   "youtube_music": "https://music.youtube.com/browse/MPREb_km85fvzVpxe",
+   "amazon_music": null,
+   "tidal": "https://tidal.com/browse/album/511031499",
+   "deezer": "https://www.deezer.com/album/949841901"
+  },
+  "links_checked": {
+   "bandcamp": {
+    "result": "searched_not_found",
+    "method": "Not in bandcamp.com/api/mobile/24/band_details discography for the artist, 2026-09-28"
+   },
+   "apple_music": {
+    "result": "found",
+    "method": "itunes.apple.com/lookup?id=<artist>&entity=album and entity=song, 2026-09-28"
+   },
+   "deezer": {
+    "result": "found",
+    "method": "api.deezer.com/artist/<id>/albums + /album/<id>, 2026-09-28"
+   },
+   "tidal": {
+    "result": "found",
+    "method": "api.tidal.com/v1/artists/<id>/albums (ALBUMS, EPSANDSINGLES, COMPILATIONS), 2026-09-28"
+   },
+   "spotify": {
+    "result": "found",
+    "method": "api.spotify.com/v1/search?q=upc:991043318712&type=album and /v1/artists/<id>/albums (all groups), using the anonymous web-player token served by the open.spotify.com/embed page, 2026-09-28; UPC 991043318712 returned album 0r4RvQu4V4jKhSAlwBm7Fz (label \"Litterbug Records\", release_date 2026-04-17), the only hit, credited to the same Spotify artist as the band's other releases"
+   },
+   "youtube_music": {
+    "result": "found",
+    "method": "YouTube Music youtubei 'next' endpoint (WEB_REMIX, signed out) for art track GoL1-6rZmHY (\"Great Day\") from the official 'The Luxury Liners - Topic' channel RSS feed; its byline links album \"New Beginning\" (2026) to browse ID MPREb_km85fvzVpxe, 2026-09-28"
+   },
+   "amazon_music": {
+    "result": "not_checked",
+    "method": "not_checked: amazon.com search and music.amazon.com return a bot block or an empty JS shell to curl, and WebFetch is egress-blocked for amazon.com (2026-09-28); WebSearch surfaced no album page for this title. Unknown, not absent; resolve in a browser"
+   }
+  },
+  "total_duration": "6:04",
+  "tracklist_source": "Apple Music (order, titles, durations)",
+  "tracklist": [
+   {
+    "number": 1,
+    "title": "New Beginning",
+    "duration": "2:42",
+    "duration_seconds": 162,
+    "isrc": "USQ7J2600002"
+   },
+   {
+    "number": 2,
+    "title": "Great Day",
+    "duration": "3:22",
+    "duration_seconds": 202,
+    "isrc": "USQ7J2600001",
+    "note": "Same recording as the February single (same ISRC USQ7J2600001)."
+   }
+  ],
+  "songwriting": {
+   "summary": "Not published.",
+   "confidence": "unverified"
+  },
+  "personnel": [],
+  "personnel_note": "Not stated (open question).",
+  "production": {},
+  "cover_art": {
+   "description": "A hand holds up a clear CD case showing a sunburst design and \"NEW BEGINNING\" lettering against a blue sky.",
+   "credit": null,
+   "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/new-beginning-3000x3000-final.jpg (3000x3000)",
+   "confidence": "unverified"
+  },
+  "notes": [
+   "Owner-confirmed 2026 release (F6). Tidal and Apple track-level date 2026-04-10 (possible pre-release); public date is Spotify's 2026-04-17."
+  ],
+  "verification": "confirmed-owner",
+  "verification_detail": {
+   "basis": "F6; Apple, Deezer, Tidal, Spotify (dd 2026-09-28/29).",
+   "web_corroboration_2026_10_07": "none surfaced.",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/releases.json",
+    "what": "first-hand API reads 2026-09-28/29 (Bandcamp, Apple, Deezer, Tidal, Spotify, Discogs, MusicBrainz); critic-approved catalog"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/DECISIONS-2026-09-29.md",
+    "what": "F6"
+   },
+   {
+    "url": "https://itunes.apple.com/lookup?id=1888874973&entity=song"
+   },
+   {
+    "url": "https://api.deezer.com/album/949841901"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/511031499/tracks?countryCode=US"
+   },
+   {
+    "url": "https://open.spotify.com/album/0r4RvQu4V4jKhSAlwBm7Fz"
+   }
+  ]
+ },
+ {
+  "id": "ll-appearance-1998-fireworks-vol-2",
+  "artist": "Various Artists",
+  "title": "Fireworks Vol. 2: 25 Explosive Tracks",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "1998",
+  "release_date_precision": "year",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": "Sound Asleep Records",
+  "catalog_number": "ZZZ006",
+  "formats": [
+   "CD compilation"
+  ],
+  "upc": "7320470015902",
+  "ll_tracks": [
+   {
+    "number": 9,
+    "title": "Since You Met Me",
+    "duration": null,
+    "isrc": null,
+    "performer": "The Luxury Liners"
+   },
+   {
+    "number": 10,
+    "title": "Think She's Coming Around",
+    "duration": null,
+    "isrc": null,
+    "performer": "The Luxury Liners"
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 6907226
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/6907226"
+  },
+  "notes": [
+   "Swedish power-pop compilation. Earliest commercially released Luxury Liners recordings; early line-up per Discogs. Both songs later on Sound As Ever (whether the same recordings is unknown)."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://www.discogs.com/release/6907226",
+    "access": "Discogs API /releases/<id> JSON fetched 2026-09-28"
+   }
+  ],
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "bass, vocals"
+   },
+   {
+    "name": "Chad Edgington",
+    "role": "guitar, vocals"
+   },
+   {
+    "name": "Jeff LaFrate",
+    "role": "drums"
+   }
+  ],
+  "production": {
+   "producers": [
+    "Mike Poole"
+   ]
+  }
+ },
+ {
+  "id": "ll-appearance-1998-nashpop",
+  "artist": "Various Artists",
+  "title": "Nashpop (A Nashville Pop Compilation)",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "1998",
+  "release_date_precision": "year",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": "Not Lame Recordings",
+  "catalog_number": "NL-046",
+  "formats": [
+   "CD compilation"
+  ],
+  "upc": "618403004626",
+  "ll_tracks": [
+   {
+    "number": 12,
+    "title": "If I Cry",
+    "duration": null,
+    "performer": "The Luxury Liners",
+    "writers": [
+     "Chad Edgington",
+     "David Dewese"
+    ]
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 7044627
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/7044627"
+  },
+  "notes": [
+   "Not Lame Recordings (label printed \"Notlame\" on the band site). \"If I Cry\" is on no Luxury Liners album; a Waco-recorded MP3 of it was on the band site in 2001 (/mp3/waco/)."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://www.discogs.com/release/7044627",
+    "access": "Discogs API /releases/<id> JSON fetched 2026-09-28"
+   }
+  ]
+ },
+ {
+  "id": "ll-appearance-2001-sesac-sxsw-promo",
+  "artist": "Various Artists",
+  "title": "SESAC Presents… An Eclectic Evening Of Music",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "2001",
+  "release_date_precision": "year",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": null,
+  "catalog_number": null,
+  "formats": [
+   "CD compilation, promo (not for sale)"
+  ],
+  "upc": null,
+  "ll_tracks": [
+   {
+    "number": 2,
+    "title": "Shake It Up",
+    "duration": null,
+    "isrc": null,
+    "performer": "The Luxury Liners"
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 8057090
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/8057090"
+  },
+  "notes": [
+   "Promo CD handed out at a SESAC showcase at SXSW 2001 (Discogs notes). Probably the Believe EP recording; not confirmed."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://www.discogs.com/release/8057090",
+    "access": "Discogs API /releases/<id> JSON fetched 2026-09-28"
+   }
+  ]
+ },
+ {
+  "id": "ll-appearance-2001-antarctic-antics",
+  "artist": "Judy Sierra / Scotty Huff / Robert Reynolds",
+  "title": "Antarctic Antics",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "2001",
+  "release_date_precision": "year",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": "Scholastic / Weston Woods",
+  "catalog_number": "CD391",
+  "formats": [
+   "CD (children's read-along)"
+  ],
+  "upc": "9781555929725",
+  "ll_tracks": [
+   {
+    "number": 6,
+    "title": "Penguin's First Swim",
+    "duration": null,
+    "isrc": null,
+    "performer": "Scotty Huff, Robert Reynolds, The Luxury Liners, David Dewese, Chad Edgington"
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 22919255
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/22919255"
+  },
+  "notes": [
+   "Scholastic / Weston Woods children's read-along audio. Discogs credits track 6 to Scotty Huff, Robert Reynolds, The Luxury Liners, David Dewese, Chad Edgington; the band's role (performers? backing music?) is not stated. Confirm with David before featuring."
+  ],
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://www.discogs.com/release/22919255",
+    "access": "Discogs API /releases/<id> JSON fetched 2026-09-28"
+   }
+  ],
+  "upc_note": "The barcode field holds an ISBN (9781555929725)."
+ },
+ {
+  "id": "ll-appearance-2005-between-goodlettsville-and-murfreesboro",
+  "artist": "Various Artists",
+  "title": "Between Goodlettsville And Murfreesboro",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "2005",
+  "release_date_precision": "year",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": "Sound Asleep Records",
+  "catalog_number": "ZZZ014",
+  "formats": [
+   "CD compilation"
+  ],
+  "upc": null,
+  "ll_tracks": [
+   {
+    "number": 15,
+    "title": "Promise Ring",
+    "duration": null,
+    "isrc": null,
+    "performer": "The Luxury Liners"
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 9601921
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/9601921"
+  },
+  "notes": [
+   "\"Promise Ring\" is otherwise unreleased (exclusive to this Sound Asleep compilation)."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://www.discogs.com/release/9601921",
+    "access": "Discogs API /releases/<id> JSON fetched 2026-09-28"
+   }
+  ],
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "guitar, lead vocals"
+   },
+   {
+    "name": "David \"Larry\" Wilstermann",
+    "role": "bass"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "drums"
+   },
+   {
+    "name": "Ryan Gilbert",
+    "role": "(role not stated)"
+   }
+  ]
+ },
+ {
+  "id": "ll-appearance-2008-make-the-best-of-it-bonus-disc",
+  "artist": "David Dewese",
+  "title": "Make The Best Of It (Kool Kat Musik bonus disc)",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": false,
+  "release_date": "2008",
+  "release_date_precision": "year",
+  "release_date_basis": "Discogs 15436127 (given free to Kool Kat Musik buyers of David Dewese's Make The Best Of It)",
+  "label": "Litterbug Records",
+  "catalog_number": null,
+  "formats": [
+   "CD-R, promo bonus disc"
+  ],
+  "upc": null,
+  "ll_tracks": [
+   {
+    "title": "Great Day",
+    "performer": "The Luxury Liners",
+    "note": "demo; later the 2026 single"
+   },
+   {
+    "title": "Breakaway",
+    "performer": "The Luxury Liners",
+    "note": "demo; an MP3 /mp3/misc/luxury_liners_breakaway.mp3 was on the band site in 2005"
+   },
+   {
+    "title": "Baby's Waiting",
+    "performer": "The Luxury Liners",
+    "cover_of": {
+     "original_artist": "Superdrag"
+    }
+   },
+   {
+    "title": "Purple Parallelogram",
+    "performer": "The Luxury Liners",
+    "cover_of": {
+     "original_artist": "The Lemonheads"
+    }
+   },
+   {
+    "title": "Lead Me On",
+    "performer": "The Luxury Liners",
+    "cover_of": {
+     "original_artist": "Jetpack (band site 2005) / \"Jetpack UK\" (daviddewese research summary of Discogs)"
+    }
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 15436127
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/15436127"
+  },
+  "notes": [
+   "10-track disc: 3 Foxymorons tracks, 5 Luxury Liners tracks, 2 David Dewese tracks. Track numbers for the LL tracks not recorded in the source summary."
+  ],
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Discogs 15436127 via daviddewese research/01 (MTBOI editions). Not re-read.",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/research/01-discography.md",
+    "what": "Make The Best Of It, Kool Kat bonus disc edition"
+   },
+   {
+    "url": "https://www.discogs.com/release/15436127"
+   }
+  ]
+ },
+ {
+  "id": "ll-appearance-2023-texas-music-cafe-25-years-vol-1",
+  "artist": "Various Artists",
+  "title": "25 Years of the 99 Cent, Deep Fried, Gravy Smothered, All You Can Eat Texas Music Cafe (Volume One)",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "2023-03-03",
+  "release_date_precision": "day",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": "Texas Music Café",
+  "catalog_number": null,
+  "formats": [
+   "Digital"
+  ],
+  "upc": "662582887822",
+  "ll_tracks": [
+   {
+    "number": 15,
+    "title": "Shake It Up",
+    "duration": "3:12",
+    "isrc": "US2762202822",
+    "performer": "The Luxury Liners",
+    "writers": [
+     "Chad Edgington",
+     "David Dewese",
+     "Scott Carpenter"
+    ]
+   }
+  ],
+  "identifiers": {
+   "tidal_album_id": 267727835
+  },
+  "links": {
+   "spotify": "https://open.spotify.com/album/4HcZ87IXLiyVui34xeLHxO",
+   "youtube_music": "https://music.youtube.com/browse/MPREb_rJxQ6edL9Ot",
+   "tidal": "https://tidal.com/browse/album/267727835"
+  },
+  "notes": [
+   "Live \"Shake It Up\" (ISRC US2762202822), a different recording from the 2021 single (US2762100919)."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://api.tidal.com/v1/albums/267727835/tracks?countryCode=US",
+    "access": "Tidal API JSON fetched 2026-09-28"
+   }
+  ]
+ },
+ {
+  "id": "ll-appearance-2025-fireworks-vol-3",
+  "artist": "Various Artists",
+  "title": "Fireworks Vol. 3",
+  "type": "compilation",
+  "release_role": "appearance",
+  "is_commercial_release": true,
+  "release_date": "2025-05-27",
+  "release_date_precision": "day",
+  "release_date_basis": "best existing source (not an LL release on Spotify; P6 fallback)",
+  "label": "Sound Asleep Records",
+  "catalog_number": "ZZZ054",
+  "formats": [
+   "CD compilation"
+  ],
+  "upc": null,
+  "ll_tracks": [
+   {
+    "number": 12,
+    "title": "Precious To My Heart",
+    "duration": "3:16",
+    "isrc": null,
+    "performer": "The Luxury Liners"
+   }
+  ],
+  "identifiers": {
+   "discogs_release_id": 34741341
+  },
+  "links": {
+   "discogs": "https://www.discogs.com/release/34741341"
+  },
+  "notes": [
+   "\"Precious To My Heart\" is the first hidden track of Sound As Ever (2000) (title \"Precious\" on Bandcamp). 3:16 here vs 3:19 on the album (likely the hidden-track gap trimmed; unconfirmed)."
+  ],
+  "verification": "verified-source",
+  "verification_detail": {
+   "basis": "Discogs/Tidal record read first-hand by dd catalog worker 2026-09-28 (catalog-meta.json appearances).",
+   "recheck": "Live re-check attempted 2026-10-07: api.discogs.com, www.discogs.com, musicbrainz.org, itunes.apple.com, music.apple.com, open.spotify.com, api.deezer.com, *.bandcamp.com, last.fm, shazam.com, iheart.com, wikipedia.org, web.archive.org and theluxuryliners.com all refused by this environment's egress policy (HTTP 403 / EGRESS_BLOCKED). Values below were read first-hand by the daviddewese.com catalog worker on 2026-09-28/29 (APIs, critic-approved) and are carried over with that provenance; WebSearch result pages were used to corroborate where they surfaced the item."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/catalog-meta.json",
+    "what": "appearances"
+   },
+   {
+    "url": "https://www.discogs.com/release/34741341",
+    "access": "Discogs API /releases/<id> JSON fetched 2026-09-28"
+   }
+  ]
+ },
+ {
+  "id": "ll-archive-1998-trunk-box",
+  "artist": "The Luxury Liners",
+  "title": "Trunk Box",
+  "type": "live-album (free MP3)",
+  "release_role": "archive",
+  "is_commercial_release": false,
+  "release_date": "1998",
+  "release_date_precision": "year",
+  "release_date_basis": "band website (Wayback); not on Spotify",
+  "description": "Live MP3 album recorded fall 1998 at E-Cleff Studios, Waco, Texas; \"scott's first offical gig\" [sic]. 11 tracks, including \"Trans-Am Mind\" and \"Araby\", which are on no other record.",
+  "tracklist": [
+   {
+    "title": "Trans-Am Mind"
+   },
+   {
+    "title": "Araby"
+   }
+  ],
+  "tracklist_complete": false,
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Band website captures read by the daviddewese.com research worker (research/04 §5.2) and the Wayback CDX index (research/legacy/cdx-theluxuryliners.com.json). Not re-opened: web.archive.org blocked 2026-10-07."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/research/04-live-sites-and-archive.md",
+    "what": "§5.2"
+   },
+   {
+    "url": "https://web.archive.org/web/20050321225645/http://theluxuryliners.com/history/music.html"
+   },
+   {
+    "url": "https://web.archive.org/web/20010622162027/http://theluxuryliners.com:80/images/trunkbox_cover.jpg",
+    "what": "cover image (CDX 200)"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/research/legacy/cdx-theluxuryliners.com.json"
+   }
+  ],
+  "notes": [
+   "Only 2 of 11 titles known. Full tracklist is on the archived history/music.html (needs a browser).",
+   "Cover art archived: /images/trunkbox_cover.jpg and trunkbox_big.jpg (2001).",
+   "Possibly related: five MP3s under /mp3/waco/ archived June 2001 (luxury_liners_be_with_you, _blockbuster, _if_i_cry, _shake_it_up, and a 404 _say_goodbye). The folder name suggests the Waco session, but that they are Trunk Box tracks is an inference."
+  ],
+  "hosting": "The files were served from the band site (theluxuryliners.com/mp3/...). Re-host only from Wayback copies or David's own files (P5, P29); never link expired hosts."
+ },
+ {
+  "id": "ll-archive-2002-live-liners",
+  "artist": "The Luxury Liners",
+  "title": "Live Liners",
+  "type": "live recordings (free MP3)",
+  "release_role": "archive",
+  "is_commercial_release": false,
+  "release_date": "2002",
+  "release_date_precision": "year",
+  "release_date_basis": "band website (Wayback); not on Spotify",
+  "description": "Live recordings at 12th & Porter, Nashville: full band 18 July 2002 and an acoustic set 17 November 2002.",
+  "tracklist": [
+   {
+    "source_show": "2002-07-18",
+    "position": 7,
+    "title": "Waiting For The Sun",
+    "file": "/mp3/7.18.02/7-luxury_waiting_for_sun.mp3 (CDX 404 in 2021)"
+   },
+   {
+    "source_show": "2002-07-18",
+    "position": 8,
+    "title": "Breaking Out",
+    "file": "/mp3/7.18.02/8-luxury_breaking_out.mp3 (CDX 404 in 2021)"
+   },
+   {
+    "source_show": "2002-11-17",
+    "title": "(at least tracks 01-07; titles not in the CDX)",
+    "file": "/mp3/20021117/01..07 (truncated URLs, 404)"
+   }
+  ],
+  "tracklist_complete": false,
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Band website captures read by the daviddewese.com research worker (research/04 §5.2) and the Wayback CDX index (research/legacy/cdx-theluxuryliners.com.json). Not re-opened: web.archive.org blocked 2026-10-07."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/research/04-live-sites-and-archive.md",
+    "what": "§5.2"
+   },
+   {
+    "url": "https://web.archive.org/web/20050321225645/http://theluxuryliners.com/history/music.html"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/research/legacy/cdx-theluxuryliners.com.json"
+   }
+  ],
+  "notes": [
+   "The 7/18/02 set had at least 8 songs; the 11/17/02 acoustic set at least 7.",
+   "Files are not in the Wayback index as playable audio; ask David for copies."
+  ],
+  "hosting": "The files were served from the band site (theluxuryliners.com/mp3/...). Re-host only from Wayback copies or David's own files (P5, P29); never link expired hosts."
+ },
+ {
+  "id": "ll-archive-from-the-vaults",
+  "artist": "The Luxury Liners",
+  "title": "From The Vaults, 1997-2001",
+  "type": "demos/outtakes (free MP3)",
+  "release_role": "archive",
+  "is_commercial_release": false,
+  "release_date": "2001",
+  "release_date_precision": "year",
+  "release_date_basis": "band website (Wayback); not on Spotify",
+  "description": "A collection of the band's early recordings, 1997-2001, listed on the 2005 music page.",
+  "tracklist": [],
+  "tracklist_complete": false,
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Band website captures read by the daviddewese.com research worker (research/04 §5.2) and the Wayback CDX index (research/legacy/cdx-theluxuryliners.com.json). Not re-opened: web.archive.org blocked 2026-10-07."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/research/04-live-sites-and-archive.md",
+    "what": "§5.2"
+   },
+   {
+    "url": "https://web.archive.org/web/20050321225645/http://theluxuryliners.com/history/music.html"
+   }
+  ],
+  "notes": [
+   "Tracklist unknown; needs a browser."
+  ],
+  "hosting": "The files were served from the band site (theluxuryliners.com/mp3/...). Re-host only from Wayback copies or David's own files (P5, P29); never link expired hosts."
+ },
+ {
+  "id": "ll-archive-2005-covers-and-mp3s",
+  "artist": "The Luxury Liners",
+  "title": "Covers and unreleased MP3s (band site, 2005)",
+  "type": "free MP3s",
+  "release_role": "archive",
+  "is_commercial_release": false,
+  "release_date": "2005",
+  "release_date_precision": "year",
+  "release_date_basis": "band website (Wayback); not on Spotify",
+  "description": "MP3s posted on the 2004-05 red splash home page: covers of Jetpack (\"Lead Me On\"), Superdrag (\"Baby's Waiting\"), The Lemonheads (\"Purple Parallelogram\", \"Ride With Me\"), Julie Miller (\"Manger Throne\"), Big Star (\"Jesus Christ\"), plus \"Breakaway\" and album tracks.",
+  "tracklist": [
+   {
+    "title": "Lead Me On",
+    "cover_of": "Jetpack"
+   },
+   {
+    "title": "Baby's Waiting",
+    "cover_of": "Superdrag"
+   },
+   {
+    "title": "Purple Parallelogram",
+    "cover_of": "The Lemonheads"
+   },
+   {
+    "title": "Ride With Me",
+    "cover_of": "The Lemonheads"
+   },
+   {
+    "title": "Manger Throne",
+    "cover_of": "Julie Miller"
+   },
+   {
+    "title": "Jesus Christ",
+    "cover_of": "Big Star"
+   },
+   {
+    "title": "Breakaway",
+    "file": "/mp3/misc/luxury_liners_breakaway.mp3 (CDX 200, 2005)"
+   }
+  ],
+  "tracklist_complete": false,
+  "verification": "single-source",
+  "verification_detail": {
+   "basis": "Band website captures read by the daviddewese.com research worker (research/04 §5.2) and the Wayback CDX index (research/legacy/cdx-theluxuryliners.com.json). Not re-opened: web.archive.org blocked 2026-10-07."
+  },
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/research/04-live-sites-and-archive.md",
+    "what": "§5.2"
+   },
+   {
+    "url": "https://web.archive.org/web/20050305090711/http://theluxuryliners.com/"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/research/legacy/cdx-theluxuryliners.com.json"
+   }
+  ],
+  "notes": [
+   "Album-track MP3s archived as 200 audio/mpeg (2005-11-05): Believe (Cher), Breaking Out, Breezy, Coming Around, Gloucester, It's You, Just A Girl, Restless, Since You Met Me, Sunshine. These are album tracks and need no separate release card.",
+   "/mp3/misc/ also held truncated \"Fall\", \"Purple\", \"Ride\" files (404)."
+  ],
+  "hosting": "The files were served from the band site (theluxuryliners.com/mp3/...). Re-host only from Wayback copies or David's own files (P5, P29); never link expired hosts."
+ },
+ {
+  "id": "ll-lead-2004-superdrag-tribute-ii",
+  "artist": "Various Artists",
+  "title": "Superdrag Tribute II",
+  "type": "compilation",
+  "release_role": "lead",
+  "is_commercial_release": null,
+  "release_date": "2004",
+  "release_date_precision": "year",
+  "label": "Bomberpunk (eBay-only)",
+  "notes": [
+   "Known only from the Foxymorons' band site (research/05 §6), which says a Luxury Liners track is on it alongside the Foxymorons. Not on Discogs. The LL track title is unknown; \"Baby's Waiting\" (their Superdrag cover) is the obvious candidate, but that is a guess."
+  ],
+  "verification": "unverified",
+  "sources": [
+   {
+    "file": "daviddewese.com/daviddewese-com/data/release-leads.json"
+   },
+   {
+    "file": "daviddewese.com/daviddewese-com/research/01-discography.md",
+    "what": "§5 leads"
+   }
+  ]
+ }
+]
