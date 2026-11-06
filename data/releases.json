@@ -1753,7 +1753,7 @@
     "role": "drums"
    }
   ],
-  "personnel_note": "Owner, LL-10 and LL-18: recorded live at the Texas Music Café in Waco, Texas, in October or November 2001, with Chad on guitar, David on bass and Scott on drums.",
+  "personnel_note": "Owner, LL-10 and LL-18: recorded live at the Texas Music Café in Waco, Texas, in autumn 1998, with Chad on guitar, David on bass and Scott on drums.",
   "production": {
    "released_by": "Texas Music Café (Waco, TX), live TV/radio series"
   },
@@ -1791,8 +1791,8 @@
   "recording": {
    "venue": "Texas Music Café",
    "city": "Waco, Texas",
-   "date": "2001 (October or November)",
-   "confidence": "confirmed-owner (Carly, 2026-11-06); LL-18 recollection",
+   "date": "1998 (autumn)",
+   "confidence": "confirmed-owner (Carly, 2026-11-06; LL-18 as corrected)",
    "date_precision": "season"
   }
  },

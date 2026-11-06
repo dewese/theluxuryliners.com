@@ -167,6 +167,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **E5. Cover songs in the Vault.** The old site offered free MP3s of cover songs (Cher's "Believe", plus songs by Superdrag, The Lemonheads, Jetpack, Julie Miller and Big Star). Re-hosting them as free downloads means distributing other writers' songs.
 - *Why it matters:* free downloads of cover songs can need a licence; original songs do not have this problem.
 - *Proposed default:* **re-host the band's own songs only**; list the covers by title, and link the *Believe* EP to Spotify and Apple Music instead.
+- **ANSWERED 2026-11-06 (LL-27: no MP3s given away at all).**
 
 **D1. A recent photo of the band.** Is there any photo of the four (together or separately) from 2021–2026?
 - *Why it matters:* apart from the two 2026 covers, the newest band photo on file is from 2009, so the site would read as a closed archive.
@@ -176,6 +177,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **D2. Logos.** Do vector or high-resolution files exist for the "THE LUXURY LINERS" condensed wordmark with the crossed X, or the red-and-white roundel from the *Believe* EP? Who designed them? If no files exist, may we redraw them as SVG?
 - *Why it matters:* no usable logo exists anywhere; the designs in the plan lean on these marks.
 - *Proposed default:* **a text wordmark** until files arrive; redraw only with your OK.
+- **ANSWERED 2026-11-06 (LL-28: masters supplied; no redraw).**
 
 **D3. The "Shake It Up (Live)" cover.** No master was supplied (P28). Apple Music has a 3000-pixel copy of the released cover. May the release page use that copy?
 - *Why it matters:* otherwise the page shows a typographic placeholder.

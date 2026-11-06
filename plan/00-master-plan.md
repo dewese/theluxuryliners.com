@@ -209,7 +209,7 @@ URLs use trailing slashes, as on daviddewese.com (`DD-ARCH` §3.2). The legacy t
 | `/vault/news/` | Old news | | the band site's news pages 2000–08 | when read (browser pass) |
 | `/vault/trunk-box/` | *Trunk Box* | | the 1998 Waco live album; 4 archived MP3s; full tracklist when read | v1.0 if audio approved |
 | `/vault/live-liners/` | *Live Liners* | | 12th & Porter 2002 (no archived audio; needs David's files) | when files arrive |
-| `/vault/mp3s/` | Free MP3s | | the 2005 site MP3 list; originals only (cover songs: §10 R9) | v1.0 for originals |
+| `/vault/mp3s/` | The old free MP3s (history) | | the 2005 site MP3 list, **by title only; no downloads (LL-27)**; each song links to where it streams today | v1.0 |
 | `/vault/old-sites/` | Old websites | | the 7 design eras 2000–2024 with screenshots and dates (`LL03` §2) | v1.0 |
 | `/photos/` | **Photos** | Galleries | by era (1997–2000, 2001–04, 2005–07, 2008–), with credits and captions; anchors for the old gallery names (`#sxsw`, `#capitol`, …) | v1.0 |
 | `/facts/` | **Facts** | Cited answers | fact table with sources and confidence; FAQ; disambiguation; "how we date things"; feeds `llms.txt` | v1.0 |
@@ -317,7 +317,7 @@ Rules that hold in every direction:
 | Worker | `/api/contact` (Turnstile, honeypot, rate limits; address never in HTML), 410 bodies, and the 32 query-string legacy URLs (`/?content=…`; `LL03` §10.1) | Static `_redirects` cannot match query strings; use a Cloudflare redirect rule that matches the query, or run the Worker first on `/` only. The Phase 2 spike picks one; the fallback (home page, 200) is acceptable (`LL03` §10.1) |
 | Editing | **Decap CMS** with the editorial workflow (Draft → In review → Ready), GitHub login with two-factor, preview link per change | Same as daviddewese.com (`DD-ARCH` §12.4), so Carly's team learns one tool |
 | Analytics | Cloudflare Web Analytics (cookie-free); Google Search Console and Bing Webmaster Tools | No cookie banner needed |
-| Media | Pre-sized web masters in git (long edge ≤ 3,000 px, ≤ 3 MB); originals in a private R2 bucket; audio files for the Vault in `public/` at their **old paths** where the legacy plan says re-host (`LL03` §10.2) | `DD-ARCH` §13.1 |
+| Media | Pre-sized web masters in git (long edge ≤ 3,000 px, ≤ 3 MB); originals in a private R2 bucket; audio files for the Vault in `public/` at their **old paths** where the legacy plan says re-host (`LL03` §10.2) | `DD-ARCH` §13.1 | **Superseded by LL-27: no audio files are hosted; old MP3 URLs return 410 or redirect to the release page.**
 | Fonts | Self-hosted, subset, at most 100 KB, 1 preload | `DD-ARCH` §7.0 budget |
 
 Repository: a **separate repository** for this site (proposed name `theluxuryliners-com`), scaffolded from the daviddewese.com `site/` template so that components, schemas, `check-dist`, `check-jsonld`, the contrast test, the portrait pipeline and the handbook carry over (`QUESTIONS-FOR-CARLY.md` A5).
@@ -509,7 +509,7 @@ Each phase ends on its **exit criteria**, not on a date.
 | R6 | **Wayback stays blocked** for scripted research | High | Medium | A human browser pass (Phase 0); launch does not depend on unread pages |
 | R7 | **The site reads as a closed archive** (no photo newer than 2009 except two covers) | High | Medium | Wish-list #1 (a recent photo); status line; 2026 releases on the home page; the "never broke up" spine |
 | R8 | **Cutover breaks the live site** (Carrd → Worker; Error 1000) | Low | High | The dd procedure; zone Active ≥ 7 days; Carrd stays live until the window; rollback = re-add the Carrd A record |
-| R9 | **Rights for re-hosted audio and lyrics.** Cover-song MP3s on the old site (Cher's "Believe", Superdrag, the Lemonheads, Jetpack, Julie Miller, Big Star; the live "Luxury Liner" cover) would be free downloads of other writers' songs; lyrics of co-written songs need the co-writers' OK | Medium | Medium | Re-host **originals only** at launch; covers are listed with a DSP link (the *Believe* EP is on Spotify and Apple) or held until rights are checked (E5); lyrics only with approval |
+| R9 | **Closed by LL-27 (no MP3s are given away).** **Rights for re-hosted audio and lyrics.** Cover-song MP3s on the old site (Cher's "Believe", Superdrag, the Lemonheads, Jetpack, Julie Miller, Big Star; the live "Luxury Liner" cover) would be free downloads of other writers' songs; lyrics of co-written songs need the co-writers' OK | Medium | Medium | Re-host **originals only** at launch; covers are listed with a DSP link (the *Believe* EP is on Spotify and Apple) or held until rights are checked (E5); lyrics only with approval |
 | R10 | **Domain expiry** 2027-03-19 | Low | Very high | Confirm auto-renew in Phase 0 (dd QUESTIONS lists the same renewal) and again before cutover |
 | R11 | **Photo quality**: the best four-piece photo is small (1096×848) and AI-enhanced; 150 Flickr originals are still rate-limited | High | Low | Sharper sources for engravings (`LL05` §5); `scripts/fetch-flickr-originals.sh`; ask for a non-AI scan |
 | R12 | **No vector logo** | High | Low | Text wordmark in the chosen display face until files arrive; redraw only with OK (D2) |
