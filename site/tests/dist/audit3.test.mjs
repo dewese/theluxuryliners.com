@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { safeJson } from '../../src/lib/json.ts';
 import { ADMIN_CSP } from '../../worker/headers.ts';
+import { loadKey } from '../../../content/private-literals.mjs';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const root = join(site, '..');
@@ -57,6 +58,9 @@ test('release gates: RELEASE=1 check-dist fails while G1 (LL-25) is open or Deca
   const cfg = readFileSync(join(dist, 'admin', 'config.yml'), 'utf8');
   const hasBase = /^\s+base_url:\s*['"]?https:\/\//m.test(cfg);
   const r = spawnSync(process.execPath, [join(site, 'scripts', 'check-dist.mjs'), dist], { env: { ...process.env, RELEASE: '1' }, encoding: 'utf8' });
+  // Without the private-literal key a release build refuses to start at all (fail closed), so the
+  // gate messages are never reached: assert that refusal instead. With the key, assert each gate.
+  if (!loadKey()) { assert.notEqual(r.status, 0); assert.match(r.stderr, /no key for the private-literal check/); return; }
   if (!approved) { assert.equal(r.status, 1); assert.match(r.stdout, /launch gate G1/); }
   if (!hasBase) { assert.equal(r.status, 1); assert.match(r.stdout, /admin\/config\.yml: backend has no https:\/\/ base_url/); }
 });
