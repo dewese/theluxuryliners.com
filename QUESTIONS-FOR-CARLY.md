@@ -284,6 +284,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **B14. Who named the band.** David said in 2001: "I named my band after a Gram Parsons song." Should the site say that, or only that the band is named after the song?
 - *Why it matters:* "I named my band" is David's own 2001 wording, but it sits awkwardly with the co-founding (F4).
 - *Proposed default:* **"named after the Gram Parsons song"**, without saying who named it.
+- **ANSWERED 2026-11-06 (covered by LL-4: Chad and David chose the name together over spring break 1997; the site says they named it after the Gram Parsons song).**
 
 **B15. The 2008 Texas show.** The band's 2008 home page said Chad Edgington ("1997-2001") would join David for a Texas CD-release show. Did it happen?
 - *Why it matters:* it would be the last known time Chad played with the band, and the Story would say so.

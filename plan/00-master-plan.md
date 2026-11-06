@@ -173,7 +173,7 @@ One long page in sections at launch; it can split into chapter pages later (§9,
 | Where it formed | Named over spring break 1997 in Texas; based in Nashville from May 1997 (LL-4, LL-5). JSON-LD `foundingLocation` Texas; the town is never named | LL-4; LL-5 |
 | When Chad left Nashville | "March 2001" (LL-15; corrects the 2005 roster's April) | LL-15 |
 | Who is in the band now | **The four forever members: David Dewese, Chad Edgington, Scott Carpenter and David "Larry" Wilstermann** (LL-9). All four play on "Great Day" and "New Beginning" (2026). Story: Chad left Nashville in March 2001 and is in the band again today (when he rejoined is an open question) | LL-9; LL-15 |
-| *Billboard* 1998 | not stated as fact until the item is found; at most "the band's 2000 bio mentions a *Billboard* write-up" | `LL01` D5 |
+| *Billboard* 1998 | "featured in *Billboard* in 1998" (owner-confirmed, LL-22); the title and issue are added when the clipping is found | LL-22 |
 | Release dates | P6 Spotify dates only; other dates internal | `LL02` D3–D5 |
 | Emmylou Harris's *Luxury Liner* | **no year** (default). Sources split: Wikipedia gives 1976-12-28, citing a Warner reissue note; MusicBrainz, the chart year and the first single give 1977 | `LL04` D8; round-1 critique check 12 |
 | "Lead Me On" | "a Jetpack song" only after David says which Jetpack | `LL02` D7 |
