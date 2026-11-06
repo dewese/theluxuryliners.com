@@ -9,7 +9,7 @@ sources:
   - claim: The band is named after Parsons's song "Luxury Liner"
     source: DECISIONS-2026-10-07.md LL-6
     confidence: confirmed-owner
-  - claim: Hidden last track "The International Submarine Band", the name of Parsons's first band
+  - claim: Hidden last track "The International Submarine Band", the name of Parsons's 1960s band
     source: data/releases.json luxury-liners-2000-sound-as-ever tracklist (track 15); research/02 §3.1
     confidence: verified-source
   - claim: "Luxury Liner" was first recorded by the International Submarine Band (Safe at Home, 1968)
@@ -22,4 +22,4 @@ notes_internal: >-
 
 “Sound as ever” was Gram Parsons’s sign-off. The Luxury Liners, already named after his song “Luxury Liner”, took the phrase for their first album in 2000.
 
-The record keeps the thread going to the very end. Its last hidden track is called “The International Submarine Band”, the name of Parsons’s first band, which first recorded “Luxury Liner” in 1968.
+The record keeps the thread going to the very end. Its last hidden track is called “The International Submarine Band”, the name of Parsons’s 1960s band, which first recorded “Luxury Liner” in 1968.
