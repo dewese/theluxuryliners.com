@@ -11,7 +11,8 @@ export const TOPICS = [
   { value: 'other', label: 'Something else' },
 ] as const;
 
-export const NAME_FORBIDDEN = /["<>`]/;
+// < > and ` only: a nickname in quotes (David "Larry" Wilstermann) is a name (audit-a11y round 1, B2)
+export const NAME_FORBIDDEN = /[<>`]/;
 export const LIMITS = { nameMax: 100, messageMin: 10, messageMax: 5000, maxLinks: 3, minSeconds: 3 } as const;
 
 export interface ContactInput { name: string; email: string; topic: string; message: string; website?: string; elapsed?: string }
@@ -20,17 +21,19 @@ export type FieldErrors = Partial<Record<'name' | 'email' | 'topic' | 'message' 
 export const MESSAGES = {
   name: 'Enter your name.',
   nameLong: `Enter a name of ${LIMITS.nameMax} characters or fewer.`,
-  nameChars: 'Enter your name without the characters " < > or `.',
-  email: 'Enter an email address like name@example.com.',
+  nameChars: 'Enter your name without the characters < > or `.',
+  email: 'Enter a full email address, with an @ and a domain such as example.com.',
   topic: 'Choose a topic.',
   messageShort: `Enter a message of at least ${LIMITS.messageMin} characters.`,
   messageLong: `Enter a message of ${LIMITS.messageMax.toLocaleString('en-US')} characters or fewer.`,
   messageLinks: `Include no more than ${LIMITS.maxLinks} links in your message.`,
   tooFast: 'That was very quick. Please wait a moment and send it again.',
   busy: 'Too many messages have been sent from here recently. Please wait a little while and try again.',
-  turnstile: 'The spam check couldn’t confirm you’re human. Please go back and try again.',
+  turnstile: 'The spam check couldn’t confirm you’re human. Please try again.',
   noToken: 'This message couldn’t be checked for spam. Please turn on JavaScript and send it again.',
   unavailable: 'The contact form isn’t working just now. Please try again later.',
+  tooLong: 'That message is too long.',
+  sendFailed: 'Your message could not be sent just now. Please try again later.',
 } as const;
 
 export const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]{2,}$/;
@@ -58,6 +61,14 @@ export function validate(input: ContactInput, opts: { checkTiming?: boolean } = 
   if (opts.checkTiming && !Object.keys(e).length && input.elapsed !== undefined && Number(input.elapsed) < LIMITS.minSeconds) e.form = MESSAGES.tooFast;
   return e;
 }
+
+/** The rules as the page states them up front (and contact.js checks before sending). */
+export const RULES_TEXT = {
+  form: 'All fields are required.',
+  name: `Up to ${LIMITS.nameMax} characters, without < > or \`.`,
+  email: 'So we can reply. We never share it.',
+  message: `At least ${LIMITS.messageMin} characters and at most ${LIMITS.messageMax.toLocaleString('en-US')}, with no more than ${LIMITS.maxLinks} links.`,
+} as const;
 
 /** The honeypot: a filled "Leave this empty" field means a bot; the Worker answers as if sent. */
 export const isTrapped = (input: ContactInput) => clean(input.website).length > 0;

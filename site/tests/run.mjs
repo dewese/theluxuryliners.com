@@ -6,7 +6,10 @@
 //   dist     scripts/check-dist.mjs           copy, privacy and owner-decision rules over dist/
 //            (+ content/check-content.mjs --dist-only, when the copy track's checker exists)
 //   jsonld   scripts/check-jsonld.mjs         JSON-LD on every page
+//   repo     content/check-content.mjs --repo  no tracked file of the public repository holds a
+//                                              private literal (+ the checker's self-test)
 //   axe      tests/browser/axe.mjs            axe-core (WCAG 2.2 A/AA) on every page, 1280 and 375 px
+//            tests/browser/behaviour.mjs      contact errors, forced colours, word breaks, first screen
 // `node tests/run.mjs unit axe` runs only the named suites. `RELEASE=1` makes `dist` strict.
 import { spawnSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
@@ -22,7 +25,8 @@ const SUITES = {
   unit: [node(['--test', ...tests('tests/unit'), ...tests('tests/dist')])],
   dist: [node(['scripts/check-dist.mjs']), ...(existsSync(contentChecker) ? [node([contentChecker, '--dist-only', 'dist'])] : [])],
   jsonld: [node(['scripts/check-jsonld.mjs'])],
-  axe: [node(['tests/browser/axe.mjs'])],
+  repo: existsSync(contentChecker) ? [node([contentChecker, '--repo']), node([contentChecker, '--self-test'])] : [],
+  axe: [node(['tests/browser/axe.mjs']), node(['tests/browser/behaviour.mjs'])],
 };
 const pick = process.argv.slice(2);
 const names = pick.length ? pick : Object.keys(SUITES);

@@ -4,7 +4,8 @@ slug: great-day
 title: Great Day
 years: "2021–2026"
 era: sky
-summary: A live single from 1998, and two singles in 2026.
+summary: A 1998 live recording released in 2021, and two singles in 2026.
+description: "Great Day (2021–2026): a 1998 live recording released in 2021, then two singles in 2026 by all four forever members of The Luxury Liners."
 sources:
   - claim: LL-17 site wording, verbatim
     source: DECISIONS-2026-10-07.md LL-17

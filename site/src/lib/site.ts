@@ -73,6 +73,8 @@ export const SAME_AS = [
   'https://www.discogs.com/artist/4298743-The-Luxury-Liners',
   'https://www.deezer.com/artist/1518436',
   'https://tidal.com/browse/artist/5748092',
+  // the band page on David's site: the same band, so engines see one entity (audit-seo round 1, S4)
+  'https://daviddewese.com/bands/the-luxury-liners/',
 ];
 
 export const RELATED = [
@@ -85,3 +87,5 @@ export const COLOPHON = 'The band’s logos date from 1999–2002.';
 
 /** P40: the neutral rights line for cover art. */
 export const COVER_RIGHTS = 'All rights reserved by the rights holders.';
+/** The footer's line (plan line 58, P40): every page that can show a cover carries it. */
+export const COVER_RIGHTS_LINE = 'Cover art: all rights reserved by the rights holders.';

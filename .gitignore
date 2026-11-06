@@ -1,7 +1,12 @@
 node_modules/
 dist/
+# the tests over the built site live in site/tests/dist/ and are part of the repository
+!site/tests/dist/
 .astro/
 .wrangler/
 .dev.vars
 *.log
 .DS_Store
+
+# private literals kept out of the public repository (content/private-literals.mjs)
+data/private/

@@ -24,7 +24,7 @@ members:
     role: drums, percussion, vocals
   - name: David “Larry” Wilstermann
     role: bass, keyboards, vocals
-members_note: He’s Larry because the band already had a David.
+members_note: null
 doors:
   - label: Read the story
     href: /story/

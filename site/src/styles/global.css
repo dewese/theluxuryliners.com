@@ -105,11 +105,23 @@ table { border-collapse: collapse; width: 100%; }
 .intro { font-size: 1.125rem; max-width: 46em; }
 .title-xl {
   font-family: "Archivo Black", "Archivo", sans-serif; font-weight: 400;
-  font-size: clamp(2.1rem, 7vw, 5.75rem); line-height: 0.95; letter-spacing: -0.01em;
+  --size: clamp(2.1rem, 7vw, 5.75rem);
+  font-size: min(var(--size), var(--fit, 100vw)); line-height: 0.95; letter-spacing: -0.01em;
   text-transform: uppercase; color: var(--head); margin-bottom: 0.3em;
-  overflow-wrap: anywhere; hyphens: auto;
+  overflow-wrap: break-word; hyphens: manual;
 }
-.title-l { font-size: clamp(2.25rem, 6vw, 4.5rem); }
+.title-l { --size: clamp(2.25rem, 6vw, 4.5rem); }
+/* Big headings never break inside a word (audit-design S3, audit-a11y m6): the heading's box is a
+   size container (.fit-box), and fit-N (N = letters in the longest word, src/lib/typo.ts) caps
+   the size so N capitals of Archivo Black (about 0.86 em each) fit the column at any width. */
+.fit-box { container-type: inline-size; }
+.fit-6 { --fit: calc(100cqi / 5.4); } .fit-7 { --fit: calc(100cqi / 6.3); } .fit-8 { --fit: calc(100cqi / 7.2); }
+.fit-9 { --fit: calc(100cqi / 8.1); } .fit-10 { --fit: calc(100cqi / 9); } .fit-11 { --fit: calc(100cqi / 9.9); }
+.fit-12 { --fit: calc(100cqi / 10.8); } .fit-13 { --fit: calc(100cqi / 11.7); } .fit-14 { --fit: calc(100cqi / 12.6); }
+.fit-15 { --fit: calc(100cqi / 13.5); } .fit-16 { --fit: calc(100cqi / 14.4); } .fit-17 { --fit: calc(100cqi / 15.3); }
+.fit-18 { --fit: calc(100cqi / 16.2); }
+/* long titles step down so they do not run to five lines (audit-design polish 11) */
+.title-xl.title-long, .chapter .title-xl.title-long { --size: clamp(1.9rem, 4.4vw, 3.6rem); }
 
 /* Filled bands: Believe red and 2026 sky. White ink; links and focus white. */
 .red, .sky { background: var(--red-fill); color: var(--on-fill); --muted: #ffffff; --focus: #ffffff; --head: #ffffff; --line: #ffffff; --link: #ffffff; }
@@ -144,6 +156,7 @@ table { border-collapse: collapse; width: 100%; }
 .theme-switch__knob::after {
   content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; border-radius: 50%;
   background: #b5121b; transition: transform 0.2s;
+  box-shadow: 0 0 0 2px var(--bg); /* a ring in the page colour: 3:1 or more against the track in both themes (a11y M2) */
 }
 .theme-switch[aria-pressed="true"] .theme-switch__knob::after { transform: translateX(14px); background: #ff8a80; }
 
@@ -153,9 +166,11 @@ table { border-collapse: collapse; width: 100%; }
   display: flex; align-items: center; gap: 0.35em;
   font-family: "Archivo Black", "Archivo", sans-serif; font-weight: 400;
   font-size: clamp(1.5rem, 3.6vw, 2.75rem); text-transform: uppercase; letter-spacing: 0.005em; color: var(--head);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word; hyphens: manual;
 }
 .sec-head h2 > span { min-width: 0; }
+/* two-column sections (People): a smaller head so "Photographers" fits one line (design S3) */
+.two-col .sec-head h2 { font-size: clamp(1.4rem, 2.5vw, 2.2rem); }
 .sec-head h2 .dot { height: 0.9em; width: auto; }
 .sec-head p { margin: 12px 0 0; }
 .h3 { font-family: "Archivo Black", sans-serif; font-weight: 400; font-size: clamp(1.2rem, 2vw, 1.5rem); text-transform: uppercase; color: var(--head); margin: 0 0 12px; }
@@ -203,6 +218,18 @@ table { border-collapse: collapse; width: 100%; }
 @media (min-width: 900px) { .hero__grid { grid-template-columns: 1.05fr 0.95fr; gap: 56px; } }
 .hero__logo { margin: 0 0 24px; }
 .logo-full { display: block; width: min(100%, 520px); height: auto; color: #ffffff; }
+/* Phones: the latest single comes before the one-liner and the lockup is smaller, so a 2026 cover
+   is on the first screen (LL-26; audit-design round 1, S1) */
+@media (max-width: 699.98px) {
+  .hero__grid { gap: 20px; }
+  .hero__text { display: contents; }
+  .hero__logo { order: 1; margin-bottom: 0; }
+  .hero__latest { order: 2; }
+  .hero .lede { order: 3; margin: 0; }
+  .hero .status { order: 4; }
+  .logo-full { width: min(100%, 190px); }
+  .stack { width: min(100%, 300px); }
+}
 .hero .lede { font-weight: 500; }
 .status {
   display: block; max-width: 34em; font-weight: 800; font-size: 1.0625rem; letter-spacing: 0.02em;
@@ -227,11 +254,12 @@ table { border-collapse: collapse; width: 100%; }
 @media (max-width: 520px) { .single { grid-template-columns: 1fr; } .single picture, .single > a { width: 160px; } }
 
 /* ---------------------------------------------------------------- video facade */
-.video { max-width: 960px; }
+.video { max-width: 640px; }
 .video figcaption { margin-top: 10px; }
 .yt {
   position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px;
   background: #111111; color: #ffffff; text-decoration: none;
+  box-shadow: 0 0 0 1px var(--line); /* an edge on the #111 ground of the dark theme (design S4) */
 }
 .yt__plain {
   position: absolute; inset: 0; background: #111111;
@@ -258,22 +286,28 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .collage figure { color: #ffffff; }
 .collage figcaption { color: #ffffff; }
 .collage figure:not(.col-jump) img { border: 6px solid #ffffff; box-shadow: var(--shadow); background: #ffffff; }
-@media (min-width: 640px) and (max-width: 999.98px) {
+/* From 480 px the small frames go two-up; the cut-out and the 2002 photo stay full width (design S2) */
+@media (min-width: 480px) and (max-width: 999.98px) {
   .collage { grid-template-columns: 1fr 1fr; }
-  .col-1, .col-2, .col-4 { grid-column: 1 / -1; }
+  .col-1, .col-2 { grid-column: 1 / -1; }
   .col-1 { width: min(100%, 460px); justify-self: center; }
 }
 @media (min-width: 1000px) {
-  /* the 1998 suits lead (LL-32: "we used to dress so much cooler"); the cut-out and the coats
-     frame fill the left column, so no dead block of red is left under it (critique M2) */
+  /* LL-32: the 2002 photo of all four forever members is the anchor, two-thirds wide, as in the
+     approved sample (audit-design round 1, S2); the cut-out and the coats frame fill the left
+     column beside it, three frames make a row, and the 2003 trio closes the collage */
   .collage {
-    grid-template-columns: 4fr 4fr 4fr; gap: 36px 32px;
-    grid-template-areas: "c1 c2 c2" "c3 c2 c2" "c3 c4 c5" "c6 c4 c7";
+    grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 36px 32px;
+    grid-template-areas:
+      "c1 c1 c1 c1 c2 c2 c2 c2 c2 c2 c2 c2"
+      "c3 c3 c3 c3 c2 c2 c2 c2 c2 c2 c2 c2"
+      "c4 c4 c4 c4 c5 c5 c5 c5 c6 c6 c6 c6"
+      ".  .  c7 c7 c7 c7 c7 c7 c7 c7 .  .";
     align-items: start;
   }
   .col-1 { grid-area: c1; }
-  .col-2 { grid-area: c2; transform: rotate(-1deg); }
-  .col-3 { grid-area: c3; transform: rotate(1.6deg); margin-top: 12px; }
+  .col-2 { grid-area: c2; align-self: center; transform: rotate(-1deg); }
+  .col-3 { grid-area: c3; transform: rotate(1.6deg); }
   .col-4 { grid-area: c4; transform: rotate(-0.6deg); }
   .col-5 { grid-area: c5; transform: rotate(2deg); }
   .col-6 { grid-area: c6; transform: rotate(-1.2deg); }
@@ -290,11 +324,12 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 
 /* ---------------------------------------------------------------- members / people cards */
 .people { list-style: none; display: grid; gap: 28px; grid-template-columns: 1fr; }
-@media (min-width: 640px) { .people { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1040px) { .people { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 640px) { .people { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 65em) { .people { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .people li { border-top: 4px solid var(--line); padding-top: 16px; }
 .people h3 { display: flex; align-items: flex-start; gap: 0.4em; font-family: "Archivo Black", sans-serif; font-weight: 400; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 10px; }
 .people h3 .dot { height: 1.1em; width: auto; }
+.people h3 > span { min-width: 0; overflow-wrap: break-word; } /* text resized to 200% (a11y m4) */
 .people h3 a { color: var(--ink); }
 .roles { font-weight: 700; margin-bottom: 0.5em; }
 .years { display: block; font-weight: 500; color: var(--muted); font-size: 0.9375rem; }
@@ -309,8 +344,11 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 }
 .doors a .dot { height: 1.6em; width: auto; }
 .doors a:hover { background: var(--ink); color: var(--bg); }
-.doors--list a { border-radius: 28px; flex-wrap: wrap; }
-.doors__sub { flex-basis: 100%; font-family: "Archivo", sans-serif; text-transform: none; font-size: 1rem; font-weight: 500; padding-left: calc(1.6em * 0.756 + 14px); }
+/* list doors (/music/ "Also"): the dot and the title share a row, the text starts at the card's
+   own edge (audit-design polish 2) */
+.doors--list a { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px 14px; border-radius: 28px; }
+.doors--list a > span:not(.doors__sub) { min-width: 0; overflow-wrap: break-word; }
+.doors__sub { grid-column: 1 / -1; font-family: "Archivo", sans-serif; text-transform: none; font-size: 1rem; font-weight: 500; }
 .disamb { max-width: 60em; margin: 0; }
 
 /* ---------------------------------------------------------------- cards (music, chapters) */
@@ -380,20 +418,21 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .chapter { padding-block: 28px clamp(48px, 7vw, 88px); overflow: hidden; }
 .chapter__grid { display: grid; gap: 36px; align-items: center; }
 @media (min-width: 900px) { .chapter__grid { grid-template-columns: 7fr 5fr; gap: 56px; } }
-.chapter .title-xl { font-size: clamp(2.25rem, 6vw, 4.75rem); }
+.chapter .title-xl { --size: clamp(2.25rem, 6vw, 4.75rem); }
 .chapter__cover { width: min(100%, 460px); justify-self: center; }
 .chapter__cover img { border: 8px solid #ffffff; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4); transform: rotate(3deg); }
 .chapter__cover figcaption { margin-top: 18px; text-align: center; color: #ffffff; }
 .story { display: grid; gap: 48px; }
-@media (min-width: 960px) { .story { grid-template-columns: minmax(0, 66ch) minmax(260px, 1fr); gap: 72px; } }
+@media (min-width: 60em) { .story { grid-template-columns: minmax(0, min(66ch, 64%)) minmax(min(260px, 30%), 1fr); gap: clamp(32px, 5vw, 72px); } }
 .story > * { min-width: 0; }
 .inline-photo { margin: 32px 0 36px; }
 .inline-photo img { box-shadow: var(--shadow); }
-.story__aside { display: grid; gap: 40px; align-content: start; }
+.story__aside { display: grid; gap: 40px; align-content: start; grid-template-columns: minmax(0, 1fr); }
 .ep-card { border: 3px solid var(--line); border-radius: 28px; padding: 24px; }
 .ep-card h2 { display: flex; align-items: center; gap: 0.35em; font-family: "Archivo Black", sans-serif; font-weight: 400; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 8px; color: var(--head); }
 .ep-card h2 .dot { height: 1em; width: auto; }
 .ep-card h2 a { color: inherit; }
+.ep-card h2 > a, .ep-card h2 > span { min-width: 0; overflow-wrap: break-word; } /* text resized to 200% */
 .mini-tracks { padding-left: 1.6em; margin: 12px 0 0; font-weight: 700; }
 .mini-tracks li { padding: 3px 0; }
 .mini-tracks .track__dur { font-weight: 400; margin-left: 0.4em; }
@@ -450,6 +489,7 @@ dl.facts dd { margin: 6px 0 0; }
   .table--stack tr { padding: 12px 0; border-bottom: 1px solid var(--rule); }
   .table--stack td { border: 0; padding: 2px 0; }
   .table--stack td:first-child { white-space: normal; }
+  .table--stack td[data-label]:not(:first-child)::before { content: attr(data-label) ": "; font-weight: 750; }
 }
 
 /* ---------------------------------------------------------------- photos */
@@ -474,6 +514,14 @@ textarea { min-height: 10rem; }
 button[type="submit"]:hover { background: var(--ink); color: var(--bg); }
 .hint { font-size: 0.9375rem; color: var(--muted); margin: 0 0 6px; }
 .error { color: var(--red-text); font-weight: 700; }
+.req { font-weight: 500; color: var(--muted); }
+.field-error { color: var(--red-text); font-weight: 700; margin: 0 0 6px; }
+[aria-invalid="true"] { border-color: var(--red-text); border-width: 3px; }
+.error-summary { border: 4px solid var(--red-text); border-radius: 12px; padding: 18px 20px; margin-bottom: 28px; max-width: 36rem; }
+.error-summary:focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+.error-summary h2 { color: var(--red-text); margin-bottom: 8px; }
+.error-summary ul { margin: 8px 0 0; padding-left: 1.2em; }
+.error-summary a { color: var(--red-text); font-weight: 700; }
 .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .placeholder { border: 3px dashed var(--head); padding: 16px; background: var(--surface); border-radius: 12px; }
 .placeholder::before { content: "Copy to come"; display: block; font-weight: 800; font-size: 0.875rem; }
@@ -489,13 +537,24 @@ button[type="submit"]:hover { background: var(--ink); color: var(--bg); }
 @media (min-width: 760px) { .foot__links--two { grid-template-columns: auto auto; justify-content: start; } }
 .foot__meta .small { color: #d9d9d9; margin-bottom: 0.4em; }
 
+/* ---------------------------------------------------------------- forced colours (a11y M1) */
+@media (forced-colors: active) {
+  .theme-switch__knob { forced-color-adjust: none; background: CanvasText; }
+  .theme-switch__knob::after { background: Canvas; box-shadow: none; }
+  .logo-full { color: CanvasText; }
+  .error-summary, .field-error { forced-color-adjust: auto; }
+}
+
 /* ---------------------------------------------------------------- motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .jump, .col-jump:hover .jump, .aside-jump:hover .jump, .yt:hover .yt__roundel { transform: none !important; }
 }
-/* small screens: keep the five nav items on as few lines as possible */
+/* small screens: keep the five nav items on as few lines as possible; the theme switch shows only
+   its knob (the label stays for screen readers) so it sits beside the nav (design S1) */
 @media (max-width: 479.98px) {
+  .theme-switch { padding: 4px; min-height: 36px; }
+  .theme-switch__text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
   .nav ul { gap: 2px 14px; }
   .nav a { letter-spacing: 0.06em; font-size: 0.8125rem; }
   .brand .dot { height: 38px; }

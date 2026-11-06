@@ -43,7 +43,7 @@ BANNED_TEXT = [
     ("lives outside the band (LL-7, LL-19)", r"lives in|living in|\bcareers?\b|\bdads?\b|\bwife\b|"
                                              r"\bkids?\b|children|family|college|university|graduat"),
     ("member-by-state or 'four states' (LL-19)", r"four states|three states|michigan|tennessee"),
-    ("founding town or parents' house (LL-4, LL-5)", r"mesquite|parents"),
+    ("parents' house (LL-4, LL-5); the founding town is checked by private_hit()", r"parents"),
     ("phone numbers", r"(?:\(\d{3}\)\s?|\b\d{3}[-.\s])\d{3}[-.]\d{4}\b"),
     ("'broke up' other than 'never broke up' (LL-17)", r"(?<!never )broke up|break[\s-]?up|split up"),
     ("reunion wording (LL-17)", r"reunion|reunit|together again|back together|comeback"),
@@ -54,6 +54,35 @@ BANNED_TEXT = [
     ("expired or excluded hosts", r"isawtheocean|soundcloud|myspace|noisetrade|bigcartel"),
 ]
 
+
+# Private literals (the founding-story town and the rest) are matched by the SHA-256 of a
+# lower-cased token, never written in this public repository; the same hashes as
+# content/private-literals.mjs (the source of truth: add new ones there and here).
+import hashlib
+PRIVATE_HASHES = {
+    "bd69e39fea034e7dab1702391ba0af52d8bb4cfddeefef293bf9ae1577a013ea",
+    "81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a",
+    "7b8bd6c0abf53d22888beafc48830e1156907dd4ec7e6ea31e55a0dd6dc5a969",
+    "f6a761f669dfeafd8086a367b336cbee496a1b13ac5128c8cb9346ca7891ccf3",
+    "270e826aaea2ede6497f2383a2e0c2fe418a737a8224fc8888e4821158342f5d",
+    "921329720029ded97c7725d6a6508f110e9488d3bbf614a33babec8f3ea383a6",
+    "0c6193e11c89c15a1715161c094efa47adfc6585cd66021968336d5b4d4fc321",
+    "2c96398674dbc4e58b556e6fbf53f85b80be112a3c9113851f431d3a67275208",
+}
+
+
+def private_hit(text, hashes=PRIVATE_HASHES):
+    """The first token (or word pair) of the text whose hash is private, else None."""
+    toks = re.findall(r"[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]", text.lower())
+    for k, t in enumerate(toks):
+        cands = [t] + [p for p in re.split(r"[.@/_-]+", t) if p]
+        if k + 1 < len(toks):
+            cands += [t + " " + toks[k + 1], t + toks[k + 1]]
+        for c in cands:
+            if hashlib.sha256(c.encode()).hexdigest() in hashes:
+                return c
+    return None
+
 REQUIRED = {
     "index.html": [ONE_LINER, LL17, CAPTION_2002,
                    "Founded in 1997. Two new singles in 2026. The band never broke up."],
@@ -63,7 +92,7 @@ REQUIRED = {
 SELF_TEST = [  # one line per banned pattern, in order; each must be caught
     "write to someone@example.com", "the band gmail", "won the talent show", "the 2008 demo",
     "free MP3 downloads", "join the newsletter", "logo designed by Glen", "as credited on Discogs",
-    "he lives in a city", "spread across four states", "in Mesquite", "call 615-555-0100",
+    "he lives in a city", "spread across four states", "at my parents' house", "call 615-555-0100",
     "when they broke up", "the reunion show", "former drummer", "Hot Prospects", "the 2002 line-up",
     "Chad left in April 2001", "on SoundCloud",
 ]
@@ -71,6 +100,8 @@ SELF_TEST = [  # one line per banned pattern, in order; each must be caught
 
 def self_test():
     bad = [ex for (label, pat), ex in zip(BANNED_TEXT, SELF_TEST) if not re.search(pat, norm(ex), re.I)]
+    if private_hit("see zz-synthetic here", {hashlib.sha256(b"zz-synthetic").hexdigest()}) is None:
+        bad.append("hashed private matcher")
     ok = not re.search(BANNED_TEXT[12][1], "The band never broke up.", re.I)
     print("self-test:", "pass" if not bad and ok and len(SELF_TEST) == len(BANNED_TEXT) else f"FAIL {bad}")
     return 0 if not bad and ok else 1
@@ -128,6 +159,8 @@ def main():
         p = Text()
         p.feed(raw)
         text = norm("".join(p.parts))
+        if private_hit(raw):
+            fail(page, "a private literal (hashed match; LL-4, LL-5, LL-7)")
         for label, pat in BANNED_TEXT:
             m = re.search(pat, text, re.I)
             if m:

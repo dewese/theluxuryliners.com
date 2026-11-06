@@ -5,6 +5,7 @@ title: Two Texans and a Gram Parsons song
 years: "1997"
 era: powder
 summary: The idea, the name and the move to Nashville.
+description: "Two Texans and a Gram Parsons song (1997): how David Dewese and Chad Edgington started The Luxury Liners, named the band and took it to Nashville."
 sources:
   - claim: Chad and David corresponded by email in the winter and spring of 1997 while Chad finished college and David lived in Texas
     source: DECISIONS-2026-10-07.md LL-4 (town deliberately not named, LL-5)

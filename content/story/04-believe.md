@@ -5,6 +5,7 @@ title: Believe, SXSW and Chad’s last show
 years: "2001"
 era: oxblood
 summary: An EP, a showcase in Austin, and the band carries on as a trio.
+description: "Believe, SXSW and Chad’s last show (2001): the Believe EP, a showcase in Austin, and how The Luxury Liners carried on as a trio."
 sources:
   - claim: Believe EP released March 2001 (public date 2001-03-01, Spotify) on Echomusic; tracks "It's You", "Shake It Up", "Believe"
     source: data/releases.json luxury-liners-2001-believe-ep

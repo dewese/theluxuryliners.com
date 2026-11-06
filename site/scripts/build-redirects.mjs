@@ -1,4 +1,5 @@
-// Legacy URLs (plan §7.2; data/legacy-urls.json, 675 rows): every archived URL of the band's
+// Legacy URLs (plan §7.2; data/legacy-urls.json, 670 public rows, plus the git-ignored
+// data/private/legacy-urls.private.json when present): every archived URL of the band's
 // old websites gets a deliberate answer on the new site. Runs AFTER `astro build`, because every
 // internal target must exist in dist/:
 //   dist/_redirects     301 rows (Cloudflare static redirects), exact paths, no chains
@@ -24,7 +25,14 @@ import { fileURLToPath } from 'node:url';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(site, 'dist');
-const rows = JSON.parse(readFileSync(join(site, '..', 'data', 'legacy-urls.json'), 'utf8')).urls;
+// Rows whose path names a private literal (content/private-literals.mjs: the old family page and
+// its images) are kept out of the public repository, in a git-ignored file the operator holds.
+// Merged when present; without it those old paths fall through to the Worker's 404.
+export const PRIVATE_ROWS = join(site, '..', 'data', 'private', 'legacy-urls.private.json');
+const rows = [
+  ...JSON.parse(readFileSync(join(site, '..', 'data', 'legacy-urls.json'), 'utf8')).urls,
+  ...(existsSync(PRIVATE_ROWS) ? JSON.parse(readFileSync(PRIVATE_ROWS, 'utf8')).urls : []),
+];
 if (!existsSync(join(dist, 'index.html'))) { console.error('build-redirects: dist/ not built (run astro build first)'); process.exit(1); }
 
 /** Does the built site answer 200 for this path? */

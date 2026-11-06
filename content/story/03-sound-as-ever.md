@@ -5,6 +5,7 @@ title: Sound As Ever
 years: "2000"
 era: powder
 summary: The first album, named after Gram Parsons's sign-off, and the arrival of Larry.
+description: "Sound As Ever (2000): The Luxury Liners’ first album, named after Gram Parsons’s sign-off, and David “Larry” Wilstermann joins on bass."
 sources:
   - claim: Sound As Ever released May 2000 (public date 2000-05-01, Spotify) on Echomusic / Litterbug Records
     source: data/releases.json luxury-liners-2000-sound-as-ever (P6 date; label field)

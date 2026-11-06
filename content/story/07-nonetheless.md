@@ -5,6 +5,7 @@ title: Nonetheless
 years: "2004–2007"
 era: oxblood
 summary: A third album, a run of top-of-the-year lists, and the band still playing.
+description: "Nonetheless (2004–2007): The Luxury Liners’ third album, a run of top-of-the-year lists, and a band still playing shows."
 sources:
   - claim: The journal stops in March 2004
     source: research/03 §3.3, §6

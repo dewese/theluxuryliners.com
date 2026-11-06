@@ -2,9 +2,13 @@
 page: people
 title: People
 intro: The Luxury Liners are four forever members, plus the players, producers and artists who helped along the way. This page lists everyone by name, role and years.
+uncredited_photos_note: Photos without a credit line come from the band’s own collection.
 four_photo_caption: David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter in 2002
 data: content/people.json
 sources:
+  - claim: uncredited_photos_note (where uncredited photos come from; no more is said, LL-7, LL-45)
+    source: data/assets.json (the uncredited photos are in the band's own Flickr archive albums); wording from critiques/audit-copy-round1.md
+    confidence: verified-source
   - claim: People appear by name, band role, years and band-era photos only; no quotes; nothing about their lives outside the band
     source: DECISIONS-2026-10-07.md LL-7
     confidence: confirmed-owner

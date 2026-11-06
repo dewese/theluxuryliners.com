@@ -9,6 +9,7 @@
 //  - data/legacy-urls.json is readable
 // Usage: node scripts/validate-data.mjs [--quiet]
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { privateHits } from '../../content/private-literals.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -81,7 +82,9 @@ for (const f of readdirSync(join(site, 'data')).filter((f) => f.endsWith('.json'
   if (/[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}/.test(t) || /mailto:/i.test(t)) fail(`site/data/${f}: holds an e-mail address`);
 }
 const legacy = read(join(root, 'data', 'legacy-urls.json'));
-if (legacy && legacy.urls?.length !== 675) fail(`legacy-urls.json: expected 675 rows, found ${legacy?.urls?.length}`);
+if (legacy && legacy.urls?.length !== 670) fail(`legacy-urls.json: expected 670 public rows, found ${legacy?.urls?.length}`);
+// the public data never names a private literal (those rows live in data/private/, git-ignored)
+if (legacy && legacy.urls.some((u) => privateHits(u.path).length)) fail('legacy-urls.json: a row names a private literal; move it to data/private/legacy-urls.private.json');
 
 if (errors.length) { console.error(`validate-data: FAIL (${errors.length})\n  ${errors.join('\n  ')}`); process.exit(1); }
 if (!quiet) console.log(`validate-data: PASS (${releases.length} releases, ${photos?.photos.length} photos, ${shows?.shows.length} shows, ${press?.items.length} press items, ${facts?.facts.length} facts)`);

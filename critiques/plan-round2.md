@@ -57,8 +57,8 @@ I re-checked 22 claims and every one passed. The rest of this critique is polish
 **Totals:** 22 PASS (one with a framing problem, N1; one understated, N2). None CONTRADICTED. None UNVERIFIABLE.
 
 **Privacy and X1 sweep (plan, questions file and README):**
-- The three files contain no college name, no Baptist Standard URL or slug, no church or career detail, no Gmail address, no family-page content and no X1 name or track number.
-- The Baptist Standard slug and the college name still sit in `research/04` (line 126 and the line-438 internal note). The plan tracks this as RD5 and makes it the first thing to fix before anything is published or the repository is shared. That is the right control. Note that `research/04` line 126 now calls the college "a shared, publishable fact", while the questions file (C3) asks whether to publish it. Carly's answer to C3 wins, and RD5 should strip that phrase.
+- The three files contain no college name, no [a later-life profile] URL or slug, no church or career detail, no Gmail address, no family-page content and no X1 name or track number.
+- The [a later-life profile] slug and the college name still sit in `research/04` (line 126 and the line-438 internal note). The plan tracks this as RD5 and makes it the first thing to fix before anything is published or the repository is shared. That is the right control. Note that `research/04` line 126 now calls the college "a shared, publishable fact", while the questions file (C3) asks whether to publish it. Carly's answer to C3 wins, and RD5 should strip that phrase.
 
 ## Blocking issues
 
@@ -105,7 +105,7 @@ None.
 - **§13 numbering:** PD10 comes after PD13. Renumber.
 - **README after this round:** the status line and the deliverables table still say "round 2 awaiting critic". Record 8.5/10 APPROVED and point to this file.
 - **Questions file V2:** "crediting the taper by name only". Tapers are listed as private people in rule 3. A name credit is fine, but make it the name as it appears on the Internet Archive item, nothing more.
-- **Questions file A12:** daviddewese.com's form goes to david@dewese.com (P2). Mention that precedent next to the proposed Gmail default.
+- **Questions file A12:** daviddewese.com's form goes to [the contact address] (P2). Mention that precedent next to the proposed Gmail default.
 
 ## What would raise the score
 

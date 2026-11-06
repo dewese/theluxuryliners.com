@@ -3,8 +3,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { isGone, queryRedirect, isStagingHost } from '../../worker/routing.ts';
-import { handleContact } from '../../worker/api/contact.ts';
+import { isGone, queryRedirect, isStagingHost, safeDecode } from '../../worker/routing.ts';
+import { handleContact, fillForm, verifyTurnstile } from '../../worker/api/contact.ts';
+import worker, { respond } from '../../worker/index.ts';
+import { MESSAGES } from '../../src/lib/contact.ts';
 import { buildMime } from '../../worker/api/mime.ts';
 import { GONE, QUERY_REDIRECTS } from '../../worker/gone.ts';
 import { SECURITY_HEADERS } from '../../worker/headers.ts';
@@ -36,7 +38,8 @@ const GOOD = { name: 'A Fan', email: 'fan@example.com', topic: 'fan-mail', messa
 const makeMessage = async (from, to, raw) => ({ from, to, raw });
 
 test('contact: a good message is sent to CONTACT_TO with Reply-To the visitor, then 303', async () => {
-  const env = ENV();
+  // no token: accepted only with the owner's ALLOW_NO_JS_CONTACT opt-in while a secret is set
+  const env = ENV({ ALLOW_NO_JS_CONTACT: '1' });
   const res = await handleContact(form(GOOD), env, { makeMessage });
   assert.equal(res.status, 303);
   assert.equal(res.headers.get('location'), '/contact/sent/');
@@ -59,6 +62,11 @@ test('contact: refusals', async () => {
   assert.equal(trapped.SEND_EMAIL.sent.length, 0, 'and sends nothing');
   const limited = ENV({ RL_CONTACT: { limit: async () => ({ success: false }) } });
   assert.equal((await handleContact(form(GOOD), limited, { makeMessage })).status, 429);
+  const withSecret = ENV();
+  assert.equal((await handleContact(form(GOOD), withSecret, { makeMessage })).status, 403, 'TURNSTILE_SECRET set: a token-less post with a forged same-origin header is refused');
+  assert.equal(withSecret.SEND_EMAIL.sent.length, 0);
+  const noSecret = ENV({ TURNSTILE_SECRET: undefined });
+  assert.equal((await handleContact(form(GOOD), noSecret, { makeMessage })).status, 303, 'no secret configured (preview): the same-origin rule applies');
   const noSite = new Request('https://theluxuryliners.com/api/contact', { method: 'POST', body: new URLSearchParams(GOOD).toString(), headers: { 'content-type': 'application/x-www-form-urlencoded' } });
   assert.equal((await handleContact(noSite, ENV(), { makeMessage })).status, 403, 'no token and no same-origin signal');
   const strict = ENV({ REQUIRE_TURNSTILE: '1' });
@@ -67,12 +75,131 @@ test('contact: refusals', async () => {
 });
 
 test('contact: Turnstile token checked with siteverify (hostname and action)', async () => {
-  const fetcher = (ok) => async () => new Response(JSON.stringify({ success: ok, hostname: 'theluxuryliners.com', action: 'contact' }));
+  const fetcher = (ok, over = {}) => async () => new Response(JSON.stringify({ success: ok, hostname: 'theluxuryliners.com', action: 'contact', ...over }));
   const env = ENV();
   const good = await handleContact(form({ ...GOOD, 'cf-turnstile-response': 'tok' }), env, { makeMessage, fetcher: fetcher(true) });
   assert.equal(good.status, 303);
   assert.doesNotMatch(env.SEND_EMAIL.sent[0].raw, /\[no Turnstile\]/);
-  assert.equal((await handleContact(form({ ...GOOD, 'cf-turnstile-response': 'tok' }), ENV(), { makeMessage, fetcher: fetcher(false) })).status, 422);
+  const post = (env, f) => handleContact(form({ ...GOOD, 'cf-turnstile-response': 'tok' }), env, { makeMessage, fetcher: f });
+  assert.equal((await post(ENV(), fetcher(false))).status, 422, 'siteverify says no');
+  assert.equal((await post(ENV(), fetcher(true, { hostname: 'evil.example' }))).status, 422, 'a token for another hostname');
+  assert.equal((await post(ENV(), fetcher(true, { action: 'login' }))).status, 422, 'a token for another action');
+  assert.equal((await post(ENV(), async () => { throw new Error('network'); })).status, 422, 'siteverify unreachable');
+  assert.equal((await post(ENV(), async () => new Response('oops', { status: 500 }))).status, 422, 'siteverify error');
+  assert.equal((await post(ENV({ TURNSTILE_SECRET: undefined }), fetcher(true))).status, 422, 'no TURNSTILE_SECRET: a token cannot be verified');
+});
+
+test('contact: remoteip is sent only when Cloudflare gave one', async () => {
+  const seen = [];
+  const fetcher = async (_u, init) => { seen.push(init.body.has('remoteip')); return new Response(JSON.stringify({ success: true, hostname: 'theluxuryliners.com', action: 'contact' })); };
+  await verifyTurnstile('tok', null, ENV(), fetcher);
+  await verifyTurnstile('tok', '203.0.113.9', ENV(), fetcher);
+  assert.deepEqual(seen, [false, true]);
+});
+
+test('contact: the rate limit runs before siteverify and before validation (audit-qa S2, audit-security S4)', async () => {
+  let verifies = 0;
+  const fetcher = async () => { verifies++; return new Response(JSON.stringify({ success: false })); };
+  const limited = ENV({ RL_CONTACT: { limit: async () => ({ success: false }) } });
+  assert.equal((await handleContact(form({ ...GOOD, 'cf-turnstile-response': 'bad' }), limited, { makeMessage, fetcher })).status, 429);
+  assert.equal((await handleContact(form({ ...GOOD, email: 'x' }), limited, { makeMessage, fetcher })).status, 429, 'a bad form counts too');
+  assert.equal(verifies, 0, 'siteverify never called for a limited client');
+  const keys = [];
+  const env = ENV({ RL_CONTACT: { limit: async ({ key }) => { keys.push(key); return { success: true }; } } });
+  await handleContact(form({ ...GOOD, email: 'x' }, { 'cf-connecting-ip': '203.0.113.9' }), env, { makeMessage });
+  assert.deepEqual(keys, ['203.0.113.9'], 'a refused form is counted');
+});
+
+const CONTACT_HTML = '<html><head><title>Contact | The Luxury Liners</title></head><body><form method="post" action="/api/contact" data-contact><div class="error-summary" data-contact-errors tabindex="-1" hidden></div>'
+  + '<p class="field-error" id="name-error" hidden></p><input id="name" name="name" type="text" aria-describedby="name-hint name-error">'
+  + '<p class="field-error" id="email-error" hidden></p><input id="email" name="email" type="email">'
+  + '<p class="field-error" id="topic-error" hidden></p><select id="topic" name="topic"><option value="" disabled selected>Choose a topic</option><option value="booking">Booking</option><option value="fan-mail">Fan mail</option></select>'
+  + '<p class="field-error" id="message-error" hidden></p><textarea id="message" name="message" aria-describedby="message-hint message-error"></textarea></form></body></html>';
+
+test('contact: a refused message without JavaScript gets the form again, filled in, with the errors (audit-a11y B2)', async () => {
+  const input = { name: 'David "Larry" <b>', email: 'nope', topic: 'fan-mail', message: 'Hi & <script>x</script>' };
+  const out = fillForm(CONTACT_HTML, { email: MESSAGES.email, form: MESSAGES.tooFast }, input);
+  assert.match(out, /<title>Error: Contact/);
+  assert.match(out, /<div class="error-summary" data-contact-errors tabindex="-1" role="alert"><h2 class="h3">Your message was not sent<\/h2>/);
+  assert.match(out, /<li><a href="#email">Enter a full email address/);
+  assert.match(out, /<p class="field-error" id="email-error">Enter a full email address/);
+  assert.match(out, /<p class="field-error" id="name-error" hidden><\/p>/, 'no error, slot stays hidden');
+  assert.match(out, /<input id="email" value="nope" aria-invalid="true"/);
+  assert.match(out, /<input id="name" value="David &quot;Larry&quot; &lt;b&gt;" name=/, 'value kept and escaped');
+  assert.match(out, /<option value="fan-mail" selected>/);
+  assert.match(out, /<option value="" disabled>Choose/);
+  assert.match(out, /<textarea id="message"[^>]*>Hi &amp; &lt;script&gt;x&lt;\/script&gt;<\/textarea>/);
+  assert.doesNotMatch(out, /<script>x/);
+  // through the handler, with an ASSETS stand-in serving the page
+  const env = ENV({ ASSETS: { fetch: async (r) => new URL(r.url ?? r).pathname === '/contact/' ? new Response(CONTACT_HTML) : new Response('', { status: 404 }) } });
+  const res = await handleContact(form({ ...GOOD, email: 'x' }), env, { makeMessage });
+  assert.equal(res.status, 422);
+  assert.match(await res.text(), /<input id="email" value="x" aria-invalid="true"/);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) assert.equal(res.headers.get(k), v);
+  // with fetch(): JSON
+  const js = await handleContact(form({ ...GOOD, email: 'x' }, { accept: 'application/json' }), ENV(), { makeMessage });
+  assert.deepEqual(await js.json(), { ok: false, errors: { email: MESSAGES.email } });
+});
+
+test('routing: a malformed escape never throws (audit-qa S1, audit-security S2)', () => {
+  for (const p of ['/foo%zz', '/100%', '/%E0%A4%A']) { assert.doesNotThrow(() => isGone(p)); assert.equal(isGone(p), false); assert.equal(safeDecode(p), p); }
+  assert.equal(safeDecode('/a%20b'), '/a b');
+});
+
+const ASSETS = (files) => ({ fetch: async (r) => { const p = new URL(r.url ?? r).pathname; return p in files ? new Response(files[p], { status: 200 }) : new Response('nope', { status: 404 }); } });
+const SITE_ENV = (over = {}) => ({ ...ENV(), SITE_HOSTNAME: 'theluxuryliners.com', ASSETS: ASSETS({ '/': 'home', '/404': '<h1>404 page</h1>', '/410/': '<h1>410 page</h1>' }), ...over });
+
+test('respond(): static files, 404, 410, fallbacks and the old query addresses', async () => {
+  const env = SITE_ENV();
+  const get = (p) => respond(new Request(`https://theluxuryliners.com${p}`), env, new URL(`https://theluxuryliners.com${p}`));
+  assert.equal(await (await get('/')).text(), 'home');
+  const nf = await get('/no-such-page/');
+  assert.equal(nf.status, 404); assert.equal(await nf.text(), '<h1>404 page</h1>'); assert.equal(nf.headers.get('x-robots-tag'), 'noindex');
+  const gone = await get(GONE[0]);
+  assert.equal(gone.status, 410); assert.equal(await gone.text(), '<h1>410 page</h1>');
+  assert.equal((await get('/foo%zz')).status, 404, 'malformed escape: a 404, not a 500');
+  const bare = SITE_ENV({ ASSETS: ASSETS({}) });
+  const fb = await respond(new Request('https://theluxuryliners.com/x'), bare, new URL('https://theluxuryliners.com/x'));
+  assert.equal(fb.status, 404); assert.match(await fb.text(), /Not found/, 'built-in fallback when /404 is missing');
+  const moved = await get('/?content=bio');
+  assert.equal(moved.status, 301); assert.equal(moved.headers.get('location'), QUERY_REDIRECTS['content=bio']);
+  assert.equal((await get('/api/other')).status, 404);
+});
+
+test('the Worker: security headers everywhere, staging included, and a 500 page on an error (audit-security S2, S3)', async () => {
+  const prod = await worker.fetch(new Request('https://theluxuryliners.com/no-such-page/'), SITE_ENV());
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) assert.equal(prod.headers.get(k), v, k);
+  const staging = await worker.fetch(new Request('https://staging.theluxuryliners.com/no-such-page/'), SITE_ENV());
+  assert.equal(staging.status, 404);
+  assert.equal(staging.headers.get('x-robots-tag'), 'noindex, nofollow');
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) assert.equal(staging.headers.get(k), v, `staging ${k}`);
+  const robots = await worker.fetch(new Request('https://staging.theluxuryliners.com/robots.txt'), SITE_ENV());
+  assert.match(await robots.text(), /Disallow: \//);
+  const broken = SITE_ENV({ ASSETS: { fetch: async () => { throw new Error('boom'); } } });
+  const err = await worker.fetch(new Request('https://theluxuryliners.com/x'), broken);
+  assert.equal(err.status, 500);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) assert.equal(err.headers.get(k), v, `500 ${k}`);
+});
+
+test('headers: modern Permissions-Policy, HSTS with subdomains; /admin/ allows the OAuth popup and pins Decap', () => {
+  assert.match(SECURITY_HEADERS['Permissions-Policy'], /browsing-topics=\(\)/);
+  assert.doesNotMatch(SECURITY_HEADERS['Permissions-Policy'], /interest-cohort/);
+  assert.match(SECURITY_HEADERS['Strict-Transport-Security'], /includeSubDomains/);
+  const h = readFileSync(new URL('../../dist/_headers', import.meta.url), 'utf8');
+  const admin = h.slice(h.indexOf('/admin/*'));
+  assert.match(admin, /! Cross-Origin-Opener-Policy\n  Cross-Origin-Opener-Policy: same-origin-allow-popups/);
+  assert.match(admin, /object-src 'none'; base-uri 'self'/);
+  assert.match(admin, /script-src 'self' 'unsafe-eval' https:\/\/unpkg\.com\/decap-cms@[\d.]+\/dist\/decap-cms\.js;/);
+  const html = readFileSync(new URL('../../public/admin/index.html', import.meta.url), 'utf8');
+  const v = /decap-cms@([\d.]+)/.exec(admin)[1];
+  assert.match(html, new RegExp(`<script src="https://unpkg\\.com/decap-cms@${v.replace(/\./g, '\\.')}/dist/decap-cms\\.js" integrity="sha384-[A-Za-z0-9+/=]{64}" crossorigin="anonymous">`));
+});
+
+test('wrangler: production requires Turnstile; the www host may send the form', () => {
+  const w = readFileSync(new URL('../../wrangler.jsonc', import.meta.url), 'utf8');
+  const top = w.slice(0, w.indexOf('"env"'));
+  assert.match(top, /"REQUIRE_TURNSTILE": "1"/);
+  assert.match(top, /"CONTACT_HOSTNAMES": "theluxuryliners\.com,www\.theluxuryliners\.com"/);
 });
 
 test('mime: no visitor text can start a header', () => {

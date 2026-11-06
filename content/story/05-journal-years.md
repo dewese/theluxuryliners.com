@@ -5,6 +5,7 @@ title: The journal years
 years: "2001–2004"
 era: oxblood
 summary: About 40 shows and trips, logged by the band itself.
+description: "The journal years (2001–2004): about 40 shows and trips by The Luxury Liners, as the band logged them itself at the time."
 sources:
   - claim: Band journal on the website, June 2001 to March 2004, logging about 40 shows and trips
     source: research/03 §3.3, §6; research/01 §7; dd research/04 §5.2 (journal table)

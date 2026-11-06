@@ -5,6 +5,8 @@
 //   node content/check-content.mjs --dist dist     also scan a built site (HTML, JSON-LD, JS, llms.txt, XML);
 //                                                  the LL-6 one-liner is compared byte for byte there
 //   node content/check-content.mjs --dist-only dist
+//   node content/check-content.mjs --repo          every tracked file (git ls-files): private literals only
+//                                                  (the repository is public; see REPO_EXCEPTIONS)
 //   node content/check-content.mjs --self-test     prove every rule fires on a bad sample and not on a good one
 //   add --json for machine-readable output
 //
@@ -15,7 +17,9 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, dirname, extname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { PRIVATE_HASHES, privateHits, privateLines, sha256 as sha } from './private-literals.mjs';
+export { privateHits };
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -63,32 +67,8 @@ const R = [];
 const rule = (id, level, scope, re, msg, extra = {}) => R.push({ id, level, scope, re, msg, ...extra });
 
 // Privacy (plan §2 item 3, LL-7, LL-31)
-// Private literals are matched by SHA-256 of a lower-cased token, never written here: naming
-// them in a public privacy rule would show what is being protected. Each entry: hash -> label.
-// Tokens tried: every word or dotted/at-sign token, its parts split on . @ / -, and adjacent
-// word pairs (joined with and without a space). To add one: printf '%s' 'token' | sha256sum
-const PRIVATE_HASHES = new Map([
-  ['bd69e39fea034e7dab1702391ba0af52d8bb4cfddeefef293bf9ae1577a013ea', 'the contact address (LL-31: Worker config only)'],
-  ['81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a', 'the private family page'],
-  ['270e826aaea2ede6497f2383a2e0c2fe418a737a8224fc8888e4821158342f5d', 'the profile of Chad\'s later life (plan §2 item 3)'],
-  ['921329720029ded97c7725d6a6508f110e9488d3bbf614a33babec8f3ea383a6', 'the profile of Chad\'s later life (plan §2 item 3)'],
-  ['0c6193e11c89c15a1715161c094efa47adfc6585cd66021968336d5b4d4fc321', 'a town from the founding story (LL-4, LL-5)'],
-  ['2c96398674dbc4e58b556e6fbf53f85b80be112a3c9113851f431d3a67275208', 'a college name (plan §2 item 3, RD5)'],
-]);
-const sha = (s) => createHash('sha256').update(s).digest('hex');
-export function privateHits(text, hashes = PRIVATE_HASHES) {
-  const toks = text.toLowerCase().match(/[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]/g) || [];
-  const cands = new Set();
-  toks.forEach((t, k) => {
-    cands.add(t);
-    for (const part of t.split(/[.@\/_-]+/)) if (part) cands.add(part);
-    const nx = toks[k + 1];
-    if (nx) { cands.add(`${t} ${nx}`); cands.add(t + nx); }
-  });
-  const out = [];
-  for (const c of cands) { const label = hashes.get(sha(c)); if (label) out.push(label); }
-  return [...new Set(out)];
-}
+// Private literals are matched by SHA-256 of a lower-cased token, never written here: the
+// matcher and the hash list live in content/private-literals.mjs (shared with site/scripts/check-dist.mjs).
 let privateHashes = PRIVATE_HASHES; // the self-test swaps in a synthetic list
 
 // Privacy (plan §2 item 3, LL-7, LL-31)
@@ -354,6 +334,22 @@ export function oneLinerRawHits(src) {
   return out;
 }
 
+// --dist: a visible sentence that names Discogs (or Wayback, Flickr) outside a link is a sourcing
+// note ("Discogs lists…", "Writers as Discogs credits them"), an error in a built page (audit-copy
+// round 1, B1/B2). A link's own text ("Overbored on Discogs") and a one-word label are fine.
+export function sourceSentenceHits(html) {
+  const body = html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, ' ');
+  const blocks = stripTags(body.replace(/<\/(?:p|li|h[1-6]|td|th|dd|dt|figcaption|caption|div|section|article|header|footer|nav|tr)>|<br\s*\/?>/gi, '\n\n')).split(/\n\s*\n/);
+  const out = [];
+  for (const b of blocks) {
+    const t = decodeEntities(b).replace(/\s+/g, ' ').trim();
+    if (!/\b(?:Discogs|Wayback|Flickr)\b/i.test(t)) continue;
+    for (const sentence of t.split(/(?<=[.!?])\s+/)) if (/\b(?:Discogs|Wayback|Flickr)\b/i.test(sentence) && sentence.split(' ').length >= 4) out.push(sentence);
+  }
+  return out;
+}
+
 function checkDist(dir) {
   const issues = [];
   for (const p of listFiles(dir, ['.html', '.json', '.jsonld', '.txt', '.xml', '.js', '.mjs', '.webmanifest'])) {
@@ -367,7 +363,43 @@ function checkDist(dir) {
     // privacy rules also run on the raw file (hrefs, mailto:, data attributes)
     segs.push({ file: rel, loc: 'raw', raw: decodeEntities(src), scope: 'internal', quote: false });
     for (const s of segs) issues.push(...applyRules(s));
+    if (ext === '.html') for (const hit of sourceSentenceHits(src)) issues.push({ level: 'error', rule: 'source-sentence', file: rel, loc: 'text', msg: 'A visible sentence names a source (Discogs, Wayback, Flickr) outside a link: a sourcing note (content/CHECK.md).', text: hit.slice(0, 200) });
     for (const hit of oneLinerRawHits(src)) issues.push({ level: 'error', rule: 'one-liner-bytes', file: rel, loc: 'raw', msg: 'The LL-6 one-liner must appear byte for byte (straight quotes, no other glyphs) in the built site.', text: hit.slice(0, 200) });
+  }
+  return issues;
+}
+
+// --repo: the repository is public, so no tracked file may hold a private literal (hashed match,
+// content/private-literals.mjs). Each line is also read with regex escapes removed, so a literal
+// written as a pattern (a word-boundary escape before it) is caught too.
+// REPO_EXCEPTIONS: files the owner has to decide on. Only the owner edits the decisions file; its
+// LL-4 founding story and LL-31 contact address are in public history already, and the owner must
+// choose (accept, approve a history purge, or make the repository private) and reword (site/BUILD-LOG.md,
+// "Owner decisions needed"). Nothing else may be added here without an owner decision.
+export const REPO_EXCEPTIONS = new Set(['DECISIONS-2026-10-07.md']);
+const BINARY = /\.(png|jpe?g|webp|avif|gif|ico|woff2?|ttf|otf|pdf|mp3|zip|gz|psd|tiff?|bmp|eps|ai)$/i;
+export function repoHits(rel, text, hashes = privateHashes) {
+  const out = [];
+  const lines = text.split('\n');
+  const unescaped = text.replace(/\\[a-zA-Z]/g, ' ').replace(/\\(.)/g, '$1');
+  const seen = new Set();
+  for (const src of [text, unescaped]) for (const { line, labels } of privateLines(src, hashes)) {
+    if (seen.has(line)) continue;
+    seen.add(line);
+    out.push({ level: 'error', rule: 'private-literal-repo', file: rel, loc: `line ${line}`, msg: `A private literal is in a tracked file of this public repository: ${labels.join('; ')}.`, text: `line ${line}` });
+  }
+  return out;
+}
+function checkRepo(root) {
+  const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, maxBuffer: 64 * 1024 * 1024 }).toString().split('\0').filter(Boolean);
+  const issues = [];
+  for (const rel of files) {
+    if (BINARY.test(rel) || REPO_EXCEPTIONS.has(rel)) continue;
+    const p = join(root, rel);
+    if (!existsSync(p)) continue;
+    const buf = readFileSync(p);
+    if (buf.subarray(0, 8000).includes(0)) continue;
+    issues.push(...repoHits(rel, buf.toString('utf8')));
   }
   return issues;
 }
@@ -440,7 +472,15 @@ function selfTest() {
   if (oneLinerRawHits(`<p>${enc}</p><meta content="${ONE_LINER.replace(/'/g, '&#x27;')}">`).length) { fail++; console.log('FAIL one-liner-bytes: exact text with entities flagged'); }
   if (!oneLinerRawHits(`<p>${ONE_LINER.replace(/'/g, '’')}</p>`).length) { fail++; console.log('FAIL one-liner-bytes: curled quotes not caught'); }
   if (!oneLinerRawHits('The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese.').length) { fail++; console.log('FAIL one-liner-bytes: shortened text not caught'); }
-  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 9} checks passed`);
+  // --repo: a literal written plainly, or as a regex with word-boundary escapes, is caught
+  if (!repoHits('x.md', 'see zzfamily.html here').length) { fail++; console.log('FAIL repo: plain literal'); }
+  if (!repoHits('x.mjs', "/\\bzzfamily\\.html\\b/").length) { fail++; console.log('FAIL repo: escaped literal'); }
+  if (repoHits('x.md', 'nothing private here').length) { fail++; console.log('FAIL repo: clean text flagged'); }
+  // --dist source sentences: a sentence naming Discogs is caught; a link or a one-word label is not
+  if (!sourceSentenceHits('<p>Discogs lists the pressing as 100 copies.</p>').length) { fail++; console.log('FAIL source-sentence: not caught'); }
+  if (!sourceSentenceHits('<p class="meta">Writers as Discogs credits them.</p>').length) { fail++; console.log('FAIL source-sentence: writers note not caught'); }
+  if (sourceSentenceHits('<dl><dt>Discogs</dt><dd><a href="https://www.discogs.com/x">Overbored on Discogs</a></dd></dl>').length) { fail++; console.log('FAIL source-sentence: link flagged'); }
+  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 15} checks passed`);
   return fail;
 }
 
@@ -450,7 +490,8 @@ if (args.includes('--self-test')) process.exit(selfTest() ? 1 : 0);
 const distIdx = args.findIndex((a) => a === '--dist' || a === '--dist-only');
 const distDir = distIdx >= 0 ? args[distIdx + 1] : null;
 let issues = [];
-if (!args.includes('--dist-only')) issues.push(...checkContent(HERE));
+if (args.includes('--repo')) issues.push(...checkRepo(join(HERE, '..')));
+else if (!args.includes('--dist-only')) issues.push(...checkContent(HERE));
 if (distDir) {
   if (!existsSync(distDir)) { console.error(`No such directory: ${distDir}`); process.exit(2); }
   issues.push(...checkDist(distDir));

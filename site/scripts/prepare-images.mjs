@@ -48,11 +48,24 @@ async function variants(key, src, widths) {
     }
   }
   const h = Math.round((meta.height / meta.width) * ws.at(-1));
-  sizes[key] = { width: ws.at(-1), height: h, widths: ws };
+  // keep whichever encoding is smaller (audit-qa round 1, M5): when a WebP copy is no smaller than
+  // its JPEG, the page offers the JPEG alone (Photo/Cover drop the WebP <source>)
+  const webp = ws.every((w) => statSync(join(out, `${key}-${w}.webp`)).size < statSync(join(out, `${key}-${w}.jpg`)).size);
+  sizes[key] = { width: ws.at(-1), height: h, widths: ws, webp };
+}
+
+// Social cards (audit-seo round 1, S5/S6): 1200x630, the shape summary_large_image shows uncropped.
+async function card(key, src) {
+  const abs = join(root, src);
+  const f = join(out, 'cards', `${key}.jpg`);
+  mkdirSync(dirname(f), { recursive: true });
+  if (!force && existsSync(f) && statSync(f).mtimeMs > statSync(abs).mtimeMs) return;
+  await sharp(abs).rotate().resize(1200, 630, { fit: 'cover', position: sharp.strategy.attention }).toColorspace('srgb').jpeg({ quality: 82, mozjpeg: true }).toFile(f);
 }
 
 for (const [slug, src] of Object.entries(COVERS)) await variants(`covers/${slug}`, src, [300, 600, 1200]);
 for (const p of photos) await variants(`photos/${p.id}`, p.src, [480, 960, 1600]);
+for (const p of photos) await card(p.id, p.src);
 writeFileSync(sizesFile, JSON.stringify(sizes, null, 1) + '\n');
 
 // ---- logos: viewBox crops of the derived sheets (verbatim artwork) ----

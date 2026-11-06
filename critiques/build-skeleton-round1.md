@@ -14,8 +14,8 @@ Critic: independent, 2026-11-06. Output reviewed: `/home/user/theluxuryliners.co
 | RELEASE mode on a copy of dist with one injected `PLACEHOLDER` (dummy keys set) | FAIL with `epk/index.html: PLACEHOLDER copy (1)`, so the gate works. Without RELEASE it passes and reports "would fail on 1 PLACEHOLDER block" |
 | `_redirects` | 315 rows, all 301. No chains, no self-redirects, every internal target exists in `dist/`, no overlap with the 293 paths in `worker/gone.ts` (410) |
 | Screenshots, 1280 and 375 px, DPR 1 (14 pages each) | no horizontal scroll on any page (`scrollWidth` equals the viewport). After scrolling, every lazy image loads (0 broken). Layout is plain and token-based, as asked |
-| `dist` grep: e-mail addresses / `david@dewese.com` / gmail | **none.** The only `dewese.com` strings are `daviddewese.com` links. `CONTACT_TO` exists only as a Worker secret |
-| `dist` grep: talent show, Mesquite, Baptist, "lives in", demo, download, newsletter, designer credit, `.mp3`/`.zip` files | none. "Designer" appears only as Mark Montgomery's *Sound As Ever* role, not as a logo credit |
+| `dist` grep: e-mail addresses / `[the contact address]` / gmail | **none.** The only `dewese.com` strings are `daviddewese.com` links. `CONTACT_TO` exists only as a Worker secret |
+| `dist` grep: talent show, [the founding-story town], Baptist, "lives in", demo, download, newsletter, designer credit, `.mp3`/`.zip` files | none. "Designer" appears only as Mark Montgomery's *Sound As Ever* role, not as a logo credit |
 | LL-6 one-liner | verbatim on home, in JSON-LD `description`, in llms.txt and in the EPK |
 | LL-17 sentence | verbatim on Story, Facts, EPK and llms.txt. "reconnected" never appears outside it |
 | JSON-LD MusicGroup | foundingDate 1997; foundingLocation Texas (region TX, no town); founders David (`daviddewese.com/#person`) and Chad; the four forever members with no endDate; sameAs without Bandcamp, with the reason recorded in BUILD-LOG |

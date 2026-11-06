@@ -48,6 +48,7 @@ test('contact rules: fields, honeypot, header-safe cleaning', () => {
   assert.equal(validate({ ...ok, email: 'nope' }).email, MESSAGES.email);
   assert.equal(validate({ ...ok, topic: 'x' }).topic, MESSAGES.topic);
   assert.equal(validate({ ...ok, name: 'a<b' }).name, MESSAGES.nameChars);
+  assert.equal(validate({ ...ok, name: 'David "Larry" Wilstermann' }).name, undefined, 'a nickname in quotes is a name (audit-a11y B2)');
   assert.equal(validate({ ...ok, message: 'hi' }).message, MESSAGES.messageShort);
   assert.equal(validate({ ...ok, message: 'see http://a http://b http://c http://d' }).message, MESSAGES.messageLinks);
   assert.equal(validate({ ...ok, elapsed: '1' }, { checkTiming: true }).form, MESSAGES.tooFast);

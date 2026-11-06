@@ -28,7 +28,7 @@ The failures are in the synthesis itself:
 | # | Claim in plan | Source checked | Result |
 |---|---|---|---|
 | 1 | Legacy URL actions: 301 = 300, query = 32, rehost-same-path = 17, rehost-or-none = 78, keep/serve = 2/3, none = 243 (§7.2) | `data/legacy-urls.json` `counts` and a recount of `urls` | PASS |
-| 2 | `/ethan.html` 301s to `/` only; `/history/concerts.html` first captured 2003-06-07 → `/shows/` | `data/legacy-urls.json` rows | PASS |
+| 2 | `/[the private family page]` 301s to `/` only; `/history/concerts.html` first captured 2003-06-07 → `/shows/` | `data/legacy-urls.json` rows | PASS |
 | 3 | releases.json has 21 objects (7 releases, 1 reissue, 8 appearances, 4 archive items, 1 lead); assets.json has 310 records; 274 Flickr photos, 248 usable | data files, recount | PASS |
 | 4 | Release spine dates 2000-05-01, 2001-03-01, 2003-05-01, 2006-10-01, 2021-08-27, 2026-02-13, 2026-04-17 (§3.1) | iTunes lookup `id=47333263`, live 2026-10-07 | PASS (agrees with F6 and P6) |
 | 5 | Domain registered 1998-03-20, expires 2027-03-19 (§7.2) | Verisign RDAP, live | PASS |
@@ -53,7 +53,7 @@ The failures are in the synthesis itself:
 **Totals:** 18 PASS, 3 CONTRADICTED, 1 UNVERIFIABLE (contested).
 
 **Privacy and X1 sweep:**
-- The plan, the questions file and the README contain no college name, no Baptist Standard URL, no church or career detail, no family-page content and no Gmail address.
+- The plan, the questions file and the README contain no college name, no [a later-life profile] URL, no church or career detail, no family-page content and no Gmail address.
 - X1 is never named. The only exception is the pointer in N4.
 
 ## Blocking issues

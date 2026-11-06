@@ -5,6 +5,7 @@ title: Overbored
 years: "2003"
 era: oxblood
 summary: The trio's first album, and two songs that went to television.
+description: "Overbored (2003): the first album by The Luxury Liners as a trio, and the two songs from it that went on to be used on television."
 sources:
   - claim: Overbored released May 2003 (public date 2003-05-01, Spotify) on Litterbug Records
     source: data/releases.json luxury-liners-2003-overbored

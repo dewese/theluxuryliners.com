@@ -3,6 +3,7 @@
 // and cover-art credits (LL-23), in design C: the cover and a big title, the facts as a roundel-
 // dotted line, the tracks in red ovals, the credits, press quotes on Believe red, a click-to-load
 // video where there is one, and a pager to the neighbouring releases. The date is shown once.
+import { fitClasses } from '../../lib/typo.ts';
 import Base from '../../layouts/Base.astro';
 import Cover from '../../components/Cover.astro';
 import Listen from '../../components/Listen.astro';
@@ -19,7 +20,12 @@ export function getStaticPaths() {
 }
 const { r } = Astro.props as { r: Release };
 const writers = (w: string[]) => w.join(' and ').replace(/ and (?=.* and )/g, ', ');
-const desc = `${r.title} by The Luxury Liners: ${r.kind === 'EP' ? 'an EP' : r.kind === 'Album' ? 'an album' : 'a single'} (${r.year}). ${r.blurb}`;
+// search snippets: title tags within about 60 characters and descriptions within about 160
+// (audit-seo round 1, S11); a long title gets a short form in the title tag only
+const SHORT_TITLE: Record<string, string> = { 'shake-it-up-live': 'Shake It Up (live, 2021)' };
+const pageTitle = SHORT_TITLE[r.slug] ?? `${r.title} (${r.year})`;
+const longDesc = `${r.title} by The Luxury Liners: ${r.kind === 'EP' ? 'an EP' : r.kind === 'Album' ? 'an album' : 'a single'} (${r.year}). ${r.blurb}`;
+const desc = longDesc.length <= 160 ? longDesc : r.blurb && r.blurb.length <= 160 ? r.blurb : `${r.title} by The Luxury Liners (${r.year}): ${r.blurb.split(/(?<=\.)\s/)[0]}`;
 const { prev, next } = neighbours(r.slug);
 const total = totalTime(r);
 const video = VIDEOS[r.slug];
@@ -31,14 +37,14 @@ const chapter = storyView().chapters.find((c) => c.release === r.slug || (r.slug
 const photoId = r.slug === 'overbored' ? 'recesses-2003' : null;
 const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} cover` : t.writers.length ? `Written by ${writers(t.writers)}` : null;
 ---
-<Base title={`${r.title} (${r.year})`} description={desc} jsonld={[musicAlbum(r)]} image={`${SITE}${r.cover}-1200.jpg`}>
+<Base title={pageTitle} description={desc} jsonld={[musicAlbum(r)]} image={`${SITE}${r.cover}-1200.jpg`} imageAlt={r.coverAlt} square>
   <section class="release" aria-labelledby="h1t">
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/music/">Music</a></li><li><span aria-current="page">{r.title}</span></li></ol></nav>
       <div class="release__grid">
-        <div class="release__text">
+        <div class="release__text fit-box">
           <p class="kicker">{r.kind} · {r.year} · The Luxury Liners</p>
-          <h1 id="h1t" class="title-xl">{r.title}</h1>
+          <h1 id="h1t" class:list={['title-xl', ...fitClasses(r.title)]}>{r.title}</h1>
           <ul class="factline">
             <li>{r.dateLabel}</li>
             <li>{r.label}</li>
@@ -51,7 +57,7 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
           <Listen links={r.listen} title={r.title} />
         </div>
         <figure class="release__cover">
-          <Cover slug={r.slug} alt={r.coverAlt} eager sizes="(max-width: 56rem) 100vw, 30rem" />
+          <Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) calc(100vw - 2rem), 36rem" />
           <figcaption>
             {r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)}
             {' '}<span>{COVER_RIGHTS}</span>
@@ -65,7 +71,6 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
     <div class="wrap two-col">
       <div>
         <SecHead id="tl">Tracks</SecHead>
-        {r.writersNote && <p class="meta">{r.writersNote}</p>}
         <ol class="tracks">
           {r.tracks.map((t) => (
             <li class="track">
@@ -114,7 +119,7 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
     <section id="lp-2026" class="band" aria-labelledby="lp-h">
       <div class="wrap measure">
         <SecHead id="lp-h">On vinyl ({r.lp.year})</SecHead>
-        <p class="intro">In {r.lp.year} Sound As Ever came out on vinyl for the first time, with {r.lp.tracks} tracks (the hidden tracks are not on it). Discogs lists the pressing as 100 copies on Sweden’s {r.lp.label.replace(' (Sweden)', '')}.</p>
+        <p class="intro">In {r.lp.year} Sound As Ever came out on vinyl for the first time, with {r.lp.tracks} tracks (the hidden tracks are not on it). The pressing is a limited edition of 100 copies on Sweden’s {r.lp.label.replace(' (Sweden)', '')}.</p>
         {r.lp.artwork.length > 0 && <ul class="bullets">{r.lp.artwork.map((a) => <li>{a.name} {a.role.charAt(0).toLowerCase() + a.role.slice(1)}.</li>)}</ul>}
       </div>
     </section>

@@ -29,6 +29,36 @@ ONE_LINER = ("The Luxury Liners are a power-pop band co-founded in 1997 by David
 LL17 = "The band never broke up. The four forever members reconnected during the pandemic and started making music again."
 P23 = "David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter in 2002"
 
+# Private literals (the founding-story town and the rest) are matched by the SHA-256 of a
+# lower-cased token, never written in this public repository; the same hashes as
+# content/private-literals.mjs (the source of truth: add new ones there and here).
+import hashlib
+PRIVATE_HASHES = {
+    "bd69e39fea034e7dab1702391ba0af52d8bb4cfddeefef293bf9ae1577a013ea",
+    "81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a",
+    "7b8bd6c0abf53d22888beafc48830e1156907dd4ec7e6ea31e55a0dd6dc5a969",
+    "f6a761f669dfeafd8086a367b336cbee496a1b13ac5128c8cb9346ca7891ccf3",
+    "270e826aaea2ede6497f2383a2e0c2fe418a737a8224fc8888e4821158342f5d",
+    "921329720029ded97c7725d6a6508f110e9488d3bbf614a33babec8f3ea383a6",
+    "0c6193e11c89c15a1715161c094efa47adfc6585cd66021968336d5b4d4fc321",
+    "2c96398674dbc4e58b556e6fbf53f85b80be112a3c9113851f431d3a67275208",
+}
+
+
+def private_hit(text, hashes=PRIVATE_HASHES):
+    """The first token (or word pair) of the text whose hash is private, else None."""
+    toks = re.findall(r"[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]", text.lower())
+    for k, t in enumerate(toks):
+        cands = [t] + [p for p in re.split(r"[.@/_-]+", t) if p]
+        if k + 1 < len(toks):
+            cands += [t + " " + toks[k + 1], t + toks[k + 1]]
+        for c in cands:
+            if hashlib.sha256(c.encode()).hexdigest() in hashes:
+                return c
+    return None
+
+PRIVATE = object()  # rule marker: the hashed private-literal matcher instead of a regex
+
 # (id, regex, message, where) where: "text" = visible page text and attributes,
 # "raw" = the whole file (code and markup too)
 RULES = [
@@ -40,7 +70,7 @@ RULES = [
     ("family", r"\b(parents|wife|husband|kids|children|daughter|son|brother|sister|family)\b", "Nothing about members' lives outside the band (LL-7)", "text"),
     ("jobs", r"\b(dads? with careers|day jobs?|his job|works as|career)\b", "Nothing about members' lives outside the band (LL-7, LL-17)", "text"),
     ("lives-where", r"\b(lives|living|moved|based) in (Tennessee|Michigan|Texas)\b|\bfour states\b", "Never which member lives where (LL-19)", "text"),
-    ("town", r"\bMesquite\b", "Founding-story town names never appear (LL-4, LL-5)", "text"),
+    ("town", PRIVATE, "Founding-story town names never appear (LL-4, LL-5)", "text"),
     ("talent-show", r"talent[- ]show|won the contest|win the contest", "No talent-show story (LL-13)", "text"),
     ("demo", r"\bdemo\b|bonus disc|Make The Best Of It|Kool Kat", "Never imply 'Great Day' is the 2008 demo; no bonus-disc mention or link (LL-13)", "text"),
     ("downloads", r"\.mp3\b|\bdownload(s|able)?\b|\bfree MP3", "No MP3s or downloads (LL-27)", "text"),
@@ -88,6 +118,10 @@ def scan_file(rel, src, kind):
         if where == "raw-html" and kind != ".html":
             continue
         hay = text if where == "text" else src
+        if rx is PRIVATE:
+            if private_hit(hay):
+                errors.append(f"{rel}: [{rid}] {msg}")
+            continue
         flags = re.I if rid not in ("sourcing", "phone") else 0
         for m in re.finditer(rx, hay, flags):
             errors.append(f"{rel}: [{rid}] {msg}\n    > {hay[max(0, m.start() - 40):m.end() + 40]!r}")
@@ -125,7 +159,7 @@ def scan():
                 src = open(p, encoding="utf-8").read()
                 for rid in ("email", "gmail", "town"):
                     rx = next(r for r in RULES if r[0] == rid)[1]
-                    if re.search(rx, src, re.I):
+                    if private_hit(src) if rx is PRIVATE else re.search(rx, src, re.I):
                         errors.append(f"{rel}: [{rid}] privacy rule")
                 continue
             errors += scan_file(rel, open(p, encoding="utf-8").read(), ext)
@@ -160,6 +194,9 @@ def self_test():
         "one-liner": "<p>The Luxury Liners are a power-pop band from Texas.</p>",
     }
     missed = [k for k, v in bad.items() if not any(f"[{k}]" in e for e in scan_file("t.html", v, ".html"))]
+    # the hashed matcher, on a synthetic token (never a real private literal)
+    if private_hit("see zz-synthetic here", {hashlib.sha256(b"zz-synthetic").hexdigest()}) is None:
+        missed.append("town (hashed matcher)")
     if missed:
         print("self-test: rules that did not fire:", missed)
         return 1

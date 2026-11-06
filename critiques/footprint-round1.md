@@ -80,9 +80,9 @@ The problems are in the live-platform layer. The worker treated WebFetch refusal
 ## Non-blocking issues
 
 1. **N1. Privacy: the headline gives away what the text holds back.**
-   - Row 26 of §2.2, §9 and the Sources list all print the Baptist Standard headline and slug (headline withheld). That headline states Chad's current calling and state.
+   - Row 26 of §2.2, §9 and the Sources list all print the [a later-life profile] headline and slug (headline withheld). That headline states Chad's current calling and state.
    - Line 10 promises not to repeat such details, and this table is the source for the future `/press/` page.
-   - Cite the item as "*Baptist Standard* profile of Chad Edgington (internal only; headline withheld)". Keep the URL only in a clearly internal note. History round 1 raised the same point (N5); make both files consistent.
+   - Cite the item as "*[a later-life profile]* profile of Chad Edgington (internal only; headline withheld)". Keep the URL only in a clearly internal note. History round 1 raised the same point (N5); make both files consistent.
 2. **N2. Erik Hage wrote three items.**
    - He is the writer of the *earpollution* interview (dd research/05 line 92), as well as the AllMusic bio and the *Metroland* review. Fill in the writer in row 7.
    - Add a note that three of the "independent" items share one critic. This matters for the Wikipedia/Wikidata notability argument in §4.1.

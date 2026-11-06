@@ -6,6 +6,22 @@ CDX = '/home/user/daviddewese.com/daviddewese-com/research/legacy/cdx-theluxuryl
 LLA = '/home/user/daviddewese.com/daviddewese-com/architecture/redirects/ll-legacy-urls.json'
 LIVE = sys.argv[1]
 OUT = '/home/user/theluxuryliners.com/data/legacy-urls.json'
+# Rows whose path names a private literal go to a git-ignored file, never the public repo.
+PRIVATE_OUT = '/home/user/theluxuryliners.com/data/private/legacy-urls.private.json'
+import hashlib, re as _re
+# SHA-256 of private tokens (content/private-literals.mjs); the literals are never written here.
+PRIVATE_HASHES = {
+    '81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a',
+    '7b8bd6c0abf53d22888beafc48830e1156907dd4ec7e6ea31e55a0dd6dc5a969',
+    'f6a761f669dfeafd8086a367b336cbee496a1b13ac5128c8cb9346ca7891ccf3',
+}
+def is_private(path):
+    toks = _re.findall(r'[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]', path.lower())
+    cands = set()
+    for t in toks:
+        cands.add(t)
+        cands.update(p for p in _re.split(r'[.@/_-]+', t) if p)
+    return any(hashlib.sha256(c.encode()).hexdigest() in PRIVATE_HASHES for c in cands)
 
 rows = json.load(open(CDX))[1:]
 dd = {x['path']: x['target'] for x in json.load(open(LLA))}
@@ -205,7 +221,7 @@ def classify(p, status, mime):
         return ('2000-05', 'contact', '301', '/contact/', 'Contact / mailing-list page.')
 
     # --- misc pages
-    if base == '/ethan.html':
+    if is_private(base) and base.endswith('.html'):
         return ('2002', 'private-family-page', '301', '/', 'Private family page. PRIVATE: do not republish or describe; redirect to home only.')
     if base in ('/links.html', '/misc.html', '/multimedia.html'):
         return ('2001-03', 'misc', '301', '/vault/', 'Links / misc / multimedia (videos) page.')
@@ -228,7 +244,7 @@ def classify(p, status, mime):
     if base == '/css/theluxuryliners.css' or base == '/images/jumping.jpg':
         return ('2009-24 link list', 'asset', 'none', None,
                 'Asset of the 2009-2024 page. /images/jumping.jpg was the 2024 og:image; ask David for the original photo.')
-    if re.search(r'(ethan|liliana)', base, re.I):
+    if is_private(base):
         return ('see capture_era', 'private-image', 'none', None, 'Personal/family image. PRIVATE: never re-host or describe.')
     if base.startswith('/images/') or base.startswith('/gif/') or base.startswith('/web/images/') \
             or base.startswith('/background/') or base in ('/animate.js', '/main.css', '/content.css') \
@@ -285,6 +301,11 @@ for o, t, s, m in rows:
     out.append(rec)
 
 out.sort(key=lambda r: (r['path'].split('?')[0], r['path']))
+private_rows = [r for r in out if is_private(r['path'])]
+out = [r for r in out if not is_private(r['path'])]
+import os
+os.makedirs(os.path.dirname(PRIVATE_OUT), exist_ok=True)
+json.dump({'_about': 'PRIVATE, git-ignored. Legacy URL rows whose path names a private literal. Merged by site/scripts/build-redirects.mjs when present. Never commit.', 'urls': private_rows}, open(PRIVATE_OUT, 'w'), indent=1, ensure_ascii=False)
 counts = collections.Counter(r['action'] for r in out)
 cats = collections.Counter(r['category'] for r in out)
 doc = {
@@ -308,7 +329,7 @@ doc = {
         'suggested_target': 'PROVISIONAL path on the new theluxuryliners.com (/, /story/, /music/, /music/<slug>/, /lyrics/, /shows/, /press/, /photos/, /vault/, /vault/journal/<yyyy-mm>/, /vault/news/, /vault/mp3s/, /vault/trunk-box/, /vault/live-liners/, /contact/). The architecture track must confirm the IA; then regenerate.',
         'daviddewese_handover_target': 'Target in the daviddewese.com handover pack (architecture/redirects/ll-legacy-urls.json), which assumed the archive would fold into daviddewese.com. Superseded for this rebuild because the band keeps its own site (L1); kept for traceability.',
     },
-    'counts': {'rows': len(out), 'by_action': dict(counts), 'by_category': dict(cats)},
+    'counts': {'rows': len(out), 'by_action': dict(counts), 'by_category': dict(cats), 'private_rows_not_in_repo': 'Rows whose path names a private literal (content/private-literals.mjs) live in the git-ignored data/private/legacy-urls.private.json; scripts/build-redirects.mjs merges them when present.'},
     'urls': out,
 }
 json.dump(doc, open(OUT, 'w'), indent=1, ensure_ascii=False)

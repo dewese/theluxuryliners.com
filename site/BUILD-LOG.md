@@ -83,7 +83,7 @@ release title, on any page, in llms.txt or in JSON-LD (round 2).
 | Privacy page describes what ships | analytics paragraph only when the beacon is built in, Turnstile paragraph only when the widget is; no embeds, cookies or storage exist; dist test compares page and build |
 | LL-3 test stub | `scripts/compare-releases.mjs` + `tests/unit/ll3-sync.test.mjs`: compares shared fields with daviddewese.com's `data/releases.json` (passes today; skipped where the file is absent; `DD_RELEASES` overrides) |
 | No sourcing notes in public copy | check-dist refuses "as credited on", "Source:", "per the 2005 site"; single-source facts carry attribution in the sentence ("Discogs lists…") |
-| Privacy (LL-7, plan §2.3) | check-dist refuses e-mail addresses, mailto:, "Mesquite", "lives in", phone numbers, the family page, "Baptist Standard", dead hosts as links. The contact address is only a Worker secret |
+| Privacy (LL-7, plan §2.3) | check-dist refuses e-mail addresses, mailto:, "[the founding-story town]", "lives in", phone numbers, the family page, "[a later-life profile]", dead hosts as links. The contact address is only a Worker secret |
 
 ## Legacy URLs (`data/legacy-urls.json`, 675 rows)
 
@@ -94,7 +94,7 @@ checked to exist in `dist/`. Targets not in v1.0 fall back to the nearest existi
 months → `/vault/journal/` (they move to their month automatically once a month is published,
 LL-25); `/vault/news/`, `/vault/trunk-box/`, `/vault/live-liners/` → `/vault/`; `/lyrics/` →
 `/music/overbored/` (the old lyrics page held the Overbored lyrics). `/sitemap.xml` → 301 to
-`/sitemap-index.xml`. `/ethan.html` → `/` only (private family page). Nothing is re-hosted (LL-27).
+`/sitemap-index.xml`. `/[the private family page]` → `/` only (private family page). Nothing is re-hosted (LL-27).
 
 ## RELEASE mode
 

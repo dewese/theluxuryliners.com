@@ -1607,11 +1607,11 @@
    "original_url": "https://live.staticflickr.com/2339/2083681711_995d8ed82e_o.jpg",
    "album": "ARCHIVE: Random Liners",
    "album_url": "https://www.flickr.com/photos/dewese/albums/72157600312232610",
-   "flickr_title": "Mesquite, TX",
-   "flickr_description": "Rodeo City",
+   "flickr_title": "(title withheld: a place name; see content/private-literals.mjs)",
+   "flickr_description": "(withheld: a place nickname)",
    "flickr_date_taken": "2007-12-03",
    "kind": "live-photo",
-   "era": "Mesquite, TX (Rodeo City)",
+   "era": "live, Texas (date and place withheld)",
    "file": "assets/source/photos/flickr/2083681711_995d8ed82e_o.jpg",
    "status": "downloaded Flickr original (unmodified)",
    "width": 350,
@@ -10529,33 +10529,6 @@
    "priority": 3
   },
   {
-   "path": "/images/ethan.jpg",
-   "first_capture": "20020823115705",
-   "captures": 1,
-   "mimetype": "image/jpeg",
-   "wayback": "https://web.archive.org/web/20020823115705im_/http://theluxuryliners.com:80/images/ethan.jpg",
-   "category": "other",
-   "priority": 2
-  },
-  {
-   "path": "/images/ethan_is_2.JPG",
-   "first_capture": "20040314052040",
-   "captures": 1,
-   "mimetype": "image/jpeg",
-   "wayback": "https://web.archive.org/web/20040314052040im_/http://www.theluxuryliners.com:80/images/ethan_is_2.JPG",
-   "category": "other",
-   "priority": 2
-  },
-  {
-   "path": "/images/ethan_yogurt.jpg",
-   "first_capture": "20051105023413",
-   "captures": 1,
-   "mimetype": "image/jpeg",
-   "wayback": "https://web.archive.org/web/20051105023413im_/http://www.theluxuryliners.com:80/images/ethan_yogurt.jpg",
-   "category": "other",
-   "priority": 2
-  },
-  {
    "path": "/images/flyer7-20-01.jpg",
    "first_capture": "20010806203242",
    "captures": 1,
@@ -11337,15 +11310,6 @@
    "wayback": "https://web.archive.org/web/20021014070534im_/http://theluxuryliners.com:80/images/wall_top.jpg",
    "category": "layout-chrome",
    "priority": 3
-  },
-  {
-   "path": "/liliana.jpg",
-   "first_capture": "20051105022852",
-   "captures": 1,
-   "mimetype": "image/jpeg",
-   "wayback": "https://web.archive.org/web/20051105022852im_/http://www.theluxuryliners.com:80/liliana.jpg",
-   "category": "other",
-   "priority": 2
   },
   {
    "path": "/photos/atlanta_02/1.jpg",

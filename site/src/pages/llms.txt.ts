@@ -4,13 +4,20 @@ import { SITE, ONE_LINER, NEVER_BROKE_UP, DISAMBIGUATION, SAME_AS, SPREAD } from
 import { RELEASES } from '../lib/releases.ts';
 import { members, yearsInWords } from '../lib/members.ts';
 import press from '../../data/press.json';
+import { storyView, factsView } from '../lib/views.ts';
+import { smart } from '../lib/typo.ts';
 
 export const GET: APIRoute = () => {
   const forever = members();
+  const chapters = storyView().chapters;
+  const facts = factsView().rows;
+  const plain = (t: string) => t.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
   const lines = [
     '# The Luxury Liners',
     '',
     `> ${ONE_LINER}`,
+    '',
+    `Last updated: ${new Date().toISOString().slice(0, 10)}`,
     '',
     `${NEVER_BROKE_UP} The band was founded in Texas in 1997 and moved to Nashville in May 1997. ${SPREAD}`,
     '',
@@ -28,14 +35,24 @@ export const GET: APIRoute = () => {
     DISAMBIGUATION,
     '',
     '## Pages',
-    `- [Facts](${SITE}/facts/): short answers about the band`,
-    `- [Story](${SITE}/story/): the band's history, 1997 to today`,
-    `- [People](${SITE}/people/): members, players and credits`,
-    `- [Music](${SITE}/music/): every release`,
-    `- [Press](${SITE}/press/)`,
-    `- [Shows](${SITE}/shows/)`,
-    `- [Press kit](${SITE}/epk/)`,
+    `- [Facts](${SITE}/facts/): short answers about the band (each question has its own link, e.g. ${SITE}/facts/#founders)`,
+    `- [Story](${SITE}/story/): the band's history, 1997 to today, in ${chapters.length} chapters`,
+    `- [People](${SITE}/people/): members, early and guest players, the people on the records, cover art and photographers`,
+    `- [Music](${SITE}/music/): every release, with tracklists, writers and where to listen`,
+    `- [Compilations](${SITE}/music/appearances/): compilations and promo discs with Luxury Liners songs`,
+    `- [Listen](${SITE}/listen/): where to stream or buy the music`,
+    `- [Press](${SITE}/press/): reviews, features and TV placements, in date order`,
+    `- [Shows](${SITE}/shows/): dated shows, 1997 to 2008`,
+    `- [Photos](${SITE}/photos/): band-era photos by era, with captions and credits`,
+    `- [Vault](${SITE}/vault/): the old free MP3 list, cover songs and the old websites, as history`,
+    `- [Press kit](${SITE}/epk/): bios, photos and logos for press`,
+    `- [Contact](${SITE}/contact/): booking, press, licensing and fan mail (a form; no address is published)`,
     '',
+    '## The story, chapter by chapter',
+    ...chapters.map((c) => `- [${plain(c.titleText)} (${c.years})](${SITE}${c.href})${c.description ? `: ${plain(c.description)}` : ''}`),
+    '',
+    '## Facts',
+    ...facts.flatMap((f) => [`### ${plain(smart(f.q))}`, plain(f.aText), '']),
     '## Elsewhere',
     ...SAME_AS.map((u) => `- ${u}`),
     '',

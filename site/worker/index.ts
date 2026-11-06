@@ -6,6 +6,8 @@
 //   - an old file in gone.ts            -> 410 with the /410/ page
 //   - anything else                     -> 404 with the /404 page
 // Any other hostname (staging) gets noindex on every response and a Disallow-all robots.txt.
+// Every response carries the security headers, staging included (audit-security round 1, S3), and
+// an unexpected error gives a plain 500 page with them instead of Cloudflare's error 1101 (S2).
 import { handleContact, type ContactEnv } from './api/contact.ts';
 import { withSecurityHeaders, text } from './security.ts';
 import { STAGING_ROBOTS, isStagingHost, isGone, queryRedirect } from './routing.ts';
@@ -26,14 +28,21 @@ function noindex(res: Response): Response {
   return out;
 }
 
+const ERROR_PAGE = '<!doctype html><html lang="en"><meta charset="utf-8"><title>Something went wrong | The Luxury Liners</title><h1>Something went wrong</h1><p>Please try again in a moment, or go to <a href="/">The Luxury Liners home page</a>.</p></html>';
+
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
-    const url = new URL(req.url);
-    if (isStagingHost(url.hostname, env)) {
-      if (url.pathname === '/robots.txt') return withSecurityHeaders(new Response(STAGING_ROBOTS, { headers: { 'content-type': 'text/plain; charset=utf-8', 'x-robots-tag': 'noindex, nofollow' } }));
-      return noindex(await respond(req, env, url));
+    try {
+      const url = new URL(req.url);
+      if (isStagingHost(url.hostname, env)) {
+        if (url.pathname === '/robots.txt') return withSecurityHeaders(new Response(STAGING_ROBOTS, { headers: { 'content-type': 'text/plain; charset=utf-8', 'x-robots-tag': 'noindex, nofollow' } }));
+        return withSecurityHeaders(noindex(await respond(req, env, url)));
+      }
+      return withSecurityHeaders(await respond(req, env, url));
+    } catch {
+      console.log(JSON.stringify({ event: 'worker_error' }));
+      return withSecurityHeaders(new Response(ERROR_PAGE, { status: 500, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } }));
     }
-    return withSecurityHeaders(await respond(req, env, url));
   },
 };
 

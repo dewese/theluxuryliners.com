@@ -29,7 +29,7 @@ Authority: DECISIONS-2026-10-07.md (LL-44, LL-45 and the rest) > daviddewese.com
     in a `youtube-nocookie.com` iframe with a title and moves focus into it. Nothing loads from
     YouTube before the press. `frame-src` in the CSP allows only Turnstile and youtube-nocookie.
 - Privacy and facts, checked in dist:
-  - `david@dewese.com` is absent, and no `.mp3` files ship.
+  - `[the contact address]` is absent, and no `.mp3` files ship.
   - No talent show, and nothing ties "Great Day" to the 2008 demo.
   - The LL-17 sentence is verbatim, and the LL-6 one-liner is byte for byte (straight
     'Luxury Liner') everywhere.

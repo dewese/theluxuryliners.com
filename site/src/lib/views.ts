@@ -66,7 +66,8 @@ export function homeView() {
     blurb,
     membersHeading: d.members_heading ?? 'The four forever members',
     members: memberList,
-    membersNoteHtml: d.members_note ? inl(d.members_note) : 'The band called David Wilstermann “Larry” because it already had a David.',
+    // null: no note (the Larry explanation is on his card already; audit-copy round 1)
+    membersNoteHtml: d.members_note ? inl(d.members_note) : '',
     disambiguationHtml: d.disambiguation ? inl(d.disambiguation) : esc(DISAMBIGUATION),
     bodyHtml: h?.html || null,
   };
@@ -78,7 +79,7 @@ export function homeView() {
 const CHAPTER_RELEASE: Record<number, string> = { 3: 'sound-as-ever', 4: 'believe-ep', 6: 'overbored', 7: 'nonetheless', 9: 'new-beginning' };
 /** The cut-out "jump" (design C) sits beside the chapter of its year. */
 const CHAPTER_CUTOUT: Record<number, string> = { 3: 'cartwheel-2000' };
-export interface Chapter { id: string; n: number; slug: string; href: string; titleHtml: string; titleText: string; years: string; summaryHtml: string | null; photo: string | null; release: string | null; cutout: string | null; html: string | null; facts: string[]; slot: string | null }
+export interface Chapter { id: string; n: number; slug: string; href: string; titleHtml: string; titleText: string; years: string; summaryHtml: string | null; description: string | null; photo: string | null; release: string | null; cutout: string | null; html: string | null; facts: string[]; slot: string | null }
 export function storyView(): { introHtml: string | null; fromContent: boolean; chapters: Chapter[] } {
   const s = md('story.md');
   const chapters = storyChapters();
@@ -86,10 +87,10 @@ export function storyView(): { introHtml: string | null; fromContent: boolean; c
   const extra = (n: number) => ({ release: CHAPTER_RELEASE[n] ?? null, cutout: CHAPTER_CUTOUT[n] ?? null });
   if (chapters.length) {
     return { introHtml: s?.html || (s?.data.intro ? `<p>${inl(s.data.intro)}</p>` : null), fromContent: true,
-      chapters: chapters.map((c) => ({ id: `chapter-${c.n}`, n: c.n, slug: c.slug, href: `/story/${c.slug}/`, titleHtml: inl(c.title), titleText: smart(c.title), years: c.years, summaryHtml: c.summary ? inl(c.summary) : null, photo: photoFor(c.n), ...extra(c.n), html: c.html, facts: [] as string[], slot: null as string | null })) };
+      chapters: chapters.map((c) => ({ id: `chapter-${c.n}`, n: c.n, slug: c.slug, href: `/story/${c.slug}/`, titleHtml: inl(c.title), titleText: smart(c.title), years: c.years, summaryHtml: c.summary ? inl(c.summary) : null, description: c.description ? smart(c.description) : null, photo: photoFor(c.n), ...extra(c.n), html: c.html, facts: [] as string[], slot: null as string | null })) };
   }
   return { introHtml: null, fromContent: false,
-    chapters: siteStory.chapters.map((c, i) => { const slug = c.id.replace(/^\d+-/, ''); return { id: c.id, n: i + 1, slug, href: `/story/${slug}/`, titleHtml: esc(c.title), titleText: c.title, years: c.years, summaryHtml: null, photo: c.photo, ...extra(i + 1), html: null as string | null, facts: c.facts, slot: `story/${c.id}` }; }) };
+    chapters: siteStory.chapters.map((c, i) => { const slug = c.id.replace(/^\d+-/, ''); return { id: c.id, n: i + 1, slug, href: `/story/${slug}/`, titleHtml: esc(c.title), titleText: c.title, years: c.years, summaryHtml: null, description: null, photo: c.photo, ...extra(i + 1), html: null as string | null, facts: c.facts, slot: `story/${c.id}` }; }) };
 }
 
 // ---------- facts ----------
@@ -99,11 +100,11 @@ export function factsView() {
     const rows = live(c.facts).filter((f: any) => f.question && f.answer);
     const dn = c.dating_note;
     return { introHtml: md('facts.md')?.html || null, datingHeading: (typeof dn === 'object' && dn?.heading) || 'How we date things', dating: (typeof dn === 'string' ? dn : dn?.text) ?? siteFacts.dating,
-      rows: rows.map((f: any) => ({ q: f.question, aHtml: inl(f.answer), aText: f.answer.replace(/\*/g, ''), faq: f.faq_jsonld !== false })) };
+      rows: rows.map((f: any) => ({ id: String(f.id), q: f.question, aHtml: inl(f.answer), aText: f.answer.replace(/\*/g, ''), faq: f.faq_jsonld !== false })) };
   }
   const link = (a: string, html: boolean) => a.replace(/\{\{link:(\/[^|}]*)\|([^}]*)\}\}/g, html ? '<a href="$1">$2</a>' : '$2');
   return { introHtml: null, datingHeading: 'How we date things', dating: siteFacts.dating,
-    rows: siteFacts.facts.filter((f) => f.status === 'publish').map((f) => ({ q: f.q, aHtml: link(esc(f.a), true), aText: link(f.a, false), faq: true })) };
+    rows: siteFacts.facts.filter((f) => f.status === 'publish').map((f, i) => ({ id: String((f as any).id ?? `fact-${i + 1}`), q: f.q, aHtml: link(esc(f.a), true), aText: link(f.a, false), faq: true })) };
 }
 
 // ---------- people ----------
@@ -122,6 +123,7 @@ export function peopleView() {
   if (c?.forever_members) {
     return {
       introHtml: md('people.md')?.html || null,
+      uncreditedNote: (md('people.md')?.data?.uncredited_photos_note as string | undefined) ?? null,
       forever: foreverRows(),
       early: live(c.early_and_guest_players).map((p: any) => ({ nameHtml: inl(p.name), rolesHtml: earlyRoles(p.roles ?? [], p.years ?? '', inl) })),
       records: live(c.on_the_records).map((p: any) => ({ nameHtml: inl(p.name), rolesHtml: inl((p.roles ?? []).join('; ')), years: p.years ?? '' })),
@@ -133,6 +135,7 @@ export function peopleView() {
   for (const r of sitePeople.records.filter((x) => x.status === 'publish')) recs.set(r.name, [...(recs.get(r.name) ?? []), `${r.role.toLowerCase()}, <a href="/music/${r.release}/">${esc(r.work)}</a>`]);
   return {
     introHtml: null,
+    uncreditedNote: null as string | null,
     forever: foreverRows(),
     early: sitePeople.early.filter((p) => p.status === 'publish').map((p) => ({ nameHtml: esc(p.name), rolesHtml: earlyRoles(p.role.split(/;\s*/), p.years, esc) })),
     records: [...recs].map(([name, rs]) => ({ nameHtml: esc(name), rolesHtml: rs.join('; '), years: '' })),
@@ -168,6 +171,14 @@ export function pressView() {
 }
 
 // ---------- shows ----------
+/** A <time datetime> no more precise than the visible date (audit-a11y round 1, m3): the day for
+ *  a known day, the month for an approximate day or a month, the year for a range or a season. */
+export function showDatetime(sortKey: string, precision?: string): string {
+  const k = sortKey.replace(/(-00)+$/, '');
+  if (precision === 'day' || !precision) return k;
+  if (precision === 'approx-day' || precision === 'month') return k.slice(0, 7);
+  return k.slice(0, 4);
+}
 const photoBySrc = (src?: string | null) => (src ? PHOTOS.find((p) => p.src === src || p.id === src)?.id : undefined);
 export function showsView() {
   const c = json('shows.json');
@@ -175,7 +186,7 @@ export function showsView() {
     const rows = live(c.shows).slice().sort((a: any, b: any) => sortKey(String(a.sort_key).replace(/-00/g, '')).localeCompare(sortKey(String(b.sort_key).replace(/-00/g, ''))) || String(a.id).localeCompare(String(b.id)));
     return {
       introHtml: c.intro ? inl(c.intro) : null, noteHtml: c.journal_note ? inl(c.journal_note) : null,
-      rows: rows.map((s: any) => ({ when: smart(s.date_display ?? ''), datetime: String(s.sort_key ?? '').replace(/(-00)+$/, ''), whereHtml: inl(where({ venue: s.venue ?? null, city: s.place ?? null })), noteHtml: inl(s.note ?? ''), href: releaseHref(s.release_id), photo: photoBySrc(s.photo) })),
+      rows: rows.map((s: any) => ({ when: smart(s.date_display ?? ''), datetime: showDatetime(String(s.sort_key ?? ''), s.date_precision), whereHtml: inl(where({ venue: s.venue ?? null, city: s.place ?? null })), noteHtml: inl(s.note ?? ''), href: releaseHref(s.release_id), photo: photoBySrc(s.photo) })),
     };
   }
   return {

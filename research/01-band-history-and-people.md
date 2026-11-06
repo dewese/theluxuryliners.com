@@ -7,7 +7,7 @@ Gauntlet: this file goes to the critic (approval bar 8/10, no blocking issues); 
 >
 > **X1 applies.** One 1990s side project and the person tied to it are left out of this file completely, at the owner's request.
 >
-> **Privacy rule.** The people below appear in their **public band roles only**. This file gives no current homes, workplaces, churches, family members or other private details of Chad Edgington, Scott Carpenter, David Wilstermann, former members, guests or photographers. Some sources contain such details (the Baptist Standard profile of Chad, the 2001 *Nashville Scene* profile, the 2002 *Nashville Rage* blurb, the old mail-order pages). This file points to those sources but does not repeat those details.
+> **Privacy rule.** The people below appear in their **public band roles only**. This file gives no current homes, workplaces, churches, family members or other private details of Chad Edgington, Scott Carpenter, David Wilstermann, former members, guests or photographers. Some sources contain such details (the [a later-life profile] profile of Chad, the 2001 *Nashville Scene* profile, the 2002 *Nashville Rage* blurb, the old mail-order pages). This file points to those sources but does not repeat those details.
 
 ---
 
@@ -29,10 +29,10 @@ Gauntlet: this file goes to the critic (approval bar 8/10, no blocking issues); 
 - `WB:<timestamp>/<path>` a Wayback capture of theluxuryliners.com, read by the daviddewese.com team in Sept 2026 (quoted in R04). **This session could not open the Wayback Machine** (blocked by network policy), so every Wayback fact here comes through R04/R05.
 - `CDX` the Wayback index of theluxuryliners.com (`research/legacy/cdx-theluxuryliners.com.json`, 675 rows).
 - `OH-FM` the Foxymorons oral history from Carly (`/home/user/foxymorons.com/research/00-oral-history-carly.md`); `FM04` foxymorons.com research file 04.
-- `BS` the Baptist Standard profile of Chad Edgington. **The page is blocked here**; its content is known only from search snippets (2026-10-07). Treat it as single-source.
+- `BS` the [a later-life profile] profile of Chad Edgington. **The page is blocked here**; its content is known only from search snippets (2026-10-07). Treat it as single-source.
 - `NS-snip` *Nashville Scene* articles known only from search snippets (nashvillescene.com is blocked here).
 
-**Web access this session.** WebSearch worked. WebFetch and curl were refused for every useful host: web.archive.org, theluxuryliners.com, baptiststandard.com, nashvillescene.com, allmusic.com, api.discogs.com, musicbrainz.org, last.fm, music.apple.com, daviddewese.bandcamp.com, wikidata.org, archive.ph, cachedview.nl and timetravel.mementoweb.org. New web facts in this file therefore rest on **search snippets**. Each is marked, and each is listed in §11 for a human to open.
+**Web access this session.** WebSearch worked. WebFetch and curl were refused for every useful host: web.archive.org, theluxuryliners.com, [a later-life profile].com, nashvillescene.com, allmusic.com, api.discogs.com, musicbrainz.org, last.fm, music.apple.com, daviddewese.bandcamp.com, wikidata.org, archive.ph, cachedview.nl and timetravel.mementoweb.org. New web facts in this file therefore rest on **search snippets**. Each is marked, and each is listed in §11 for a human to open.
 
 ---
 
@@ -60,7 +60,7 @@ David told it this way on his own site, 2012–2024: *"I moved to Nashville with
 
 The Foxymorons oral history (Carly, 2026-10-07) agrees: *"Spring 1997: David moved to Nashville to start a working band, The Luxury Liners, with a college friend."* (`OH-FM`; confirmed-owner.)
 
-**Owner account, 2026-10-07 (`DECISIONS-2026-10-07.md` LL-4; confirmed-owner; authoritative).** Chad and David corresponded by email in the winter and spring of 1997, while Chad was finishing college and David was living in Mesquite, Texas. They came up with the band name over spring break 1997, when they met up to record a ton of songs together on a 4-track. They moved to Nashville in **May 1997**, after Chad's graduation. This matches the 2005 roster (David from May 1997) and David's own "I moved to Nashville with my college buddy … to start this band". It does **not** match the 2005 site's talent-show account of the name (below), which stays archive lore only (Q1/B1). (The place of the spring-break sessions is private and is never named.)
+**Owner account, 2026-10-07 (`DECISIONS-2026-10-07.md` LL-4; confirmed-owner; authoritative).** Chad and David corresponded by email in the winter and spring of 1997, while Chad was finishing college and David was living in [the founding-story town], Texas. They came up with the band name over spring break 1997, when they met up to record a ton of songs together on a 4-track. They moved to Nashville in **May 1997**, after Chad's graduation. This matches the 2005 roster (David from May 1997) and David's own "I moved to Nashville with my college buddy … to start this band". It does **not** match the 2005 site's talent-show account of the name (below), which stays archive lore only (Q1/B1). (The place of the spring-break sessions is private and is never named.)
 
 ### 2.2 Other accounts (archive records; show as context, not as the origin story)
 
@@ -68,7 +68,7 @@ The Foxymorons oral history (Carly, 2026-10-07) agrees: *"Spring 1997: David mov
 |---|---|---|---|
 | Band history page, 2005 | *"In 1997, college senior Chad Edgington vowed to win his school's annual talent show by putting together 'the greatest band of all time'. He called upon all of his musical friends, named the band The Luxury Liners, and did indeed win the contest. Later that spring he and his college pal David Dewese resurrected the name, invented 'Texas Pop', and moved to Nashville, Tennessee to 'get famous'."* | `WB:20050826054452/history/intro.html` (`R04` §5.2) | verified-source (as the band's own 2005 telling) |
 | Band roster, 2005 | Chad Edgington Feb 1997–Apr 2001; David Dewese May 1997–current | `WB:20050321225706/history/story.html` | verified-source (as archive) |
-| Baptist Standard profile of Chad | After graduating from college in 1997, Chad formed the pop-rock band The Luxury Liners. He and Dewese moved to Nashville "because all the major labels had offices there, and they loved country music." | `BS` (search snippet only) | single-source |
+| [a later-life profile] profile of Chad | After graduating from college in 1997, Chad formed the pop-rock band The Luxury Liners. He and Dewese moved to Nashville "because all the major labels had offices there, and they loved country music." | `BS` (search snippet only) | single-source |
 | David's 2011 blog post on the *Believe* EP | the band as *"two goofy Texans obsessed with Gram Parsons, The Beatles, rhinestones, and Coca Cola"* | [daviddewese.com 2011-02-24](https://web.archive.org/web/20210422235120/http://daviddewese.com/the-luxury-liners-believe-ep/) (`R04` §4.2) | verified-source |
 | Discogs artist profile | "Originally formed in 1997 in Texas" | Discogs artist 4298743 (`R01` §2) | single-source |
 | Live theluxuryliners.com (Carrd, 2024–) | *"Forever brosephs that formed in 1997 and have released several albums over the years."* | `R04` §3.1 | verified-source |
@@ -99,7 +99,7 @@ The Foxymorons oral history (Carly, 2026-10-07) agrees: *"Spring 1997: David mov
 | Dec 1997 – Apr 1998 | David, Chad, Jeff LaFrate (drums), Mark W. Winchester (bass) | the first four-piece | 2005 roster | verified-source (archive) |
 | 1998 (recordings) | David (bass, vocals), Chad (guitar, vocals), Jeff LaFrate (drums); produced by Mike Poole | the line-up credited on *Fireworks Vol. 2* | Discogs 6907226 (`R01` §4) | verified-source |
 | May – Aug 1998 | David, Chad, Kyle Edgington (drums) | | 2005 roster | verified-source (archive) |
-| Aug 1998 – Dec 2000 | **David, Chad, Scott Carpenter (drums)**: the "3-piece rock combo" of the 2000 bio | Scott's "first offical [sic] gig" is the fall 1998 *Trunk Box* show in Waco. The Baptist Standard says the band had "at times, additional musicians on bass" | 2005 roster; 2000 bio `WB:20000926003543/bio.htm`; `BS` | verified-source; BS single-source |
+| Aug 1998 – Dec 2000 | **David, Chad, Scott Carpenter (drums)**: the "3-piece rock combo" of the 2000 bio | Scott's "first offical [sic] gig" is the fall 1998 *Trunk Box* show in Waco. The [a later-life profile] says the band had "at times, additional musicians on bass" | 2005 roster; 2000 bio `WB:20000926003543/bio.htm`; `BS` | verified-source; BS single-source |
 | Dec 2000 – early 2001 | **David, Chad, Scott, David "Larry" Wilstermann (bass)**: all four forever members | the four-piece of "Chad's Last Show – March 2001" (`PH:530769478`) | 2005 roster; `DEC` P8 | verified-source / confirmed-owner |
 | Spring 2001 → | **David, Scott, Larry**: the trio | Chad leaves Nashville in 2001 (F4). The journal of 2001-08-12 mentions "the new three piece configuration" | `DEC` F4; `R04` §5.2 | confirmed-owner |
 | 2002–2006 (records and shows) | David (vocals, guitar), Wilstermann (bass; keys and vocals on *Nonetheless*), Carpenter (drums, percussion, vocals) | guests in §3.3 | *Overbored* and *Nonetheless* credits (`R01` §2) | verified-source |
@@ -156,13 +156,13 @@ The Foxymorons oral history (Carly, 2026-10-07) agrees: *"Spring 1997: David mov
 
 - **Nashville, 1997.** David and Chad move to Nashville in (spring) 1997 (`DEC` F4; `OH-FM`). David's 2010 Flickr caption: *"I moved to Nashville 13 years ago to make music. Mission accomplished!"* (`PH:5122724227`, 2010-10-27; verified-source). The band's photo-archive filenames, archived in 2005, hint at what has not been read yet: `97_12th_porter.jpg`, `97_opry.jpg`, `97_pajamas.jpg`, `98_hard_rock.jpg`, `98_waco.jpg`, `99_12th_serious.jpg`, `99_green_jackets.jpg`, `99_session_guitars.jpg` (`CDX`, `/history/photos/`). That suggests 1997 shows at 12th & Porter and something at or near the Opry, and a 1998 Hard Rock show. These are filename inferences only (unverified; open in a browser, §11).
 - **Monsters of Pop, June 11–13, 1998.** A three-night pop showcase at the Exit/In and The End. On the bill: Marshall Crenshaw with Bill Lloyd, Japan's Hicksville, Will Owsley, Swan Dive, The Shazam, Neilson Hubbard, Who Hit John, Joe Marc's Brother, Betty Rocker, Rayon City Quartet, Ross Rice, the Idle Jets, Paul Myers, Cherry Twister and **"the Byrds-influenced Luxury Liners"**. Organiser: Lee Swartz (P.O.P. UN Ltd.). (NS-snip: *Nashville Scene* "Top of the Pops" and "Block-Rockin'", [link 1](https://www.nashvillescene.com/arts_culture/top-of-the-pops/article_a7f15ca7-0558-526a-9709-e4ee4a74a05f.html), [link 2](https://www.nashvillescene.com/arts_culture/block-rockin/article_81f0b3b8-63a9-521b-82c4-d324fe5d9065.html); single-source; the year 1998 comes from the snippet and must be checked.) By the 2005 roster, the drummer then was Kyle Edgington (May–Aug 1998).
-- ***Billboard*, 1998.** The Baptist Standard says the band was "named one of Billboard magazine's Hot Prospects in 1998" (BS snippet). The 2000 band bio says their live show earned "a buzz-bin article in industry giant Billboard magazine" (`WB:20000926003543/bio.htm`). David's Flickr has a "Billboard Photo Shoot 1998" set of contact sheets (`PH:2068108482`). Confidence: **unverified**. Two band-side sources agree, but the *Billboard* item itself has not been seen (look in the worldradiohistory.com Billboard 1998 PDFs or Google Books, §11).
+- ***Billboard*, 1998.** The [a later-life profile] says the band was "named one of Billboard magazine's Hot Prospects in 1998" (BS snippet). The 2000 band bio says their live show earned "a buzz-bin article in industry giant Billboard magazine" (`WB:20000926003543/bio.htm`). David's Flickr has a "Billboard Photo Shoot 1998" set of contact sheets (`PH:2068108482`). Confidence: **unverified**. Two band-side sources agree, but the *Billboard* item itself has not been seen (look in the worldradiohistory.com Billboard 1998 PDFs or Google Books, §11).
 - **1998 compilations** (`R01` §4; verified-source):
   - *Fireworks Vol. 2: 25 Explosive Tracks* (Sound Asleep Records, Sweden, ZZZ006): "Since You Met Me" and "Think She's Coming Around"; line-up David/Chad/Jeff LaFrate; produced by Mike Poole.
   - *Nashpop (A Nashville Pop Compilation)* (Not Lame Recordings NL-046): "If I Cry" (Edgington/Dewese), a song on no Luxury Liners album.
 - ***Trunk Box*, fall 1998.** A live MP3 album from E-Cleff Studios, Waco, Texas, described as "scott's first offical gig". It has 11 tracks, including songs heard nowhere else: "Trans-Am Mind", "Araby" and (per the archived MP3 paths) "Be With You", "Blockbuster", "If I Cry", "Shake It Up" and "Say Goodbye" (`R04` §5.2; `CDX` `/mp3/waco/…`). Verified-source (archive); never released commercially. It is a Vault item (P5).
 - **"Blockbuster".** One of the first songs David and Jerry James wrote for the Foxymorons. *"Jerry hated it, but the Luxury Liners have played it for four years now"* (David, Aug 2001; `R05` §7). That puts it in the set from about 1997.
-- **Production deal.** The Baptist Standard says the band "secured a production deal, recorded two CDs" (BS snippet). The two CDs fit *Sound As Ever* (2000) and the *Believe* EP (2001), both produced by Mark Montgomery and released on echomusic. **That the deal was with Montgomery/echomusic is an inference** (unverified; Q4).
+- **Production deal.** The [a later-life profile] says the band "secured a production deal, recorded two CDs" (BS snippet). The two CDs fit *Sound As Ever* (2000) and the *Believe* EP (2001), both produced by Mark Montgomery and released on echomusic. **That the deal was with Montgomery/echomusic is an inference** (unverified; Q4).
 
 ### 4.2 2000: *Sound As Ever*
 
@@ -178,7 +178,7 @@ The Foxymorons oral history (Carly, 2026-10-07) agrees: *"Spring 1997: David mov
 - ***Believe* EP**, public date 2001-03-01 (Spotify, P6; Bandcamp says 2001-01-21). Echomusic EMLLCDP1002, an enhanced CD carrying a QuickTime "It's You" video and an EPK. Produced and engineered by Mark Montgomery, mixed by Shane D. Wilson, mastered by Chris Milfred. Tracks: "It's You", **"Shake It Up"** (an original Luxury Liners song, first released here; **not** the Cars song; P27) and **"Believe"** (a cover of Cher's song, credited to Cher as the original artist; P27). Writers of 1–2 per Discogs: Edgington / Dewese / Carpenter (whether Scott is a writer is open: QUESTIONS-FOR-CARLY Q8). (`R01` §2; verified-source / confirmed-owner.)
 - **SXSW 2001.** "Shake It Up" is on *SESAC Presents… An Eclectic Evening Of Music*, a CD handed out at a SESAC showcase at SXSW 2001 (Discogs 8057090 notes; `R01` §4; verified-source). **Whether the band played that showcase is unverified.** The band site later had an "sxsw" photo gallery (`/photos/sxsw/`, captured 2003–05); its year is unknown (Q5).
 - ***Antarctic Antics*** (Scholastic / Weston Woods, 2001): Discogs credits track 6, "Penguin's First Swim", to the Luxury Liners with David and Chad. The role is unknown (`R01` §4; single-source; ask before featuring).
-- **Chad's last show.** David's Flickr photo of the four-piece is titled "Chad's Last Show - March 2001", with the description "Matching gray slacks from Castner-Knott." (`PH:530769478`). The 2005 roster ends his tenure in **Apr 2001**. The Baptist Standard says the band played together "about four and a half years". Summary: Chad left Nashville in 2001 (F4; confirmed-owner); the month is contested (§10 D3).
+- **Chad's last show.** David's Flickr photo of the four-piece is titled "Chad's Last Show - March 2001", with the description "Matching gray slacks from Castner-Knott." (`PH:530769478`). The 2005 roster ends his tenure in **Apr 2001**. The [a later-life profile] says the band played together "about four and a half years". Summary: Chad left Nashville in 2001 (F4; confirmed-owner); the month is contested (§10 D3).
 - **The trio begins.** Journal, 2001-08-12 (12th & Porter, 8 songs): "the new three piece configuration" (`R04` §5.2).
 - ***Nashville Scene* profile "Catching Up Fast"** (Noel Murray, July 2001). A profile of David that covers both bands: *"Foxymorons gets the artsy songs, and Luxury Liners gets the cheesy hits."* (`R05` §4.3; verified-source). The profile names family members, so do not reprint it whole.
 - **First solo show.** Early September 2001, Nashville (the journal's "boring acoustic guy"). The set mixed Luxury Liners and Foxymorons songs (`R04` §5.2; `R05`).
@@ -206,7 +206,7 @@ From the band journal (`R04` §5.2; verified-source as the band's own account):
 - **Shows, 2003** (journal): the "indiana acoustic tour" (The House, Indianapolis; The Rev, Evansville; c. Jan 31–Feb 1); three Nashville shows in one week (Feb 20–21, with Jetpack and For All The Drifters); Knoxville (acoustic, with Ginny Owens); Columbia, South Carolina (March; they turned down **International Pop Overthrow**, Chicago, to keep this date); Slow Bar, Nashville (03-26); Le Jive Coffee House, Wyandotte(?), Michigan (03-28); a Starbucks in the Detroit suburbs, "sold out" (03-29); Louisville (04-18); Rocketown, Nashville (late April); a Detroit tour (mid-June); "12@12th" at 12th & Porter (09-15); Columbia SC again (early Oct, debut of "Circles" and "Still In Love"); Radio Cafe, East Nashville, probably, with Mark Wiggins (10-18, the surprise "Luxury Liner" cover); a Detroit-area **radio appearance** and gig, then a gig in **Canada** (c. Oct 24–25).
 - **Memorial Day 2003:** a "Liners reunion" Flickr set (`R06`; content not read).
 - **July 2003:** a "recording_7-03" photo gallery suggests sessions (for *Nonetheless*?), unverified.
-- **Not the band:** 2003-06-28 Mesquite TX (David's "texas show", probably solo) and Aug 2003 Los Angeles ("dd's playing in l.a.") (`R04` §5.2).
+- **Not the band:** 2003-06-28 [the founding-story town] TX (David's "texas show", probably solo) and Aug 2003 Los Angeles ("dd's playing in l.a.") (`R04` §5.2).
 
 ### 4.6 2004–2006: *Nonetheless*
 
@@ -233,7 +233,7 @@ From the band journal (`R04` §5.2; verified-source as the band's own account):
 
 ### 4.8 2021–2026: the return
 
-- **2021-08-27:** "Shake It Up (Live at the Texas Music Café)", single, ℗ 2021 Texas Music Café (UPC 662582233728, ISRC US2762100919). A live version of the *Believe* EP original (P27). Texas Music Café is a long-running live-music TV and radio series from Waco, Texas, founded in 1997 (search snippet, destinationwaco.org / Baylor Lariat; single-source). **Recording date and line-up unknown** (`R01` §2; Q6). The cover shows three members mid-jump in embroidered Western suits (`R02`). A *different* recording of the song (ISRC US2762202822) is on *25 Years of the … Texas Music Cafe (Volume One)* (2023-03-03) (`R01` §4).
+- **2021-08-27:** "Shake It Up (Live at the Texas Music Café)", single, ℗ 2021 Texas Music Café (UPC 662582233728, ISRC US2762100919). A live version of the *Believe* EP original (P27). Texas Music Café is a long-running live-music TV and radio series from Waco, Texas, founded in 1997 (search snippet, destinationwaco.org / [a college] Lariat; single-source). **Recording date and line-up unknown** (`R01` §2; Q6). The cover shows three members mid-jump in embroidered Western suits (`R02`). A *different* recording of the song (ISRC US2762202822) is on *25 Years of the … Texas Music Cafe (Volume One)* (2023-03-03) (`R01` §4).
 - **2024-10-15:** theluxuryliners.com relaunched as a Carrd link page: "Forever brosephs that formed in 1997…" (`R04` §3).
 - **2025-05-27:** "Precious To My Heart" (the hidden track of *Sound As Ever*) on *Fireworks Vol. 3* (Sound Asleep ZZZ054), 27 years after the band's *Fireworks Vol. 2* tracks (`R01` §4; verified-source).
 - **2026-02-13:** **"Great Day"**, single, Litterbug Records, ℗ 2026 The Luxury Liners, ISRC USQ7J2600001 (`DEC` F6; `R01` §2; confirmed-owner). The song dates back at least to the 2008 demo.
@@ -383,11 +383,11 @@ All are verified-source **as the band's own words**. Quote only with Carly's OK,
 
 | # | Topic | Version A | Version B (and others) | Handling |
 |---|---|---|---|---|
-| D1 | Who founded the band | **David and Chad co-founded it in 1997** (`DEC` F4; confirmed-owner) | 2005 band history: Chad formed a talent-show band (roster: Feb 1997), and David "resurrected the name" with him (roster: David from May 1997). Baptist Standard: Chad "formed" the band after graduating. AllMusic: "an alt-country outlet for … David Dewese" | Copy follows F4. The others are archive context only. |
-| D2 | Where it formed | Nashville (F4: "1997 (Nashville)") | Texas college (2005 history; Discogs "formed in 1997 in Texas"; Baptist Standard) | Say "co-founded in 1997 and took the band to Nashville" (the wording the daviddewese.com band page already uses). |
-| D3 | When Chad left | Mar 2001 (Flickr "Chad's Last Show - March 2001") | Apr 2001 (2005 roster); "about four and a half years" (Baptist Standard, implying about late 2001) | Publish "2001" only (F4). |
-| D4 | Early bass players | Mark W. Winchester, Dec 1997–Apr 1998 (roster); David on bass on the 1998 *Fireworks* tracks | Baptist Standard: "at times, additional musicians on bass" | List Winchester; say David and Chad both played guitar and bass (roster). |
-| D5 | *Billboard* | "Hot Prospects", 1998 (Baptist Standard) | "buzz-bin article" (2000 bio) | Unverified until the item is found; don't publish a title. |
+| D1 | Who founded the band | **David and Chad co-founded it in 1997** (`DEC` F4; confirmed-owner) | 2005 band history: Chad formed a talent-show band (roster: Feb 1997), and David "resurrected the name" with him (roster: David from May 1997). [a later-life profile]: Chad "formed" the band after graduating. AllMusic: "an alt-country outlet for … David Dewese" | Copy follows F4. The others are archive context only. |
+| D2 | Where it formed | Nashville (F4: "1997 (Nashville)") | Texas college (2005 history; Discogs "formed in 1997 in Texas"; [a later-life profile]) | Say "co-founded in 1997 and took the band to Nashville" (the wording the daviddewese.com band page already uses). |
+| D3 | When Chad left | Mar 2001 (Flickr "Chad's Last Show - March 2001") | Apr 2001 (2005 roster); "about four and a half years" ([a later-life profile], implying about late 2001) | Publish "2001" only (F4). |
+| D4 | Early bass players | Mark W. Winchester, Dec 1997–Apr 1998 (roster); David on bass on the 1998 *Fireworks* tracks | [a later-life profile]: "at times, additional musicians on bass" | List Winchester; say David and Chad both played guitar and bass (roster). |
+| D5 | *Billboard* | "Hot Prospects", 1998 ([a later-life profile]) | "buzz-bin article" (2000 bio) | Unverified until the item is found; don't publish a title. |
 | D6 | *Sound As Ever* label | Echomusic **and** Litterbug, EMLLCD1001 (Discogs) | "Litterbug Records, May 2000" (band site 2005); Litterbug (Deezer/Tidal) | Show both. |
 | D7 | *Believe* EP date | 2001-03-01 (Spotify, public under P6) | Bandcamp 2001-01-21 | P6: publish March 1, 2001. |
 | D8 | *Overbored* date | 2003-05-01 (Spotify, public) | Discogs 2003-04-16; Bandcamp 2003-04-01 | P6. |
@@ -404,7 +404,7 @@ All are verified-source **as the band's own words**. Quote only with Carly's OK,
 1. **Q1** May the site tell the talent-show story as band lore, after the F4 co-founding line?
 2. **Q2** Who plays on "Great Day", "New Beginning" and the 2021 "Shake It Up (Live)", and when and where was the live track recorded (Texas Music Café, Waco)?
 3. **Q3** Who owns Litterbug Records (David? the band?), and what does the name refer to?
-4. **Q4** Was the "production deal" (Baptist Standard) with Mark Montgomery / echomusic? Were the "two CDs" *Sound As Ever* and *Believe*?
+4. **Q4** Was the "production deal" ([a later-life profile]) with Mark Montgomery / echomusic? Were the "two CDs" *Sound As Ever* and *Believe*?
 5. **Q5** Did the band play SXSW (2001, or the year of the "sxsw" photo gallery)? Which showcase?
 6. **Q6** The *Billboard* item, 1998: which issue? Is there a clipping?
 7. **Q7** Is there a show list for 1997–2000 and 2004–2009 (the journal covers only 2001–04)? Was there a 1997 Opry-area show?
@@ -430,7 +430,7 @@ All are verified-source **as the band's own words**. Quote only with Carly's OK,
 | https://web.archive.org/web/20000823195951/http://theluxuryliners.com/news.htm and …/20000605102421/…/events.htm | 2000 news and show listings |
 | https://web.archive.org/web/20020609184248/http://theluxuryliners.com/news.html | 2002 news |
 | https://web.archive.org/web/20001022071739/http://theluxuryliners.com/band.html, …/20000407105847/…/biography.htm, …/20030913003424/…/bios.html | member bios, 2000–03 (check for private details before use) |
-| https://web.archive.org/web/20010311152739/http://theluxuryliners.com/multimedia.html, …/20020808070406/…/ethan.html, …/20050204103904/…/luxuryliners.html, …/20041010205156/…/index4.html, …/20021004004512/…/splash.html | misc. pages, not read |
+| https://web.archive.org/web/20010311152739/http://theluxuryliners.com/multimedia.html, …/20020808070406/…/[the private family page], …/20050204103904/…/luxuryliners.html, …/20041010205156/…/index4.html, …/20021004004512/…/splash.html | misc. pages, not read |
 | https://web.archive.org/web/20071112180601/http://theluxuryliners.com/?content=bio and …/20070823124101/…/?content=news, …/20071114175023/… (news, Nov 2007) | the 2006–08 echomusic-CMS bio and news (the 2007 tours) |
 | 2001_07, 2003_11 and 2003_12 journal months (connection resets in R04); 2003_05 (404) | journal gaps |
 | https://web.archive.org/web/20030414032936/http://theluxuryliners.com/downloads/luxury_liners_onesheet.pdf | the *Overbored* one-sheet in full |
@@ -439,7 +439,7 @@ All are verified-source **as the band's own words**. Quote only with Carly's OK,
 
 **Web pages blocked here (search snippets only):**
 
-- Baptist Standard profile of Chad: (URL held outside the repo; RD5) (read for band facts only; do not reuse his private details).
+- [a later-life profile] profile of Chad: (URL held outside the repo; RD5) (read for band facts only; do not reuse his private details).
 - *Nashville Scene*:
   - "Top of the Pops": https://www.nashvillescene.com/arts_culture/top-of-the-pops/article_a7f15ca7-0558-526a-9709-e4ee4a74a05f.html
   - "Block-Rockin'": https://www.nashvillescene.com/arts_culture/block-rockin/article_81f0b3b8-63a9-521b-82c4-d324fe5d9065.html
@@ -475,7 +475,7 @@ All are verified-source **as the band's own words**. Quote only with Carly's OK,
 - `OH-FM` /home/user/foxymorons.com/research/00-oral-history-carly.md; `FM04` /home/user/foxymorons.com/research/04-people-and-scene.md
 
 **Web (WebSearch 2026-10-07; snippets only, pages not opened):**
-- Baptist Standard: (URL held outside the repo; RD5)
+- [a later-life profile]: (URL held outside the repo; RD5)
 - *Nashville Scene* articles listed in §11
 - Wikipedia, Mark Montgomery (entrepreneur): https://en.wikipedia.org/wiki/Mark_Montgomery_(entrepreneur)
 - Wikipedia, The Nobility: https://en.wikipedia.org/wiki/The_Nobility (David and Jetpack's "Mathematics" video)

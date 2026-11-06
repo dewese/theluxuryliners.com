@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { privateHits } from '../../../content/private-literals.mjs';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const dist = join(site, 'dist');
@@ -117,7 +118,7 @@ test('photo credits are the same on every page; Amy Wilstermann credited on the 
 
 test('/shows/: sorted by date, notes kept, no leading comma for a missing venue', () => {
   const h = page('shows');
-  const rows = [...h.matchAll(/<tr>\s*<td>\s*<time datetime="([^"]*)"[^>]*>[^<]*<\/time>\s*<\/td>\s*<td>([\s\S]*?)<\/td>\s*<td>([\s\S]*?)<\/td>\s*<\/tr>/g)];
+  const rows = [...h.matchAll(/<tr>\s*<td[^>]*>\s*<time datetime="([^"]*)"[^>]*>[^<]*<\/time>\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>\s*<\/tr>/g)];
   assert.ok(rows.length > 20, `rows: ${rows.length}`);
   const years = rows.map((r) => r[1].slice(0, 4));
   assert.deepEqual(years, [...years].sort(), 'years in order');
@@ -179,7 +180,16 @@ test('legacy URLs: every redirect target exists, no chains, a 410 list (data/leg
     assert.ok(!sources.has(to), `chain ${from} -> ${to}`);
     if (to.startsWith('/')) assert.ok(existsSync(join(dist, to.split('#')[0], to.endsWith('/') ? 'index.html' : '')), `target ${to}`);
   }
-  assert.ok(sources.has('/ethan.html') && rows.find((r) => r[0] === '/ethan.html')[1] === '/', 'the private page goes home only');
+  // the old family page (a private literal, hashed: content/private-literals.mjs) goes home only;
+  // its row is in the git-ignored data/private/legacy-urls.private.json, merged when present
+  const privateRows = rows.filter((r) => privateHits(r[0]).length);
+  for (const r of privateRows) assert.equal(r[1], '/', 'a private page goes home only');
+  const privFile = join(site, '..', 'data', 'private', 'legacy-urls.private.json');
+  if (existsSync(privFile)) {
+    const want = JSON.parse(readFileSync(privFile, 'utf8')).urls.filter((u) => u.action === '301').map((u) => u.path.split('?')[0]);
+    assert.ok(want.length > 0 && want.every((p) => sources.has(p)), 'the private rows are merged into _redirects');
+  }
+  assert.ok(!readFileSync(join(site, '..', 'data', 'legacy-urls.json'), 'utf8').split('\n').some((l) => privateHits(l).length), 'the public data names no private literal');
   const gone = readFileSync(join(site, 'worker', 'gone.ts'), 'utf8');
   assert.match(gone, /export const GONE/);
 });
@@ -224,7 +234,12 @@ test('captions: a space before every photo credit; cover captions say "Cover art
   for (const p of ['', 'story', 'epk', 'people', 'photos']) assert.doesNotMatch(page(p), /\S<span class="credit">Photo:/, p);
   const s = text(page('music/shake-it-up-live'));
   assert.match(s, /Cover art: David Dewese, from a photo by Mark Montgomery\./);
-  for (const r of ['great-day', 'overbored', 'shake-it-up-live']) assert.equal((text(page(`music/${r}`)).match(/Cover art/g) ?? []).length, 1, r);
+  // in the page's own content (the footer adds the site-wide rights line, audit-design round 1, B1)
+  const main = (h) => h.slice(h.indexOf('<main'), h.indexOf('</main>'));
+  for (const r of ['great-day', 'overbored', 'shake-it-up-live']) {
+    assert.equal((text(main(page(`music/${r}`))).match(/Cover art/g) ?? []).length, 1, r);
+    assert.equal((text(page(`music/${r}`)).match(/Cover art: all rights reserved by the rights holders\./g) ?? []).length, 1, `${r}: the footer line once`);
+  }
 });
 
 test('/vault/: no unread Internet Archive links, no overstated domain date; /vault/mp3s/ says "the song" (items 4, 7, 11)', () => {

@@ -39,11 +39,6 @@ const WRITER_OVERRIDES: Record<string, (title: string) => string[] | undefined> 
   'new-beginning': () => ['Chad Edgington', 'David Dewese'],
   'sound-as-ever': (t) => (t === 'The Duke Of Gloucester' ? ['David Dewese'] : undefined),
 };
-/** Writers that rest on one source (Discogs) and are attributed on the page. */
-const WRITERS_ATTRIBUTED: Record<string, string> = {
-  'believe-ep': 'Writers as Discogs credits them.',
-  'shake-it-up-live': 'Writers as Discogs credits them on the Believe EP.',
-};
 
 /** Who plays on each record (from the credits and the owner decisions; band roles only). */
 const PLAYERS: Record<string, string[]> = {
@@ -97,7 +92,7 @@ const LISTEN_LABELS: Record<string, string> = { spotify: 'Spotify', apple_music:
 export interface Track { n: number; title: string; duration?: string; writers: string[]; isrc?: string; coverOf?: string }
 export interface Release {
   id: string; slug: string; title: string; kind: string; date: string; dateLabel: string; year: string;
-  label: string; catalog?: string; upc?: string; tracks: Track[]; writersNote?: string;
+  label: string; catalog?: string; upc?: string; tracks: Track[];
   listen: { key: string; label: string; href: string }[]; discogs?: string;
   cover: string; coverAlt: string; artwork: { name: string; role: string; edition?: string }[];
   players: string[]; production: string[]; notes: string[]; blurb: string;
@@ -111,7 +106,19 @@ function findRaw(id: string): Raw {
   return r;
 }
 
-const coverAlt = (r: Raw, title: string) => `Sleeve art for ${title} by The Luxury Liners.`;
+/** What each cover shows (audit-a11y round 1, m2; from the alt drafts in data/assets.json). */
+const COVER_ART: Record<string, string> = {
+  'sound-as-ever': 'four pairs of light-blue trouser legs in red boots on a blue-and-white pattern, under the band name in a blue bar and “Sound as ever…” in script',
+  'believe-ep': 'a black silhouette of a leaping guitarist over a white ring on red, with the band name in spaced capitals',
+  overbored: 'three figures in coats hanging upside down on an off-white ground, the title small below',
+  nonetheless: 'a long dark dress on a hanger on an off-white ground, the band name and title across the top',
+  'great-day': 'a red kite on a long string against a deep blue sky, “Great Day” in white serif lettering',
+  'new-beginning': 'a hand holds up a clear CD case with a rainbow sunburst design and “New Beginning” lettering against a bright blue sky',
+};
+const coverAlt = (r: Raw, title: string) => {
+  const art = COVER_ART[SLUGS[r.id]];
+  return art ? `Cover of ${title} by The Luxury Liners: ${art}.` : `Sleeve art for ${title} by The Luxury Liners.`;
+};
 
 export function release(id: string): Release {
   const r = findRaw(id);
@@ -128,7 +135,7 @@ export function release(id: string): Release {
   const art = artwork.credits.filter((c) => c.release === slug && c.status === 'publish');
   const out: Release = {
     id, slug, title: smart(r.title), kind: KIND[r.type] ?? r.type, date: r.release_date, dateLabel: monthYear(r.release_date), year: r.release_date.slice(0, 4),
-    label: r.label, catalog: r.catalog_number ?? undefined, upc: r.upc ?? undefined, tracks, writersNote: WRITERS_ATTRIBUTED[slug],
+    label: r.label, catalog: r.catalog_number ?? undefined, upc: r.upc ?? undefined, tracks,
     listen, discogs: r.other_links?.discogs ?? r.links?.discogs ?? undefined,
     cover: `/img/covers/${slug}`, coverAlt: coverAlt(r, r.title),
     artwork: art.filter((c) => !c.edition).map((c) => ({ name: c.name, role: c.role })),
@@ -172,7 +179,7 @@ const APPEARANCE_PUBLIC: Record<string, { note?: string; songs?: string[] | null
   'll-appearance-2005-between-goodlettsville-and-murfreesboro': {},
   // LL-13: the 2008 disc that carries the 'Great Day' demo is never listed or linked.
   'll-appearance-2023-texas-music-cafe-25-years-vol-1': { note: 'A different live recording of “Shake It Up” from the 2021 single.' },
-  'll-appearance-2025-fireworks-vol-3': { note: '“Precious To My Heart” is the first hidden track of Sound As Ever.' },
+  'll-appearance-2025-fireworks-vol-3': { note: '“Precious To My Heart” is the first hidden track of Sound As Ever, listed there as “Precious”.' },
 };
 export const APPEARANCES: Appearance[] = Object.entries(APPEARANCE_PUBLIC).map(([id, pub]) => {
   const r = findRaw(id);

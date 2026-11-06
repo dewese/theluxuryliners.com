@@ -55,7 +55,7 @@ blocking items come from the form flow and the statement. Automated tools do not
   - `src/pages/contact/index.astro`, `src/lib/contact.ts` and `worker/api/contact.ts`
   - `src/pages/accessibility.astro` and `docs/HANDBOOK.md`
 - **Privacy and owner-decision spot checks for this lens:**
-  - `david@dewese.com` is in no built file.
+  - `[the contact address]` is in no built file.
   - Amy Wilstermann appears only as "Photo: Amy Wilstermann." on 2003 photos and in the People
     photographer list (LL-45). Nothing implies a relationship.
   - Alt text names no member's life outside the band (LL-7).

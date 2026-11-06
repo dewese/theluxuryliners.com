@@ -7,7 +7,7 @@ Gauntlet: this file goes to the critic (approval bar 8/10, no blocking issues); 
 >
 > **X1 applies.** One 1990s side project and the person tied to it are left out of this file completely. Where a public record carries X1 material, this file says so only in general terms (see §4.2) and does not name it.
 >
-> **Privacy.** Chad Edgington, Scott Carpenter, David Wilstermann and everyone else appear in **public band roles only**. Some sources below (the Baptist Standard profile, the 2001 *Nashville Scene* profile, the 2002 *Nashville Rage* blurb, the old mail-order pages) contain jobs, churches, family names, addresses or phone numbers. This file points to those sources but does not repeat those details. **Rule for the new site: none of those details may appear in copy, captions, JSON-LD, `llms.txt` or alt text.**
+> **Privacy.** Chad Edgington, Scott Carpenter, David Wilstermann and everyone else appear in **public band roles only**. Some sources below (the [a later-life profile] profile, the 2001 *Nashville Scene* profile, the 2002 *Nashville Rage* blurb, the old mail-order pages) contain jobs, churches, family names, addresses or phone numbers. This file points to those sources but does not repeat those details. **Rule for the new site: none of those details may appear in copy, captions, JSON-LD, `llms.txt` or alt text.**
 
 ---
 
@@ -54,7 +54,7 @@ Facts from AllMusic, Shazam, Last.fm, Instagram and Facebook therefore still res
 
 ## 1. Summary
 
-1. **The press record is real but almost all of it is offline.** About 25 press items are known (1998–2006, plus a later profile of Chad). Nearly all are known only through the band's own 2005 press page on Wayback (`WB:20051225072849/press.html`, read by R04). Only a handful of originals are online today (*Nashville Scene* archive pages, the Baptist Standard profile, AllMusic). None of the originals could be opened this session. Best quotes: "the best (and best dressed) purveyors of pop in Nashville" (*Nashville Rage*, 7-02), "drop-dead perfect pop-rock" (Erik Hage, *Metroland*, 6-03), "a must-have for all power pop fans" (*Performing Songwriter*, 7-04).
+1. **The press record is real but almost all of it is offline.** About 25 press items are known (1998–2006, plus a later profile of Chad). Nearly all are known only through the band's own 2005 press page on Wayback (`WB:20051225072849/press.html`, read by R04). Only a handful of originals are online today (*Nashville Scene* archive pages, the [a later-life profile] profile, AllMusic). None of the originals could be opened this session. Best quotes: "the best (and best dressed) purveyors of pop in Nashville" (*Nashville Rage*, 7-02), "drop-dead perfect pop-rock" (Erik Hage, *Metroland*, 6-03), "a must-have for all power pop fans" (*Performing Songwriter*, 7-04).
 2. **The one bio every platform repeats is AllMusic's 2001 bio by Erik Hage**: "Named after a Gram Parsons song, Luxury Liners were originally intended as an alt-country outlet for Foxymorons member David Dewese (after moving from Texas to Nashville) … The Believe EP followed in 2001. ~ Erik Hage". It is shown word for word, signed "~ Erik Hage", on **Apple Music** (artist 47333263, in the page's JSON-LD `description`) and on **iHeart** (artist 384637). Both were read live today **[live 10-07]**; the Apple text was also recorded as fetched in dd `research/03-standards-and-stack.md` (line 549). **Shazam** (which uses the Apple artist ID) shows it too, per search summary. Apple's lookup API ties the artist to AllMusic (`amgArtistId` 468639) **[live 10-07]**, so this is syndication from AllMusic. The bio **omits Chad Edgington's co-founding** (F4), frames the band as David's side outlet, and stops in 2001. **One upstream fix at AllMusic would correct Apple, iHeart and Shazam together.**
 3. **A second blurb circulates, source unknown**: "The Luxury Liners are a Nashville-based rock band. The band members consist of Scott Carpenter, David Dewese, and David Wilstermann. Since 1998, they have been releasing albums and EPs and are currently with Litterbug Records." Round 1 attributed it to Apple and iHeart. **That was wrong**: neither page contains "Nashville-based" today **[live 10-07]**. The most likely home is the **Last.fm wiki** (Last.fm "similar artists" pages are what surface for this exact phrase), but Last.fm could not be read. The text may also be a search engine's own composite. It **omits Chad** (P8, F4), says "Nashville-based" in the present tense (David lives in Dallas, F3), and "since 1998" is loose (founded 1997; first compilation tracks 1998; first album 2000).
 4. **Search/AI answers repeat both texts.** This session's search tool, asked about the band, answered with the two texts above merged together, with **no mention of Chad, the 2021 live single or the 2026 singles** (§6). Caution: this may only be the search tool restating whichever page carries the text, so it shows what retrieval surfaces, not an independent AI view. The stronger evidence is the live Apple and iHeart pages in point 2.
@@ -88,7 +88,7 @@ Facts from AllMusic, Shazam, Last.fm, Instagram and Facebook therefore still res
 | The 2001 links page | `/links.html`, captured 2001-07-11 (`CDX`). Never read. | unread |
 | The 2003 one-sheet | `/downloads/luxury_liners_onesheet.pdf`, captured 2003-04-14 (`CDX`); its web version (`WB:20050308093846/data.html`) was read (R04 §5.2) | verified-source (band's own copy) |
 | Foxymorons press pages | the 2003 foxymorons.com press page carries the 2001 *Nashville Scene* profile of David and the *earpollution* interview, both of which cover the LL (R05 §4.3, §7) | verified-source as reprint |
-| Search | *Nashville Scene* archive URLs and the Baptist Standard profile surfaced in WS; pages blocked | unverified / single-source |
+| Search | *Nashville Scene* archive URLs and the [a later-life profile] profile surfaced in WS; pages blocked | unverified / single-source |
 
 **Quote policy for the new site** (carried over from R04 §5.2): quote only the positive excerpts below, always with publication and date, and link the original where one is online. Some 2003 reviews were mixed (Lost At Sea: "'Overbored' is not a clever pun"; Splendid: "they don't have anything to say"); do not quote them out of context, and do not fake a positive pull-quote from them.
 
@@ -98,7 +98,7 @@ Facts from AllMusic, Shazam, Last.fm, Instagram and Facebook therefore still res
 
 | # | Date | Publication | Writer | Headline / type | URL | Excerpt | Confidence |
 |---|---|---|---|---|---|---|---|
-| 1 | 1998 (issue unknown) | *Billboard* | unknown | "Hot Prospects" (Baptist Standard) or "buzz-bin article" (band bio, 2000) | none found; look in the worldradiohistory.com *Billboard* 1998 PDFs or Google Books | excerpt unverified. Band bio 2000: the live show earned "a buzz-bin article in industry giant Billboard magazine" (`WB:20000926003543/bio.htm`) | **unverified** (two band-side sources agree; the item itself is unseen). David's Flickr has a "Billboard Photo Shoot 1998" set (`PH:2068108482`, R06) |
+| 1 | 1998 (issue unknown) | *Billboard* | unknown | "Hot Prospects" ([a later-life profile]) or "buzz-bin article" (band bio, 2000) | none found; look in the worldradiohistory.com *Billboard* 1998 PDFs or Google Books | excerpt unverified. Band bio 2000: the live show earned "a buzz-bin article in industry giant Billboard magazine" (`WB:20000926003543/bio.htm`) | **unverified** (two band-side sources agree; the item itself is unseen). David's Flickr has a "Billboard Photo Shoot 1998" set (`PH:2068108482`, R06) |
 | 2 | 1998 (June; year from snippet) | *Nashville Scene* | unknown | "Top of the Pops" (Monsters of Pop showcase, June 11–13, Exit/In and The End) | https://www.nashvillescene.com/arts_culture/top-of-the-pops/article_a7f15ca7-0558-526a-9709-e4ee4a74a05f.html ; alternate path surfaced today: https://nashvillescene.com/arts-culture/article/13002339/top-of-the-pops | "the Byrds-influenced Luxury Liners" (WS summary, today and in LL01) | single-source (snippet; page blocked) |
 | 3 | 1998 (year from snippet) | *Nashville Scene* | unknown | "Block-Rockin'" (Monsters of Pop) | https://www.nashvillescene.com/arts_culture/block-rockin/article_81f0b3b8-63a9-521b-82c4-d324fe5d9065.html | excerpt unverified | unverified |
 | 4 | Sep 2001 | *All Music Guide* (AllMusic) | Erik Hage | artist biography | https://www.allmusic.com/artist/luxury-liners-mn0000759673 | "Named after a Gram Parsons song, the Luxury Liners were originally intended as an alt-country outlet for Foxymorons member David Dewese … the group ended up more as a guitar-crunchy power pop band that called to mind classic acts like Big Star, Badfinger, and the Raspberries." | verified-source (reprint on the 2005 press page, R04; same text live today on Apple Music and iHeart [live 10-07], and on Shazam per WS). Assessed in §3.1 |
@@ -123,7 +123,7 @@ Facts from AllMusic, Shazam, Last.fm, Instagram and Facebook therefore still res
 | 23 | Jul 2004 | *Performing Songwriter* | "—LN" | review of *Overbored* | none | "Overbored … is a must-have for all power pop fans." | verified-source (reprint) |
 | 24 | 2006 (year-end) | Absolute Power Pop (blog) | unknown | Top 100 Releases of 2006: *Nonetheless* at **#100** | none (listed on the band's 2007 home page, `WB:20070205211156/`) | — | verified-source (band's own listing) |
 | 25 | 2006 (year-end) | Carligula (blog) | unknown | Top Five Nashville Releases of 2006: *Nonetheless* at **#3** | none (same capture) | — | verified-source (band's own listing) |
-| 26 | date unknown (after 2001) | *Baptist Standard* (Texas) | unknown | profile of **Chad Edgington** (**internal only; headline withheld**: the headline and URL state Chad's later life and are not repeated in this file; the URL is kept only in the internal note in §9) | internal only | Band facts only (WS summary): Chad and David were college friends (the college name is held back until the owner confirms it; P21 approves only "college friend Chad Edgington"); after graduating in 1997 they moved to Nashville and formed the band; it lasted "about four and a half years" with drummer Scott Carpenter and "at times, additional musicians on bass"; it "secured a production deal, recorded two CDs, and was named one of Billboard magazine's Hot Prospects in 1998". **Not to be cited, summarised or linked on the site without Chad's OK.** | single-source (summary only; page blocked) |
+| 26 | date unknown (after 2001) | *[a later-life profile]* (Texas) | unknown | profile of **Chad Edgington** (**internal only; headline withheld**: the headline and URL state Chad's later life and are not repeated in this file; the URL is kept only in the internal note in §9) | internal only | Band facts only (WS summary): Chad and David were college friends (the college name is held back until the owner confirms it; P21 approves only "college friend Chad Edgington"); after graduating in 1997 they moved to Nashville and formed the band; it lasted "about four and a half years" with drummer Scott Carpenter and "at times, additional musicians on bass"; it "secured a production deal, recorded two CDs, and was named one of Billboard magazine's Hot Prospects in 1998". **Not to be cited, summarised or linked on the site without Chad's OK.** | single-source (summary only; page blocked) |
 
 **One critic, three items.** Erik Hage wrote the AllMusic bio (#4), the *earpollution* interview (#7) and the *Metroland* review (#14). Count them as one independent voice, not three. This matters for any Wikidata or Wikipedia notability case (§4.1): the independent coverage is thinner than 26 rows suggest.
 
@@ -303,7 +303,7 @@ Round 1's summaries (same tool, unlogged queries) also produced:
 - Asked about *Overbored* and *Sound As Ever* reviews: it assumed ocean liners.
 - One answer **hallucinated** that the band had "multiple appearances in power pop communities and compilations released by Kool Kat Musik". In fact there is one Kool Kat bonus disc, credited to David (LL02 §4).
 
-**The telling result:** searching for "Dewese Edgington" did not surface Chad at all. The tool treated his surname as noise. Nothing crawlable connects Chad to the band except Discogs's member list and the Baptist Standard profile.
+**The telling result:** searching for "Dewese Edgington" did not surface Chad at all. The tool treated his surname as noise. Nothing crawlable connects Chad to the band except Discogs's member list and the [a later-life profile] profile.
 
 **Inferred answer to "Who are The Luxury Liners?"** today: *a Nashville power-pop band, started as David Dewese's alt-country outlet, members Carpenter / Dewese / Wilstermann, debut* Sound As Ever *2000.* **Wrong or missing against owner decisions:** Chad Edgington as co-founder (F4) and forever member (P8); the founding year 1997; the 2021 and 2026 releases (F6); that the band is active; *Overbored* and *Nonetheless*; the TV placements.
 
@@ -427,7 +427,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
 | 2 | https://www.shazam.com/artist/-/47333263 (403 to scripts) | confirm it shows the Hage bio |
 | 2 | Nashville Scene "Top of the Pops" (both URLs in §2.2), "Block-Rockin'", and the others in LL01 §11 | dates, writers and exact LL wording |
 | 2 | *Billboard* 1998 issues (worldradiohistory.com; Google Books) | the "Hot Prospects" / buzz-bin item |
-| 3 | Baptist Standard profile of Chad (URL in the internal note below) | publication date and band facts only (privacy rule) |
+| 3 | [a later-life profile] profile of Chad (URL in the internal note below) | publication date and band facts only (privacy rule) |
 | 3 | https://web.archive.org/web/20010711195105/http://theluxuryliners.com:80/links.html | 2001 links page: fan sites, press and directories that may still exist |
 | 3 | https://web.archive.org/web/20030414032936/http://theluxuryliners.com/downloads/luxury_liners_onesheet.pdf | the *Overbored* one-sheet (press quotes as of 2003) |
 | 3 | https://www.tunefind.com/show/one-tree-hill (season 1) | third-party confirmation of "Dreaming" in S1 E15 |
@@ -435,7 +435,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
 | 3 | http://www.flickr.com/photos/dewese/collections/72157600177972175/ | is this collection LL-only? (decides the MusicBrainz Flickr link, §7 #3) |
 | 3 | Google search "The Luxury Liners" and "Luxury Liners band" (logged out, US) | is there a knowledge panel; what the AI Overview says (record a screenshot as a baseline) |
 
-> **Internal note: not for publication, not for the site, not for any public file.** The Baptist Standard profile of Chad Edgington is at (URL held outside the repo; RD5). Its headline and slug state Chad's later life, so this file cites the item only as "*Baptist Standard* profile of Chad Edgington". Use it for band facts only, and only with Chad's OK (§10.2 Q8).
+> **Internal note: not for publication, not for the site, not for any public file.** The [a later-life profile] profile of Chad Edgington is at (URL held outside the repo; RD5). Its headline and slug state Chad's later life, so this file cites the item only as "*[a later-life profile]* profile of Chad Edgington". Use it for band facts only, and only with Chad's OK (§10.2 Q8).
 
 
 ---
@@ -446,7 +446,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
 
 | # | Topic | Version A | Version B | Handling |
 |---|---|---|---|---|
-| D1 | Who founded the band | **David and Chad co-founded it, 1997** (F4; confirmed-owner) | AllMusic/Hage bio (live on Apple, iHeart, Shazam): "an alt-country outlet for … David Dewese" (Chad absent); the "Nashville-based" blurb (source unknown): trio only; Baptist Standard (summary): Chad "formed" the band; 2005 band history: Chad's talent-show band, David joined May 1997 | Site copy follows F4. Off-site fixes §7 #2a–#6 |
+| D1 | Who founded the band | **David and Chad co-founded it, 1997** (F4; confirmed-owner) | AllMusic/Hage bio (live on Apple, iHeart, Shazam): "an alt-country outlet for … David Dewese" (Chad absent); the "Nashville-based" blurb (source unknown): trio only; [a later-life profile] (summary): Chad "formed" the band; 2005 band history: Chad's talent-show band, David joined May 1997 | Site copy follows F4. Off-site fixes §7 #2a–#6 |
 | D2 | Where it formed | Nashville (F4) | Texas (Discogs "formed in 1997 in Texas"; 2005 band history) | "co-founded in 1997 … took it to Nashville". JSON-LD `foundingLocation` Nashville per F4; flag for Carly if Wikidata editors challenge it |
 | D3 | Members | P8: four forever members | MB (live): Carpenter, Dewese, Wilstermann; the "Nashville-based" blurb: the same three; Discogs (live): five incl. Chad and "Lafrate" | P8 on site; add Chad on MB |
 | D4 | Base | "Nashville-based" (blurb) | David in Dallas (F3); members in several states (David, 2012–24) | Do not say "Nashville-based" in the present tense; "formed in Nashville" is fine |
@@ -454,7 +454,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
 | D6 | "Since 1998" | the "Nashville-based" blurb (source unknown) | founded 1997; first recordings 1998; first album 2000 | Use 1997 (founding) and 2000 (first album) |
 | D7 | Band name form | "The Luxury Liners" (Spotify, Apple, Discogs, MB, official site) | "Luxury Liners" (AllMusic; *Nashville Rage* and Hage reviews) | Canonical "The Luxury Liners"; "Luxury Liners" as `alternateName` |
 | D8 | Emmylou Harris album year | 1977 (daviddewese.com `LUXURY_LINERS_NOT`; first single Feb 1977; 1977 year-end chart) | **1976-12-28** (Wikipedia infobox, citing the 2004 Warner reissue note; read live 10-07) | **Resolved: 1976.** Omit the year or say 1976 on both sites; fix daviddewese.com `site.ts` line 32 |
-| D9 | *Billboard* | "Hot Prospects", 1998 (Baptist Standard) | "buzz-bin article" (2000 band bio) | Do not publish a title until the item is found |
+| D9 | *Billboard* | "Hot Prospects", 1998 ([a later-life profile]) | "buzz-bin article" (2000 band bio) | Do not publish a title until the item is found |
 | D10 | Big Cartel store | live store page for *Sound As Ever* (WS, LL02) | R02: bigcartel is a dead link to purge | Check by hand; do not link until checked |
 | D11 | Tidal dates | "New Beginning" 2026-04-10; *Overbored* 2003-01-01 | Spotify 2026-04-17; 2003-05-01 (P6) | P6 on site; ask distributor to fix Tidal |
 | D12 | *Believe* release type | EP (band, Discogs, LL02; P27 calls it "the *Believe* EP") | Apple: "Believe - Single" (iTunes lookup, live 10-07) | Call it the *Believe* EP on the site; optional distributor fix (§7 #4) |
@@ -470,7 +470,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
 5. **The 2026 singles:** was there any press, radio or playlist coverage of "Great Day" or "New Beginning"? Any blog premieres?
 6. **Social:** are Instagram @theluxuryliners and Facebook /theluxuryliners active, and who posts? Does a SoundCloud account exist and should it be linked?
 7. **Canonical one-liner:** approve the description in §8.3 for use on the site, DSPs, Wikidata and Discogs (it is the daviddewese.com `LUXURY_LINERS_LINE`, already owner-consistent with F4).
-8. **The Baptist Standard profile:** may the site cite it as a source for band facts (it is a public article about Chad), or should it stay internal only?
+8. **The [a later-life profile] profile:** may the site cite it as a source for band facts (it is a public article about Chad), or should it stay internal only?
 9. **TV placements:** may the site embed or link the YouTube clips of the *One Tree Hill* and FOX Sports uses (R04: KAq9dUlt3Rw, mju1nb3BOzU), or just name them?
 10. **`foundingLocation`:** should both sites publish "Nashville" in JSON-LD (F4), or both leave it out until the Texas-college wording is settled (as daviddewese.com does now)?
 11. **Superdrag Tribute II (2004):** which Luxury Liners song is on it?
@@ -499,7 +499,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
 - Last.fm: https://www.last.fm/music/The+Luxury+Liners ; https://www.last.fm/music/The+Luxury+Liners/Sound+As+Ever ; https://last.fm/zh/music/The+Luxury+Liners/_/Constellation+Invitation ; similar-artist pages https://last.fm/music/The+Nobility/+similar , https://last.fm/music/Zaemon/+similar , https://last.fm/music/Rob+Momary/+similar
 - Bandcamp: https://daviddewese.bandcamp.com/album/overbored , https://daviddewese.bandcamp.com/album/believe-ep
 - *Nashville Scene*: https://www.nashvillescene.com/arts_culture/formation-of-stars/article_2354206e-23bd-5b0a-aaff-3a21f788939c.html ; https://nashvillescene.com/arts-culture/article/13002339/top-of-the-pops
-- Baptist Standard profile of Chad Edgington (URL in the §9 internal note only)
+- [a later-life profile] profile of Chad Edgington (URL in the §9 internal note only)
 - Collisions: https://en.wikipedia.org/wiki/Luxury_Liner_(album) ; https://en.wikipedia.org/wiki/Luxury_(Iowa_band) ; https://www.spinmagazine.com/2013/01/carter-tanton-luxury-liners-caribbean-sunset-stream-premiere/ ; https://www.pastemagazine.com/artist/luxury-liners ; https://litterbug.bandcamp.com ; https://www.poyst.com/business/luxury-liners-marina-del-rey-yacht-rentals-la-yacht-charter ; https://magpie.travel/companies/hampton-luxury-liner ; https://highwayqueens.com/2026/04/12/emmylou-harriss-discography-luxury-liner-1976/ ; https://music.apple.com/us/album/5560295
 - Namesake: https://powerpop.blog/2026/04/26/international-submarine-band-luxury-liner/
 - Tunefind One Tree Hill pages (no LL listing surfaced): https://www.tunefind.com/show/one-tree-hill/season-3/1703
@@ -533,7 +533,7 @@ Round 2 removed the rows that `curl` has now answered: the MusicBrainz state, th
   - The "Apple bio may not be editable" hedge is replaced by a plain statement that the bio is AllMusic-syndicated.
 - **B3 fixed.** Re-read MusicBrainz live: five URL relations (http homepage, Facebook, dead MySpace, David's Flickr collection, iTunes), three members, two release groups, no dates.
   - §4.1 and §7 #3 now ask to: switch the homepage to https; end the MySpace link; decide on the Flickr link; update the Apple link; add Chad, dates and the missing releases.
-- **N1.** The Baptist Standard headline and slug are removed from §2.2, §9 and the Sources list. The URL survives only in a marked internal note in §9.
+- **N1.** The [a later-life profile] headline and slug are removed from §2.2, §9 and the Sources list. The URL survives only in a marked internal note in §9.
 - **N2.** Erik Hage is now named as the *earpollution* writer (D14). A note says he wrote three of the press items, and the Wikipedia/Wikidata notability reasoning is adjusted.
 - **N3.** The Discogs profile is quoted in full and both sentences are flagged. The redundant "add official site" step is removed (Discogs already links the site and Facebook).
 - **N4.** The web-access note is corrected: a host-by-host `curl` table replaces the "blocked" claim. Spotify's 553 monthly listeners are recorded as a baseline.

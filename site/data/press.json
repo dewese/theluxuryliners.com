@@ -1,5 +1,5 @@
 {
-  "_about": "Press on /press/ and /epk/. Only items whose existence is verified (the band's own press page reprints) or owner-confirmed. Excerpts only where the exact words are known and positive. 'pending' rows never render. Never add the Baptist Standard profile (privacy).",
+  "_about": "Press on /press/ and /epk/. Only items whose existence is verified (the band's own press page reprints) or owner-confirmed. Excerpts only where the exact words are known and positive. 'pending' rows never render. Never add the later-life profile of a member (privacy; content/private-literals.mjs).",
   "items": [
     { "id": "billboard-1998", "date": "1998", "publication": "Billboard", "type": "Feature", "text": "The band was featured in Billboard in 1998.", "status": "publish", "source": "LL-22 (title and issue to add when the clipping turns up)" },
     { "id": "allmusic-2001", "date": "2001-09", "publication": "AllMusic", "writer": "Erik Hage", "type": "Artist biography", "url": "https://www.allmusic.com/artist/luxury-liners-mn0000759673", "status": "pending", "source": "LL04 #4; page 403 to scripts; frames David as sole founder (plan §4.3: Vault quotation only)" },

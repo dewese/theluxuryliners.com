@@ -1,22 +1,35 @@
 ---
+// The accessibility statement (audit-a11y round 1, B1): every claim here is true of the build.
+// `npm run build:production` runs the axe suite (tests/browser/axe.mjs) and stops on a failure;
+// the date below is the last time the statement was reviewed against the site.
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
+const turnstile = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY);
 ---
-<Base title="Accessibility" description="How theluxuryliners.com is built to be accessible, and how to tell us about a problem.">
+<Base title="Accessibility" description="How theluxuryliners.com is built to be accessible, what is known not to work yet, and how to tell us about a problem.">
   <PageHead title="Accessibility" size="l">
     <p class="lede">We want everyone to be able to use this site. It aims to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
   </PageHead>
   <div class="wrap page-body">
     <div class="prose">
+      <h2 class="h3">Status</h2>
+      <p>We believe the site partially conforms to WCAG 2.2 level AA: most of it meets the standard, and the parts that may not are listed under “Known limitations”. This statement was last reviewed on <time datetime="2026-11-06">6 November 2026</time>.</p>
       <h2 class="h3">What we do</h2>
       <ul>
-        <li>Every page works without JavaScript, with the keyboard alone and on small screens.</li>
+        <li>{turnstile ? 'Every page except the contact form works without JavaScript; the contact form’s spam check needs it.' : 'Every page works without JavaScript.'} Every page works with the keyboard alone and on small screens.</li>
         <li>Every photo has a text description; every cover is named.</li>
-        <li>Links are underlined, and the keyboard focus is always visible.</li>
+        <li>Links in running text are underlined. Menus, buttons and cards are marked by their shape and place on the page, and the keyboard focus is always visible.</li>
         <li>There is a light and a dark theme. The site follows your device’s setting, and the “Dark theme” switch at the top of each page (it needs JavaScript) changes it.</li>
         <li>Animations are switched off when your device asks for reduced motion.</li>
         <li>Videos load only when you press play.</li>
-        <li>Every page is checked with the axe accessibility engine, in both themes, each time the site is built, and a page that fails is not published.</li>
+        <li>Before each release, every page is checked with the axe accessibility engine, in both themes, at desktop and phone widths. The production build stops if a page fails.</li>
+      </ul>
+      <h2 class="h3">Known limitations</h2>
+      <ul>
+        <li>Videos play in YouTube’s player, which we do not control. Its captions and controls are YouTube’s.</li>
+        {turnstile && <li>The contact form uses Cloudflare Turnstile to stop spam. It needs JavaScript, and on rare occasions it may ask you to confirm you are human.</li>}
+        <li>Words that appear inside cover art, flyers and old photos are described in the text around them, not transcribed in full.</li>
+        <li>Automated checks find only some problems. If something gets in your way, please tell us.</li>
       </ul>
       <h2 class="h3">Tell us about a problem</h2>
       <p>If something on the site doesn’t work for you, please use the <a href="/contact/?topic=accessibility">contact form</a> and choose “Accessibility problem”. Tell us the page and what happened.</p>

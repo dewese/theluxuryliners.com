@@ -16,8 +16,8 @@ There are two blocking items, both the same kind: sourcing notes in public copy,
 - **LL-27**: no `.mp3`, `.zip` or `download` links. The Vault lists the old MP3s by title only.
 - **LL-39**: no logo designer is named. **LL-40**: no newsletter.
 - **LL-45**: Amy Wilstermann is credited as "Photo: Amy Wilstermann" on the two 2003 shots and in People › Photographers. No relationship is stated.
-- **LL-7 / LL-19 / LL-4 / LL-5**: grep of dist found no Mesquite, college name, parents, Gmail, phone numbers, addresses, "dads with careers" or any member-to-state mapping. "College friend" is approved wording (daviddewese.com P21). `foundingLocation` is Texas, with no town. Person JSON-LD for Chad, Scott and Larry is name only (LL-33). No EXIF found in the photo derivatives.
-- **`david@dewese.com`** does not appear anywhere in dist (HTML, JS, JSON-LD, `llms.txt`).
+- **LL-7 / LL-19 / LL-4 / LL-5**: grep of dist found no [the founding-story town], college name, parents, Gmail, phone numbers, addresses, "dads with careers" or any member-to-state mapping. "College friend" is approved wording (daviddewese.com P21). `foundingLocation` is Texas, with no town. Person JSON-LD for Chad, Scott and Larry is name only (LL-33). No EXIF found in the photo derivatives.
+- **`[the contact address]`** does not appear anywhere in dist (HTML, JS, JSON-LD, `llms.txt`).
 - **International Submarine Band fix confirmed**: chapter 3 reads "…'The International Submarine Band', the name of Parsons's 1960s band." No "first band" anywhere in dist. The Vault covers page correctly credits "Luxury Liner" to Gram Parsons (The International Submarine Band).
 - **Matches LL-9, 10, 14, 15, 16, 18, 20, 21, 22, 23, 24, 37 and 38**: dates, line-ups, songwriting and cover-art credits all agree with the decisions and with `releases.json`. The 2002 photo is never called a line-up (P23).
 - **Press quotes** match the research text character for character. That includes "tongue-in cheek" (as printed), "drop-dead perfect pop-rock", the one-sheet's "up the 5 from San Diego to L.A." and the 2000 bio's "caricature lunch box".

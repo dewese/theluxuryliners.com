@@ -188,7 +188,7 @@ Free MP3s, RealAudio clips and the *Trunk Box* live album: §5. `/multimedia.htm
 - Contact: `/contact.html` (2001-03-11), `/email.html` (2001-07-11), `/?content=contact` (2007). Mailing list: `/mail_list.htm` (2000), `/mail_list.html` (2000-10-22), `/?content=mailinglist` (2007, with a captcha). The E2 nav button was "luxlist".
 - The E2 nav also had a **"message"** button (`go_message.gif`, 2001-06-11): probably a message board or guestbook, hosted elsewhere. No message-board URL is in the CDX. **Unread / location unknown.**
 - `/links.html`, `/misc.html` (2001-07-11): unread.
-- One 2002 page (`/ethan.html`) is a family page. It is private: never republish it (§12).
+- One 2002 page (`/[the private family page]`) is a family page. It is private: never republish it (§12).
 
 ### 3.11 Images to request from David in original resolution
 
@@ -544,7 +544,7 @@ The 276 paths in `HO` are the status-200 HTML, audio and PDF paths with the quer
 | Old path(s) | Suggested target | Rows | Was (daviddewese.com handover) |
 |---|---|---|---|
 | `/`, `/index.html` | keep `/` | 2 | keep |
-| `/index4.html`, `/splash.html`, `/luxuryliners.html`, `/go/?…` (4), `/ethan.html` (private: home only) | `/` | 8 | band page |
+| `/index4.html`, `/splash.html`, `/luxuryliners.html`, `/go/?…` (4), `/[the private family page]` (private: home only) | `/` | 8 | band page |
 | `/bio.htm`, `/biography.htm`, `/bio.html` (404), `/band.html`, `/bios.html`, `/data.html`, `/history`, `/history/index.html`, `/history/intro.html`, `/history/story.html` | `/story/` | 10 | band page |
 | `/events.htm`, `/history/concerts.html` | `/shows/` | 2 | band page `#live` |
 | `/music.html`, `/albums.html`, `/history/music.html` (the 2004–05 album-notes page: re-publish its copy on `/music/`), `/merch.htm`, `/store`, `/store/cat/LuxuryLiners` | `/music/` | 6 | music |
@@ -571,7 +571,7 @@ The 276 paths in `HO` are the status-200 HTML, audio and PDF paths with the quer
 - **If the new site is a static build on Cloudflare** (as daviddewese.com is): put exact paths first and splats last in `_redirects` (`/photos/*`, `/history/photos/*`, `/mp3/20021117/*`, `/mp3/7.18.02/*`), never splat over a built route, and serve re-hosted MP3s and PDFs as static files at their old paths. Query-string URLs need a small Worker or Redirect Rule if anyone cares; otherwise leave them on the home page.
 - **Do not redirect images to HTML pages.** Old image URLs stay 404 unless the same image is re-hosted.
 - **Never redirect `/cdn-cgi/*`.** Cloudflare owns it.
-- **`/ethan.html`** goes to the home page only. Its content is private.
+- **`/[the private family page]`** goes to the home page only. Its content is private.
 - **Regenerate** `data/legacy-urls.json` once the IA is fixed, and again once a human has run CDX query #24 (§11): add the last-capture timestamps to `KNOWN_LATER` in the script (or load the uncollapsed CDX) so `last_known_capture` is filled for every row. Today it is null in 666 of 675 rows (null = unknown).
 - Regenerate command: `python3 research/tools/gen_legacy_urls.py research/legacy/live-status-2026-10-07.tsv` (the rules are in `classify()`; the TSV is this session's live status check).
 
@@ -638,7 +638,7 @@ Open each link in a browser, save the page (File > Save, or copy the text into `
 |---|---|---|
 | `/bio.htm` (2000), `/?content=mailorder` (2007), the 2001–05 mail-order text | old mailing addresses and a phone number | strip before quoting (`R04` §5.2) |
 | *Nashville Scene* 2001 profile, *Nashville Rage* 2002 blurb (press page) | members' family members by name | do not repeat those names |
-| `/ethan.html` and four personal image files (2002–05) | a private family page and family photos | never republish, re-host or describe; the page redirects to `/` only. In `data/legacy-urls.json` these rows (`private-*`) keep their paths but have `wayback_url: null` |
+| `/[the private family page]` and four personal image files (2002–05) | a private family page and family photos | never republish, re-host or describe; the page redirects to `/` only. In `data/legacy-urls.json` these rows (`private-*`) keep their paths but have `wayback_url: null` |
 | `/history/photos/00_*.jpg` | one file name in this set needs a look before any reuse | a human (with the owner) reviews the image first. In `data/legacy-urls.json` that row is category `sensitive-image`, action `none`, `wayback_url: null`, with the note "do not re-host or reuse without owner review" |
 | IA item `lliners2003-06-19` | the taper's personal e-mail address | credit the taper by name only |
 | IA collection image | credited to a named person | ask Carly before reusing the image |
@@ -718,7 +718,7 @@ X1: nothing in this file concerns the excluded side project or person.
 **Round 2 (2026-10-07), after `critiques/archaeology-round1.md` (7.5/10):**
 - **B1 fixed.** `/history/music.html` (the 2004–05 album-notes page) now gets a 301 to `/music/` in `data/legacy-urls.json`. The music rule in `research/tools/gen_legacy_urls.py` now runs before the `/history/` catch-all. Re-checked after regenerating: the only status-200 HTML row left on `none` is Cloudflare's `/cdn-cgi/l/email-protection` (correct), and every `HO` path with a target is covered. Counts updated in §1 and §10.1 (301: 299 → 300; `rehost-or-none`: 79 → 78; `none` stays 243).
 - **B2 fixed.** The flagged history photo row is now category `sensitive-image`, action `none`, `wayback_url: null`, note "do not re-host or reuse without owner review". The prose stays discreet (§12 says where the flag lives).
-- **Privacy.** The IA collection image credit no longer prints a name (§5.3). The `private-*` rows (`/ethan.html` and four image files) keep their paths but have `wayback_url: null`, and the description of the subject of those files is gone from the prose, the data notes and the generator.
+- **Privacy.** The IA collection image credit no longer prints a name (§5.3). The `private-*` rows (`/[the private family page]` and four image files) keep their paths but have `wayback_url: null`, and the description of the subject of those files is gone from the prose, the data notes and the generator.
 - **`content_period`** is now derived from the evidence: dated gallery names, or "2001 or earlier" / "2002 or earlier" from each gallery's earliest archive date (sxsw, capitol, trio, studio, live, misc, live2, dancin); `/history/concerts.html` reads "1997–2003 (guess)". The field note in the JSON says what the field means.
 - §11 #2 now says "the first months after Chad left (Apr 2001)", matching the 2005 roster.
 - §9 adds Shazam (403 here; single-source), David's Big Cartel shop (dead, 404, re-checked 2026-10-07) and the NoiseTrade sampler (dead; a David solo item).

@@ -1,5 +1,5 @@
 // The contact e-mail as raw MIME (ported from daviddewese.com, where it passed its security audit). Hand-written rather than a library
-// so that every byte that reaches a header is visible here and covered by tests/unit/worker-security:
+// so that every byte that reaches a header is visible here and covered by tests/unit/worker.test.mjs:
 //   - no visitor text in any header except Reply-To, and that only when the address passes
 //     EMAIL_RE, is plain ASCII and has no control or line-separator characters;
 //   - the Subject is built from fixed parts (the topic label, the release title from the built

@@ -2,6 +2,7 @@
 // A Story chapter (design C, "story-believe" template): a Believe-red head with the chapter's record
 // cover (or its photo), the narrative with a drop cap, an aside with the record card, and the
 // chapter list with a pager. One page per chapter in content/story/.
+import { fitClasses } from '../../lib/typo.ts';
 import Base from '../../layouts/Base.astro';
 import Photo from '../../components/Photo.astro';
 import Cover from '../../components/Cover.astro';
@@ -12,7 +13,8 @@ import Dot from '../../components/Dot.astro';
 import SecHead from '../../components/SecHead.astro';
 import { storyView, type Chapter } from '../../lib/views.ts';
 import { bySlug } from '../../lib/releases.ts';
-import { COVER_RIGHTS } from '../../lib/site.ts';
+import { COVER_RIGHTS, SITE } from '../../lib/site.ts';
+import { photo } from '../../lib/photos.ts';
 
 export function getStaticPaths() {
   const v = storyView();
@@ -25,21 +27,26 @@ const listen = r ? r.listen.filter((l) => ['spotify', 'apple_music', 'bandcamp',
 // photo heads the chapter.
 const headPhoto = !r && c.photo ? c.photo : null;
 const textPhoto = r && c.photo ? c.photo : null;
-const desc = `Chapter ${c.n} of the story of The Luxury Liners: ${c.titleText} (${c.years}).`;
+// SEO (audit-seo round 1, S6): a written summary per chapter (content/story/*.md description), the
+// chapter's own lead photo (or its record's cover) as the social card, and a title that does not
+// compete with the release page ("Overbored (2003): the story, chapter 6").
+const desc = c.description ?? `Chapter ${c.n} of the story of The Luxury Liners: ${c.titleText} (${c.years}).`;
+const leadPhoto = headPhoto ?? textPhoto;
+const card = leadPhoto ? { image: `${SITE}/img/cards/${leadPhoto}.jpg`, imageAlt: photo(leadPhoto)?.alt } : r ? { image: `${SITE}${r.cover}-1200.jpg`, imageAlt: r.coverAlt, square: true } : {};
 ---
-<Base title={`${c.titleText}: chapter ${c.n}`} description={desc}>
+<Base title={`${c.titleText} (${c.years}): the story, chapter ${c.n}`} description={desc} {...card}>
   <article aria-labelledby="h1t">
     <header class="chapter red">
       <div class="wrap chapter__grid">
-        <div>
+        <div class="fit-box">
           <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/story/">Story</a></li><li><span aria-current="page">Chapter {c.n}</span></li></ol></nav>
           <p class="kicker">Chapter {c.n} · {c.years}</p>
-          <h1 id="h1t" class="title-xl" set:html={c.titleHtml} />
+          <h1 id="h1t" class:list={['title-xl', ...fitClasses(c.titleHtml)]} set:html={c.titleHtml} />
           {c.summaryHtml && <p class="lede" set:html={c.summaryHtml} />}
         </div>
         {r && (
           <figure class="chapter__cover">
-            <a href={`/music/${r.slug}/`}><Cover slug={r.slug} alt={r.coverAlt} eager sizes="(max-width: 56rem) 90vw, 28rem" /></a>
+            <a href={`/music/${r.slug}/`}><Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) 90vw, 29rem" /></a>
             <figcaption>{r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)} {COVER_RIGHTS}</figcaption>
           </figure>
         )}

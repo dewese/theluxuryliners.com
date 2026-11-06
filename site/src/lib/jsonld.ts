@@ -4,7 +4,7 @@
 import { members, bandRoles, type Member } from './members.ts';
 import { SITE, BAND, ONE_LINER, DISAMBIGUATION, SAME_AS } from './site.ts';
 import { isoDuration } from './dates.ts';
-import type { Release } from './releases.ts';
+import { RELEASES, type Release } from './releases.ts';
 
 export const BAND_ID = `${SITE}/#band`;
 const plain = (s: string) => s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
@@ -33,6 +33,9 @@ export function musicGroup() {
     foundingLocation: { '@type': 'Place', name: 'Texas', address: { '@type': 'PostalAddress', addressRegion: 'TX', addressCountry: 'US' } },
     founder: founders.map(person),
     member: forever.map((p) => ({ '@type': 'OrganizationRole', roleName: bandRoles(p).join(', '), startDate: p.startDate, member: person(p) })),
+    // LL-19: Nashville is the band's home town. Band-level only, never a place per member (LL-7).
+    location: { '@type': 'Place', name: 'Nashville, Tennessee', address: { '@type': 'PostalAddress', addressLocality: 'Nashville', addressRegion: 'TN', addressCountry: 'US' } },
+    album: RELEASES.map((r) => ({ '@type': 'MusicAlbum', '@id': `${SITE}/music/${r.slug}/#album`, name: r.title, url: `${SITE}/music/${r.slug}/` })),
     genre: ['Power pop', 'Pop rock'],
     logo: `${SITE}/logos/roundel-wordmark.png`,
     image: `${SITE}/img/photos/four-2002-1096.jpg`,
@@ -40,7 +43,9 @@ export function musicGroup() {
   };
 }
 
-export const bandRef = { '@id': BAND_ID };
+/** The band as a typed reference with its name, so a page without the full node still names it
+ *  (audit-seo round 1, S1). */
+export const bandRef = { '@type': 'MusicGroup', '@id': BAND_ID, name: BAND };
 
 export function website() {
   return { '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: BAND, publisher: bandRef, inLanguage: 'en-US' };
@@ -48,10 +53,14 @@ export function website() {
 
 const RELEASE_TYPE: Record<string, string> = { Album: 'AlbumRelease', EP: 'EPRelease', Single: 'SingleRelease' };
 
+/** "Echomusic / Litterbug Records" is two labels: one Organization each (audit-seo round 1, S3). */
+const labels = (label: string) => label.split(/\s+\/\s+/).map((name) => ({ '@type': 'Organization', name: name.replace(/\s*\((?:Sweden)\)$/, '') }));
+
 export function musicAlbum(r: Release) {
+  const albumId = `${SITE}/music/${r.slug}/#album`;
   return {
     '@type': 'MusicAlbum',
-    '@id': `${SITE}/music/${r.slug}/#album`,
+    '@id': albumId,
     name: r.title,
     url: `${SITE}/music/${r.slug}/`,
     byArtist: bandRef,
@@ -60,12 +69,12 @@ export function musicAlbum(r: Release) {
     albumProductionType: r.slug === 'shake-it-up-live' ? 'LiveAlbum' : 'StudioAlbum',
     numTracks: r.tracks.length,
     track: r.tracks.map((t) => ({
-      '@type': 'MusicRecording', name: t.title, position: t.n,
+      '@type': 'MusicRecording', name: t.title, position: t.n, byArtist: bandRef, inAlbum: { '@id': albumId },
       ...(t.duration ? { duration: isoDuration(t.duration) } : {}),
       ...(t.isrc ? { isrcCode: t.isrc } : {}),
       ...(t.writers.length ? { recordingOf: { '@type': 'MusicComposition', name: t.title, composer: t.writers.map((w) => ({ '@type': 'Person', name: plain(w) })) } } : {}),
     })),
-    recordLabel: { '@type': 'Organization', name: r.label },
+    recordLabel: labels(r.label).length === 1 ? labels(r.label)[0] : labels(r.label),
     image: `${SITE}${r.cover}-1200.jpg`,
     ...(r.upc ? { gtin: r.upc } : {}),
     sameAs: r.listen.map((l) => l.href),

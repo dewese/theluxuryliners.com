@@ -28,7 +28,7 @@ source).
   duplicates, all 315 rows are 301; the 410 list and query-string redirects are generated from
   `data/legacy-urls.json`.
 - Privacy and owner-decision sweep of `dist/` (HTML, JSON-LD, `llms.txt`, sitemap): no
-  `david@dewese.com`, no Gmail, no college name, no Mesquite, no member-by-state mapping, no
+  `[the contact address]`, no Gmail, no college name, no [the founding-story town], no member-by-state mapping, no
   talent show, no 2008 bonus disc tied to "Great Day" (LL-13), no MP3 or download links (LL-27),
   LL-6 one-liner and LL-17 sentence verbatim, no logo designer credit (LL-39), no newsletter
   (LL-40). "Photo: Amy Wilstermann" appears as a credit line only (LL-45); see S10 for one nearby

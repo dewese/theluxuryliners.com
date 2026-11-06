@@ -25,13 +25,20 @@ export async function serve() {
   if (!existsSync(join(dist, 'index.html'))) { console.error('dist/ not built: run `npm run build` first'); process.exit(1); }
   const server = createServer(async (req, res) => {
     const url = new URL(req.url, 'http://x');
-    let p = join(dist, decodeURIComponent(url.pathname));
+    let path;
+    try { path = decodeURIComponent(url.pathname); } catch { res.writeHead(400).end(); return; }
+    let p = join(dist, path);
     if (!p.startsWith(dist)) { res.writeHead(403).end(); return; }
     try {
       if ((await stat(p)).isDirectory()) p = join(p, 'index.html');
       const body = await readFile(p);
       res.writeHead(200, { 'content-type': TYPES[extname(p)] ?? 'application/octet-stream' }).end(body);
-    } catch { res.writeHead(404, { 'content-type': 'text/html' }).end(await readFile(join(dist, '404.html'))); }
+    } catch {
+      // dist/ may be mid-rebuild (another build running): answer, never crash the suite
+      // (audit-qa round 1, S6); a missing 404 page shows as a failing check with this message
+      const body = await readFile(join(dist, '404.html')).catch(() => 'dist/404.html is missing: is dist/ being rebuilt? Run the suite again after `npm run build`.');
+      res.writeHead(404, { 'content-type': 'text/html' }).end(body);
+    }
   });
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   return { base: `http://127.0.0.1:${server.address().port}`, close: () => server.close() };

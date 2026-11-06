@@ -19,7 +19,7 @@ const singles = [bySlug('new-beginning'), bySlug('great-day')];
 const v = homeView();
 const latestLabel = v.latestLabel ?? `Latest release: ${LATEST.title}, ${LATEST.dateLabel}`;
 const heroListen = [
-  ...LATEST.listen.filter((l) => l.key === 'spotify').map((l) => ({ ...l, label: `Listen to ${LATEST.title}` })),
+  ...LATEST.listen.filter((l) => l.key === 'spotify').map((l) => ({ ...l, label: `${LATEST.title} on Spotify` })),
   ...LATEST.listen.filter((l) => l.key === 'apple_music'),
 ];
 const shortListen = (r: typeof singles[number]) => r.listen.filter((l) => ['spotify', 'apple_music', 'youtube_music', 'bandcamp'].includes(l.key));
@@ -30,15 +30,15 @@ const video = VIDEOS['great-day'];
   <section class="hero sky" aria-labelledby="h1t">
     <div class="wrap hero__grid">
       <div class="hero__text">
-        <h1 class="hero__logo"><svg class="logo-full" viewBox="0 0 331.15 259.42" role="img" aria-labelledby="h1t"><title id="h1t">The Luxury Liners</title><use href="/art/sprite.svg#lx-full" /></svg></h1>
+        <h1 class="hero__logo" id="h1t"><span class="visually-hidden">The Luxury Liners</span><svg class="logo-full" viewBox="0 0 331.15 259.42" aria-hidden="true" focusable="false"><use href="/art/sprite.svg#lx-full" /></svg></h1>
         <p class="lede">{ONE_LINER}</p>
         <p class="status">{v.statusLine}</p>
       </div>
       <div class="hero__latest">
         <p class="kicker">{latestLabel}</p>
         <div class="stack">
-          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager alt={`${LATEST.title}: the cover of the latest single.`} sizes="(max-width: 56rem) 84vw, 28rem" /></a>
-          <a href="/music/great-day/" class="stack__back"><Cover slug="great-day" eager alt="Great Day: the cover of the first 2026 single." sizes="(max-width: 56rem) 40vw, 14rem" /></a>
+          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager priority alt={LATEST.coverAlt} sizes="(max-width: 43.7rem) min(84vw, 252px), (max-width: 56rem) 84vw, 28rem" /></a>
+          <a href="/music/great-day/" class="stack__back"><Cover slug="great-day" eager alt={bySlug('great-day').coverAlt} sizes="(max-width: 43.7rem) 120px, (max-width: 56rem) 40vw, 14rem" /></a>
         </div>
         <Listen links={heroListen} title={LATEST.title} variant="hero" />
       </div>
@@ -73,7 +73,7 @@ const video = VIDEOS['great-day'];
   <section class="band red" aria-labelledby="eras">
     <div class="wrap">
       <SecHead id="eras" ink>Through the years</SecHead>
-      <p class="intro">Pale-blue suits in 1998, the white-studio sessions around 2000, all four forever members in 2002 and the trio in 2003.</p>
+      <p class="intro">Powder-blue suits about 1998, the white-studio sessions around 2000, all four forever members in 2002 and the trio in 2003.</p>
       <div class="collage">
         {COLLAGE.map((p, i) => (p as any).cutout
           ? <Cutout id={p.id} class={`col-${i + 1}`} />

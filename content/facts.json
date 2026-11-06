@@ -124,7 +124,7 @@
     {
       "id": "labels",
       "question": "Which labels released their records?",
-      "answer": "Litterbug Records released *Overbored*, *Nonetheless* and the 2026 singles, and released *Sound As Ever* with Echomusic. Echomusic released the *Believe* EP. Texas Music Café released the 2021 live single.",
+      "answer": "Litterbug Records released *Overbored*, *Nonetheless* and the 2026 singles, and released *Sound As Ever* with Echomusic. Echomusic released the *Believe* EP. Texas Music Café released the 2021 live single, and Sound Asleep Records in Sweden released *Sound As Ever* on vinyl in 2026.",
       "faq_jsonld": true,
       "source": "data/releases.json label fields",
       "confidence": "verified-source"
@@ -189,7 +189,7 @@
     {
       "id": "foxymorons",
       "question": "How is the band connected to The Foxymorons?",
-      "answer": "David Dewese co-founded both bands; he started The Foxymorons with Jerry James. Songs moved between them: both bands recorded David’s “The Duke Of Gloucester”, and Mike Poole produced both bands’ first albums.",
+      "answer": "David Dewese co-founded both bands; he started The Foxymorons with Jerry James. Songs moved between them: both bands recorded David’s “The Duke Of Gloucester”, and Mike Poole recorded both bands’ first albums.",
       "faq_jsonld": true,
       "source": "daviddewese.com DECISIONS F5; DECISIONS-2026-10-07.md LL-14; research/01 §8",
       "confidence": "confirmed-owner"

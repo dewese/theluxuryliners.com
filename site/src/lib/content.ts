@@ -60,12 +60,12 @@ export const live = <T extends Record<string, any>>(xs: T[] | undefined | null):
 export const inl = (s: string | null | undefined) => (s ? mdInline(s) : '');
 
 /** The Story chapters from content/story/NN-*.md, in chapter order. */
-export function storyChapters(): { n: number; slug: string; title: string; years: string; summary?: string; html: string }[] {
+export function storyChapters(): { n: number; slug: string; title: string; years: string; summary?: string; description?: string; html: string }[] {
   const dir = join(CONTENT_DIR, 'story');
   if (!existsSync(dir)) return [];
   return readdirSync(dir).filter((f) => /^\d{2}-.*\.md$/.test(f)).sort().map((f) => {
     const c = md(join('story', f))!;
-    return { n: Number(c.data.chapter ?? f.slice(0, 2)), slug: String(c.data.slug ?? f.replace(/^\d{2}-|\.md$/g, '')), title: String(c.data.title ?? ''), years: String(c.data.years ?? ''), summary: c.data.summary, html: c.html };
+    return { n: Number(c.data.chapter ?? f.slice(0, 2)), slug: String(c.data.slug ?? f.replace(/^\d{2}-|\.md$/g, '')), title: String(c.data.title ?? ''), years: String(c.data.years ?? ''), summary: c.data.summary, description: c.data.description, html: c.html };
   }).filter((c) => c.title && c.html);
 }
 

@@ -27,7 +27,7 @@
       var swap = function () {
         var f = document.createElement("iframe");
         f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(a.getAttribute("data-yt")) + "?autoplay=1&rel=0";
-        f.title = a.getAttribute("data-title") || "YouTube video";
+        f.title = "\u201c" + (a.getAttribute("data-title") || "Video") + "\u201d on YouTube (video player)";
         f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
         f.referrerPolicy = "strict-origin-when-cross-origin";
         f.setAttribute("allowfullscreen", "");

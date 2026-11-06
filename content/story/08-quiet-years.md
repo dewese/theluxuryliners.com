@@ -5,6 +5,7 @@ title: The quiet years
 years: "2008–2020"
 era: sky
 summary: Fewer shows, no new records, and a band that never called it a day.
+description: "The quiet years (2008–2020): fewer shows and no new records for The Luxury Liners, but a band that never called it a day."
 sources:
   - claim: David's solo debut Make The Best Of It, 2008
     source: daviddewese.com DECISIONS P25 (date 2008-10-01); research/01 §4.7

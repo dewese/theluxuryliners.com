@@ -3,12 +3,12 @@
 import data from '../../data/photos.json';
 import sizes from '../../data/image-sizes.json';
 
-export type Photo = (typeof data.photos)[number] & { width: number; height: number; widths: number[] };
+export type Photo = (typeof data.photos)[number] & { width: number; height: number; widths: number[]; webp?: boolean };
 
 export const PHOTOS: Photo[] = data.photos
   .filter((p) => p.status === 'publish')
   .map((p) => {
-    const s = (sizes as Record<string, { width: number; height: number; widths: number[] }>)[`photos/${p.id}`];
+    const s = (sizes as Record<string, { width: number; height: number; widths: number[]; webp?: boolean }>)[`photos/${p.id}`];
     if (!s) throw new Error(`photo ${p.id}: no web copy; run npm run prepare:images`);
     return { ...p, ...s };
   });
@@ -43,4 +43,4 @@ export const ERAS = [
   { id: '2008-', label: '2008 on' },
 ];
 
-export const coverSizes = (slug: string) => (sizes as Record<string, { width: number; height: number; widths: number[] }>)[`covers/${slug}`];
+export const coverSizes = (slug: string) => (sizes as Record<string, { width: number; height: number; widths: number[]; webp?: boolean }>)[`covers/${slug}`];

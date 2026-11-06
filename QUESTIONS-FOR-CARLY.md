@@ -184,10 +184,10 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 - *Proposed default:* **use the released 3000-pixel cover** with the standard rights line, until you send the master.
 - **ANSWERED 2026-11-06 (LL-30: use the 3000-pixel copy).**
 
-**A12. Contact form address.** Should the form send to the band's Gmail (the address behind the current Carrd button) or to david@dewese.com?
+**A12. Contact form address.** Should the form send to the band's Gmail (the address behind the current Carrd button) or to [the contact address]?
 - *Why it matters:* someone has to read it.
 - *Proposed default:* **the band's Gmail**, never printed in the page.
-- **ANSWERED 2026-11-06 (LL-31: david@dewese.com).**
+- **ANSWERED 2026-11-06 (LL-31: [the contact address]).**
 
 **A2. Design direction** ANSWERED 2026-11-06 (LL-44: C "Roundel"). (at the Phase 1 review). The plan proposes three directions: **A "Stitched"** (a cousin of daviddewese.com's Duotone, with the oxblood and blush pair, era colour pairs, engraved portraits and a chain-stitch motif), **B "Tonight, No Cover"** (gig-poster typography on paper) and **C "Roundel"** (bright *Believe*-era red and white with the 2026 sky blue). You will see three sample pages in each.
 - *Why it matters:* it sets the look for years.

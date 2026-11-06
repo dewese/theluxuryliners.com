@@ -55,10 +55,10 @@ I found no contradiction with any owner decision.
 | 12 | "Shake It Up (Live)" UPC 662582233728, ISRC US2762100919; "Great Day" ISRC USQ7J2600001; *Sound As Ever* LP ZZZ056, 2026-05-27, 100 copies, Anders Peterson | dd research/01 lines 73, 330, 384, 398 | PASS |
 | 13 | "Dreaming" on *One Tree Hill* S1 E15, "Suddenly Everything Has Changed"; air date "unverified, probably early 2004" | dd research/04 line 248; WebSearch: the episode aired **2004-02-24**, and both the One Tree Hill fandom wiki and Tunefind list "Dreaming" by The Luxury Liners | PASS. The date can now be filled in at single-source or better (N2) |
 | 14 | echomusic: formed 1999 by Mark Montgomery and Neil Einstman; sold to Ticketmaster/IAC in 2007 | WebSearch: Wikipedia "Mark Montgomery (entrepreneur)" snippet (March 2007, $25M); MusicRow "Montgomery To Exit Echo" | PASS |
-| 15 | Texas Music Café, Waco, founded 1997; TV/radio series | WebSearch: destinationwaco.org and Baylor Lariat (founded 1997 by the Ermoian brothers; PBS and AFRTS) | PASS |
+| 15 | Texas Music Café, Waco, founded 1997; TV/radio series | WebSearch: destinationwaco.org and [a college] Lariat (founded 1997 by the Ermoian brothers; PBS and AFRTS) | PASS |
 | 16 | Mike Poole: a Nashville engineer and producer (newhaven.edu profile) | WebSearch: the profile says he is a Nashville-based engineer (MTSU; credits include The Byrds and Patty Griffin) | PASS. Same person, no name collision |
 | 17 | Monsters of Pop, June 11–13, 1998, "the Byrds-influenced Luxury Liners" | WebSearch could not show the Luxury Liners on the bill; it only confirmed that the festival and Lee Swartz existed | UNVERIFIABLE (the file already labels it single-source, D13) |
-| 18 | *Billboard* "Hot Prospects" 1998 | WebSearch found nothing; the Baptist Standard search did not bring up the profile | UNVERIFIABLE (the file already labels it unverified, D5) |
+| 18 | *Billboard* "Hot Prospects" 1998 | WebSearch found nothing; the [a later-life profile] search did not bring up the profile | UNVERIFIABLE (the file already labels it unverified, D5) |
 | 19 | Summary: "it became a sharp-dressed guitar power-pop band (`DEC` F4, P21; confirmed-owner)" | DECISIONS F4 and P21 | **CONTRADICTED as sourced.** Neither decision says "sharp-dressed" or "power pop"; that comes from AllMusic and *Nashville Rage* (N1) |
 
 ## Blocking issues

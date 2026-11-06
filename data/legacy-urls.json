@@ -20,12 +20,12 @@
   "daviddewese_handover_target": "Target in the daviddewese.com handover pack (architecture/redirects/ll-legacy-urls.json), which assumed the archive would fold into daviddewese.com. Superseded for this rebuild because the band keeps its own site (L1); kept for traceability."
  },
  "counts": {
-  "rows": 675,
+  "rows": 670,
   "by_action": {
    "keep": 2,
    "301-if-query-capable": 32,
-   "none": 243,
-   "301": 300,
+   "none": 239,
+   "301": 299,
    "rehost-same-path": 17,
    "serve": 3,
    "rehost-or-none": 78
@@ -47,7 +47,6 @@
    "contact": 4,
    "press-file": 2,
    "newsletter-image": 34,
-   "private-family-page": 1,
    "shows": 2,
    "site-file": 3,
    "foxymorons": 1,
@@ -55,7 +54,6 @@
    "photos": 5,
    "sensitive-image": 1,
    "photo-file": 78,
-   "private-image": 4,
    "home-variant": 3,
    "misc": 3,
    "lyrics": 1,
@@ -65,7 +63,8 @@
    "press": 1,
    "realaudio": 4,
    "broken-link": 1
-  }
+  },
+  "private_rows_not_in_repo": "Rows whose path names a private literal (content/private-literals.mjs) live in the git-ignored data/private/legacy-urls.private.json; scripts/build-redirects.mjs merges them when present."
  },
  "urls": [
   {
@@ -3736,25 +3735,6 @@
    "note": "Image from an HTML e-mail newsletter; the file name dates the mailing. 404 (or revisit) when captured in 2021."
   },
   {
-   "url": "http://www.theluxuryliners.com:80/ethan.html",
-   "path": "/ethan.html",
-   "first_capture": "2002-08-08",
-   "first_capture_ts": "20020808070406",
-   "last_known_capture": null,
-   "last_known_capture_ts": null,
-   "wayback_url": null,
-   "cdx_status": "200",
-   "cdx_mimetype": "text/html",
-   "live_status_2026_10_07": 404,
-   "capture_era": "E3 khaki photo-collage frame (Apr 2002-Sep 2004)",
-   "content_period": "2002",
-   "category": "private-family-page",
-   "action": "301",
-   "suggested_target": "/",
-   "daviddewese_handover_target": "https://daviddewese.com/bands/the-luxury-liners/",
-   "note": "Private family page. PRIVATE: do not republish or describe; redirect to home only."
-  },
-  {
    "url": "http://www.theluxuryliners.com:80/events.htm",
    "path": "/events.htm",
    "first_capture": "2000-06-05",
@@ -4836,63 +4816,6 @@
    "suggested_target": null,
    "daviddewese_handover_target": null,
    "note": "Old image/script/style file. No rule (404). See 03 §7 for images worth asking David for."
-  },
-  {
-   "url": "http://theluxuryliners.com:80/images/ethan.jpg",
-   "path": "/images/ethan.jpg",
-   "first_capture": "2002-08-23",
-   "first_capture_ts": "20020823115705",
-   "last_known_capture": null,
-   "last_known_capture_ts": null,
-   "wayback_url": null,
-   "cdx_status": "200",
-   "cdx_mimetype": "image/jpeg",
-   "live_status_2026_10_07": 404,
-   "capture_era": "E3 khaki photo-collage frame (Apr 2002-Sep 2004)",
-   "content_period": "see capture_era",
-   "category": "private-image",
-   "action": "none",
-   "suggested_target": null,
-   "daviddewese_handover_target": null,
-   "note": "Personal/family image. PRIVATE: never re-host or describe."
-  },
-  {
-   "url": "http://www.theluxuryliners.com:80/images/ethan_is_2.JPG",
-   "path": "/images/ethan_is_2.JPG",
-   "first_capture": "2004-03-14",
-   "first_capture_ts": "20040314052040",
-   "last_known_capture": null,
-   "last_known_capture_ts": null,
-   "wayback_url": null,
-   "cdx_status": "200",
-   "cdx_mimetype": "image/jpeg",
-   "live_status_2026_10_07": 404,
-   "capture_era": "E3 khaki photo-collage frame (Apr 2002-Sep 2004)",
-   "content_period": "see capture_era",
-   "category": "private-image",
-   "action": "none",
-   "suggested_target": null,
-   "daviddewese_handover_target": null,
-   "note": "Personal/family image. PRIVATE: never re-host or describe."
-  },
-  {
-   "url": "http://www.theluxuryliners.com:80/images/ethan_yogurt.jpg",
-   "path": "/images/ethan_yogurt.jpg",
-   "first_capture": "2005-11-05",
-   "first_capture_ts": "20051105023413",
-   "last_known_capture": null,
-   "last_known_capture_ts": null,
-   "wayback_url": null,
-   "cdx_status": "200",
-   "cdx_mimetype": "image/jpeg",
-   "live_status_2026_10_07": 404,
-   "capture_era": "E4 red rotating-photo splash (Sep 2004-Nov 2005)",
-   "content_period": "see capture_era",
-   "category": "private-image",
-   "action": "none",
-   "suggested_target": null,
-   "daviddewese_handover_target": null,
-   "note": "Personal/family image. PRIVATE: never re-host or describe."
   },
   {
    "url": "http://theluxuryliners.com:80/images/flyer7-20-01.jpg",
@@ -6831,25 +6754,6 @@
    "suggested_target": "/vault/journal/",
    "daviddewese_handover_target": "https://daviddewese.com/vault/#journal",
    "note": "Journal front page / archive index."
-  },
-  {
-   "url": "http://www.theluxuryliners.com:80/liliana.jpg",
-   "path": "/liliana.jpg",
-   "first_capture": "2005-11-05",
-   "first_capture_ts": "20051105022852",
-   "last_known_capture": null,
-   "last_known_capture_ts": null,
-   "wayback_url": null,
-   "cdx_status": "200",
-   "cdx_mimetype": "image/jpeg",
-   "live_status_2026_10_07": 404,
-   "capture_era": "E4 red rotating-photo splash (Sep 2004-Nov 2005)",
-   "content_period": "see capture_era",
-   "category": "private-image",
-   "action": "none",
-   "suggested_target": null,
-   "daviddewese_handover_target": null,
-   "note": "Personal/family image. PRIVATE: never re-host or describe."
   },
   {
    "url": "http://theluxuryliners.com:80/links.html",

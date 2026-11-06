@@ -16,7 +16,8 @@ const v = factsView();
   <div class="band surface">
     <div class="wrap">
       <dl class="facts">
-        {v.rows.map((f) => <><dt>{smart(f.q)}</dt><dd set:html={f.aHtml} /></>)}
+        {/* stable ids from content/facts.json, so one answer can be linked to and cited (audit-seo S8) */}
+        {v.rows.map((f) => <><dt id={f.id}>{smart(f.q)}</dt><dd set:html={f.aHtml} /></>)}
       </dl>
     </div>
   </div>

@@ -12,8 +12,10 @@
 //  - LL-27: any .mp3 file or link; LL-40: a newsletter; LL-39: a logo designer credit
 //  - LL-6: the home page carries the one-liner byte for byte (entities decoded, quotes not folded); LL-17: "reconnected" only in the
 //    approved sentence; "dads with careers" never
-//  - privacy (plan §2.3, LL-7): the family page, phone numbers, "lives in", the Baptist Standard
-//    profile, the town named in the founding story; old dead hosts as links
+//  - privacy (plan §2.3, LL-7): phone numbers, "lives in", old dead hosts as links; and every
+//    private literal (the family page and images, the later-life profile, the founding-story town,
+//    a college name, the contact address) by the hashed matcher of content/private-literals.mjs,
+//    so this public file never names what it protects
 //  - the 2002 photo is never "the 2002 line-up"
 //  - † "reunion", "broke up" (but "never broke up"), "one-time", "Nashville-based", "former
 //    member", single-founder wording ("formed by Chad", "David joined", "Chad's band")
@@ -29,6 +31,7 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { privateHits } from '../../content/private-literals.mjs';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = process.argv[2] ?? join(site, 'dist');
@@ -67,11 +70,8 @@ const RULES = [
   ['logo designer credit (LL-39)', /logos?\b[^.]{0,60}\b(?:designed|drawn|created) by\b|logo design(?:er)?:/i, 'text'],
   ['"reconnected" outside the approved sentence (LL-17)', /reconnected/i, 'll17'],
   ['"dads with careers" (LL-17, LL-7)', /dads with careers/i, 'raw'],
-  ['private family page (privacy)', /\bethan(?:\.html|\.jpg|_)|href="[^"]*ethan/i, 'html'],
   ['phone number (privacy)', /\(\d{3}\)\s?\d{3}-\d{4}|\b\d{3}[-.]\d{3}[-.]\d{4}\b/, 'text'],
   ['where a member lives (LL-7, LL-19)', /\b(?:lives|living|resides|resident) (?:in|near|outside)\b|\bnow (?:lives|based) in\b/i, 'own'],
-  ['the profile of Chad\'s later life (privacy)', /baptist ?standard/i, 'raw'],
-  ['the town of the founding story (LL-5)', /\bMesquite\b/i, 'raw'],
   ['link to a dead or retired host', /href="https?:\/\/(?:www\.)?(?:isawtheocean\.com|[a-z0-9-]*\.?bigcartel\.com|noisetrade\.com|myspace\.com|soundcloud\.com)/i, 'html'],
   ['"the 2002 line-up" (P23)', /2002 line-?up|line-?up (?:of|in) 2002/i, 'text'],
   ['† "reunion"', /\breunion|\breunited\b/i, 'own'],
@@ -133,6 +133,9 @@ for (const f of textFiles) {
   const isHtml = f.endsWith('.html');
   scan(RULES, hits, f, rel, raw, isHtml);
   scan(WARN, warns, f, rel, raw, isHtml);
+  // private literals (hashed). dist/_redirects is Cloudflare configuration, never served: it may
+  // carry the old family page's redirect to / from the git-ignored data/private/ rows.
+  if (!/_redirects$/.test(f)) { const p = privateHits(decode(raw)); if (p.length) hits.push(`${rel}: private literal (privacy, LL-7): ${p.join('; ')}`); }
   if (isHtml) {
     const n = (raw.match(/\bPLACEHOLDER\b/g) ?? []).length;
     placeholders += n;

@@ -337,7 +337,7 @@ Repository: a **separate repository** for this site (proposed name `theluxurylin
 | `rehost-same-path` | 17 | 200: the file served at its old URL (11 site MP3s, 4 *Trunk Box* MP3s, the one-sheet PDF and the 300 dpi photo), **subject to rights** (§10 R9); otherwise 301 to its Vault or press page |
 | `rehost-or-none` | 78 | 200 if the image is re-hosted at its old path; otherwise **410** |
 | `keep` / `serve` | 2 / 3 | 200 (`/`, `/index.html`, robots, sitemap, favicon) |
-| `none` | 243 | **410 Gone** for old images, CSS, scripts, Flash, newsletter images and private files; **untouched** for Cloudflare's `/cdn-cgi/*` and generic bot probes (404 is right for those). The private family page (`/ethan.html`) 301s to `/` only (`LL03` §10.3) |
+| `none` | 243 | **410 Gone** for old images, CSS, scripts, Flash, newsletter images and private files; **untouched** for Cloudflare's `/cdn-cgi/*` and generic bot probes (404 is right for those). The private family page (`/[the private family page]`) 301s to `/` only (`LL03` §10.3) |
 
 - The redirect generator (`research/tools/gen_legacy_urls.py`, ported to the dd `build-redirects` pattern) regenerates `_redirects` from the JSON after the IA is final, and again after the browser pass adds last-capture dates (`LL03` §10.3).
 

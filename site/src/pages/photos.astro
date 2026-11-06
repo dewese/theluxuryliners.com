@@ -12,11 +12,11 @@ const groups = ERAS.map((e) => ({ ...e, photos: sortPhotos(PHOTOS.filter((p) => 
     <p class="lede">Band-era photos with their captions and credits. Need one for an article? See the <a href="/epk/">press kit</a>.</p>
   </PageHead>
   <div class="wrap page-body">
-    {groups.map((g) => (
+    {groups.map((g, gi) => (
       <section class="era" aria-labelledby={`era-${g.id}`}>
         <SecHead id={`era-${g.id}`}>{g.label}</SecHead>
         <div class="gallery">
-          {g.photos.map((p) => <Photo id={p.id} anchor sizes="(max-width: 40rem) 100vw, 24rem" />)}
+          {g.photos.map((p, i) => <Photo id={p.id} anchor eager={gi === 0 && i < 3} sizes="(max-width: 40rem) calc(100vw - 2rem), (max-width: 64rem) 45vw, 25rem" />)}
         </div>
       </section>
     ))}

@@ -11,6 +11,7 @@ import Dot from '../components/Dot.astro';
 import { peopleView } from '../lib/views.ts';
 import { photographers } from '../lib/photos.ts';
 import { COLOPHON } from '../lib/site.ts';
+import { smart } from '../lib/typo.ts';
 const v = peopleView();
 const shooters = photographers();
 ---
@@ -28,7 +29,7 @@ const shooters = photographers();
           {v.forever.map((p) => (
             <>
               <dt>{p.url ? <a href={p.url} set:html={p.nameHtml} /> : <span set:html={p.nameHtml} />}</dt>
-              <dd>{p.roles}{p.years && <> ({p.years})</>}.{p.lineHtml && <> <span set:html={p.lineHtml} /></>}</dd>
+              <dd>{p.roles}{p.years && <> ({p.years.replace(/–$/, ' to today')})</>}.{p.lineHtml && <> <span set:html={p.lineHtml} /></>}</dd>
             </>
           ))}
         </dl>
@@ -63,7 +64,7 @@ const shooters = photographers();
             <li><strong>{s.name}</strong> ({s.years}): {s.photos.map((p, i) => <>{i > 0 && '; '}<a href={`/photos/#${p.id}`}>{p.caption}</a></>)}</li>
           ))}
         </ul>
-        <p class="meta">Photos without a credit line were taken by the band, by family or with a self-timer.</p>
+        {v.uncreditedNote && <p class="meta">{smart(v.uncreditedNote)}</p>}
       </div>
     </div>
   </section>

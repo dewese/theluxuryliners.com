@@ -77,7 +77,7 @@ None.
    - Where: §2.2 row 26 names Chad's college and calls it "a shared, publishable fact". That label is the worker's own judgment. The owner did not confirm it: P21 approves only the wording "college friend Chad Edgington".
    - Evidence: the daviddewese.com site source never names the university.
    - Fix: drop the university name from Chad's row, or mark it "internal; site says 'college friends' only (P21)".
-2. **N2. The Baptist Standard URL is still in a repo file.**
+2. **N2. The [a later-life profile] URL is still in a repo file.**
    - The internal note in §9 keeps the full URL. Its slug states Chad's current calling and state. This follows round 1's instruction, but the note says "not for any public file" while it sits inside the website repo.
    - If this repo is ever pushed to a public remote, the slug goes with it.
    - Fix: move the URL to a non-committed or `.gitignore`d internal notes file, or say "URL held by Carly's team".

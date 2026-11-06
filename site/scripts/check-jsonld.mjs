@@ -21,6 +21,7 @@ const SAME_AS = new Set([
   'https://www.youtube.com/channel/UCi2Kheqfw714F4v8bwBbViA', 'https://www.instagram.com/theluxuryliners/', 'https://www.facebook.com/theluxuryliners/',
   'https://musicbrainz.org/artist/7af7fd54-1d1b-4353-ab60-4b61bceed337', 'https://www.discogs.com/artist/4298743-The-Luxury-Liners',
   'https://www.deezer.com/artist/1518436', 'https://tidal.com/browse/artist/5748092',
+  'https://daviddewese.com/bands/the-luxury-liners/', // the same band on David's site (audit-seo round 1, S4)
   // later, once they exist or are checked (plan §8.3): Wikidata, AllMusic, Last.fm
 ]);
 const ONE_LINER = "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.";

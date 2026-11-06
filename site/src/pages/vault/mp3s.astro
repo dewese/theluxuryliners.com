@@ -2,7 +2,8 @@
 // The old free MP3s, by title only (LL-27). Each song links to where it streams today, when it
 // does: its record, or the compilation it is on (/music/appearances/). The page never says a song
 // was not released. It says "the song", never "the recording": an old MP3 (a demo or a live take)
-// is not the recording it points to.
+// is not the recording it points to. `alsoLive` adds a live release of the song, without saying it
+// is the same take as the old MP3 (audit-copy round 1).
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 import vault from '../../../data/vault.json';
@@ -17,7 +18,7 @@ const songs = vault.oldMp3s.songs.map((s: any) => ({ ...s, title: smart(s.title)
   <div class="wrap page-body">
     <ul class="rows">
       {songs.map((s) => (
-        <li>“{s.title}”{s.release ? <>: the song is on <a href={`/music/${s.release}/`}>{bySlug(s.release).title}</a></> : s.app ? <>: the song is on <a href={`/music/appearances/#${s.app.id}`}>{s.app.title}</a>, a compilation</> : null}</li>
+        <li>“{s.title}”{s.release ? <>: the song is on <a href={`/music/${s.release}/`}>{bySlug(s.release).title}</a></> : s.app ? <>: the song is on <a href={`/music/appearances/#${s.app.id}`}>{s.app.title}</a>, a compilation</> : null}{s.alsoLive && <>, and a live recording of it is on <a href={`/music/${s.alsoLive}/`}>{bySlug(s.alsoLive).title}</a></>}</li>
       ))}
     </ul>
     <p><a href="/vault/">Back to the Vault</a></p>
