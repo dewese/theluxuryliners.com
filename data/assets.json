@@ -4893,13 +4893,13 @@
    },
    "quality": "archive-thumbnail only (too small for layout use)",
    "credit_line": "Photo: Amy Wilstermann",
-   "credit_note": "Credit from the Flickr album/title/description (Amy Wilstermann); not in the P17 review: confirm with Carly.",
-   "credit_confidence": "single-source",
+   "credit_note": "Credit confirmed by Carly 2026-11-06 (LL-45).",
+   "credit_confidence": "confirmed-owner (LL-45)",
    "people": "David Dewese, Scott Carpenter and David \"Larry\" Wilstermann (confirm)",
    "alt_text_draft": "Promo image: three band members, one in a shearling coat, beside the condensed 'The Luxury Liners' wordmark.",
    "recommended_use": "logo reference",
    "flags": [],
-   "credit_status": "named-credit-awaiting-confirmation"
+   "credit_status": "named-credit-confirmed"
   },
   {
    "id": "flickr-533776657",
@@ -5165,13 +5165,13 @@
    },
    "quality": "web-large (full-width at 1x; not retina hero); small print ~5.6 in",
    "credit_line": "Photo: Amy Wilstermann",
-   "credit_note": "Credit from the Flickr album/title/description (Amy Wilstermann); not in the P17 review: confirm with Carly.",
-   "credit_confidence": "single-source",
+   "credit_note": "Credit confirmed by Carly 2026-11-06 (LL-45).",
+   "credit_confidence": "confirmed-owner (LL-45)",
    "people": "David Dewese, Scott Carpenter and David \"Larry\" Wilstermann (confirm)",
    "alt_text_draft": "Black-and-white portrait of three band members in black T-shirts against white.",
    "recommended_use": "band page / engraving source candidate (1675px)",
    "flags": [],
-   "credit_status": "named-credit-awaiting-confirmation"
+   "credit_status": "named-credit-confirmed"
   },
   {
    "id": "flickr-533675926",
@@ -5403,13 +5403,13 @@
    },
    "quality": "web-small (thumbnails, inline)",
    "credit_line": "Photo: Amy Wilstermann",
-   "credit_note": "Credit from the Flickr album/title/description (Amy Wilstermann (photo)); not in the P17 review: confirm with Carly.",
-   "credit_confidence": "single-source",
+   "credit_note": "Credit confirmed by Carly 2026-11-06 (LL-45).",
+   "credit_confidence": "confirmed-owner (LL-45)",
    "people": null,
    "alt_text_draft": "Black-and-white 8x10 promo print: three band members between stone pillars, 'theluxuryliners' wordmark below.",
    "recommended_use": "press kit history; logo reference",
    "flags": [],
-   "credit_status": "named-credit-awaiting-confirmation"
+   "credit_status": "named-credit-confirmed"
   },
   {
    "id": "flickr-533776611",
