@@ -13,17 +13,17 @@ singles:
     blurb: Two tracks, “New Beginning” and “Great Day”.
   - release_id: luxury-liners-2026-great-day
     title: Great Day
-    blurb: The first of the two.
+    blurb: Written by Chad and David, with a cover by David.
 members_heading: The four forever members
 members:
   - name: David Dewese
-    role: guitar, bass, vocals
+    role: guitar, bass, lead vocals
   - name: Chad Edgington
     role: guitar, bass, vocals
   - name: Scott Carpenter
-    role: drums, vocals
+    role: drums, percussion, vocals
   - name: David “Larry” Wilstermann
-    role: bass
+    role: bass, keyboards, vocals
 members_note: He’s Larry because the band already had a David.
 doors:
   - label: Read the story
@@ -48,6 +48,9 @@ sources:
     confidence: confirmed-owner
   - claim: four forever members and roles; Larry nickname
     source: daviddewese.com DECISIONS P8; DECISIONS-2026-10-07.md LL-9; 2005 roster (research/01 §3.2)
+    confidence: confirmed-owner
+  - claim: Great Day blurb (writers; cover by David)
+    source: DECISIONS-2026-10-07.md LL-14, LL-23
     confidence: confirmed-owner
   - claim: disambiguation sentence (no year for Emmylou Harris's album)
     source: plan/00-master-plan.md §8.4, §4.3; research/04 §5

@@ -43,8 +43,10 @@ held:
     why: LL-25 - the journal is privacy-passed and approved month by month before anything longer is quoted.
 ---
 
-From June 2001 to March 2004 the band kept a journal on its website, and it logs about 40 shows and trips.
+From June 2001 to March 2004 the band kept a journal on its website. It logs about 40 shows and trips: for a band that had just gone down to three, it was a busy stretch.
 
-The Luxury Liners made their Memphis debut at The Map Room. In May 2002 they played a music-conference showcase at the House of Blues at Mandalay Bay in Las Vegas (“all of nevada was rocked last friday night”), and that August they opened for Blues Traveler in Atlanta. There was an acoustic tour of Indiana, there were trips to Detroit and its suburbs, Louisville and Columbia, South Carolina, and in October 2003 a radio appearance near Detroit and a gig in Canada. In 2003 they turned down International Pop Overthrow in Chicago to keep a date in Columbia.
+The Luxury Liners made their Memphis debut at The Map Room. In May 2002 they played a music-conference showcase at the House of Blues at Mandalay Bay in Las Vegas, and the journal reported back that “all of nevada was rocked last friday night”. That August they opened for Blues Traveler in Atlanta.
 
-At home they played 12th & Porter, The Basement, The End, Exit/In, The Sutler, Slow Bar and Rocketown. “Sunshine” and “Dreaming” were first played at a Borders acoustic show in September 2001. Two sets at 12th & Porter in 2002, one electric in July and one acoustic in November, became *Live Liners*. And in October 2003 the band surprised an East Nashville crowd with Gram Parsons’s “Luxury Liner”.
+The road kept going after that: an acoustic tour of Indiana, trips to Detroit and its suburbs, to Louisville and to Columbia, South Carolina. In 2003 they turned down International Pop Overthrow in Chicago to keep their date in Columbia, and that October brought a radio appearance near Detroit and a gig in Canada.
+
+Nashville was still home, and they played its clubs: 12th & Porter, The Basement, The End, Exit/In, The Sutler, Slow Bar and Rocketown. “Sunshine” and “Dreaming” had their first outing at a Borders acoustic show in September 2001. Two sets at 12th & Porter in 2002, one electric in July and one acoustic in November, became *Live Liners*. And in October 2003 they surprised an East Nashville crowd with the song that gave the band its name, Gram Parsons’s “Luxury Liner”.

@@ -73,7 +73,7 @@
     {
       "id": "line-ups",
       "question": "Who else has played in the band?",
-      "answer": "Jeff LaFrate (drums, 1997–98), Mark W. Winchester (bass, 1997–98), Kyle Edgington (drums, summer 1998) and Scott Jeffries (tambourine, one show, 1997) in the early days; later Gary Ishee (2004–06), Doli Stepniewski (2006), and Grant Johnson and Jeremy Stephens (2007).",
+      "answer": "Jeff LaFrate (drums, 1997–98), Mark W. Winchester (bass, 1997–98), Kyle Edgington (drums, summer 1998) and Scott Jeffries (tambourine, one show, 1997) in the early days; later Gary Ishee (several shows in 2004–05, and guitar on *Nonetheless*), Doli Stepniewski (2006), and Grant Johnson and Jeremy Stephens (2007).",
       "faq_jsonld": true,
       "source": "DECISIONS-2026-10-07.md LL-24",
       "confidence": "confirmed-owner"
@@ -81,7 +81,7 @@
     {
       "id": "chad-2001",
       "question": "When did Chad leave Nashville?",
-      "answer": "In March 2001, after his last show with the band. David carried the band on as a trio with Scott and Larry. Chad is one of the four forever members, and he plays on both 2026 singles.",
+      "answer": "In March 2001, after his last show with the band. David carried the band on as a trio with Scott and Larry. Chad is one of the four forever members, he is in the band again today, and he plays on both 2026 singles.",
       "faq_jsonld": true,
       "source": "DECISIONS-2026-10-07.md LL-15, LL-9; daviddewese.com DECISIONS F4",
       "confidence": "confirmed-owner",
@@ -140,7 +140,7 @@
     {
       "id": "producers",
       "question": "Who produced the records?",
-      "answer": "Mike Poole and Mark Montgomery produced *Sound As Ever*. Mark Montgomery produced the *Believe* EP with the band. Doug Nightwine recorded *Overbored* and Chris Henning mixed it, and Chris Henning mixed and mastered *Nonetheless*.",
+      "answer": "Mike Poole produced most of *Sound As Ever*, and Mark Montgomery produced two of its tracks. Mark Montgomery produced the *Believe* EP with the band. Doug Nightwine recorded *Overbored* and Chris Henning mixed it, and Chris Henning mixed and mastered *Nonetheless*.",
       "faq_jsonld": true,
       "source": "data/releases.json production fields",
       "confidence": "verified-source"
@@ -197,10 +197,11 @@
     {
       "id": "cover-art",
       "question": "Who made the cover art?",
-      "answer": "Mark Montgomery designed *Sound As Ever* and made the *Believe* EP cover; Jim Horan restored the *Sound As Ever* art for the 2026 vinyl. David made the covers of *Overbored*, “Shake It Up (Live)” (from a Mark Montgomery photo), “Great Day” and “New Beginning”. Scott Carpenter painted the pictures on *Nonetheless*, which David designed.",
+      "answer": "Mark Montgomery designed *Sound As Ever* and made the *Believe* EP cover; Jim Horan restored the *Sound As Ever* art for the 2026 vinyl. David made the covers of *Overbored*, “Shake It Up (Live)” (from a Mark Montgomery photo), “Great Day” and “New Beginning”.",
       "faq_jsonld": true,
-      "source": "DECISIONS-2026-10-07.md LL-23; data/releases.json luxury-liners-2006-nonetheless cover_art",
-      "confidence": "confirmed-owner"
+      "source": "DECISIONS-2026-10-07.md LL-23",
+      "confidence": "confirmed-owner",
+      "notes_internal": "The Nonetheless credit (paintings: Scott Carpenter; design: David) is single-source and outside LL-23: held until David confirms."
     },
     {
       "id": "listen",
@@ -242,6 +243,6 @@
   ],
   "dating_note": {
     "heading": "How we date things",
-    "text": "Release dates are the dates the streaming services list; for the older records we give the month. Where we know only a season or a range, we say so. Where accounts differ, we go with the band’s own answer."
+    "text": "Release dates are the dates the streaming services list; for the older records the site gives the month. Where only a season or a range is known, the site says so. Where accounts differ, the band’s own answer stands."
   }
 }

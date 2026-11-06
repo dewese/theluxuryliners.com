@@ -1,7 +1,7 @@
 ---
 page: shows
 title: Shows
-intro: Shows we can date, from the band’s own records and memories. The list grows as more turns up.
+intro: Shows that can be dated, from the band’s own records and memories. The list grows as more turns up.
 journal_note: Shows from 2001 to 2004 come from the band’s journal.
 data: content/shows.json
 sources:
@@ -10,4 +10,4 @@ sources:
     confidence: verified-source
 ---
 
-Shows we can date, from the band’s own records and memories. The list grows as more turns up.
+Shows that can be dated, from the band’s own records and memories. The list grows as more turns up.

@@ -14,6 +14,7 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, dirname, extname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -61,14 +62,44 @@ const R = [];
 const rule = (id, level, scope, re, msg, extra = {}) => R.push({ id, level, scope, re, msg, ...extra });
 
 // Privacy (plan §2 item 3, LL-7, LL-31)
-rule('contact-address', 'error', 'all', /david@dewese\.com/i, 'The contact address must never appear outside the Worker config (LL-31).');
+// Private literals are matched by SHA-256 of a lower-cased token, never written here: naming
+// them in a public privacy rule would show what is being protected. Each entry: hash -> label.
+// Tokens tried: every word or dotted/at-sign token, its parts split on . @ / -, and adjacent
+// word pairs (joined with and without a space). To add one: printf '%s' 'token' | sha256sum
+const PRIVATE_HASHES = new Map([
+  ['bd69e39fea034e7dab1702391ba0af52d8bb4cfddeefef293bf9ae1577a013ea', 'the contact address (LL-31: Worker config only)'],
+  ['81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a', 'the private family page'],
+  ['270e826aaea2ede6497f2383a2e0c2fe418a737a8224fc8888e4821158342f5d', 'the profile of Chad\'s later life (plan §2 item 3)'],
+  ['921329720029ded97c7725d6a6508f110e9488d3bbf614a33babec8f3ea383a6', 'the profile of Chad\'s later life (plan §2 item 3)'],
+  ['0c6193e11c89c15a1715161c094efa47adfc6585cd66021968336d5b4d4fc321', 'a town from the founding story (LL-4, LL-5)'],
+  ['2c96398674dbc4e58b556e6fbf53f85b80be112a3c9113851f431d3a67275208', 'a college name (plan §2 item 3, RD5)'],
+]);
+const sha = (s) => createHash('sha256').update(s).digest('hex');
+export function privateHits(text, hashes = PRIVATE_HASHES) {
+  const toks = text.toLowerCase().match(/[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]/g) || [];
+  const cands = new Set();
+  toks.forEach((t, k) => {
+    cands.add(t);
+    for (const part of t.split(/[.@\/_-]+/)) if (part) cands.add(part);
+    const nx = toks[k + 1];
+    if (nx) { cands.add(`${t} ${nx}`); cands.add(t + nx); }
+  });
+  const out = [];
+  for (const c of cands) { const label = hashes.get(sha(c)); if (label) out.push(label); }
+  return [...new Set(out)];
+}
+let privateHashes = PRIVATE_HASHES; // the self-test swaps in a synthetic list
+
+// Privacy (plan §2 item 3, LL-7, LL-31)
+rule('private-literal', 'error', 'all', null, 'A private name or address (hash match) must never appear in copy, data or the built site.', {
+  test: (t) => privateHits(t, privateHashes).length > 0,
+  detail: (t) => privateHits(t, privateHashes).join('; '),
+});
 rule('email-address', 'error', 'all', /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i, 'No email addresses in copy or data (the band Gmail and the contact address stay private).');
 rule('phone-number', 'error', 'all', /(?:\(\d{3}\)\s?|\b\d{3}[-.\s])\d{3}[-.]\d{4}\b/, 'No phone numbers (old site privacy flags).');
 rule('postal-address', 'error', 'all', /\bP\.?\s?O\.?\s+Box\b|\b\d{2,5}\s+[A-Z][a-z]+\s+(?:Street|St\.|Avenue|Ave\.|Road|Rd\.|Drive|Dr\.|Lane|Ln\.|Boulevard|Blvd\.)/, 'No mailing addresses.');
-rule('family-page', 'error', 'all', /ethan\.html|family page/i, 'The private family page is never linked or named.');
-rule('chad-profile', 'error', 'all', /baptist\s*standard|baptiststandard/i, 'The profile of Chad\'s later life is never cited or linked (plan §2 item 3).');
-rule('founding-town', 'error', 'all', /\bMesquite\b/, 'Towns from the founding story are never named (LL-4, LL-5).');
-rule('college-name', 'error', 'all', /\b(?:[A-Z][\w&.'-]*\s+){1,4}(?:University|College)\b|\bUniversity of\b|\bBaylor\b/, 'No college names (plan §2 item 3). "college friend" is fine.');
+rule('family-page', 'error', 'all', /family page/i, 'The private family page is never linked or named.');
+rule('college-name', 'error', 'all', /\b(?:[A-Z][\w&.'-]*\s+){1,4}(?:University|College)\b|\bUniversity of\b/, 'No college names (plan §2 item 3). "college friend" is fine.');
 rule('life-outside-band', 'error', 'public', /\b(?:wife|wives|husband|married|kids|children|daughters?|sons|grandkids|dads|careers|day jobs?|church|pastor|minister|ministry|seminary)\b|dads with careers/i, 'Nothing about members\' lives outside the band (LL-7, LL-17).');
 rule('where-members-live', 'error', 'public', /\b(?:lives?|living|resides?|based|moved|moving|relocated)\b(?:\s+[\w']+){0,4}\s+(?:in|to)\s+(?:Tennessee|Michigan|Texas|Dallas|California|Southern California|San Diego|Detroit|Grand Rapids)\b/i, 'Never say which member lives where (LL-7, LL-19). "spread across Tennessee, Michigan and Texas" is the approved form.');
 rule('southern-california', 'error', 'public', /Southern California/i, 'Do not say where anyone moved (LL-7).');
@@ -118,6 +149,9 @@ rule('ascii-year-apostrophe', 'error', 'public', null, 'Use U+2019 (’) before 
 rule('unverified-items', 'error', 'public', /hot prospects|monsters of pop|music music caf/i, 'Unverified (Billboard title, Monsters of Pop) or mistaken names never publish.');
 rule('lead-me-on-jetpack', 'error', 'public', /Lead Me On[^.]{0,60}Jetpack|Jetpack[^.]{0,60}Lead Me On/i, 'Which Jetpack is open (plan §4.3): held.');
 rule('emmylou-year', 'warn', 'public', /Emmylou Harris[^.]{0,80}\b19(?:76|77)\b|Luxury Liner"?\s*\(19\d\d\)/, 'The year of Emmylou Harris\'s album is contested; default is no year (plan §4.3).');
+rule('ishee-years', 'error', 'public', /Ishee[^.]{0,60}\b2004\s*[–-]\s*(?:20)?0[6-9]\b/, 'LL-24: Gary Ishee played shows in 2004–05; Nonetheless guitar is a separate role.');
+rule('nonetheless-cover-credit', 'error', 'public', /paint(?:ed|ing|ings)\b[^.]{0,80}Nonetheless|Nonetheless[^.]{0,80}\bpaint(?:ed|ing|ings)\b/i, 'The Nonetheless painting credit is single-source and outside LL-23: held until David confirms.');
+rule('two-waco-sessions', 'error', 'public', /\balso recorded\b[^.]{0,80}E-Cleff|E-Cleff[^.]{0,120}\b(?:separate|another|second|also)\b/i, 'Whether the E-Cleff set (Trunk Box) and the Texas Music Café night are one session or two is not known: never imply two.');
 rule('barlowe-spelling', 'warn', 'public', /Krist[ei]n Barlowe/i, 'Photographer spelling not confirmed (research/01 D12).');
 rule('hatch-show', 'warn', 'public', /Hatch Show/i, 'Unverified that Hatch Show Print made the band\'s poster.');
 
@@ -216,7 +250,7 @@ function applyRules(seg) {
     const hit = r.test ? r.test(r.raw ? seg.raw : t) : r.re.test(t);
     if (hit) {
       const m = r.re ? t.match(r.re) : null;
-      out.push({ level: r.level, rule: r.id, file: seg.file, loc: seg.loc, msg: r.msg, text: (m ? m[0] : t).slice(0, 140) });
+      out.push({ level: r.level, rule: r.id, file: seg.file, loc: seg.loc, msg: r.detail ? `${r.msg} (${r.detail(t)})` : r.msg, text: r.detail ? '' : (m ? m[0] : t).slice(0, 140) });
     }
   }
   return out;
@@ -338,10 +372,11 @@ function selfTest() {
     ['single-founder', 'Chad’s band'],
     ['believe-without-cher', 'a cover of “Believe”'],
     ['shake-it-up-cover', '“Shake It Up” is a cover'],
-    ['contact-address', 'mail david@dewese.com'],
+    ['private-literal', 'mail zz.private@example.test'],
+    ['private-literal', 'see https://example.test/zzfamily.html'],
+    ['private-literal', 'at Zzpriv Zzcollege'],
     ['email-address', 'theband@gmail.com'],
     ['phone-number', 'call 615-555-0100'],
-    ['founding-town', 'in Mesquite'],
     ['where-members-live', 'Scott now lives in Michigan'],
     ['life-outside-band', 'dads with careers'],
     ['downloads', 'Free download'],
@@ -353,10 +388,17 @@ function selfTest() {
     ['chad-april', 'Chad left in April 2001'],
     ['caption-2002', 'David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter, 2002 line'],
     ['nashville-based', 'a Nashville-based band'],
+    ['ishee-years', 'Gary Ishee (2004–06)'],
+    ['nonetheless-cover-credit', 'Scott painted the pictures for the cover of Nonetheless'],
+    ['two-waco-sessions', 'In Waco that autumn they also recorded a live set at E-Cleff Studios'],
     ['four-states', 'scattered across four different states'],
     ['founded-in-nashville', 'founded in Nashville in 1997'],
   ];
+  // Synthetic private tokens prove the hash matcher (unigram, dotted file name, address, word pair)
+  // without writing any real private literal into this public file.
+  privateHashes = new Map([...PRIVATE_HASHES, ...['zz.private@example.test', 'zzfamily.html', 'zzpriv zzcollege'].map((t) => [sha(t), 'synthetic'])]);
   let fail = 0;
+  if (![...PRIVATE_HASHES.keys()].every((h) => /^[0-9a-f]{64}$/.test(h))) { fail++; console.log('FAIL private hash list malformed'); }
   for (const [expect, text] of cases) {
     const got = applyRules({ file: 'self-test', loc: '', raw: text, scope: 'public', quote: false }).filter((i) => i.level === 'error').map((i) => i.rule);
     const ok = expect ? got.includes(expect) : got.length === 0;
@@ -369,14 +411,14 @@ function selfTest() {
   if (!q2.some((i) => i.rule === 'talent-show')) { fail++; console.log('FAIL talent show in quote'); }
   // internal notes: privacy applies, phrase rules do not
   const i1 = applyRules({ file: 'self-test', loc: '', raw: 'LL-13: no talent-show story', scope: 'internal', quote: false });
-  const i2 = applyRules({ file: 'self-test', loc: '', raw: 'see david@dewese.com', scope: 'internal', quote: false });
+  const i2 = applyRules({ file: 'self-test', loc: '', raw: 'see zz.private@example.test', scope: 'internal', quote: false });
   if (i1.length) { fail++; console.log('FAIL internal phrase scope'); }
   if (!i2.length) { fail++; console.log('FAIL internal privacy scope'); }
   // HTML extraction: blockquote exemption and JSON-LD
   const h = htmlSegments('x.html', '<p>Hi</p><blockquote>former member Chad</blockquote><script type="application/ld+json">{"description":"a Nashville-based band"}</script>');
   const hi = h.flatMap(applyRules).map((i) => i.rule);
   if (hi.includes('former-member') || !hi.includes('nashville-based')) { fail++; console.log('FAIL html extraction', hi); }
-  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 5} checks passed`);
+  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 6} checks passed`);
   return fail;
 }
 
@@ -393,7 +435,7 @@ if (distDir) {
 }
 // de-duplicate (raw + extracted passes can report the same hit)
 const seen = new Set();
-issues = issues.filter((i) => { const k = `${i.rule}|${i.file}|${i.text}`; if (seen.has(k)) return false; seen.add(k); return true; });
+issues = issues.filter((i) => { const k = `${i.rule}|${i.file}|${i.text}|${i.msg}`; if (seen.has(k)) return false; seen.add(k); return true; });
 const errors = issues.filter((i) => i.level === 'error');
 if (args.includes('--json')) console.log(JSON.stringify({ errors: errors.length, warnings: issues.length - errors.length, issues }, null, 2));
 else {

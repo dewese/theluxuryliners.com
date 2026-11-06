@@ -1,12 +1,12 @@
 {
   "_about": "Shows page data. Rows are sorted by [sort_key, id]. sort_key is YYYY-MM-DD with 00 for an unknown month or day, so a row known only to the year sorts before the dated rows of that year, and a season or range sorts by its first possible month. Where a post says early, mid or late in a month, a representative day (about 05, 15 or 25) stands in so the row sorts sensibly; date_precision then stays \"month\" and the display text says early/mid/late. date_precision is one of: day, approx-day, month, month-range, season, season-range, year. Public fields: date_display, venue, place, note. Internal: source, confidence, notes_internal, and rows with \"publish\": false. The 2001-04 rows are the band's own journal: the band's account, not a verified gig list.",
   "checked_on": "2026-11-06",
-  "intro": "Shows we can date, from the band’s own records and memories. The list grows as more turns up.",
+  "intro": "Shows that can be dated, from the band’s own records and memories. The list grows as more turns up.",
   "journal_note": "Shows from 2001 to 2004 come from the band’s journal.",
   "shows": [
     {
       "id": "1997-western-beat-roots-revival-zanies",
-      "date_display": "Autumn 1997 or winter 1998",
+      "date_display": "Probably autumn 1997 or winter 1998",
       "sort_key": "1997-10-00",
       "date_precision": "season-range",
       "venue": "Billy Block’s Western Beat Roots Revival, Zanies",
@@ -36,7 +36,9 @@
       "note": "A live set, later posted on the band’s website as *Trunk Box*.",
       "release_id": "ll-archive-1998-trunk-box",
       "source": "data/releases.json ll-archive-1998-trunk-box; research/01 §4.1 (2005 band music page: \"fall 1998\")",
-      "confidence": "verified-source"
+      "confidence": "verified-source",
+      "publish": false,
+      "notes_internal": "Held: research ties Trunk Box to Scott's first official gig in Waco (fall 1998), and the old /mp3/waco/ folder held a \"Shake It Up\", so this may be the same night as the Texas Music Café row. Do not list it as a separate show until David says whether they are one session or two. Story ch. 2 mentions Trunk Box in one neutral sentence."
     },
     {
       "id": "1998-texas-music-cafe-waco",
@@ -55,11 +57,12 @@
       "date_display": "March 2001",
       "sort_key": "2001-03-00",
       "date_precision": "month",
-      "venue": "Venue not recorded",
+      "venue": null,
       "place": null,
-      "note": "Chad’s last show with the band.",
+      "note": "Chad’s last show with the band. The SXSW showcase was the same month; which came first is not recorded.",
       "source": "DECISIONS-2026-10-07.md LL-15 (month); photo title \"Chad's Last Show - March 2001\" (research/01 §4.3)",
-      "confidence": "confirmed-owner"
+      "confidence": "confirmed-owner",
+      "notes_internal": "Same month as 2001-sxsw-sesac-showcase; order within March 2001 unknown. The id tiebreak puts this row first; that is not a claim about order."
     },
     {
       "id": "2001-sxsw-sesac-showcase",

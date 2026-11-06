@@ -9,7 +9,7 @@ sources:
   - claim: Sound As Ever released May 2000 (public date 2000-05-01, Spotify) on Echomusic / Litterbug Records
     source: data/releases.json luxury-liners-2000-sound-as-ever (P6 date; label field)
     confidence: verified-source
-  - claim: Produced by Mike Poole (recorded and mixed in Nashville) and Mark Montgomery; Mark Montgomery designed it
+  - claim: Mike Poole produced tracks 1–7 and 10–15 and recorded and mixed the album in Nashville; Mark Montgomery produced tracks 8–9 and designed it
     source: data/releases.json luxury-liners-2000-sound-as-ever (production; cover_art); 2005 band music page via research/01 §4.2; LL-23 (original design credit Mark Montgomery)
     confidence: verified-source
   - claim: Chad and David wrote almost all the songs; Scott played drums
@@ -33,7 +33,7 @@ notes_internal: >-
   quotes from Chad, Scott or Larry unless they offer one).
 ---
 
-The band’s first album, *Sound As Ever*, came out in May 2000 on Echomusic and Litterbug Records. Mike Poole produced it with Mark Montgomery, recording and mixing in Nashville, and Mark Montgomery designed the sleeve. Chad and David wrote almost all of the songs, and Scott played drums.
+The band’s first album, *Sound As Ever*, came out in May 2000 on Echomusic and Litterbug Records. Mike Poole produced most of it and recorded and mixed it in Nashville; Mark Montgomery produced two tracks and designed the sleeve. Chad and David wrote almost all of the songs, and Scott played drums.
 
 The title is Gram Parsons’s sign-off: he signed his letters “Sound as ever”. The album ends with three hidden tracks, and the last of them is called “The International Submarine Band”, the name of Parsons’s first band.
 

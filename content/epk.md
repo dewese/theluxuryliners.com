@@ -41,6 +41,9 @@ sources:
   - claim: Journal of about 40 shows and trips; Las Vegas, Blues Traveler in Atlanta, Canada
     source: research/01 §4.4, §4.5, §7; dd research/04 §5.2
     confidence: verified-source
+  - claim: Nonetheless (2006), David's songs, the trio with guests Ryan Gilbert, Gary Ishee, Erika Proegler, Brent Milligan (the single-source cover credit is held)
+    source: DECISIONS-2026-10-07.md LL-14, LL-24; data/releases.json luxury-liners-2006-nonetheless personnel
+    confidence: confirmed-owner
   - claim: TV placements (One Tree Hill; FOX Sports US Youth Soccer Show)
     source: research/02 §3.3; research/04 §2.3
     confidence: verified-source
@@ -67,7 +70,7 @@ The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Ch
 
 The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.
 
-Nashville became the band’s home town. Scott Carpenter joined on drums in 1998 and David “Larry” Wilstermann on bass in 2000; with David and Chad, they are the band’s four forever members. The band was featured in *Billboard* in 1998, played the SESAC Showcase at SXSW 2001, and made the albums *Sound As Ever* (2000), *Overbored* (2003) and *Nonetheless* (2006) and the *Believe* EP (2001). “Dreaming” was used in *One Tree Hill*, and “Sunshine” became the theme of FOX Sports’ *US Youth Soccer Show*.
+Nashville became the band’s home town. Scott Carpenter joined on drums in 1998 and David “Larry” Wilstermann on bass in 2000; with David and Chad, they are the band’s four forever members. The band was featured in *Billboard* in 1998, played the SESAC Showcase at SXSW 2001, and made *Sound As Ever* (2000), the *Believe* EP (2001), *Overbored* (2003) and *Nonetheless* (2006). “Dreaming” was used in *One Tree Hill*, and “Sunshine” became the theme of FOX Sports’ *US Youth Soccer Show*.
 
 The band never broke up. The four forever members reconnected during the pandemic and started making music again. “Great Day” and “New Beginning”, written by Chad and David and played by all four, came out in 2026.
 
@@ -79,6 +82,6 @@ David and Chad came up with the name over spring break 1997, recording songs on 
 
 The first album, *Sound As Ever* (2000), is named after Parsons’s sign-off. David “Larry” Wilstermann joined on bass that December. In 2001 came the *Believe* EP and the SESAC Showcase at SXSW. Chad left Nashville in March 2001, and David carried the band on as a trio with Scott and Larry. Their journal logged about 40 shows and trips, from the House of Blues in Las Vegas to opening for Blues Traveler in Atlanta and a gig in Canada.
 
-*Overbored* (2003) gave “Dreaming” to *One Tree Hill* and “Sunshine” to FOX Sports’ *US Youth Soccer Show*. *Nonetheless* (2006) followed, with paintings by Scott on the cover.
+*Overbored* (2003) gave “Dreaming” to *One Tree Hill* and “Sunshine” to FOX Sports’ *US Youth Soccer Show*. *Nonetheless* (2006) followed: David’s songs, played by the trio with Ryan Gilbert, Gary Ishee, Erika Proegler and Brent Milligan as guests.
 
 The band never broke up. The four forever members reconnected during the pandemic and started making music again. Now spread across Tennessee, Michigan and Texas, they released “Great Day” and “New Beginning” in 2026, written by Chad and David and played by all four, and *Sound As Ever* came out on vinyl the same year.

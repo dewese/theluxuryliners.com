@@ -33,7 +33,7 @@ sources:
   - claim: Texas Music Café, Waco, autumn 1998, with Chad on guitar, David on bass, Scott on drums; released as a single in 2021
     source: DECISIONS-2026-10-07.md LL-10, LL-18; data/releases.json luxury-liners-2021-shake-it-up-live
     confidence: confirmed-owner
-  - claim: A live set recorded at E-Cleff Studios, Waco, in autumn 1998, later posted on the band's website as Trunk Box
+  - claim: A live set from Waco, autumn 1998, recorded at E-Cleff Studios, later posted on the band's website as Trunk Box (worded so it neither claims nor denies that this is the Texas Music Café night)
     source: data/releases.json ll-archive-1998-trunk-box; research/01 §4.1
     confidence: verified-source
 held:
@@ -44,7 +44,11 @@ held:
 notes_internal: >-
   LL-20 does not say who drummed at the 12th & Porter show; the copy does not
   say either. The relationship (if any) between the Texas Music Café recording
-  and the E-Cleff set is unknown; the copy keeps them as separate sentences.
+  and the E-Cleff set is unknown (research ties Trunk Box to Scott's first official
+  gig in Waco, and the old /mp3/waco/ folder held a "Shake It Up"). The copy
+  tells Trunk Box in one neutral sentence that does not say "also" or imply a
+  second session, and the separate E-Cleff row in shows.json is held until David
+  says whether they are the same night.
 ---
 
 The band leaned into its namesake. When The Luxury Liners played Billy Block’s Western Beat Roots Revival at Zanies in Nashville, probably in the autumn of 1997 or the winter of 1998, they met Emmylou Harris and Phil Kaufman, Gram Parsons’s old road manager.
@@ -55,4 +59,4 @@ The rhythm section took a while to settle. Jeff LaFrate played drums and Mark W.
 
 In 1998 the band was featured in *Billboard*. It also turned up on two compilations that year: “Since You Met Me” and “Think She’s Coming Around” on *Fireworks Vol. 2* from Sweden’s Sound Asleep Records, and “If I Cry” on *Nashpop* from Not Lame Recordings.
 
-That autumn the band played the Texas Music Café in Waco, Texas, with Chad on guitar, David on bass and Scott on drums. Their “Shake It Up” from that night came out as a single in 2021. In Waco that autumn they also recorded a live set at E-Cleff Studios, which later went up on the band’s website as *Trunk Box*.
+That autumn the band played the Texas Music Café in Waco, Texas, with Chad on guitar, David on bass and Scott on drums. Their “Shake It Up” from that night came out as a single in 2021. A live set from Waco that autumn, recorded at E-Cleff Studios, later went up on the band’s website as *Trunk Box*.

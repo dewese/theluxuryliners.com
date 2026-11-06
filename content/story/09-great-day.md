@@ -9,6 +9,9 @@ sources:
   - claim: LL-17 site wording, verbatim
     source: DECISIONS-2026-10-07.md LL-17
     confidence: confirmed-owner
+  - claim: Chad, who left Nashville in 2001, is in the band again today (when he rejoined is not dated)
+    source: DECISIONS-2026-10-07.md LL-9, LL-15; plan/00-master-plan.md §4.3 row "Who is in the band now"
+    confidence: confirmed-owner
   - claim: Now spread across Tennessee, Michigan and Texas (never which member lives where)
     source: DECISIONS-2026-10-07.md LL-19
     confidence: confirmed-owner
@@ -43,7 +46,7 @@ notes_internal: >-
   reconnection (no source says so).
 ---
 
-The band never broke up. The four forever members reconnected during the pandemic and started making music again. Today they are spread across Tennessee, Michigan and Texas.
+The band never broke up. The four forever members reconnected during the pandemic and started making music again. Chad, who left Nashville in 2001, is in the band again today, and the four of them are spread across Tennessee, Michigan and Texas.
 
 In August 2021 Texas Music Café released “Shake It Up (Live at the Texas Music Café)”, recorded live in Waco, Texas, in autumn 1998. In 2025 “Precious To My Heart”, the hidden track from *Sound As Ever*, appeared on *Fireworks Vol. 3* from Sound Asleep Records.
 
