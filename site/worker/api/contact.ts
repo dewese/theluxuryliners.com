@@ -11,7 +11,9 @@
 //   6. Turnstile: a token is verified with siteverify (success, hostname, action 'contact').
 //      No token (JavaScript off, or Turnstile not configured) is accepted only from a browser
 //      that says the form was sent from this site (Sec-Fetch-Site: same-origin), with
-//      "[no Turnstile]" in the subject
+//      "[no Turnstile]" in the subject. Sec-Fetch-Site is only a browser's word: any script can
+//      send it, so this path is a known spam route (handbook §9). REQUIRE_TURNSTILE="1" closes it
+//      (every message then needs a verified token; the form stops working with JavaScript off).
 //   7. rate limit: RL_CONTACT (wrangler.jsonc), per connection
 //   8. send one plain-text email (send_email binding) with Reply-To = the visitor
 //   9. 303 to /contact/sent/ (or JSON {ok:true} for fetch())
@@ -29,6 +31,7 @@ export interface ContactEnv {
   CONTACT_FROM?: string;       // var: contact-form@theluxuryliners.com
   SITE_HOSTNAME?: string;      // var: theluxuryliners.com
   CONTACT_HOSTNAMES?: string;  // var: hosts the form may be sent from, comma-separated
+  REQUIRE_TURNSTILE?: string;  // var: "1" refuses every message without a verified Turnstile token
   RL_CONTACT?: RateLimit;      // ratelimits binding
   SEND_EMAIL?: SendEmail;      // send_email binding
 }
@@ -99,7 +102,7 @@ export async function handleContact(req: Request, env: ContactEnv, deps: { makeM
   const token = field('cf-turnstile-response');
   const verified = token ? await verifyTurnstile(token, ip, env, deps.fetcher) : false;
   if (token && !verified) return refuse(req, 422, { form: MESSAGES.turnstile });
-  if (!token && site !== 'same-origin') return refuse(req, 403, { form: MESSAGES.noToken });
+  if (!token && (site !== 'same-origin' || env.REQUIRE_TURNSTILE === '1')) return refuse(req, 403, { form: MESSAGES.noToken });
 
   try { if (!(await env.RL_CONTACT.limit({ key: ip })).success) return refuse(req, 429, { form: MESSAGES.busy }); }
   catch { log('contact_limiter_failed'); return refuse(req, 503, { form: MESSAGES.unavailable }); }

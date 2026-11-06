@@ -1,5 +1,7 @@
 ---
-// The Vault (plan §5.1; LL-27: history only, no MP3s or downloads of any kind).
+// The Vault (plan §5.1; LL-27: history only, no MP3s or downloads of any kind). The old sites are
+// described, not linked: no Internet Archive snapshot has been read yet, and the early ones probably
+// show old contact details (plan R2, §11). 'wayback_unchecked' in data/vault.json is never rendered.
 import Base from '../../layouts/Base.astro';
 import vault from '../../../data/vault.json';
 ---
@@ -23,10 +25,10 @@ import vault from '../../../data/vault.json';
   </ul>
 
   <h2 id="old-sites">The band’s websites</h2>
-  <p>theluxuryliners.com has been the band’s address since 1998. Its looks, in order:</p>
+  <p>The band’s website has been at theluxuryliners.com since at least 2000. Its looks, in order:</p>
   <ul>
     {vault.oldSites.map((o) => (
-      <li><strong>{o.dates}</strong>: {o.design}{o.wayback && <> <a href={o.wayback}>See it in the Internet Archive</a></>}</li>
+      <li><strong>{o.dates}</strong>: {o.design}</li>
     ))}
   </ul>
 </Base>

@@ -36,6 +36,10 @@ test('shows: partial dates sort correctly; a null venue leaves no comma', () => 
   assert.equal(where({ venue: null, city: 'Nashville' }), 'Nashville');
   assert.equal(where({ venue: 'The End', city: 'Nashville' }), 'The End, Nashville');
   assert.equal(where({ venue: '', city: null }), '');
+  // the place is not repeated when the venue already says it (round-1 critique, item 5)
+  assert.equal(where({ venue: 'Shows in Ohio and Michigan', city: 'Ohio and Michigan' }), 'Shows in Ohio and Michigan');
+  assert.equal(where({ venue: 'A radio appearance and a gig near Detroit, then a gig in Canada', city: 'Michigan and Canada' }), 'A radio appearance and a gig near Detroit, then a gig in Canada');
+  assert.equal(where({ venue: 'The Canada Club', city: 'Toronto, Canada' }), 'The Canada Club, Toronto, Canada');
 });
 
 test('contact rules: fields, honeypot, header-safe cleaning', () => {

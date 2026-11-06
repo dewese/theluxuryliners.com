@@ -136,7 +136,16 @@ repository or a page: it is a Worker secret.
      enter it together)
 4. Test on staging: send a message; it arrives with the subject `[theluxuryliners.com] <topic>`.
    A message sent with JavaScript off arrives marked `[no Turnstile]`.
-5. Limits: three messages a minute per connection (`ratelimits` in `wrangler.jsonc`). Check the
+5. **Known spam route, and how to close it.** So that the form also works with JavaScript off,
+   the Worker accepts a message without a Turnstile token when the request says it came from
+   this site (`Sec-Fetch-Site: same-origin`). Browsers send that header honestly, but any script
+   can fake it, so a spammer can skip Turnstile this way. The honeypot field, the timing check and
+   the rate limit still apply, and such messages arrive marked `[no Turnstile]`. If spam marked
+   `[no Turnstile]` starts to arrive, close the route: add `"REQUIRE_TURNSTILE": "1"` to `vars`
+   in `wrangler.jsonc` (both environments) and deploy the Worker. From then on every message
+   needs Turnstile, and visitors without JavaScript see the "no spam check" message and are
+   asked to turn JavaScript on.
+6. Limits: three messages a minute per connection (`ratelimits` in `wrangler.jsonc`). Check the
    Workers usage chart monthly; the free plan's daily limit is far above what the form needs.
 
 ## 10. Analytics: Cloudflare Web Analytics, Google Search Console, Bing Webmaster Tools

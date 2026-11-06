@@ -8,7 +8,9 @@ const turnstile = !!import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 <Base title="Privacy" description="What theluxuryliners.com collects (very little) and why.">
   <h1>Privacy</h1>
   <div class="prose">
-    <p>This site sets no cookies, has no accounts and keeps nothing in your browser.</p>
+    {turnstile
+      ? <p>This site sets no cookies and has no accounts, and its pages keep nothing in your browser. The one exception is the spam check on the contact page (see below), which is run by Cloudflare and may keep a little data in your browser while it works.</p>
+      : <p>This site sets no cookies, has no accounts and keeps nothing in your browser.</p>}
     <h2>Hosting</h2>
     <p>The site is served by Cloudflare. Like any web host, Cloudflare handles your IP address and browser details to deliver pages and to protect the site from abuse.</p>
     {analytics && (
@@ -19,7 +21,7 @@ const turnstile = !!import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     )}
     <h2>The contact form</h2>
     <p>When you send a message, the name, email address, topic and message you enter are emailed to the band so we can reply. The site does not keep a copy. To stop the form being used for spam, the number of messages sent from one connection is limited for a short time.</p>
-    {turnstile && <p>The form uses Cloudflare Turnstile to check that a person, not a program, is sending it. Turnstile is loaded only on the contact page.</p>}
+    {turnstile && <p>The form uses Cloudflare Turnstile to check that a person, not a program, is sending it. Turnstile is loaded only on the contact page, and it may store a small amount of data in your browser to run its check. It is covered by Cloudflare’s own privacy policy.</p>}
     <h2>Links to other sites</h2>
     <p>Links to Spotify, Apple Music, Bandcamp, YouTube, Instagram, Facebook and other sites take you to those services, which have their own privacy policies. Nothing from them is loaded on this site’s pages.</p>
     <h2>Questions</h2>

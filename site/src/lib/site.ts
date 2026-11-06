@@ -84,4 +84,4 @@ export const RELATED = [
 export const COLOPHON = 'The band’s logos date from 1999–2002.';
 
 /** P40: the neutral rights line for cover art. */
-export const COVER_RIGHTS = 'Cover art: all rights reserved by the rights holders.';
+export const COVER_RIGHTS = 'All rights reserved by the rights holders.';

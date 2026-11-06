@@ -25,7 +25,7 @@ const shooters = photographers();
   </dl>
 
   <h2>Early and guest players</h2>
-  <ul>{v.early.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} />{p.years && <>, {p.years}</>}</li>)}</ul>
+  <ul>{v.early.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} /></li>)}</ul>
 
   <h2>On the records</h2>
   <ul>{v.records.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} />{p.years && <>, {p.years}</>}</li>)}</ul>

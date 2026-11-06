@@ -7,6 +7,7 @@ import { SLUGS, BLURBS, bySlug } from './releases.ts';
 import { sortKey } from './dates.ts';
 import { sortShows, where } from './shows.ts';
 import { PHOTOS } from './photos.ts';
+import { members } from './members.ts';
 import siteFacts from '../../data/facts.json';
 import sitePeople from '../../data/people.json';
 import siteArtwork from '../../data/artwork.json';
@@ -40,14 +41,13 @@ export function homeView() {
     if (s?.blurb) console.warn(`content: home.md: the blurb for ${slug} ("${s.blurb}") is too thin or carries a date; the site's own blurb is used (BUILD-LOG, "Home blurbs")`);
     return esc(BLURBS[slug]);
   };
-  const members = (d.members ?? []).length
-    ? d.members.map((m: any) => ({ nameHtml: inl(m.name), roleHtml: inl(m.role) }))
-    : sitePeople.forever.filter((p) => p.status === 'publish').map((p) => ({ nameHtml: esc(p.name), roleHtml: esc(p.role.replace(/^Co-founder; /, 'co-founder; ').replace(/^(\w)/, (c) => c.toLowerCase())) }));
+  // Roles come from the one members source (members.ts), the same as /people/ and the JSON-LD.
+  const memberList = members().map((m) => ({ nameHtml: esc(m.name), roleHtml: esc(m.roles.join(', ')) }));
   return {
     statusLine: d.status_line ?? STATUS_LINE,
     blurb,
     membersHeading: d.members_heading ?? 'The four forever members',
-    members,
+    members: memberList,
     membersNoteHtml: d.members_note ? inl(d.members_note) : 'The band called David Wilstermann “Larry” because it already had a David.',
     disambiguationHtml: d.disambiguation ? inl(d.disambiguation) : esc(DISAMBIGUATION),
     bodyHtml: h?.html || null,
@@ -82,16 +82,25 @@ export function factsView() {
 }
 
 // ---------- people ----------
+/** Release slugs whose cover credit is still pending in data/artwork.json (single-source, not in
+ *  LL-23): the build never prints a cover credit for them, whatever a copy file says. */
+export const PENDING_COVER_SLUGS = [...new Set(siteArtwork.credits.filter((a) => a.status !== 'publish' && !siteArtwork.credits.some((b) => b.release === a.release && b.status === 'publish' && !(b as any).edition)).map((a) => a.release))];
+const coverOk = (releaseId?: string | null) => !PENDING_COVER_SLUGS.includes(slugFor(releaseId) ?? '');
+/** An early player's roles with the years after the first role only ("several shows, 2004–05;
+ *  guitar on Nonetheless"), so the years never read as covering a later, separate role (LL-24). */
+const earlyRoles = (roles: string[], years: string, h: (s: string) => string) =>
+  roles.length > 1 && years ? `${h(roles[0])}, ${esc(years)}; ${roles.slice(1).map(h).join('; ')}` : `${roles.map(h).join(', ')}${years ? `, ${esc(years)}` : ''}`;
+const foreverRows = () => members().map((m) => ({ nameHtml: esc(m.name), url: m.url, roles: m.roles.join(', '), years: m.years, lineHtml: inl(m.line) }));
 export function peopleView() {
   const c = json('people.json');
   const art = siteArtwork.credits.filter((a) => a.status === 'publish');
   if (c?.forever_members) {
     return {
       introHtml: md('people.md')?.html || null,
-      forever: live(c.forever_members).map((p: any) => ({ nameHtml: inl(p.name), url: p.link ?? null, roles: (p.roles ?? []).join(', '), years: p.years ?? '', lineHtml: inl(p.line) })),
-      early: live(c.early_and_guest_players).map((p: any) => ({ nameHtml: inl(p.name), rolesHtml: inl((p.roles ?? []).join(', ')), years: p.years ?? '' })),
+      forever: foreverRows(),
+      early: live(c.early_and_guest_players).map((p: any) => ({ nameHtml: inl(p.name), rolesHtml: earlyRoles(p.roles ?? [], p.years ?? '', inl) })),
       records: live(c.on_the_records).map((p: any) => ({ nameHtml: inl(p.name), rolesHtml: inl((p.roles ?? []).join('; ')), years: p.years ?? '' })),
-      artwork: (live(c.cover_art).length ? live(c.cover_art).map((a: any) => ({ releaseHtml: inl(a.title), href: releaseHref(a.release_id) ?? '/music/', creditHtml: inl(a.credit) }))
+      artwork: (live(c.cover_art).length ? live(c.cover_art).filter((a: any) => coverOk(a.release_id)).map((a: any) => ({ releaseHtml: inl(a.title), href: releaseHref(a.release_id) ?? '/music/', creditHtml: inl(a.credit) }))
         : art.map((a) => ({ releaseHtml: esc(bySlug(a.release).title + (a.edition ? ` (${a.edition})` : '')), href: `/music/${a.release}/`, creditHtml: esc(`${a.role}: ${a.name}`) }))),
     };
   }
@@ -99,8 +108,8 @@ export function peopleView() {
   for (const r of sitePeople.records.filter((x) => x.status === 'publish')) recs.set(r.name, [...(recs.get(r.name) ?? []), `${r.role.toLowerCase()}, <a href="/music/${r.release}/">${esc(r.work)}</a>`]);
   return {
     introHtml: null,
-    forever: sitePeople.forever.filter((p) => p.status === 'publish').map((p: any) => ({ nameHtml: esc(p.name), url: p.url ?? null, roles: p.role, years: p.years, lineHtml: p.note ? esc(p.note) : '' })),
-    early: sitePeople.early.filter((p) => p.status === 'publish').map((p) => ({ nameHtml: esc(p.name), rolesHtml: esc(p.role), years: p.years })),
+    forever: foreverRows(),
+    early: sitePeople.early.filter((p) => p.status === 'publish').map((p) => ({ nameHtml: esc(p.name), rolesHtml: earlyRoles(p.role.split(/;\s*/), p.years, esc) })),
     records: [...recs].map(([name, rs]) => ({ nameHtml: esc(name), rolesHtml: rs.join('; '), years: '' })),
     artwork: art.map((a) => ({ releaseHtml: esc(bySlug(a.release).title + (a.edition ? ` (${a.edition})` : '')), href: `/music/${a.release}/${a.edition ? '#lp-2026' : ''}`, creditHtml: esc(`${a.role}: ${a.name}`) })),
   };

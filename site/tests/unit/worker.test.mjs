@@ -61,6 +61,9 @@ test('contact: refusals', async () => {
   assert.equal((await handleContact(form(GOOD), limited, { makeMessage })).status, 429);
   const noSite = new Request('https://theluxuryliners.com/api/contact', { method: 'POST', body: new URLSearchParams(GOOD).toString(), headers: { 'content-type': 'application/x-www-form-urlencoded' } });
   assert.equal((await handleContact(noSite, ENV(), { makeMessage })).status, 403, 'no token and no same-origin signal');
+  const strict = ENV({ REQUIRE_TURNSTILE: '1' });
+  assert.equal((await handleContact(form(GOOD), strict, { makeMessage })).status, 403, 'REQUIRE_TURNSTILE: a faked same-origin header no longer skips Turnstile');
+  assert.equal(strict.SEND_EMAIL.sent.length, 0);
 });
 
 test('contact: Turnstile token checked with siteverify (hostname and action)', async () => {

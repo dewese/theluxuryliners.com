@@ -2,11 +2,11 @@
 import type { APIRoute } from 'astro';
 import { SITE, ONE_LINER, NEVER_BROKE_UP, DISAMBIGUATION, SAME_AS, SPREAD } from '../lib/site.ts';
 import { RELEASES } from '../lib/releases.ts';
-import people from '../../data/people.json';
+import { members, yearsInWords } from '../lib/members.ts';
 import press from '../../data/press.json';
 
 export const GET: APIRoute = () => {
-  const forever = people.forever.filter((p) => p.status === 'publish');
+  const forever = members();
   const lines = [
     '# The Luxury Liners',
     '',
@@ -15,7 +15,7 @@ export const GET: APIRoute = () => {
     `${NEVER_BROKE_UP} The band was founded in Texas in 1997 and moved to Nashville in May 1997. ${SPREAD}`,
     '',
     '## Members (the four forever members)',
-    ...forever.map((p) => `- ${p.name}: ${p.role} (${p.years})`),
+    ...forever.map((p) => `- ${p.name} (${yearsInWords(p.years)}): ${p.roles.join(', ')}.${p.line ? ` ${p.line.replace(/\*/g, '')}` : ''}`),
     '',
     '## Releases',
     ...RELEASES.slice().reverse().map((r) => `- [${r.title}](${SITE}/music/${r.slug}/): ${r.kind}, ${r.dateLabel}, ${r.label}`),

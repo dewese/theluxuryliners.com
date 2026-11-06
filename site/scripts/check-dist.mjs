@@ -85,11 +85,21 @@ const RULES = [
   ['double full stop', /[^.]\.\.(?!\.)/, 'text'],
   ['"Photo: Cover art"', /Photo:\s*Cover art/i, 'text'],
   ['comma at the start of a cell or line', /<td[^>]*>\s*,|<dd[^>]*>\s*,|<li[^>]*>\s*,|, ,/, 'html'],
+  ['Internet Archive link (no snapshot has been read yet; plan R2, §11)', /href="https?:\/\/web\.archive\.org/i, 'html'],
+  ['a place repeated ("Ohio and Michigan, Ohio and Michigan")', /\b([A-Z][a-z]+(?: and [A-Z][a-z]+)?), \1\b/, 'text'],
   ['sourcing note in public copy', /\bas credited on\b|\bSources?:\s|\bper (?:the )?(?:band['’]s )?\d{4} (?:site|website|discography)/i, 'own'],
 ];
+// Cover credits still pending in data/artwork.json (single-source, outside LL-23) never ship, on
+// any page or in JSON-LD, whatever a copy file says (round-1 critique, blocking item 1).
+const ARTWORK = JSON.parse(readFileSync(join(site, 'data', 'artwork.json'), 'utf8')).credits;
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+for (const a of ARTWORK.filter((x) => x.status !== 'publish')) {
+  const t = esc(a.release.replace(/-/g, ' ')); // the release slug read as its title ("nonetheless")
+  RULES.push([`pending cover credit: ${a.name}, ${a.release}`, new RegExp(`${esc(a.name)}[^.<]{0,60}\\b(?:paint(?:ed|ing|ings|s)?|cover (?:art|painting|design)|the cover)\\b|\\b(?:paint(?:ed|ing|ings)|cover(?: art)?)\\b[^.]{0,40}\\bby ${esc(a.name)}|\\bpaint(?:ed|ing|ings)?\\b[^.]{0,80}\\b(?:${t})\\b|\\b(?:${t})\\b[^.]{0,80}\\bpaint(?:ed|ing|ings)?\\b`, 'i'), 'raw']);
+}
 const WARN = [
   ['a year next to Emmylou Harris’s Luxury Liner (contested; human check)', /Emmylou Harris['’]s? (?:album )?Luxury Liner[^.]{0,30}\b19\d\d\b/i, 'text'],
-  ['British spelling on an American band’s site', /\b(?:colours?|travell(?:ed|ing)|licence|catalogue|favourite|organis(?:e|ed|ing)|recognis(?:e|ed|ing)|behaviour|practis(?:e|ed|ing))\b/i, 'own'],
+  ['British spelling on an American band’s site', /\b(?:colours?|travell(?:ed|ing)|licence|favourite|organis(?:e|ed|ing)|recognis(?:e|ed|ing)|behaviour|practis(?:e|ed|ing))\b/i, 'own'],
 ];
 const SKIP_RAW = {
   // bundled code and generated config are not prose; _redirects is Cloudflare configuration (never served)

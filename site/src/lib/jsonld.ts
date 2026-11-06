@@ -1,7 +1,7 @@
 // Structured data (plan §8.2, owner decisions LL-5 and LL-9). One MusicGroup on every page
 // (by @id; the full node on the home page), a MusicAlbum per release page, FAQPage on /facts/
 // for answers visible there. scripts/check-jsonld.mjs checks every page.
-import people from '../../data/people.json';
+import { members, bandRoles, type Member } from './members.ts';
 import { SITE, BAND, ONE_LINER, DISAMBIGUATION, SAME_AS } from './site.ts';
 import { isoDuration } from './dates.ts';
 import type { Release } from './releases.ts';
@@ -9,17 +9,17 @@ import type { Release } from './releases.ts';
 export const BAND_ID = `${SITE}/#band`;
 const plain = (s: string) => s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
 
-const person = (p: (typeof people.forever)[number]) => ({
-  '@type': 'Person', '@id': p.jsonldId, name: (p as any).plainName ?? p.name,
-  ...((p as any).url ? { url: (p as any).url } : {}),
+const person = (p: Member) => ({
+  '@type': 'Person', '@id': p.jsonldId, name: p.plainName,
+  ...(p.url ? { url: p.url } : {}),
   ...(p.id === 'david-wilstermann' ? { alternateName: 'Larry' } : {}),
 });
 
 /** LL-9: the four forever members are the band today, so no member has an endDate. Chad left
- *  Nashville in March 2001 and plays on the 2026 singles; his membership is modelled as current
+ *  Nashville in March 2001 and is in the band again today; his membership is modelled as current
  *  from 1997 (BUILD-LOG, "JSON-LD"). LL-5: founded in Texas in 1997; the town is never named. */
 export function musicGroup() {
-  const forever = people.forever.filter((p) => p.status === 'publish');
+  const forever = members();
   const founders = forever.filter((p) => p.id === 'david-dewese' || p.id === 'chad-edgington');
   return {
     '@type': 'MusicGroup',
@@ -32,7 +32,7 @@ export function musicGroup() {
     foundingDate: '1997',
     foundingLocation: { '@type': 'Place', name: 'Texas', address: { '@type': 'PostalAddress', addressRegion: 'TX', addressCountry: 'US' } },
     founder: founders.map(person),
-    member: forever.map((p) => ({ '@type': 'OrganizationRole', roleName: p.role.replace(/^Co-founder; /, ''), startDate: p.startDate, member: person(p) })),
+    member: forever.map((p) => ({ '@type': 'OrganizationRole', roleName: bandRoles(p).join(', '), startDate: p.startDate, member: person(p) })),
     genre: ['Power pop', 'Pop rock'],
     logo: `${SITE}/logos/roundel-wordmark.png`,
     image: `${SITE}/img/photos/four-2002-1096.jpg`,

@@ -44,20 +44,22 @@ Only public fields are read; `source`, `confidence`, `contested`, `notes_interna
   credits always match the captions on Home, Story, Photos and EPK. `content/people.json`
   `photographs` is not rendered. Amy Wilstermann's credit is single-source: her 2003 promo is
   `pending` and `PENDING_CREDITS` blocks it (data gate + dist test).
-- **Home blurbs** must say something particular and carry no date. At the time of writing
-  `content/home.md` gives "The first of the two." for "Great Day": the build warns and uses the
-  site's blurb ("Written by Chad Edgington and David Dewese, with all four forever members
-  playing."). Question for the copy track.
-- **YAML**: `story/01`, `story/04`, `story/05` and `sound-as-ever-name.md` have front matter that is
-  not valid YAML in their `sources` blocks (e.g. `claim: "College friend" wording`). The importer
-  drops the internal blocks and reads the public keys, with a build warning. Question for the copy track.
+- **Home blurbs** must say something particular and carry no date (`blurbOk`); a thin or dated
+  blurb is replaced by the site's own, with a build warning. Today's `content/home.md` blurbs pass.
+- **YAML**: `story/04` and `story/05` still have front matter that is not valid YAML in their
+  `sources` blocks. The importer drops the internal blocks and reads the public keys, with a build
+  warning. Question for the copy track.
 - `content/home.md` body repeats the one-liner and status line; the home page uses the front-matter
   fields only.
 
-Cross-track flags (not changed here; for the copy critic): `content/` credits the *Nonetheless*
-cover paintings to Scott Carpenter; that credit is not in LL-23 and rests on the 2010
-daviddewese.com discography page (single-source). `data/artwork.json` keeps it `pending`, so the
-release page does not print it, but the copy track's People, Facts and bios do.
+**Cover credits** are gated by `data/artwork.json` whatever a copy file says: a release whose
+credit is `pending` there gets no row in People › Artwork (`PENDING_COVER_SLUGS`), and check-dist
+fails on the pending name next to "painted"/"cover art"/"the cover", or "painted" next to the
+release title, on any page, in llms.txt or in JSON-LD (round 2).
+
+**Members**: `src/lib/members.ts` is the one source for the four forever members' roles and years
+(content/people.json, else data/people.json) used by home, /people/, the MusicGroup JSON-LD
+(`roleName` = the roles without "co-founder", which is the `founder` property) and llms.txt.
 
 ## Owner decisions and the lost run's critic notes: how each is met
 
@@ -103,15 +105,34 @@ PLACEHOLDER blocks (Story, EPK) while the normal checks and axe still pass on th
 
 ## Verification (2026-11-06)
 
-`npm ci && npm test`: data PASS; unit 28/28 (helpers, Worker contact/routing/MIME, LL-3, built-page
+`npm ci && npm test`: data PASS; unit 35/35 (round 2) (helpers, Worker contact/routing/MIME, LL-3, built-page
 rules); dist PASS (check-dist + `content/check-content.mjs --dist-only`: 0 errors); jsonld PASS
 (29 pages); axe 112/112 (28 pages × 1280/375 px × JS on/off; no horizontal scroll at 375 px).
 `wrangler deploy --dry-run` bundles the Worker. Screenshots of home, a release page and People
 checked by eye at 1280 px.
 
+## Round 2 (critiques/build-skeleton-round1.md, score 7)
+
+| Critique item | Fix | Guard |
+|---|---|---|
+| 1 (blocking) *Nonetheless* painting credit printed on People, Story, Facts (+FAQPage), EPK | copy track now holds it (`publish: false`, rewritten ch. 7, Facts, EPK); the build drops any cover row whose release is `pending` in `data/artwork.json` | check-dist rule per pending artwork row (raw, so JSON-LD and llms.txt too); dist test |
+| 2 (blocking) LL-9: Chad "1997–2001; on the 2026 singles" on People and llms.txt | one members source; Chad "1997–2001, and again today" (People, llms.txt, fallback data); llms.txt gives "(<year> to today)" for the others | dist test on /people/ and llms.txt |
+| 3 cover captions | "Cover art: David Dewese, from a photo by Mark Montgomery."; rights line is plain "All rights reserved by the rights holders." | dist test: "Cover art" once per release page |
+| 4 `/vault/mp3s/` "Shake It Up (live): on Believe EP" | every row reads "the song is on …" (an old demo or live MP3 is not the album recording) | dist test |
+| 5 `/shows/` "Ohio and Michigan, Ohio and Michigan" | `where()` drops the place when the venue contains it or ends with one of its parts | unit tests (incl. "The Canada Club, Toronto, Canada" kept); check-dist "place repeated" |
+| 6 no space before photo credits | `Photo.astro` emits a space; the credit ends with a full stop | dist test |
+| 7 unread Wayback links on `/vault/` | not rendered; kept in `data/vault.json` as `wayback_unchecked` until the human browser pass (plan §11) clears each | check-dist fails on any web.archive.org link |
+| 8 Turnstile skippable via Sec-Fetch-Site | `REQUIRE_TURNSTILE="1"` Worker var closes the no-token path; handbook §9 item 5 records the spam route and the switch | unit test |
+| 9 roles differ home / People / JSON-LD | `members.ts` (above) | dist test compares all three |
+| 10 Gary Ishee years | early players render the years after the first role only: "several shows, 2004–05; guitar on *Nonetheless*" | dist test |
+| 11 "address since 1998" | "has been at theluxuryliners.com since at least 2000" (1998 is only the registration) | dist test |
+| 12 privacy "keeps nothing in your browser" | with Turnstile built in, the page says the contact-page check, run by Cloudflare, may keep a little data in the browser | existing privacy test (paragraphs follow the build) |
+| 13 "catalogue" warning | dropped from the British-spelling warning: an accepted US spelling, and here part of a shop's own description ("shop catalogue listing") | none needed |
+
 ## Open / next
 
-- Copy-track questions above (Great Day blurb, YAML in four files, the Nonetheless cover credit).
+- Copy-track question above (YAML in two story files). B10: if Carly confirms the *Nonetheless*
+  cover credit, set it to `publish` in `data/artwork.json` and `publish: true` in content/people.json.
 - Design direction: replace the tokens at the top of `src/styles/global.css`.
 - Hosting setup: Turnstile keys, `CONTACT_TO`, Email Routing, analytics token, Decap `base_url`.
 - The journal months (LL-25), `/vault/news/`, Trunk Box / Live Liners pages when material clears.
