@@ -49,3 +49,17 @@ Carly's answers to the first Tier 1 questions in `QUESTIONS-FOR-CARLY.md`. **Aut
 | LL-26 | A recent photo | **Launch without one**; the home page leads with the 2026 singles. |
 | LL-27 | Free MP3s | **The site gives away no MP3s at all**: no downloads of covers or of the band's own songs. Music is played through streaming links and embeds (Spotify, Apple Music, Bandcamp, YouTube). This replaces the plan's Vault downloads (daviddewese.com's P5 does not carry over here). The Vault lists the old free MP3s and covers by title, as history. |
 | LL-28 | Logos | Carly supplied the logo masters (2026-11-06): `assets/source/logos/` holds `logos.ai`, `Lux_Liner_logo_masters.eps.pdf` and `BIG_luxury_logos_separated.eps` (Illustrator 9, made 2002-12-10 on David's computer). They hold the red oval "L" roundel with the spaced wordmark, the black "L" roundel, the layered "distressed" wordmark, the stacked "THE LUXURY LINERS" wordmark with the crossed X and the slate "LXL" oval, and the condensed wordmark over the red roundel. Web copies (SVG and 300 dpi PNG sheets) are in `assets/derived/logos/`. **No redrawing needed.** The designer is not yet credited (question 31). |
+
+## Round 4: 2026-11-06
+
+| # | Question | Decision |
+|---|---|---|
+| LL-29 | Covers list | No free MP3s (LL-27). The Vault keeps **a list of the band's known cover songs** by title and original artist. |
+| LL-30 | Live "Shake It Up" cover | **Use the 3000-pixel released cover** (Apple Music copy). |
+| LL-31 | Contact form | Messages go to **david@dewese.com**; the address is never printed in the page. |
+| LL-32 | Home page photo | **A collage of a few photos from the band's eras**, including the forever-members photo, because "we used to dress so much cooler in the earlier eras of the band". The collage favours the best-dressed early photos (the c. 2000 studio shots, the Nudie-suit years). |
+| LL-33 | Music databases | **Yes**: Chad, Scott and Larry are listed as members by name only on Wikidata, MusicBrainz and Discogs, with no profile entries of their own. |
+| LL-34 | Spotify and Apple Music profiles | **David controls both.** The team prepares the bio text (the LL-6 one-liner) for him to paste. |
+| LL-35 | Videos | **Embedding YouTube videos is fine**, including the *One Tree Hill* and FOX Sports clips (with captions where possible). |
+| LL-36 | Social accounts | **Instagram @theluxuryliners and Facebook /theluxuryliners are the band's own and active**; link them in the footer and the structured data. **No SoundCloud.** The band's albums are on **David's Bandcamp** (daviddewese.bandcamp.com), which the site links as the band's Bandcamp. |
+| LL-37 | The 2008 Texas show | **It happened.** David played a solo CD-release show in Texas in 2008 (for *Make The Best Of It*), and **Chad joined him for a few songs**. Carly supplied a photo of the two of them on stage (David and Chad, banjo and acoustic guitar): `assets/source/photos/2008-texas-cd-release-david-and-chad.jpg` (1632×1224). Left-to-right names and the venue still to be confirmed (question 32). |

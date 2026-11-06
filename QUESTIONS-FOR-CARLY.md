@@ -182,10 +182,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **D3. The "Shake It Up (Live)" cover.** No master was supplied (P28). Apple Music has a 3000-pixel copy of the released cover. May the release page use that copy?
 - *Why it matters:* otherwise the page shows a typographic placeholder.
 - *Proposed default:* **use the released 3000-pixel cover** with the standard rights line, until you send the master.
+- **ANSWERED 2026-11-06 (LL-30: use the 3000-pixel copy).**
 
 **A12. Contact form address.** Should the form send to the band's Gmail (the address behind the current Carrd button) or to david@dewese.com?
 - *Why it matters:* someone has to read it.
 - *Proposed default:* **the band's Gmail**, never printed in the page.
+- **ANSWERED 2026-11-06 (LL-31: david@dewese.com).**
 
 **A2. Design direction** (at the Phase 1 review). The plan proposes three directions: **A "Stitched"** (a cousin of daviddewese.com's Duotone, with the oxblood and blush pair, era colour pairs, engraved portraits and a chain-stitch motif), **B "Tonight, No Cover"** (gig-poster typography on paper) and **C "Roundel"** (bright *Believe*-era red and white with the 2026 sky blue). You will see three sample pages in each.
 - *Why it matters:* it sets the look for years.
@@ -226,6 +228,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **D7. The band's "face".** The current site uses the c. 2000 white-studio photos of the founding trio. Should the new site lead with those, with the 2003 trio, or with the four forever members?
 - *Why it matters:* the home page photo is the band's first impression and says which era the site is about.
 - *Proposed default:* **the four forever members** on the home page; each era's photos lead its own chapter.
+- **ANSWERED 2026-11-06 (LL-32: a collage of eras).**
 
 **D8. Discogs scans.** May the Vault show back covers and disc scans from Discogs (uploaded by other people) as reference?
 - *Why it matters:* those scans were uploaded by other people, so their rights are unclear.
@@ -238,10 +241,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **E2. Chad on databases.** Is Chad happy to be listed as co-founder (1997–2001), by name only, on Wikidata, MusicBrainz and Discogs? (Same for Scott and Larry as members.)
 - *Why it matters:* databases copy whatever is entered, permanently; Chad, Scott and Larry are private people and should agree to how they appear.
 - *Proposed default:* **name only, no separate database entries for any of them**.
+- **ANSWERED 2026-11-06 (LL-33: yes).**
 
 **E3. Spotify for Artists and Apple Music for Artists.** Who holds the logins (or which distributor released the 2026 singles)? Is there a Spotify bio today?
 - *Why it matters:* the Spotify and Apple bios are among the most-read descriptions of the band, and only the account holder can change them.
 - *Proposed default:* **David claims both** and pastes the canonical bio.
+- **ANSWERED 2026-11-06 (LL-34: David controls both).**
 
 **E4. Flickr on MusicBrainz.** MusicBrainz links the band to David's Flickr collection "The Luxury Liners". Keep it?
 - *Why it matters:* MusicBrainz links feed knowledge graphs; a link to a collection with non-band photos would confuse them.
@@ -250,10 +255,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **E6. TV clips.** May the site embed or link the YouTube clips of "Dreaming" on *One Tree Hill* (aired 2004-02-24) and "Sunshine" as the FOX Sports *US Youth Soccer Show* theme?
 - *Why it matters:* TV placements are strong facts for the EPK; clips of the shows belong to the networks, so embedding them raises rights questions.
 - *Proposed default:* **name the placements, with no clips**.
+- **ANSWERED 2026-11-06 (LL-35: embedding is fine).**
 
 **E7. Social accounts.** Are Instagram @theluxuryliners and Facebook /theluxuryliners active, and who posts? Is there a SoundCloud account to link?
 - *Why it matters:* linking an abandoned or unofficial account from the site and its structured data would send fans and engines to the wrong place.
 - *Proposed default:* **link Instagram and Facebook from the footer and in structured data only after you confirm they are the band's and active**; not SoundCloud.
+- **ANSWERED 2026-11-06 (LL-36: yes; no SoundCloud; David's Bandcamp).**
 
 **V1. Audio masters.** Does David have *Trunk Box* (Waco, 1998), *Live Liners* (12th & Porter, 2002), *From The Vaults 1997–2001*, the 2005 demos (including "Breakaway") and the band's other free MP3s?
 - *Why it matters:* the Vault's audio depends on these files; archived copies are low quality and incomplete.
@@ -291,6 +298,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **B15. The 2008 Texas show.** The band's 2008 home page said Chad Edgington ("1997-2001") would join David for a Texas CD-release show. Did it happen?
 - *Why it matters:* it would be the last known time Chad played with the band, and the Story would say so.
 - *Proposed default:* mention it with attribution after the browser pass reads the 2008 news page.
+- **ANSWERED 2026-11-06 (LL-37: yes, Chad joined for a few songs).**
 
 ---
 
