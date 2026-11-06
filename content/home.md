@@ -13,7 +13,7 @@ singles:
     blurb: Two tracks, “New Beginning” and “Great Day”.
   - release_id: luxury-liners-2026-great-day
     title: Great Day
-    blurb: Written by Chad and David, with a cover by David.
+    blurb: null
 members_heading: The four forever members
 members:
   - name: David Dewese
@@ -49,9 +49,6 @@ sources:
   - claim: four forever members and roles; Larry nickname
     source: daviddewese.com DECISIONS P8; DECISIONS-2026-10-07.md LL-9; 2005 roster (research/01 §3.2)
     confidence: confirmed-owner
-  - claim: Great Day blurb (writers; cover by David)
-    source: DECISIONS-2026-10-07.md LL-14, LL-23
-    confidence: confirmed-owner
   - claim: disambiguation sentence (no year for Emmylou Harris's album)
     source: plan/00-master-plan.md §8.4, §4.3; research/04 §5
     confidence: verified-source
@@ -59,7 +56,7 @@ notes_internal: >-
   LL-26: no recent photo; the page leads with the 2026 singles. LL-32: the hero is
   a collage of era photos (build track). Singles blurbs deliberately carry no
   dates (the release cards show them) and nothing about either recording's history
-  (LL-13). No newsletter sign-up (LL-40).
+  (LL-13). The Great Day blurb is left empty on purpose: the singles intro already gives the writers and players, so repeating them would be padding. No newsletter sign-up (LL-40).
 ---
 
 The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.

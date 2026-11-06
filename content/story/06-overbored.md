@@ -15,7 +15,7 @@ sources:
   - claim: Recorded by Doug Nightwine, mixed by Chris Henning; Paul Seykora on keyboards
     source: data/releases.json luxury-liners-2003-overbored (production); research/01 §3.3
     confidence: verified-source
-  - claim: David wrote most of the songs; David Wilstermann wrote "Restless"
+  - claim: David wrote or co-wrote nearly all of the songs (sole writer on 5 of 10, co-writer on 4; Discogs per LL-14); David Wilstermann wrote "Restless"
     source: data/releases.json songwriting (Discogs 14391955), endorsed by DECISIONS-2026-10-07.md LL-14
     confidence: confirmed-owner
   - claim: Cover art by David Dewese
@@ -38,7 +38,7 @@ notes_internal: >-
   credit is withheld under the owner's exclusion rule.
 ---
 
-*Overbored*, the trio’s first album, came out in May 2003 on Litterbug Records. Doug Nightwine recorded it, Chris Henning mixed it, and Paul Seykora added keyboards. David wrote most of the songs, Larry wrote “Restless”, and David made the cover.
+*Overbored*, the trio’s first album, came out in May 2003 on Litterbug Records. Doug Nightwine recorded it, Chris Henning mixed it, and Paul Seykora added keyboards. David wrote or co-wrote nearly all of the songs, Larry wrote “Restless”, and David made the cover.
 
 The band’s one-sheet pitched it as “the perfect CD for traveling up the 5 from San Diego to L.A.” In *Metroland*, Erik Hage called “Waiting for the Sun” “drop-dead perfect pop-rock”. *Performing Songwriter* called the album “a must-have for all power pop fans.”
 

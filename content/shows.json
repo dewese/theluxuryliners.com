@@ -421,6 +421,7 @@
       "venue": "The French Quarter Cafe",
       "place": "Nashville, Tennessee",
       "note": "An audience recording of this show is in the Live Music Archive.",
+      "notes_internal": "Do not link the Live Music Archive item: it offers downloadable MP3s, and LL-27 means the site gives away no downloads. Keep this as plain history text only.",
       "source": "research/03 §5.3 (Internet Archive item lliners2003-06-19.at853.shnf); journal 2003_06",
       "confidence": "verified-source"
     },

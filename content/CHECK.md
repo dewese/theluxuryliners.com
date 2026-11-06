@@ -11,7 +11,7 @@ Authority order, highest first: `DECISIONS-2026-10-07.md`, then daviddewese.com 
 | `home.md` | `/` | The LL-6 one-liner (`one_liner`, byte for byte), the status line, the latest-release label, the 2026 singles (no dates in the blurbs), the forever members, three doors and the disambiguation line |
 | `story.md`, `story/01…09-*.md` | `/story/` | Nine chapters, one file each, with `chapter`, `title`, `years`, `era` (`powder`, `oxblood` or `sky`, the Direction A era pairs) and `summary` |
 | `people.md`, `people.json` | `/people/` | Forever members, early and guest players (LL-24), people on the records, cover-art credits (LL-23) and photographers. Names, roles and years only (LL-7) |
-| `facts.md`, `facts.json` | `/facts/` | Questions and answers (plan §5.4), with contested facts handled as in plan §4.3; `faq_jsonld: true` marks answers that may also go into `FAQPage` JSON-LD; the "How we date things" note |
+| `facts.md`, `facts.json` | `/facts/` | Questions and answers (plan §5.4), with contested facts handled as in plan §4.3; `faq_jsonld: true` marks answers that may also go into `FAQPage` JSON-LD; the "How dates are given" note |
 | `press.md`, `press.json` | `/press/` | Press in date order; positive excerpts only, exactly as printed; TV placements |
 | `shows.md`, `shows.json` | `/shows/` | Dated shows with sort keys for partial dates |
 | `covers.md`, `covers.json` | Vault, covers list | Known cover songs by title and original artist (LL-29); no audio (LL-27) |

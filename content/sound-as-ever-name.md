@@ -20,6 +20,6 @@ notes_internal: >-
   govern the band name). Nothing here says who chose the album title.
 ---
 
-Gram Parsons signed his letters “Sound as ever”. The Luxury Liners, already named after his song “Luxury Liner”, took the phrase for their first album in 2000.
+“Sound as ever” was Gram Parsons’s sign-off. The Luxury Liners, already named after his song “Luxury Liner”, took the phrase for their first album in 2000.
 
 The record keeps the thread going to the very end. Its last hidden track is called “The International Submarine Band”, the name of Parsons’s first band, which first recorded “Luxury Liner” in 1968.

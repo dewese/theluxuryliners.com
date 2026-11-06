@@ -35,7 +35,7 @@ notes_internal: >-
 
 The band’s first album, *Sound As Ever*, came out in May 2000 on Echomusic and Litterbug Records. Mike Poole produced most of it and recorded and mixed it in Nashville; Mark Montgomery produced two tracks and designed the sleeve. Chad and David wrote almost all of the songs, and Scott played drums.
 
-The title is Gram Parsons’s sign-off: he signed his letters “Sound as ever”. The album ends with three hidden tracks, and the last of them is called “The International Submarine Band”, the name of Parsons’s first band.
+The title is Gram Parsons’s sign-off, “Sound as ever”. The album ends with three hidden tracks, and the last of them is called “The International Submarine Band”, the name of Parsons’s first band.
 
 That year the band’s website introduced it as “an original pop band with the drive and potential to conquer the world” whose “ultimate career goal is a caricature lunch box”.
 

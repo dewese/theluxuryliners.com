@@ -27,8 +27,8 @@
       "name": "Scott Carpenter",
       "roles": ["drums", "percussion", "vocals"],
       "years": "1998–",
-      "line": "Joined on drums in August 1998, and plays on every Luxury Liners record since.",
-      "source": "daviddewese.com DECISIONS P8; 2005 roster; DECISIONS-2026-10-07.md LL-18 (joined August 1998), LL-9 (in the band today); plays on every record from Sound As Ever on (data/releases.json personnel)",
+      "line": "Joined on drums in August 1998, and plays on every Luxury Liners album and single from *Sound As Ever* on.",
+      "source": "daviddewese.com DECISIONS P8; 2005 roster; DECISIONS-2026-10-07.md LL-18 (joined August 1998), LL-9 (in the band today); plays on every album and single from Sound As Ever on (data/releases.json personnel); the line deliberately does not cover Nashpop (1998), Antarctic Antics (2001) or the SESAC promo, where his part is unknown",
       "confidence": "confirmed-owner"
     },
     {
@@ -75,7 +75,7 @@
   ],
   "photographs": [
     { "id": "mark-montgomery-photos", "name": "Mark Montgomery", "roles": ["band photographs"], "years": "c. 2000–02", "source": "research/01 §3.3 (photo credits)", "confidence": "verified-source" },
-    { "id": "amy-wilstermann", "name": "Amy Wilstermann", "roles": ["*Overbored* promotional photographs"], "years": "2003", "source": "research/01 §3.3 (Flickr album description)", "confidence": "verified-source", "notes_internal": "Credit line only; no relationship to anyone is stated." },
+    { "id": "amy-wilstermann", "name": "Amy Wilstermann", "roles": ["*Overbored* promotional photographs"], "years": "2003", "source": "research/01 §3.3 (Flickr album description)", "confidence": "verified-source", "notes_internal": "Credit line only; no relationship to anyone is stated, and none may be. Before launch, confirm with David that Amy Wilstermann should be credited at all: the shared surname with Larry invites a family inference that LL-7 aims to prevent." },
     { "id": "kristina-marie-krug", "name": "Kristina Marie Krug", "roles": ["portraits of David"], "years": "c. 2000–03", "source": "research/01 §3.3", "confidence": "verified-source" }
   ],
   "held": [

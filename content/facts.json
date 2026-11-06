@@ -148,7 +148,7 @@
     {
       "id": "writers",
       "question": "Who wrote the songs?",
-      "answer": "Chad and David wrote most of *Sound As Ever* and both 2026 singles. David wrote *Nonetheless* and most of *Overbored*, and David Wilstermann wrote “Restless”. “Believe” on the *Believe* EP is a cover of Cher’s song; “Shake It Up” is the band’s own.",
+      "answer": "Chad and David wrote most of *Sound As Ever* and both 2026 singles. David wrote *Nonetheless* and wrote or co-wrote nearly all of *Overbored*, and David Wilstermann wrote “Restless”. “Believe” on the *Believe* EP is a cover of Cher’s song; “Shake It Up” is the band’s own.",
       "faq_jsonld": true,
       "source": "DECISIONS-2026-10-07.md LL-14 (Nonetheless, Great Day, New Beginning; Discogs credits for Sound As Ever and Overbored stand); daviddewese.com DECISIONS P27; data/releases.json songwriting",
       "confidence": "confirmed-owner"
@@ -156,7 +156,7 @@
     {
       "id": "sound-as-ever-name",
       "question": "What does “Sound As Ever” mean?",
-      "answer": "It was Gram Parsons’s sign-off: he signed his letters “Sound as ever”. The band named its first album after it.",
+      "answer": "It was Gram Parsons’s sign-off, “Sound as ever”. The band named its first album after it.",
       "faq_jsonld": true,
       "source": "DECISIONS-2026-10-07.md LL-21",
       "confidence": "confirmed-owner"
@@ -242,7 +242,7 @@
     }
   ],
   "dating_note": {
-    "heading": "How we date things",
+    "heading": "How dates are given",
     "text": "Release dates are the dates the streaming services list; for the older records the site gives the month. Where only a season or a range is known, the site says so. Where accounts differ, the band’s own answer stands."
   }
 }

@@ -48,7 +48,7 @@ notes_internal: >-
 
 The band never broke up. The four forever members reconnected during the pandemic and started making music again. Chad, who left Nashville in 2001, is in the band again today, and the four of them are spread across Tennessee, Michigan and Texas.
 
-In August 2021 Texas Music Café released “Shake It Up (Live at the Texas Music Café)”, recorded live in Waco, Texas, in autumn 1998. In 2025 “Precious To My Heart”, the hidden track from *Sound As Ever*, appeared on *Fireworks Vol. 3* from Sound Asleep Records.
+In August 2021 Texas Music Café released “Shake It Up (Live at the Texas Music Café)”, recorded live in Waco, Texas, in autumn 1998. In 2025 “Precious To My Heart”, the first of the hidden tracks on *Sound As Ever*, appeared on *Fireworks Vol. 3* from Sound Asleep Records.
 
 Then came the 2026 singles. “Great Day” came out on February 13, 2026, and “New Beginning” on April 17, 2026, both on Litterbug Records. Chad and David wrote them, all four forever members play on them, and David made both covers.
 
