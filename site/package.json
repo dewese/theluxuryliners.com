@@ -12,7 +12,7 @@
     "prepare:images": "node scripts/prepare-images.mjs",
     "redirects": "node scripts/build-redirects.mjs",
     "dev": "astro dev",
-    "build": "node scripts/validate-data.mjs --quiet && node scripts/prepare-images.mjs && node scripts/build-redirects.mjs && astro build && node scripts/build-redirects.mjs --check",
+    "build": "node scripts/validate-data.mjs --quiet && node scripts/prepare-images.mjs && astro build && node scripts/build-headers.mjs && node scripts/build-redirects.mjs && node scripts/build-redirects.mjs --check",
     "preview": "astro preview",
     "test": "npm run build && node tests/run.mjs",
     "test:unit": "node tests/run.mjs data unit dist jsonld",
@@ -26,7 +26,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "~7.3.5",
-    "sharp": "^0.35.5"
+    "sharp": "^0.35.5",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

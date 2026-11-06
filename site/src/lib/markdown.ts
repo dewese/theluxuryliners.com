@@ -3,6 +3,8 @@
 // Anything else is shown as text. Raw HTML is escaped.
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+export function mdInline(s: string): string { return inline(s); }
+
 function inline(s: string): string {
   return esc(s)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')

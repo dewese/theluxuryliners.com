@@ -4,19 +4,18 @@ import Base from '../layouts/Base.astro';
 import Cover from '../components/Cover.astro';
 import Photo from '../components/Photo.astro';
 import Listen from '../components/Listen.astro';
-import Copy from '../components/Copy.astro';
-import { ONE_LINER, STATUS_LINE, DISAMBIGUATION, SPREAD } from '../lib/site.ts';
+import { ONE_LINER, SPREAD } from '../lib/site.ts';
+import { homeView } from '../lib/views.ts';
 import { bySlug } from '../lib/releases.ts';
 import { COLLAGE } from '../lib/photos.ts';
-import people from '../../data/people.json';
 
 const singles = [bySlug('new-beginning'), bySlug('great-day')];
-const forever = people.forever.filter((p) => p.status === 'publish');
+const v = homeView();
 ---
 <Base title="Home" fullBand>
   <h1>The Luxury Liners</h1>
   <p class="lede">{ONE_LINER}</p>
-  <p class="status">{STATUS_LINE}</p>
+  <p class="status">{v.statusLine}</p>
 
   <section aria-labelledby="singles">
     <h2 id="singles">The 2026 singles</h2>
@@ -26,7 +25,7 @@ const forever = people.forever.filter((p) => p.status === 'publish');
           <a href={`/music/${r.slug}/`} aria-hidden="true" tabindex="-1"><Cover slug={r.slug} alt="" eager={i === 0} sizes="(max-width: 40rem) 100vw, 22rem" /></a>
           <h3><a href={`/music/${r.slug}/`}>{r.title}</a></h3>
           <p class="muted">{r.kind}, {r.dateLabel}</p>
-          <p>{r.blurb}</p>
+          <p set:html={v.blurb(r.slug)} />
           <Listen links={r.listen.filter((l) => ['spotify', 'apple_music', 'youtube_music'].includes(l.key))} title={r.title} />
         </article>
       ))}
@@ -41,12 +40,13 @@ const forever = people.forever.filter((p) => p.status === 'publish');
   </section>
 
   <section aria-labelledby="members">
-    <h2 id="members">The four forever members</h2>
+    <h2 id="members">{v.membersHeading}</h2>
     <ul>
-      {forever.map((p) => <li><strong>{p.name}</strong>: {p.role.replace(/^Co-founder; /, 'co-founder; ').replace(/^(\w)/, (c) => c.toLowerCase())}</li>)}
+      {v.members.map((m) => <li><strong set:html={m.nameHtml} />: <span set:html={m.roleHtml} /></li>)}
     </ul>
-    <p>The band called David Wilstermann “Larry” because it already had a David. {SPREAD}</p>
-    <Copy slot="home/intro" />
+    <p><span set:html={v.membersNoteHtml} /> {SPREAD}</p>
+    {v.bodyHtml && <div class="prose" set:html={v.bodyHtml} />}
+    <p><a href="/people/">Everyone who has played in the band</a></p>
   </section>
 
   <section aria-labelledby="more">
@@ -58,5 +58,5 @@ const forever = people.forever.filter((p) => p.status === 'publish');
     </ul>
   </section>
 
-  <p class="small muted">{DISAMBIGUATION}</p>
+  <p class="small muted" set:html={v.disambiguationHtml} />
 </Base>

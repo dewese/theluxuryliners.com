@@ -102,7 +102,7 @@ function findRaw(id: string): Raw {
   return r;
 }
 
-const coverAlt = (r: Raw, title: string) => `Cover of ${title} by The Luxury Liners.`;
+const coverAlt = (r: Raw, title: string) => `Sleeve art for ${title} by The Luxury Liners.`;
 
 export function release(id: string): Release {
   const r = findRaw(id);
@@ -149,8 +149,7 @@ const APPEARANCE_PUBLIC: Record<string, { note?: string; songs?: string[] | null
   'll-appearance-1998-nashpop': { label: 'Not Lame Recordings' },
   'll-appearance-2001-sesac-sxsw-promo': { note: 'A promo CD from the SESAC Showcase at SXSW 2001, where the band played.', label: '' },
   'll-appearance-2005-between-goodlettsville-and-murfreesboro': {},
-  // LL-13: the tracklist and the outside links of this disc are never shown.
-  'll-appearance-2008-make-the-best-of-it-bonus-disc': { note: 'A bonus disc that came with David Dewese’s album Make The Best Of It, with songs by The Foxymorons, The Luxury Liners and David.', songs: null, links: false },
+  // LL-13: the 2008 disc that carries the 'Great Day' demo is never listed or linked.
   'll-appearance-2023-texas-music-cafe-25-years-vol-1': { note: 'A different live recording of “Shake It Up” from the 2021 single.' },
   'll-appearance-2025-fireworks-vol-3': { note: '“Precious To My Heart” is the first hidden track of Sound As Ever.' },
 };

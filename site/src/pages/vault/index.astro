@@ -1,13 +1,11 @@
 ---
 // The Vault (plan §5.1; LL-27: history only, no MP3s or downloads of any kind).
 import Base from '../../layouts/Base.astro';
-import Copy from '../../components/Copy.astro';
 import vault from '../../../data/vault.json';
 ---
 <Base title="The Vault" description="The Luxury Liners archive: the old free MP3s and cover songs by title, the band journal, and the band’s websites since 2000.">
   <h1>The Vault</h1>
-  <p class="lede">The band’s history, kept as history. Nothing here is a download: the music is on the streaming services (see <a href="/listen/">Listen</a>).</p>
-  <Copy slot="vault/intro" />
+  <p class="lede">The band’s history, kept as history. The music itself is on the streaming services (see <a href="/listen/">Listen</a>).</p>
 
   <h2>In the Vault</h2>
   <ul>

@@ -1,21 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
-import press from '../../data/press.json';
-import { monthYear } from '../lib/dates.ts';
-const items = press.items.filter((p) => p.status === 'publish');
-const placements = press.placements.filter((p) => p.status === 'publish');
+import { pressView } from '../lib/views.ts';
+const v = pressView();
 ---
 <Base title="Press" description="Press about The Luxury Liners, 1998–2006, and the band’s songs on TV.">
   <h1>Press</h1>
+  {v.introHtml && <Fragment set:html={v.introHtml} />}
   <h2>On TV</h2>
-  <ul>{placements.map((p) => <li>{p.text} <a href={`/music/${p.release}/`}>About the record</a></li>)}</ul>
+  <ul>{v.placements.map((p) => <li set:html={p.html} />)}</ul>
   <h2>Coverage</h2>
   <ul>
-    {items.map((p: any) => (
+    {v.items.map((p) => (
       <li>
-        <time datetime={p.date}>{monthYear(p.date)}</time>. <cite>{p.publication}</cite>{p.headline && <>, “{p.headline}”</>}{p.writer && <>, by {p.writer}</>}: {p.type}{p.release ? <> (<a href={`/music/${p.release}/`}>about the record</a>)</> : null}.
-        {p.text && <> {p.text}</>}
-        {p.excerpt && <blockquote><p>{p.excerpt}</p>{p.excerptBy && <footer>{p.excerptBy}</footer>}</blockquote>}
+        <time datetime={p.datetime}>{p.when}</time>. <span set:html={p.headHtml} />.
+        {p.aboutHtml && <> <span set:html={p.aboutHtml} /></>}
+        {p.excerptHtml && <blockquote><p set:html={p.excerptHtml} />{p.speakerHtml && <footer set:html={p.speakerHtml} />}</blockquote>}
       </li>
     ))}
   </ul>

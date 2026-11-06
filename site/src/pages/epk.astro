@@ -8,19 +8,22 @@ import { ONE_LINER, NEVER_BROKE_UP } from '../lib/site.ts';
 import { RELEASES } from '../lib/releases.ts';
 import { PHOTOS, creditLine } from '../lib/photos.ts';
 import press from '../../data/press.json';
+import { epkView } from '../lib/views.ts';
+const v = epkView();
 const quotes = press.items.filter((p: any) => p.status === 'publish' && p.excerpt && !p.excerptBy);
 const epkPhotos = PHOTOS.filter((p) => ['four-2002', 'studio-2000', 'blue-suits-1998', 'chads-last-show'].includes(p.id));
 ---
 <Base title="Press kit" description="The Luxury Liners press kit: bios, fact sheet, photos with credits, logos and press quotes.">
   <h1>Press kit</h1>
+  {v.introHtml && <p class="lede" set:html={v.introHtml} />}
   <h2>In one line</h2>
   <p class="prose">{ONE_LINER}</p>
-  <h2>Bio, 50 words</h2>
-  <Copy slot="epk/bio-50" />
-  <h2>Bio, 150 words</h2>
-  <Copy slot="epk/bio-150" />
-  <h2>Bio, 300 words</h2>
-  <Copy slot="epk/bio-300" />
+  {v.bios.map((b: any) => (
+    <>
+      <h2>{b.heading}</h2>
+      {b.html ? <div class="prose" set:html={b.html} /> : <Copy name={b.slot ?? 'epk/bio'} />}
+    </>
+  ))}
 
   <h2>Fact sheet</h2>
   <dl class="facts">
@@ -54,5 +57,5 @@ const epkPhotos = PHOTOS.filter((p) => ['four-2002', 'studio-2000', 'blue-suits-
   </div>
   <p>The band’s logos date from 1999–2002.</p>
   <h2>Contact</h2>
-  <p>Use the <a href="/contact/?topic=press">contact form</a>.</p>
+  <p>{v.contactHtml ? <span set:html={v.contactHtml} /> : 'Use the contact form.'} <a href="/contact/?topic=press">Contact the band</a>.</p>
 </Base>
