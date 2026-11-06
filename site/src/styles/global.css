@@ -219,12 +219,34 @@ table { border-collapse: collapse; width: 100%; }
 /* ---------------------------------------------------------------- home: hero */
 .hero { padding-block: clamp(36px, 6vw, 84px) clamp(48px, 7vw, 96px); overflow: hidden; }
 .hero__grid { display: grid; gap: 40px; align-items: center; }
-@media (min-width: 900px) { .hero__grid { grid-template-columns: 1.05fr 0.95fr; gap: 56px; } }
 .hero__logo { margin: 0 0 24px; }
 .logo-full { display: block; width: min(100%, 520px); height: auto; color: #ffffff; }
-/* Phones: the latest single comes before the one-liner and the lockup is smaller, so a 2026 cover
-   is on the first screen (LL-26; audit-design round 1, S1) */
-@media (max-width: 699.98px) {
+.hero .lede { font-weight: 500; }
+.status {
+  display: block; max-width: 34em; font-weight: 800; font-size: 1.0625rem; letter-spacing: 0.02em;
+  border-top: 3px solid #ffffff; border-bottom: 3px solid #ffffff; padding: 8px 0; margin: 8px 0 0;
+}
+.hero__latest .kicker { font-size: 0.9375rem; }
+/* The cover stack, as in the sample: the front cover 84% wide and tilted -3deg, the Great Day kite
+   card over its lower-right corner. The links and pictures are blocks, so the width and the tilt
+   apply (audit-design round 3, S1). These base rules come before the media blocks below, so the
+   phone cap wins there. */
+.stack { position: relative; width: min(100%, 540px); padding: 0 0 14% 0; }
+.stack img { display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35); }
+.stack picture { display: block; }
+.stack__front { display: block; position: relative; width: 84%; transform: rotate(-3deg); z-index: 1; }
+.stack__back { display: block; position: absolute; width: 40%; right: 0; bottom: 0; transform: rotate(6deg); z-index: 2; }
+.stack__back img { border: 6px solid #ffffff; }
+/* Two columns from 640 px, so on small tablets the cover sits beside the lockup instead of a
+   screen below it (audit-design round 3, S2) */
+@media (min-width: 640px) and (max-width: 899.98px) {
+  .hero__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .logo-full { width: min(100%, 300px); }
+}
+@media (min-width: 900px) { .hero__grid { grid-template-columns: 1.05fr 0.95fr; gap: 56px; } }
+/* Phones (one column, portrait or landscape): the latest single comes before the one-liner and the
+   lockup is smaller, so a 2026 cover is on the first screen (LL-26; audit-design round 1, S1) */
+@media (max-width: 639.98px) {
   .hero__grid { gap: 20px; }
   .hero__text { display: contents; }
   .hero__logo { order: 1; margin-bottom: 0; }
@@ -232,7 +254,18 @@ table { border-collapse: collapse; width: 100%; }
   .hero .lede { order: 3; margin: 0; }
   .hero .status { order: 4; }
   .logo-full { width: min(100%, 190px); }
-  .stack { width: min(100%, 300px); }
+}
+@media (max-width: 639.98px) { .stack { width: min(100%, 300px); } }
+/* Landscape phones (a short screen), at any width: two columns, a short run-up and a small
+   lockup, with the cover top-aligned beside the text, so it starts on the first screen (round 3, S2) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { padding-top: 20px; }
+  .hero__grid { grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .hero__text { display: block; }
+  .hero__logo { margin-bottom: 16px; }
+  .hero .lede { margin: 0 0 1em; }
+  .logo-full { width: min(100%, 150px); }
+  .hero__latest .kicker { margin-bottom: 10px; }
 }
 /* Small phones: a shorter run-up to the cover, so at least 250 px of it is on a 320x568 first
    screen (design r2 S1; browser test) */
@@ -242,17 +275,6 @@ table { border-collapse: collapse; width: 100%; }
   .logo-full { width: min(100%, 150px); }
   .hero__latest .kicker { margin-bottom: 10px; }
 }
-.hero .lede { font-weight: 500; }
-.status {
-  display: block; max-width: 34em; font-weight: 800; font-size: 1.0625rem; letter-spacing: 0.02em;
-  border-top: 3px solid #ffffff; border-bottom: 3px solid #ffffff; padding: 8px 0; margin: 8px 0 0;
-}
-.hero__latest .kicker { font-size: 0.9375rem; }
-.stack { position: relative; width: min(100%, 540px); padding: 0 0 14% 0; }
-.stack img { border-radius: 4px; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35); }
-.stack__front { position: relative; width: 84%; transform: rotate(-3deg); z-index: 1; }
-.stack__back { position: absolute; width: 40%; right: 0; bottom: 0; transform: rotate(6deg); z-index: 2; }
-.stack__back img { border: 6px solid #ffffff; }
 
 /* ---------------------------------------------------------------- home: singles */
 .singles { display: grid; gap: 24px; margin-bottom: 40px; }
@@ -263,7 +285,9 @@ table { border-collapse: collapse; width: 100%; }
 .single h3 a { color: var(--ink); text-decoration: none; }
 .single h3 a:hover { text-decoration: underline; }
 .single p { margin-bottom: 0.5em; }
-@media (max-width: 520px) { .single { grid-template-columns: 1fr; } .single picture, .single > a { width: 160px; } }
+/* phones: the cover stays beside the title down to 360 px (design r3 m8); below that it stacks */
+@media (max-width: 520px) { .single { grid-template-columns: 120px 1fr; gap: 16px; } }
+@media (max-width: 359.98px) { .single { grid-template-columns: 1fr; } .single picture, .single > a { width: 160px; } }
 
 /* ---------------------------------------------------------------- video facade */
 .video { max-width: 640px; }
@@ -293,6 +317,7 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .credit { white-space: normal; }
 .framed img { box-shadow: var(--shadow); }
 .col-note { display: block; margin-top: 4px; font-size: 0.875rem; }
+.collage .col-note { font-size: inherit; } /* the same size as the caption it follows (design r3 m4) */
 
 /* ---------------------------------------------------------------- home: era collage (LL-32) */
 .collage { display: grid; gap: 28px; grid-template-columns: 1fr; }
@@ -305,6 +330,8 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
   .collage { grid-template-columns: 1fr 1fr; gap: 14px; }
   .col-1, .col-2, .col-7, .col-more { grid-column: 1 / -1; }
   .collage figcaption { font-size: 0.8125rem; }
+  /* equal-height pairs: the small frames share one shape (design r3 m2; crop loss under 15%) */
+  .collage figure:not(.col-1):not(.col-2):not(.col-7) img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 }
 /* From 480 px the small frames go two-up; the cut-out and the 2002 photo stay full width (design S2) */
 @media (min-width: 480px) and (max-width: 999.98px) {
@@ -371,8 +398,9 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 /* list doors (/music/ "Also"): the dot and the title share a row, the text starts at the card's
    own edge (audit-design polish 2) */
 .doors--list li { display: flex; }
-.doors--list a { height: 100%; width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px 14px; border-radius: 28px; }
-.doors--list a > span:not(.doors__sub) { min-width: 0; overflow-wrap: break-word; }
+/* top-aligned, so the titles of equal-height cards share a line (design r3 m1) */
+.doors--list a { height: 100%; width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; align-content: start; justify-content: start; gap: 10px 14px; border-radius: 28px; }
+.doors--list a > span:not(.doors__sub) { min-width: 0; overflow-wrap: break-word; line-height: 1.15; }
 .doors__sub { grid-column: 1 / -1; font-family: "Archivo", sans-serif; text-transform: none; font-size: 1rem; font-weight: 500; }
 .disamb { max-width: 60em; margin: 0; }
 
@@ -407,6 +435,11 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .band--short-end { padding-bottom: clamp(20px, 3vw, 40px); }
 .home-video { margin-top: clamp(32px, 5vw, 56px); }
 .home-video .video { max-width: none; }
+/* the home "Watch" head is a section-style head pinned to the top of its column, as on the
+   release pages (design r3 m3) */
+@media (min-width: 900px) { .home-video { align-items: start; } }
+.home-video .h3 { font-family: "Archivo Black", sans-serif; font-weight: 400; font-size: clamp(1.4rem, 2.5vw, 2.2rem); text-transform: uppercase; line-height: 1.1; display: flex; align-items: center; gap: 0.35em; }
+.home-video .h3 .dot { height: 0.9em; width: auto; }
 
 .tracks { list-style: none; }
 .track {
@@ -442,6 +475,9 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
   color: var(--ink); text-decoration: none; font-weight: 800; min-width: min(100%, 260px);
 }
 .pager a.next { margin-left: auto; text-align: right; }
+/* "All releases" sits centred between the two pager pills as a smaller plain pill (design r3 m6) */
+.pager a.all { align-self: center; margin-inline: auto; min-width: 0; padding: 10px 20px; border-width: 2px; }
+.pager a.all ~ a.next { margin-left: 0; }
 .pager a:hover { background: var(--ink); color: var(--bg); }
 .pager a:hover .meta { color: var(--bg); }
 .pager .meta { font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.75rem; }
@@ -610,4 +646,3 @@ button[type="submit"]:hover { background: var(--ink); color: var(--bg); }
   .nav ul { gap: 2px 10px; }
   .nav a { letter-spacing: 0.02em; }
 }
-.all-link { margin: 28px 0 0; }

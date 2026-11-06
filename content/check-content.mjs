@@ -6,7 +6,7 @@
 //                                                  the LL-6 one-liner is compared byte for byte there
 //   node content/check-content.mjs --dist-only dist
 //   node content/check-content.mjs --repo          every tracked file (git ls-files): private literals only
-//                                                  (the repository is public; see REPO_EXCEPTIONS)
+//                                                  (the repository is public; no file is exempt)
 //   node content/check-content.mjs --self-test     prove every rule fires on a bad sample and not on a good one
 //   add --json for machine-readable output
 //
@@ -37,7 +37,7 @@ const INTERNAL_KEYS = new Set([
   'sources', 'source', 'confidence', 'contested', 'notes_internal', 'held', 'checked_on', 'checked_by',
   'why', 'id', 'sort_key', 'date_precision', 'release_id', 'show_id', 'faq_jsonld', 'publish', 'data',
   'chapters_dir', 'use', 'target_words', 'era', 'slug', 'page', 'photo', 'file', 'link', 'href',
-  'excerpt_speaker', 'kind_internal', 'claim', 'item',
+  'excerpt_speaker', 'kind_internal', 'claim', 'item', 'journalDerivedApproved',
 ]);
 const SKIP_FILES = new Set(['CHECK.md', 'check-content.mjs']);
 
@@ -375,11 +375,10 @@ function checkDist(dir) {
 // --repo: the repository is public, so no tracked file may hold a private literal (hashed match,
 // content/private-literals.mjs). Each line is also read with regex escapes removed, so a literal
 // written as a pattern (a word-boundary escape before it) is caught too.
-// REPO_EXCEPTIONS: files the owner has to decide on. Only the owner edits the decisions file; its
-// LL-4 founding story and LL-31 contact address are in public history already, and the owner must
-// choose (accept, approve a history purge, or make the repository private) and reword (site/BUILD-LOG.md,
-// "Owner decisions needed"). Nothing else may be added here without an owner decision.
-export const REPO_EXCEPTIONS = new Set(['DECISIONS-2026-10-07.md']);
+// REPO_EXCEPTIONS: none. The repository is public, so every tracked file is scanned. The decisions
+// file names its two private details by role only (security audit round 3, B1); the exact wording
+// is in the git-ignored data/private/decisions-private.md. Adding a file here needs an owner decision.
+export const REPO_EXCEPTIONS = new Set([]);
 const BINARY = /\.(png|jpe?g|webp|avif|gif|ico|woff2?|ttf|otf|pdf|mp3|zip|gz|psd|tiff?|bmp|eps|ai)$/i;
 export function repoHits(rel, text, hashes = privateHashes, key = privateKey) {
   const out = [];

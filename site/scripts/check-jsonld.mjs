@@ -9,7 +9,7 @@ import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..');
-const dist = join(site, 'dist');
+const dist = process.env.LL_DIST ?? join(site, 'dist'); // tests/run.mjs points LL_DIST at its snapshot
 if (!existsSync(join(dist, 'index.html'))) { console.error('check-jsonld: dist/ not built'); process.exit(1); }
 const pages = [];
 const walk = (d) => readdirSync(d, { withFileTypes: true }).forEach((e) => { const p = join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name.endsWith('.html')) pages.push(p); });

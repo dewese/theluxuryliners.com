@@ -13,5 +13,5 @@ const credit = creditLine(p);
     {(p as any).webp !== false && <source type="image/webp" srcset={set('webp')} sizes={sizes} />}
     <img src={`/img/photos/${p.id}-${p.widths[0]}.jpg`} srcset={set('jpg')} sizes={sizes} alt={p.alt} width={p.width} height={p.height} loading={eager || priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding={priority ? undefined : 'async'} />
   </picture>
-  {caption && <figcaption>{p.caption}.{credit && <>{" "}<span class="credit">{credit}.</span></>}{note && <span class="col-note">{note}</span>}</figcaption>}
+  {caption && <figcaption>{p.caption}.{credit && <>{" "}<span class="credit">{credit}.</span></>}{note && <>{" "}<span class="col-note">{note}</span></>}</figcaption>}
 </figure>

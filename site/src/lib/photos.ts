@@ -37,7 +37,7 @@ export const sortPhotos = (ps: Photo[]): Photo[] => ps.map((p, i) => [p, i] as c
 export const COLLAGE: Photo[] = PHOTOS.filter((p) => typeof (p as any).collage === 'number').sort((a, b) => (a as any).collage - (b as any).collage);
 
 export const ERAS = [
-  { id: '1997-2000', label: '1997–2000' },
+  { id: '1998-2000', label: '1998–2000' },
   { id: '2001-2004', label: '2001–2004' },
   { id: '2005-2007', label: '2005–2007' },
   { id: '2008-', label: '2008 on' },

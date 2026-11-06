@@ -14,9 +14,10 @@ import PageHead from '../../components/PageHead.astro';
 import SecHead from '../../components/SecHead.astro';
 import { TOPICS, LIMITS, MESSAGES, RULES_TEXT } from '../../lib/contact.ts';
 import { SOCIAL } from '../../lib/site.ts';
+import { safeJson } from '../../lib/json.ts';
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 // the rules for contact.js, as a JSON data block (not executed; the CSP allows no inline script)
-const rules = JSON.stringify({ limits: LIMITS, messages: MESSAGES }).replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
+const rules = safeJson({ limits: LIMITS, messages: MESSAGES });
 ---
 <Base title="Contact" description="Contact The Luxury Liners: booking, press, licensing and fan mail.">
   <Fragment slot="head">

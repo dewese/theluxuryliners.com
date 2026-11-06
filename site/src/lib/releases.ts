@@ -37,7 +37,6 @@ const WRITER_OVERRIDES: Record<string, (title: string) => string[] | undefined> 
   nonetheless: () => ['David Dewese'],
   'great-day': () => ['Chad Edgington', 'David Dewese'],
   'new-beginning': () => ['Chad Edgington', 'David Dewese'],
-  'sound-as-ever': (t) => (t === 'The Duke Of Gloucester' ? ['David Dewese'] : undefined),
 };
 
 /** Who plays on each record (from the credits and the owner decisions; band roles only). */
@@ -182,7 +181,7 @@ const APPEARANCE_PUBLIC: Record<string, { note?: string; songs?: string[] | null
   'll-appearance-2001-sesac-sxsw-promo': { note: 'A promo CD from the SESAC Showcase at SXSW 2001, where the band played.', label: '' },
   'll-appearance-2005-between-goodlettsville-and-murfreesboro': {},
   // LL-13: the 2008 disc that carries the 'Great Day' demo is never listed or linked.
-  'll-appearance-2023-texas-music-cafe-25-years-vol-1': { note: 'A different live recording of “Shake It Up” from the 2021 single.' },
+  'll-appearance-2023-texas-music-cafe-25-years-vol-1': { note: 'A live “Shake It Up”, released as a separate track from the 2021 single.' },
   'll-appearance-2025-fireworks-vol-3': { note: '“Precious To My Heart” is the first hidden track of Sound As Ever, listed there as “Precious”.' },
 };
 export const APPEARANCES: Appearance[] = Object.entries(APPEARANCE_PUBLIC).map(([id, pub]) => {

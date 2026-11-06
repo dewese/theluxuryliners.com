@@ -99,7 +99,10 @@ LL-25); `/vault/news/`, `/vault/trunk-box/`, `/vault/live-liners/` → `/vault/`
 ## RELEASE mode
 
 `RELEASE=1 node scripts/check-dist.mjs` (and `npm run build:production`) also fails on PLACEHOLDER
-copy and on missing keys (`PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`). Verified:
+copy and on missing keys (`PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`). From round 3
+it also fails while launch gate G1 is open (`"journalDerivedApproved": false` in
+`content/shows.json`) and while `dist/admin/config.yml` has no `https://` backend `base_url`. So
+today it fails on four items: the two keys, G1 and the Decap sign-in helper. Verified:
 with dummy keys and today's `content/` it passes; with `CONTENT_DIR=/nonexistent` it fails on 13
 PLACEHOLDER blocks (Story, EPK) while the normal checks and axe still pass on the fallback site.
 
@@ -323,9 +326,9 @@ in the repository.
    repository private. Nothing in the current tree names them. Round 2: this also covers the
    contact address written into `critiques/audit-copy-round2.md` line 5 by commit `5eaab60`
    (reworded in the tree, still in history) and the earlier unsalted digests.
-2. **`DECISIONS-2026-10-07.md`**: LL-4 names the founding-story town and the LL-31 row names the
-   contact address. Only the owner edits that file; `check-content --repo` exempts it
-   (`REPO_EXCEPTIONS`) until it is reworded.
+2. **`DECISIONS-2026-10-07.md`**: (round 3) the LL-4 and LL-31 cells now name the town and the
+   address by role; the exact wording is in the git-ignored `data/private/decisions-private.md`,
+   and `REPO_EXCEPTIONS` is empty. The owner's OK on the wording is launch gate G3.
 3. **LL-25**: approve (or hold) the journal-derived details on /shows/ and in Story ch. 5.
 4. **Contact without JavaScript**: production now requires Turnstile. To accept no-JS messages
    again, set `ALLOW_NO_JS_CONTACT="1"` and drop `REQUIRE_TURNSTILE`.
@@ -443,3 +446,124 @@ Verification (2026-11-06, round 2): `npm test`: data, unit (86 tests), dist, jso
 (self-test 53/53) and axe (370/370; behaviour 223/223, the /admin/ check ran with the real bundle)
 all PASS. `node content/check-content.mjs --dist site/dist`: 0 errors (12 deliberate warnings);
 `node content/check-content.mjs`: 0 errors. Not deployed.
+
+## Round 3 audits: fixes (2026-11-06)
+
+Reports: `critiques/audit-security-round3.md` (7.5, not approved), `critiques/audit-copy-round3.md`
+(8.7), `critiques/audit-design-round3.md` (8.0). The user confirmed design C "Roundel" (LL-44) and
+the Amy Wilstermann credit for the 2003 photos (LL-45); nothing here changes either.
+
+### Blocking
+
+- **Security B1 (private details in the public decisions file):** the two cells of
+  `DECISIONS-2026-10-07.md` now say the same thing by role: LL-4 "a Texas town (named in the
+  git-ignored `data/private/decisions-private.md` …)", LL-31 "the owner's address (the Worker secret
+  `CONTACT_TO` …)". No decision changed. The exact original cells are in
+  `data/private/decisions-private.md` (git-ignored, checked with `git check-ignore`).
+  `REPO_EXCEPTIONS` in `content/check-content.mjs` is now empty, so `--repo` scans every tracked
+  file: 0 errors. The owner could not be asked from this run, so the rewording was made (it only
+  removes two private literals, as LL-7 requires) and the owner's one-line OK is asked as launch
+  gate **G3** in `QUESTIONS-FOR-CARLY.md`; launch waits for it. The history question stays with the
+  owner ("Owner decisions needed", item 1). The repository's visibility was not changed: that is the
+  owner's call.
+
+### Should fix: done
+
+- **Copy S1 (LL-25 gate):** G1 now names every journal-derived place (the /shows/ 2001–04 rows,
+  chapter 5, the /shows/ meta description, the chapter 5 summary on the Story index and in
+  `llms.txt`, and the EPK long-bio sentence), with the fallback wording if David says no.
+  `"journalDerivedApproved": false` in `content/shows.json` makes `RELEASE=1 check-dist` fail until
+  David answers (test in `tests/dist/audit3.test.mjs`).
+- **Copy S2:** LP track A6 writers are `["David Dewese"]` in `data/releases.json`. New
+  `validate-data` rule: a reissue's track with a `cd_track` must carry the parent CD track's writers
+  (proved to fire on the old value). The now-redundant `sound-as-ever` override in
+  `src/lib/releases.ts` is gone. `compare-releases` still reports the shared fields match.
+- **Copy S3:** "A live “Shake It Up”, released as a separate track from the 2021 single." (page and
+  the master data note).
+- **Copy S4:** "A third album, two year-end lists, and the band still playing." (ch. 7 summary,
+  which feeds the Story index and `llms.txt`); the meta description says "two year-end lists" and
+  names the October 2006 Litterbug release to stay within the 120–155 character rule.
+- **Copy S5:** the early October 2003 row reads "The first performance of “Circles”."; whether
+  "Still In Love" is "So In Love" is asked under G1.
+- **Copy S6:** /accessibility/ "November 6, 2026"; /press/ "shop catalog listing".
+- **Copy S7:** the first /photos/ section is "1998–2000" (era id `1998-2000` in `photos.json`,
+  `photos.ts` and the editor's options).
+- **Copy S8:** the `brosephs` id, image files and card are now `white-shirts-1998`
+  (`site/data/photos.json`, `site/data/image-sizes.json`). No redirect: the site has never been
+  published, so the old image paths were never public.
+- **Copy S9 (test isolation):** `npm test` is now `node tests/run.mjs --build`. The run holds
+  `site/.build.lock` (`scripts/lock.mjs`; `npm run build` takes it too, a child of the holder does
+  not), so a second build or test run waits and says so; a lock left by a dead process is taken
+  over. The suites read a snapshot of `dist/` in a temporary directory (`LL_DIST`), never the live
+  `dist/`. Before the browser suite starts, `playwright-core` and `@axe-core/playwright` must
+  resolve; a missing one fails the suite with its name. Every suite stays mandatory.
+- **Copy polish:** a space before the 2002 photo's `col-note`.
+- **Security S1:** `src/lib/json.ts` `safeJson` (escapes `<`, `>`, U+2028, U+2029) in
+  `Base.astro` (JSON-LD) and the contact page's rules block; dist test: no JSON block holds a
+  literal `<`, and each parses.
+- **Security S2:** `markdown.ts` takes link targets out before `smart()` and escaping, curls only the
+  link text, and attribute-escapes the raw target (`&"<>`), keeping the `https?://` or `/`
+  allowlist. Unit test with `"` and `'` in targets. Every built page's visible text and link list
+  is unchanged by it (compared against the previous build).
+- **Security S3:** `RELEASE=1 check-dist` fails when `dist/admin/config.yml` has no `https://`
+  `base_url` under `backend`; the config comment says to set `auth_endpoint` with it once the
+  sign-in helper exists.
+- **Security minor:** `ADMIN_CSP` adds `form-action 'none'` and `upgrade-insecure-requests` (with
+  the reasons for `img-src https:` and `style-src 'unsafe-inline'` in the comment);
+  `/.well-known/security.txt` gives the contact page URL and an `Expires` date (2027-11-06; a dist
+  test fails once it has passed, so it gets renewed); QUESTIONS B11 reworded to "Where is the band
+  based today? (see F3)". `upload_source_maps` stays unset.
+- **Design S1:** `.stack__front` and the stack's pictures are blocks, so the 84% width and the −3°
+  tilt render; the base `.stack` rules come before the phone block, so the 300 px phone cap
+  applies. Measured: front/stack 0.84 at every size from 320 to 1440; the kite card overlaps the
+  lower-right corner. The hero `sizes` now follow the real layout (the browser picks 600w at 1440,
+  300w for a 252 px cover at 375 DPR 1). Behaviour test: front ≤ 0.86 × stack and a tilted block
+  at 1440 and 375, stack ≤ 300 px at 375.
+- **Design S2:** two columns from 640 px (lockup capped at 300 px); on short landscape screens
+  (`max-height: 500px` and landscape) the hero is two columns at any width, top-aligned, with a
+  150 px lockup. Cover on the first screen: 180 px at 667x375, 244 px at 844x390, 800 px at
+  768x1024 (behaviour test: at least 120 px at all three). 320x568 still shows 268 px.
+- **Design m1:** "Also" cards top-aligned, titles at line-height 1.15. **m2:** the four small
+  collage frames are 4:3 with `object-fit: cover` at 360–479 px (sources are 1.33–1.5, so the crop
+  stays under 15%). **m3:** the home "Watch “Great Day”" head is top-aligned, with a roundel and the
+  section-head type, kept an h3 under "The 2026 singles". **m4:** the collage note inherits the
+  caption size. **m5:** the ink (white) roundel in "All the photos" and in the outlined hero pills
+  on sky; the white primary pill keeps the red one. **m6:** "All releases" is a small plain pill
+  centred between the pager pills. **m7:** chapter heads `min(31rem, 90vw)`, EPK grid
+  `(min-width: 40rem) 24rem`. **m8:** the 2026 single cards keep a 120 px cover beside the text
+  down to 360 px.
+
+### Skipped, with reasons
+
+- **Security B1, "get the owner's OK first":** no owner could be asked from this run. The rewording
+  only removes two literals LL-7 already forbids in the public repository, so it was done now and
+  the OK is a launch gate (G3) rather than a precondition. Making the repository private was not
+  done: it is the owner's decision.
+- **Security S3, `auth_endpoint`:** the sign-in helper does not exist yet; left as a commented
+  instruction next to `base_url`.
+- **Copy polish (Le Jive city, the 2006 "Where" cell, "other people" vs "other writers"):** optional
+  and not asked for in this round's fix list.
+
+### Tests added or changed (none weakened)
+
+`tests/dist/audit3.test.mjs` (9 tests: JSON blocks, safeJson, ADMIN_CSP, security.txt, release
+gates, round-3 wording, the `brosephs` slug, the col-note space, the pager). `tests/unit/helpers`
++1 (Markdown link targets). `tests/browser/behaviour.mjs` +8 checks (stack inset and tilt at 1440
+and 375, phone cap, first screen at 667x375, 844x390 and 768x1024). Two assertions changed with the
+copy they pin: the accessibility date is now US style, and the hero `sizes` value follows the fixed
+layout. `scripts/validate-data.mjs` +1 rule (LP writers follow the CD). The dist suites, the Worker
+headers test and the browser harness read `LL_DIST` (the run's snapshot).
+
+### Owner decisions needed (round 3 additions)
+
+1. **G3:** a one-line OK on the role wording of LL-4 and LL-31 in the decisions file.
+2. **G1, widened:** David's approval of all journal-derived material, and whether "Still In Love" is
+   "So In Love". Then set `journalDerivedApproved` to `true`.
+3. **Decap sign-in helper:** set `backend.base_url` (and `auth_endpoint`) in
+   `public/admin/config.yml` once it exists; the release check enforces it.
+
+Verification (2026-11-06, round 3): `npm test`: data, unit (96 tests), dist, jsonld, repo
+(self-test 53/53) and axe (370/370; behaviour 231/231) all PASS. `node content/check-content.mjs`:
+0 errors; `--dist site/dist`: 0 errors (the same 12 deliberate warnings); `--repo`: 0 errors with
+no exempt file. `RELEASE=1 check-dist` fails only on the two keys, G1 and the Decap `base_url`.
+Not deployed.

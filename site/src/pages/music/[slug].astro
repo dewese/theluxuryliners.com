@@ -173,9 +173,9 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
       {!video && chapter && <p>Chapter {chapter.n} of the Story tells this part of the band’s history: <a href={chapter.href}>read “<span set:html={chapter.titleHtml} />”</a>.</p>}
       <div class="pager">
         {prev && <a class="prev" href={`/music/${prev.slug}/`}><span class="meta">Earlier</span><span>{prev.title} ({prev.year})</span></a>}
+        <a class="all" href="/music/">All releases</a>
         {next && <a class="next" href={`/music/${next.slug}/`}><span class="meta">Later</span><span>{next.title} ({next.year})</span></a>}
       </div>
-      <p class="intro all-link"><a href="/music/">All releases</a></p>
     </div>
   </nav>
 </Base>

@@ -47,8 +47,8 @@ const collageSizes = (i: number) => i === 1
       <div class="hero__latest">
         <p class="kicker">{latestLabel}</p>
         <div class="stack">
-          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager priority alt={LATEST.coverAlt} sizes="(max-width: 43.7rem) min(84vw, 252px), (max-width: 56rem) 84vw, min(37vw, 532px)" /></a>
-          <a href="/music/great-day/" class="stack__back"><Cover slug="great-day" eager alt={bySlug('great-day').coverAlt} sizes="(max-width: 43.7rem) 120px, (max-width: 56rem) 40vw, 14rem" /></a>
+          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager priority alt={LATEST.coverAlt} sizes="(max-width: 39.99rem) min(calc(84vw - 27px), 252px), (max-width: 56.24rem) calc(42vw - 40px), min(calc(40vw - 48px), 447px)" /></a>
+          <a href="/music/great-day/" class="stack__back"><Cover slug="great-day" eager alt={bySlug('great-day').coverAlt} sizes="(max-width: 39.99rem) 120px, (max-width: 56.24rem) calc(20vw - 19px), 14rem" /></a>
         </div>
         <Listen links={heroListen} title={LATEST.title} variant="hero" />
       </div>
@@ -79,7 +79,7 @@ const collageSizes = (i: number) => i === 1
       {video && (
         <div class="two-col two-col--media home-video">
           <div>
-            <h3 class="h3">Watch “{video.song}”</h3>
+            <h3 class="h3"><Dot /><span>Watch “{video.song}”</span></h3>
             <p>The first of the two 2026 singles. <a href="/music/great-day/">About the record</a></p>
           </div>
           <YouTube {...video} />
@@ -96,7 +96,7 @@ const collageSizes = (i: number) => i === 1
         {COLLAGE.map((p, i) => (p as any).cutout
           ? <Cutout id={p.id} class={`col-${i + 1}`} />
           : <Photo id={p.id} class={`col-${i + 1}`} sizes={collageSizes(i)} note={p.id === 'four-2002' ? fourNote : undefined} />)}
-        <p class="col-more"><a class="pill" href="/photos/"><Dot /><span>All the photos</span></a></p>
+        <p class="col-more"><a class="pill" href="/photos/"><Dot ink /><span>All the photos</span></a></p>
       </div>
     </div>
   </section>

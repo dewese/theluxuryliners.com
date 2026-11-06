@@ -46,11 +46,11 @@ const card = leadPhoto ? { image: `${SITE}/img/cards/${leadPhoto}.jpg`, imageAlt
         </div>
         {r && (
           <figure class="chapter__cover">
-            <a href={`/music/${r.slug}/`}><Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) 90vw, 29rem" /></a>
+            <a href={`/music/${r.slug}/`}><Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) 90vw, min(31rem, 90vw)" /></a>
             <figcaption>{r.artwork.length ? <>{r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)} {COVER_RIGHTS}</> : COVER_RIGHTS_LINE}</figcaption>
           </figure>
         )}
-        {headPhoto && <Photo id={headPhoto} eager class="chapter__cover" sizes="(max-width: 56rem) 90vw, 28rem" />}
+        {headPhoto && <Photo id={headPhoto} eager class="chapter__cover" sizes="(max-width: 56rem) 90vw, min(31rem, 90vw)" />}
       </div>
     </header>
     <div class="band">

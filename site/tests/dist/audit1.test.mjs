@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const root = join(site, '..');
-const dist = join(site, 'dist');
+const dist = process.env.LL_DIST ?? join(site, 'dist'); // tests/run.mjs points LL_DIST at its snapshot
 const page = (p) => readFileSync(join(dist, p, 'index.html'), 'utf8');
 const decode = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const text = (h) => decode(h.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<\/?(?:em|strong|a|span|cite|time|i|b)\b[^>]*>/gi, '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
@@ -37,7 +37,7 @@ test('copy B1/B2: no Discogs sourcing sentences on the release pages', () => {
 
 test('a11y B1: the accessibility statement is dated, has a status and known limitations, and claims only what is true', () => {
   const t = text(page('accessibility'));
-  assert.match(t, /last reviewed on 6 November 2026/);
+  assert.match(t, /last reviewed on November 6, 2026/); // US style, as on every other page (copy audit round 3, S6)
   assert.match(t, /partially conforms to WCAG 2\.2 level AA/);
   assert.match(t, /Known limitations/);
   assert.doesNotMatch(t, /each time the site is built, and a page that fails is not published/);

@@ -7,11 +7,19 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 export function mdInline(s: string): string { return inline(s); }
 
+const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const LINK = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g;
+
 function inline(s: string): string {
-  return esc(smart(s))
+  // Link targets are taken out before smart() and escaping (security audit round 3, S2): smart()
+  // curls quotes in the link text only, and the raw target is attribute-escaped. The brackets
+  // stay in place so smart() sees the same context as before; U+E001 n U+E002 marks target n.
+  const targets: string[] = [];
+  const marked = s.replace(LINK, (_m, text: string, href: string) => `[${text}]\uE001${targets.push(href) - 1}\uE002`);
+  return esc(smart(marked))
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*])\*(?!\s)(.+?)\*/g, '$1<em>$2</em>')
-    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g, '<a href="$2">$1</a>');
+    .replace(/\[([^\]]+)\]\uE001(\d+)\uE002/g, (_m, text: string, i: string) => `<a href="${attr(targets[Number(i)])}">${text}</a>`);
 }
 
 export function mdToHtml(md: string): string {

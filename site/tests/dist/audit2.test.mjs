@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const root = join(site, '..');
-const dist = join(site, 'dist');
+const dist = process.env.LL_DIST ?? join(site, 'dist'); // tests/run.mjs points LL_DIST at its snapshot
 const page = (p) => readFileSync(join(dist, p, 'index.html'), 'utf8');
 const decode = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const text = (h) => decode(h.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<\/?(?:em|strong|a|span|cite|time|i|b)\b[^>]*>/gi, '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
@@ -98,7 +98,7 @@ test('design S2, S3, m5, m7: home video row, release video band, collage door, s
   const home = page('');
   assert.match(home, /class="two-col two-col--media home-video"/);
   assert.match(home, /class="col-more"><a class="pill" href="\/photos\/">/);
-  assert.match(home, /min\(37vw, 532px\)/, 'hero cover sizes');
+  assert.match(home, /min\(calc\(40vw - 48px\), 447px\)/, 'hero cover sizes (the 84% front cover; design r3 S1)');
   assert.match(home, /min\(58vw, 800px\)/, 'collage anchor sizes');
   const ob = page('music/overbored');
   assert.match(ob, /<section class="band band--tight surface" aria-labelledby="vid">/);

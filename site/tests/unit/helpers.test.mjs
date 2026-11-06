@@ -23,6 +23,14 @@ test('markdown: paragraphs, emphasis, links, quotations; HTML escaped', () => {
   assert.equal(mdInline('[x](javascript:alert(1))'), '[x](javascript:alert(1))');
 });
 
+test('markdown: a link target is attribute-escaped and never curled; the link text is curled (security round 3, S2)', () => {
+  assert.equal(mdInline('[x](https://a.example/"onmouseover="alert(1))'), '<a href="https://a.example/&quot;onmouseover=&quot;alert(1">x</a>)');
+  assert.equal(mdInline("[it's \"here\"](/a'b\"c/)"), '<a href="/a\'b&quot;c/">it’s “here”</a>');
+  assert.equal(mdInline('[a](/x?y=1&z=<2>)'), '<a href="/x?y=1&amp;z=&lt;2&gt;">a</a>');
+  assert.equal(mdInline('"[quoted link](/story/)" and *[em](/a/)*'), '“<a href="/story/">quoted link</a>” and <em><a href="/a/">em</a></em>');
+  assert.doesNotMatch(mdInline('[x](/"><img src=x onerror=alert(1)>)'), /<img|"\s*onerror|href="[^"]*"[^>]*"/);
+});
+
 test('shows: partial dates sort correctly; a null venue leaves no comma', () => {
   const rows = [
     { date: '2001-08-12', when: 'Aug 12', venue: 'A', city: 'Nashville', status: 'publish' },

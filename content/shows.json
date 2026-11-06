@@ -1,5 +1,7 @@
 {
   "_about": "Shows page data. Rows are sorted by [sort_key, id]. sort_key is YYYY-MM-DD with 00 for an unknown month or day, so a row known only to the year sorts before the dated rows of that year, and a season or range sorts by its first possible month. Where a post says early, mid or late in a month, a representative day (about 05, 15 or 25) stands in so the row sorts sensibly; date_precision then stays \"month\" and the display text says early/mid/late. date_precision is one of: day, approx-day, month, month-range, season, season-range, year. Public fields: date_display, venue, place, note. Internal: source, confidence, notes_internal, and rows with \"publish\": false. The 2001-04 rows are the band's own journal: the band's account, not a verified gig list.",
+  "journalDerivedApproved": false,
+  "_journalDerivedApproved": "Launch gate G1 in QUESTIONS-FOR-CARLY.md (LL-25). Set to true only when David approves the journal-derived material: the 2001-04 rows here, Story chapter 5, the /shows/ meta description, the Story-index and llms.txt summaries and the EPK long-bio journal sentence. RELEASE=1 node site/scripts/check-dist.mjs fails while it is false.",
   "checked_on": "2026-11-06",
   "intro": "Shows that can be dated, from the band’s own records and memories. The list grows as more turns up.",
   "shows": [
@@ -442,10 +444,10 @@
       "date_precision": "month",
       "venue": "A show",
       "place": "Columbia, South Carolina",
-      "note": "The first performances of “Circles” and “Still In Love”.",
+      "note": "The first performance of “Circles”.",
       "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20031218231614/http://www.theluxuryliners.com:80/2003_10_01_archives.html",
       "confidence": "verified-source",
-      "notes_internal": "sort_key day 04 stands for 'early October' (post dated 10-05)."
+      "notes_internal": "sort_key day 04 stands for 'early October' (post dated 10-05). The journal also names a first performance of a song titled Still In Love, which is on no record (Nonetheless has So In Love); held until David answers (QUESTIONS-FOR-CARLY.md G1)."
     },
     {
       "id": "2003-10-18-east-nashville",

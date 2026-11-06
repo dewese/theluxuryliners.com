@@ -7,6 +7,10 @@ backend:
   branch: main
   # Set at hosting setup to the GitHub sign-in helper (a small Cloudflare Worker), e.g.
   # base_url: https://decap-auth.theluxuryliners.com
+  # and, once that helper exists, its path explicitly, e.g.
+  # auth_endpoint: auth
+  # A release build (RELEASE=1 node scripts/check-dist.mjs) fails until base_url is an https URL,
+  # because without it Decap signs in through api.netlify.com.
   squash_merges: true
 publish_mode: editorial_workflow
 site_url: https://theluxuryliners.com
@@ -98,7 +102,7 @@ collections:
               - { name: id, label: Id (letters and dashes), widget: string }
               - { name: src, label: Master file (in assets/source/photos), widget: string }
               - { name: assetId, label: Inventory id (data/assets.json), widget: string, required: false }
-              - { name: era, label: Era, widget: select, options: ["1997-2000", "2001-2004", "2005-2007", "2008-"] }
+              - { name: era, label: Era, widget: select, options: ["1998-2000", "2001-2004", "2005-2007", "2008-"] }
               - { name: year, label: Year, widget: string }
               - { name: caption, label: Caption, widget: string, hint: "Name people only where the band has confirmed who they are." }
               - { name: alt, label: Description for screen readers, widget: string }

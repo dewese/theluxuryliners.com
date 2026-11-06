@@ -3,3 +3,4 @@ public/img/
 public/logos/
 public/favicon.ico
 worker/gone.ts
+.build.lock

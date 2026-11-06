@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { privateHits } from '../../../content/private-literals.mjs';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const dist = join(site, 'dist');
+const dist = process.env.LL_DIST ?? join(site, 'dist'); // tests/run.mjs points LL_DIST at its snapshot
 const page = (p) => readFileSync(join(dist, p, p.endsWith('.html') || p.includes('.') ? '' : 'index.html'), 'utf8');
 const text = (h) => h.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<\/?(?:em|strong|a|span|cite|time)\b[^>]*>/gi, '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/\s+/g, ' ');
 const norm = (s) => s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');

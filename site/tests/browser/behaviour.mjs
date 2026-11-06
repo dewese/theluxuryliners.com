@@ -13,6 +13,8 @@
 //   - the masthead is two rows, at most 110 px, at 320, 375 and 414 px, and the New Beginning
 //     cover shows at least 250 px on the first screen at 320x568 (design S1)
 //   - the video label wraps inside the facade at 320 px with text at 200% (a11y m5)
+// Round 3 (critiques/audit-design-round3.md): the hero cover stack keeps its inset and tilt (S1),
+//   and at least 120 px of the cover is on the first screen at 667x375, 844x390 and 768x1024 (S2)
 //   - /admin/ (security B2): with the real pinned Decap file and the admin CSP, the editor renders
 //     its sign-in and throws nothing (needs the network for unpkg.com; the dist test that the
 //     script is at the end of <body> runs either way)
@@ -141,6 +143,30 @@ try {
       if (width === 320) check(height - m.coverTop >= 250, `home ${tag}: ${Math.round(height - m.coverTop)}px of the New Beginning cover on the first screen (at least 250)`);
       await ctx.close();
     }
+  }
+  // ---- design r3 S1: the cover stack as in the sample: the front cover is a block, at most 0.86
+  // of the stack wide and really tilted; on phones the stack is capped at 300 px
+  for (const [width, height] of [[1440, 900], [375, 667]]) {
+    const ctx = await browser.newContext({ viewport: { width, height } });
+    const page = await ctx.newPage();
+    await page.goto(`${base}/`);
+    const m = await page.evaluate(() => {
+      const stack = document.querySelector('.stack'), front = document.querySelector('.stack__front');
+      return { stack: stack.getBoundingClientRect().width, front: front.offsetWidth, display: getComputedStyle(front).display, tilt: getComputedStyle(front).transform };
+    });
+    check(m.front <= 0.86 * m.stack, `home @${width}: the front cover is ${Math.round(m.front)}px of a ${Math.round(m.stack)}px stack (at most 0.86)`);
+    check(m.display === 'block' && m.tilt !== 'none', `home @${width}: the front cover is a tilted block (display ${m.display}, transform ${m.tilt})`);
+    if (width === 375) check(m.stack <= 300, `home @375: the cover stack is ${Math.round(m.stack)}px wide (at most 300)`);
+    await ctx.close();
+  }
+  // ---- design r3 S2: landscape phones and small tablets show at least 120 px of the cover
+  for (const [width, height] of [[667, 375], [844, 390], [768, 1024]]) {
+    const ctx = await browser.newContext({ viewport: { width, height } });
+    const page = await ctx.newPage();
+    await page.goto(`${base}/`);
+    const top = await page.evaluate(() => document.querySelector('.stack__front img').getBoundingClientRect().top);
+    check(height - top >= 120, `home @${width}x${height}: ${Math.round(height - top)}px of the New Beginning cover on the first screen (at least 120)`);
+    await ctx.close();
   }
   // ---- a11y r2 m5: the video label never clips at 320 px with text at 200%
   {

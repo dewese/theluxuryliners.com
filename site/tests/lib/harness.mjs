@@ -8,7 +8,7 @@ import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const dist = join(site, 'dist');
+export const dist = process.env.LL_DIST ?? join(site, 'dist'); // tests/run.mjs serves a snapshot, never the live dist/
 
 export function findChromium() {
   if (process.env.CHROMIUM) return process.env.CHROMIUM;

@@ -1,7 +1,8 @@
 // The data gate (runs before every build and as the `data` test suite). Fails with a plain
 // message when a data file would put something wrong on the site:
 //  - data/releases.json (the master, LL-3): every release with a page exists, has a real date,
-//    a tracklist and https links; the 2008 bonus disc never links out (LL-13)
+//    a tracklist and https links; the 2008 bonus disc never links out (LL-13); a reissue's
+//    tracks carry the parent CD track's writers (LL-14)
 //  - site/data/*.json: every record has status publish|pending; photos exist on disk and a
 //    photographer whose credit is pending is never published; artwork names a release with a
 //    page; facts marked publish are confirmed-owner or verified-source, or attributed in the
@@ -41,6 +42,19 @@ for (const [id, slug] of Object.entries(PAGES)) {
   if (!Object.values(r.links ?? {}).some(Boolean)) fail(`releases.json ${id}: no listen links`);
 }
 for (const id of ['luxury-liners-2026-sound-as-ever-lp', 'll-appearance-2008-make-the-best-of-it-bonus-disc']) if (!ids.has(id)) fail(`releases.json: no ${id}`);
+// a reissue's tracks that name a cd_track carry the parent release's writers for that track
+// (LL-14: daviddewese.com copies this file, so the LP must not contradict the CD)
+for (const r of releases) {
+  if (!r.parent_release_id) continue;
+  const parent = releases.find((x) => x.id === r.parent_release_id);
+  if (!parent) { fail(`releases.json ${r.id}: parent_release_id ${r.parent_release_id} not found`); continue; }
+  for (const t of r.tracklist ?? []) {
+    if (t.cd_track == null) continue;
+    const p = (parent.tracklist ?? []).find((x) => x.number === t.cd_track);
+    if (!p) { fail(`releases.json ${r.id} ${t.position ?? t.title}: cd_track ${t.cd_track} is not on ${parent.id}`); continue; }
+    if (JSON.stringify(t.writers ?? []) !== JSON.stringify(p.writers ?? [])) fail(`releases.json ${r.id} ${t.position ?? t.title} "${t.title}": writers ${JSON.stringify(t.writers)} differ from the parent CD track ${t.cd_track} (${JSON.stringify(p.writers)})`);
+  }
+}
 
 // ---- site data ----
 const slugs = new Set(Object.values(PAGES));

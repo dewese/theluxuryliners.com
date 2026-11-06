@@ -25,13 +25,24 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 
 ## Launch gate: must be answered before launch (added 2026-11-06, audits round 2)
 
-**G1. Journal-derived shows and Story chapter 5 (LL-25).** The 2001–04 rows on the Shows page, and the shows named in Story chapter 5 ("The journal years"), were taken from the band's 2001–04 journal: dates, venues and short paraphrased notes (the quotes are already held). LL-25 says David approves each journal month before it goes live. Does David approve these derived rows and chapter 5 as they stand?
+**G1. Journal-derived material (LL-25).** These were taken from the band's 2001–04 journal (dates, venues and short paraphrased notes; the quotes are already held). LL-25 says David approves each journal month before it goes live. Does David approve all of them as they stand?
+  - the 2001–04 rows on the Shows page (`content/shows.json`), including the early October 2003 row (see the "Still In Love" question below);
+  - Story chapter 5, "The journal years" (`content/story/05-journal-years.md`);
+  - the Shows page meta description ("…SXSW, Las Vegas, Atlanta with Blues Traveler…", `site/src/pages/shows.astro`);
+  - the chapter 5 summary on the Story index and in the `llms.txt` chapter list ("About 40 shows and trips, logged by the band itself.", from the chapter's front matter);
+  - the EPK long-bio sentence "Their journal logged about 40 shows and trips, from the House of Blues in Las Vegas to opening for Blues Traveler in Atlanta and a gig in Canada." (`content/epk.md`).
+  - **"Still In Love":** the early October 2003 journal entry names first performances of "Circles" and "Still In Love". No record has a "Still In Love"; *Nonetheless* has "So In Love". Is it "So In Love"? Until David answers, the row names "Circles" only.
 - *Why it matters:* LL-25 is about the journal; these lines come from it, and no approval for them is recorded yet.
-- *Proposed default:* none: the site does not launch until David answers. **If he says no**, the team sets `"publish": false` on those rows in `content/shows.json` and trims chapter 5 to what other sources support.
+- *Enforced:* `"journalDerivedApproved": false` in `content/shows.json`. `RELEASE=1 node site/scripts/check-dist.mjs` fails until it is set to `true` from David's answer.
+- *Proposed default:* none: the site does not launch until David answers. **If he says no**, the team sets `"publish": false` on those rows in `content/shows.json`, trims chapter 5 to what other sources support, cuts the EPK sentence to "The trio kept touring from Nashville.", and gives the Shows page a meta description that names no journal show.
 
 **G2. The 2001 *Nashville Scene* profile.** The Press page lists the July 2001 *Nashville Scene* profile of David by Noel Murray. The article names members' family, so the site lists it without its title and never links a copy. May the site give its title?
 - *Why it matters:* the title helps readers find the piece, but the piece itself goes beyond the band (LL-7).
 - *Proposed default:* listed without the title (as now).
+
+**G3. Two cells of the decisions file are now worded by role (public repository).** The repository is public. `DECISIONS-2026-10-07.md` LL-4 named the town from the founding story and LL-31 printed the contact address. Both cells now say the same thing by role ("a Texas town"; "the owner's address, the Worker secret `CONTACT_TO`"), and the exact original wording is kept in the git-ignored `data/private/decisions-private.md`. No decision changed. Please reply with a one-line OK to keep this wording (or say how to word it). Separately, the old wording is still in the git history: purge it, accept it, or make the repository private until launch (`site/BUILD-LOG.md`, "Owner decisions needed", item 1).
+- *Why it matters:* LL-7 says the founding town is never public, and the address lives only in the Worker.
+- *Proposed default:* keep the role wording. Launch waits for this OK and the history answer.
 
 ---
 
@@ -151,7 +162,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 - *Proposed default:* **show only sourced credits** (*Sound As Ever* design: Mark Montgomery; *Nonetheless*: paintings Scott Carpenter, design David Dewese, photos Kristin Barlowe; the LP: cover Jim Horan); no credit line elsewhere.
 - **ANSWERED 2026-11-06 (LL-23).**
 
-**B11. Where is the band based today?** David lives in Dallas (F3); David wrote that the members are "scattered across four different states".
+**B11. Where is the band based today?** (see F3)
 - *Why it matters:* old bios say "Nashville-based", which engines repeat in the present tense.
 - *Proposed default:* **no current base**; the band is described as formed in 1997 and based in Nashville until about 2010, with members now in several states.
 - **ANSWERED 2026-11-06 (LL-19: Nashville; members now in TN, MI and TX).**

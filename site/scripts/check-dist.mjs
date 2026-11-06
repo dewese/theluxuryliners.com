@@ -27,6 +27,10 @@
 //  - PLACEHOLDER copy (content not written yet)
 //  - a missing key: PUBLIC_TURNSTILE_SITE_KEY (no Turnstile widget on /contact/) or
 //    PUBLIC_CF_ANALYTICS_TOKEN (no analytics beacon on every page)
+//  - launch gate G1 (LL-25): content/shows.json "journalDerivedApproved" is not true (David has not
+//    approved the journal-derived rows, chapter 5 and the summaries built from them)
+//  - dist/admin/config.yml without an https:// backend base_url (Decap would sign in through
+//    api.netlify.com)
 // Usage: node scripts/check-dist.mjs [dist-dir]
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
@@ -34,7 +38,7 @@ import { fileURLToPath } from 'node:url';
 import { privateHits } from '../../content/private-literals.mjs';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..');
-const dist = process.argv[2] ?? join(site, 'dist');
+const dist = process.argv[2] ?? process.env.LL_DIST ?? join(site, 'dist');
 const RELEASE = process.env.RELEASE === '1';
 if (!existsSync(join(dist, 'index.html'))) { console.error('check-dist: dist/ not built (run npm run build)'); process.exit(1); }
 
@@ -162,9 +166,18 @@ const contact = existsSync(join(dist, 'contact/index.html')) ? readFileSync(join
 const hasTurnstile = /challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/.test(contact) && /class="cf-turnstile[^"]*"[^>]*data-sitekey="[^"]+"/.test(contact);
 const pages = all.filter((f) => f.endsWith('.html') && !relative(dist, f).startsWith('admin/')); // the Decap editor shell is not a site page
 const withBeacon = pages.filter((f) => /static\.cloudflareinsights\.com\/beacon\.min\.js[^>]*data-cf-beacon='\{[^']*"token":"[^"]+"/.test(readFileSync(f, 'utf8').replace(/data-cf-beacon="([^"]*)"/, (m, v) => `data-cf-beacon='${decode(v)}'`))).length;
+// launch gate G1 (LL-25): David approves the journal-derived material before release
+const showsJson = join(site, '..', 'content', 'shows.json');
+const journalApproved = existsSync(showsJson) && JSON.parse(readFileSync(showsJson, 'utf8')).journalDerivedApproved === true;
+// Decap sign-in: the backend must name its own https sign-in helper
+const adminCfg = existsSync(join(dist, 'admin/config.yml')) ? readFileSync(join(dist, 'admin/config.yml'), 'utf8') : '';
+const backendBlock = (adminCfg.match(/^backend:\n((?:[ \t]+.*\n?|\s*\n)*)/m) || [, ''])[1];
+const adminBaseUrl = !adminCfg || /^[ \t]+base_url:[ \t]*['"]?https:\/\/[^\s'"]+/m.test(backendBlock);
 if (RELEASE) {
   if (!hasTurnstile) hits.push('missing key: PUBLIC_TURNSTILE_SITE_KEY (no Turnstile on /contact/)');
   if (withBeacon !== pages.length) hits.push(`missing key: PUBLIC_CF_ANALYTICS_TOKEN (analytics beacon on ${withBeacon} of ${pages.length} pages)`);
+  if (!journalApproved) hits.push('launch gate G1 (LL-25): content/shows.json journalDerivedApproved is not true (QUESTIONS-FOR-CARLY.md G1)');
+  if (!adminBaseUrl) hits.push('admin/config.yml: backend has no https:// base_url (set the GitHub sign-in helper; HANDBOOK §11)');
 }
 
 for (const w of warns) console.log(`check-dist: warning: ${w}`);
@@ -173,4 +186,6 @@ const notes = [];
 if (placeholders) notes.push(`${placeholders} PLACEHOLDER block(s)`);
 if (!hasTurnstile) notes.push('no Turnstile key');
 if (!withBeacon) notes.push('no analytics token');
+if (!journalApproved) notes.push('launch gate G1 open (journalDerivedApproved)');
+if (!adminBaseUrl) notes.push('no Decap base_url');
 console.log(`check-dist: PASS${RELEASE ? ' (RELEASE)' : ''} (${textFiles.length} text files, ${all.length} files)${notes.length && !RELEASE ? `; a release build (RELEASE=1) would fail on: ${notes.join(', ')}` : ''}`);

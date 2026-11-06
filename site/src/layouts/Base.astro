@@ -7,6 +7,7 @@
 import '../styles/global.css';
 import { SITE, BAND, ONE_LINER, NAV } from '../lib/site.ts';
 import { graph, musicGroup, website, bandRef } from '../lib/jsonld.ts';
+import { safeJson } from '../lib/json.ts';
 import Footer from '../components/Footer.astro';
 import Dot from '../components/Dot.astro';
 
@@ -54,7 +55,7 @@ const current = (href: string) => (path === href || (href !== '/' && path.starts
     <meta property="og:image:alt" content={ogAlt} />
     <meta name="twitter:card" content={square ? 'summary' : 'summary_large_image'} />
     <meta name="twitter:image:alt" content={ogAlt} />
-    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    <script type="application/ld+json" set:html={safeJson(ld)} />
     {beacon && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon}></script>}
     <script src="/js/site.js" defer></script>
     <slot name="head" />

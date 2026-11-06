@@ -3,6 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { isGone, queryRedirect, isStagingHost, safeDecode } from '../../worker/routing.ts';
 import { handleContact, fillForm, verifyTurnstile, readCapped, MAX_BODY } from '../../worker/api/contact.ts';
 import worker, { respond } from '../../worker/index.ts';
@@ -186,7 +187,7 @@ test('headers: modern Permissions-Policy, HSTS with subdomains; /admin/ allows t
   assert.match(SECURITY_HEADERS['Permissions-Policy'], /browsing-topics=\(\)/);
   assert.doesNotMatch(SECURITY_HEADERS['Permissions-Policy'], /interest-cohort/);
   assert.match(SECURITY_HEADERS['Strict-Transport-Security'], /includeSubDomains/);
-  const h = readFileSync(new URL('../../dist/_headers', import.meta.url), 'utf8');
+  const h = readFileSync(process.env.LL_DIST ? join(process.env.LL_DIST, '_headers') : new URL('../../dist/_headers', import.meta.url), 'utf8');
   const admin = h.slice(h.indexOf('/admin/*'));
   assert.match(admin, /! Cross-Origin-Opener-Policy\n  Cross-Origin-Opener-Policy: same-origin-allow-popups/);
   assert.match(admin, /object-src 'none'; base-uri 'self'/);
@@ -229,7 +230,7 @@ test('security r2 S2: /admin/ keeps the editor CSP and COOP through the Worker (
   }
   const other = await worker.fetch(new Request('https://staging.theluxuryliners.com/administrator/'), env);
   assert.equal(other.headers.get('content-security-policy'), SECURITY_HEADERS['Content-Security-Policy'], 'only /admin/ gets the editor CSP');
-  const h = readFileSync(new URL('../../dist/_headers', import.meta.url), 'utf8');
+  const h = readFileSync(process.env.LL_DIST ? join(process.env.LL_DIST, '_headers') : new URL('../../dist/_headers', import.meta.url), 'utf8');
   assert.ok(h.includes(`Content-Security-Policy: ${ADMIN_CSP}`), 'dist/_headers uses the same ADMIN_CSP');
   assert.equal(ADMIN_HEADERS['Content-Security-Policy'], ADMIN_CSP);
 });
