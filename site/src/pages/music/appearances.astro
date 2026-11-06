@@ -1,0 +1,20 @@
+---
+// Compilations and bonus discs. Third-party art is never hosted. LL-13: the 2008 bonus disc has
+// no tracklist and no outside links here.
+import Base from '../../layouts/Base.astro';
+import { APPEARANCES } from '../../lib/releases.ts';
+---
+<Base title="Compilations and bonus discs" description="Luxury Liners songs on compilations and bonus discs, 1998–2025.">
+  <h1>Compilations and bonus discs</h1>
+  <ul>
+    {APPEARANCES.map((a) => (
+      <li>
+        <strong>{a.title}</strong> ({a.year}{a.label && <>, {a.label}</>}).
+        {a.songs.length > 0 && <> Luxury Liners {a.songs.length === 1 ? 'song' : 'songs'}: {a.songs.map((s, i) => <>{i > 0 && ', '}“{s}”</>)}.</>}
+        {a.note && <> {a.note}</>}
+        {a.links.length > 0 && <> {a.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.href}>{l.label}</a></>)}</>}
+      </li>
+    ))}
+  </ul>
+  <p><a href="/music/">All releases</a></p>
+</Base>

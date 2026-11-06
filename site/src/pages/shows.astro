@@ -1,0 +1,26 @@
+---
+// Known shows (plan §5.1). Rows sort by date, approximate dates by their 'sort' key; a null
+// venue never leaves a stray comma; every row keeps its note.
+import Base from '../layouts/Base.astro';
+import data from '../../data/shows.json';
+import { sortShows, where } from '../lib/shows.ts';
+const shows = sortShows(data.shows as any[]);
+---
+<Base title="Shows" description="Known Luxury Liners shows, 1997–2008: Nashville clubs, SXSW, Las Vegas, Atlanta with Blues Traveler, and more.">
+  <h1>Shows</h1>
+  <p class="lede">The shows we know about. Most of the 2001–2004 dates come from the journal the band kept on its website. The list is not complete.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">When</th><th scope="col">Where</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        {shows.map((s) => (
+          <tr>
+            <td><time datetime={s.date}>{s.when}</time></td>
+            <td>{where(s)}</td>
+            <td>{s.note ?? ''}{(s as any).release && <> <a href={`/music/${(s as any).release}/`}>Hear it</a></>}{(s as any).photo && <> <a href={`/photos/#${(s as any).photo}`}>See the photo</a></>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>

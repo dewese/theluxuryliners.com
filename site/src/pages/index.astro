@@ -1,0 +1,62 @@
+---
+// Home (plan §5.3; LL-26: lead with the 2026 singles, no recent photo; LL-32: an era collage).
+import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
+import Photo from '../components/Photo.astro';
+import Listen from '../components/Listen.astro';
+import Copy from '../components/Copy.astro';
+import { ONE_LINER, STATUS_LINE, DISAMBIGUATION, SPREAD } from '../lib/site.ts';
+import { bySlug } from '../lib/releases.ts';
+import { COLLAGE } from '../lib/photos.ts';
+import people from '../../data/people.json';
+
+const singles = [bySlug('new-beginning'), bySlug('great-day')];
+const forever = people.forever.filter((p) => p.status === 'publish');
+---
+<Base title="Home" fullBand>
+  <h1>The Luxury Liners</h1>
+  <p class="lede">{ONE_LINER}</p>
+  <p class="status">{STATUS_LINE}</p>
+
+  <section aria-labelledby="singles">
+    <h2 id="singles">The 2026 singles</h2>
+    <div class="grid">
+      {singles.map((r, i) => (
+        <article class="card">
+          <a href={`/music/${r.slug}/`} aria-hidden="true" tabindex="-1"><Cover slug={r.slug} alt="" eager={i === 0} sizes="(max-width: 40rem) 100vw, 22rem" /></a>
+          <h3><a href={`/music/${r.slug}/`}>{r.title}</a></h3>
+          <p class="muted">{r.kind}, {r.dateLabel}</p>
+          <p>{r.blurb}</p>
+          <Listen links={r.listen.filter((l) => ['spotify', 'apple_music', 'youtube_music'].includes(l.key))} title={r.title} />
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="eras">
+    <h2 id="eras">Through the years</h2>
+    <div class="collage">
+      {COLLAGE.map((p) => <Photo id={p.id} sizes="(max-width: 40rem) 100vw, 18rem" />)}
+    </div>
+  </section>
+
+  <section aria-labelledby="members">
+    <h2 id="members">The four forever members</h2>
+    <ul>
+      {forever.map((p) => <li><strong>{p.name}</strong>: {p.role.replace(/^Co-founder; /, 'co-founder; ').replace(/^(\w)/, (c) => c.toLowerCase())}</li>)}
+    </ul>
+    <p>The band called David Wilstermann “Larry” because it already had a David. {SPREAD}</p>
+    <Copy slot="home/intro" />
+  </section>
+
+  <section aria-labelledby="more">
+    <h2 id="more">More</h2>
+    <ul class="button-list">
+      <li><a href="/story/">Read the story</a></li>
+      <li><a href="/music/">Hear the records</a></li>
+      <li><a href="/vault/">Open the Vault</a></li>
+    </ul>
+  </section>
+
+  <p class="small muted">{DISAMBIGUATION}</p>
+</Base>

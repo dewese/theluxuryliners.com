@@ -1,0 +1,58 @@
+---
+// Press kit (plan §5.1). Bios come from content/epk/bio-*.md (copy track) or PLACEHOLDER.
+// Photos: the approved photos with their credits; logos: the band's own artwork, verbatim.
+import Base from '../layouts/Base.astro';
+import Copy from '../components/Copy.astro';
+import Photo from '../components/Photo.astro';
+import { ONE_LINER, NEVER_BROKE_UP } from '../lib/site.ts';
+import { RELEASES } from '../lib/releases.ts';
+import { PHOTOS, creditLine } from '../lib/photos.ts';
+import press from '../../data/press.json';
+const quotes = press.items.filter((p: any) => p.status === 'publish' && p.excerpt && !p.excerptBy);
+const epkPhotos = PHOTOS.filter((p) => ['four-2002', 'studio-2000', 'blue-suits-1998', 'chads-last-show'].includes(p.id));
+---
+<Base title="Press kit" description="The Luxury Liners press kit: bios, fact sheet, photos with credits, logos and press quotes.">
+  <h1>Press kit</h1>
+  <h2>In one line</h2>
+  <p class="prose">{ONE_LINER}</p>
+  <h2>Bio, 50 words</h2>
+  <Copy slot="epk/bio-50" />
+  <h2>Bio, 150 words</h2>
+  <Copy slot="epk/bio-150" />
+  <h2>Bio, 300 words</h2>
+  <Copy slot="epk/bio-300" />
+
+  <h2>Fact sheet</h2>
+  <dl class="facts">
+    <dt>Founded</dt><dd>1997, by David Dewese and Chad Edgington; Nashville from May 1997</dd>
+    <dt>Members</dt><dd>David Dewese, Chad Edgington, Scott Carpenter, David “Larry” Wilstermann</dd>
+    <dt>Status</dt><dd>{NEVER_BROKE_UP}</dd>
+    <dt>Releases</dt><dd>{RELEASES.slice().reverse().map((r, i) => <>{i > 0 && '; '}<a href={`/music/${r.slug}/`}>{r.title}</a> ({r.dateLabel})</>)}</dd>
+    <dt>On TV</dt><dd>“Dreaming” in One Tree Hill (The WB, 2004); “Sunshine”, theme of FOX Sports’ US Youth Soccer Show</dd>
+    <dt>More</dt><dd><a href="/facts/">Facts</a>, <a href="/press/">Press</a>, <a href="/people/">People</a></dd>
+  </dl>
+
+  <h2>Press quotes</h2>
+  {quotes.map((q: any) => <blockquote><p>{q.excerpt}</p><footer><cite>{q.publication}</cite>{q.writer && <>, {q.writer}</>}</footer></blockquote>)}
+
+  <h2>Photos</h2>
+  <p>Use with the credit shown, where there is one. Larger files: ask through the <a href="/contact/?topic=press">contact form</a>.</p>
+  <div class="grid">
+    {epkPhotos.map((p) => (
+      <div>
+        <Photo id={p.id} sizes="(max-width: 40rem) 100vw, 20rem" />
+        <p class="small"><a href={`/img/photos/${p.id}-${p.widths.at(-1)}.jpg`}>Open the {p.widths.at(-1)} px image</a></p>
+      </div>
+    ))}
+  </div>
+
+  <h2>Logos</h2>
+  <div class="grid">
+    <figure><img src="/logos/roundel-wordmark.svg" alt="The Luxury Liners wordmark over the red L roundel" width="331" height="250" /><figcaption><a href="/logos/roundel-wordmark.svg">SVG</a> · <a href="/logos/roundel-wordmark.png">PNG</a></figcaption></figure>
+    <figure><img src="/logos/roundel-spaced.svg" alt="The red L roundel with the spaced wordmark" width="280" height="170" /><figcaption><a href="/logos/roundel-spaced.svg">SVG</a></figcaption></figure>
+    <figure><img src="/logos/stacked-lxl.svg" alt="The stacked wordmark with the LXL oval" width="184" height="216" /><figcaption><a href="/logos/stacked-lxl.svg">SVG</a></figcaption></figure>
+  </div>
+  <p>The band’s logos date from 1999–2002.</p>
+  <h2>Contact</h2>
+  <p>Use the <a href="/contact/?topic=press">contact form</a>.</p>
+</Base>

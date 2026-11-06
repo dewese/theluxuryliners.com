@@ -1,0 +1,24 @@
+---
+// The Story (plan §4.2): nine chapters on one page. Each chapter's short facts are owner-confirmed
+// or verified; the narrative comes from content/story/<id>.md (copy track) or a PLACEHOLDER.
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Copy from '../components/Copy.astro';
+import story from '../../data/story.json';
+const chapters = story.chapters;
+---
+<Base title="Story" description="The story of The Luxury Liners: two Texans, a Gram Parsons song, Nashville from 1997, four records, and the 2026 singles.">
+  <h1>The story</h1>
+  <Copy slot="story/intro" />
+  <nav aria-label="Chapters">
+    <ol>{chapters.map((c) => <li><a href={`#${c.id}`}>{c.title}</a> ({c.years})</li>)}</ol>
+  </nav>
+  {chapters.map((c, i) => (
+    <section id={c.id} aria-labelledby={`${c.id}-h`}>
+      <h2 id={`${c.id}-h`}><span class="muted">{i + 1}.</span> {c.title} <span class="muted">({c.years})</span></h2>
+      {c.photo && <Photo id={c.photo} sizes="(max-width: 40rem) 100vw, 36rem" />}
+      <ul class="prose">{c.facts.map((f) => <li>{f}</li>)}</ul>
+      <Copy slot={`story/${c.id}`} />
+    </section>
+  ))}
+</Base>

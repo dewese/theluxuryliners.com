@@ -1,0 +1,31 @@
+{
+  "_about": "Press on /press/ and /epk/. Only items whose existence is verified (the band's own press page reprints) or owner-confirmed. Excerpts only where the exact words are known and positive. 'pending' rows never render. Never add the Baptist Standard profile (privacy).",
+  "items": [
+    { "id": "billboard-1998", "date": "1998", "publication": "Billboard", "type": "Feature", "text": "The band was featured in Billboard in 1998.", "status": "publish", "source": "LL-22 (title and issue to add when the clipping turns up)" },
+    { "id": "allmusic-2001", "date": "2001-09", "publication": "AllMusic", "writer": "Erik Hage", "type": "Artist biography", "url": "https://www.allmusic.com/artist/luxury-liners-mn0000759673", "status": "pending", "source": "LL04 #4; page 403 to scripts; frames David as sole founder (plan §4.3: Vault quotation only)" },
+    { "id": "nashville-rage-2001-09", "date": "2001-09", "publication": "Nashville Rage", "type": "Blurb", "excerpt": "Former Texans who craft stylish Americana pop as if the Byrds had arisen in a post-alternative rock world.", "status": "publish", "source": "LL04 #5 verified-source (reprint)" },
+    { "id": "earpollution-2001-08", "date": "2001-08", "publication": "earpollution", "writer": "Erik Hage", "type": "Interview with David Dewese", "excerpt": "We got to meet [Western clothes designer] Manuel and wear Nudie Suits in concert.", "excerptBy": "David Dewese", "status": "publish", "source": "LL04 #7; LL-20" },
+    { "id": "nashville-scene-2001-07", "date": "2001-07", "publication": "Nashville Scene", "writer": "Noel Murray", "headline": "Catching Up Fast", "type": "Profile of David Dewese", "excerpt": "Foxymorons gets the artsy songs, and Luxury Liners gets the cheesy hits.", "excerptBy": "David Dewese", "status": "publish", "source": "LL04 #6 (family details in the article are never reused)" },
+    { "id": "nashville-scene-2001-10", "date": "2001-10", "publication": "Nashville Scene", "type": "Article", "status": "publish", "source": "LL04 #8" },
+    { "id": "tennessean-2001-12", "date": "2001-12", "publication": "The Tennessean", "type": "Style profile", "status": "publish", "source": "LL04 #9" },
+    { "id": "ccm-2002-04", "date": "2002-04", "publication": "CCM Magazine", "type": "Review of the Believe EP", "release": "believe-ep", "status": "publish", "source": "LL04 #10" },
+    { "id": "nashville-rage-2002-04", "date": "2002-04", "publication": "Nashville Rage", "type": "Blurb", "excerpt": "Excellent power pop with the tongue-in cheek wiliness of Cheap Trick and the underlying violence of Big Star.", "status": "publish", "source": "LL04 #11" },
+    { "id": "nashville-rage-2002-07", "date": "2002-07", "publication": "Nashville Rage", "type": "Blurb", "excerpt": "…the best (and best dressed) purveyors of pop in Nashville.", "status": "publish", "source": "LL04 #12 (family details in the blurb are never reused)" },
+    { "id": "nashville-scene-2002-07", "date": "2002-07", "publication": "Nashville Scene", "type": "Article", "status": "publish", "source": "LL04 #13" },
+    { "id": "metroland-2003-06", "date": "2003-06", "publication": "Metroland (Albany, New York)", "writer": "Erik Hage", "type": "Review of Overbored", "release": "overbored", "excerpt": "‘Waiting for the Sun’ … is drop-dead perfect pop-rock (and the best song here) … This is one of my favorites of the year.", "status": "publish", "source": "LL04 #14" },
+    { "id": "impact-press-2003-08", "date": "2003-08", "publication": "Impact Press", "type": "Review of Overbored", "release": "overbored", "status": "publish", "source": "LL04 #16" },
+    { "id": "aiding-abetting-2003-08", "date": "2003-08", "publication": "Aiding & Abetting", "type": "Review of Overbored", "release": "overbored", "status": "publish", "source": "LL04 #17" },
+    { "id": "southeast-performer-2003-09", "date": "2003-09", "publication": "Southeast Performer", "type": "Review of Overbored", "release": "overbored", "status": "publish", "source": "LL04 #18" },
+    { "id": "nashville-rage-2003-10", "date": "2003-10", "publication": "Nashville Rage", "writer": "Todd Anderson", "type": "Review of Overbored", "release": "overbored", "excerpt": "The bittersweet trio of Woman, Equasue and Fifteen Again really push the album into the pantheon of tremendous local songwriting.", "status": "publish", "source": "LL04 #19" },
+    { "id": "splendid-2003-10", "date": "2003-10", "publication": "Splendid", "writer": "Theodore Defosse", "type": "Review of Overbored", "release": "overbored", "status": "publish", "source": "LL04 #20 (mixed: never pull-quoted)" },
+    { "id": "lost-at-sea-2003-10", "date": "2003-10", "publication": "Lost At Sea", "writer": "Andy Brown", "type": "Review of Overbored", "release": "overbored", "status": "publish", "source": "LL04 #21 (mixed: never pull-quoted)" },
+    { "id": "nashville-scene-2004-01", "date": "2004-01", "publication": "Nashville Scene", "type": "Article", "status": "publish", "source": "LL04 #22" },
+    { "id": "performing-songwriter-2004-07", "date": "2004-07", "publication": "Performing Songwriter", "type": "Review of Overbored", "release": "overbored", "excerpt": "Overbored … is a must-have for all power pop fans.", "status": "publish", "source": "LL04 #23" },
+    { "id": "absolute-power-pop-2006", "date": "2006-12", "publication": "Absolute Power Pop", "type": "Year-end list", "text": "Nonetheless was number 100 in the blog’s Top 100 Releases of 2006.", "release": "nonetheless", "status": "publish", "source": "LL04 #24 (band's own 2007 listing)" },
+    { "id": "carligula-2006", "date": "2006-12", "publication": "Carligula", "type": "Year-end list", "text": "Nonetheless was number 3 in the blog’s Top Five Nashville Releases of 2006.", "release": "nonetheless", "status": "publish", "source": "LL04 #25" }
+  ],
+  "placements": [
+    { "id": "one-tree-hill", "song": "Dreaming", "release": "overbored", "text": "“Dreaming” was used in One Tree Hill, season 1, episode 15, “Suddenly Everything Has Changed”, first aired on The WB on February 24, 2004.", "status": "publish", "source": "LL02 §3.3; LL04 §2.3" },
+    { "id": "fox-soccer", "song": "Sunshine", "release": "overbored", "text": "“Sunshine” was the theme song of FOX Sports’ US Youth Soccer Show.", "status": "publish", "source": "LL04 §2.3" }
+  ]
+}

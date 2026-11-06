@@ -1,0 +1,48 @@
+---
+// Contact (LL-31): the form posts to the Worker (/api/contact), which checks Turnstile and sends
+// the message to the address in its CONTACT_TO secret. No address is printed anywhere.
+// Turnstile appears when PUBLIC_TURNSTILE_SITE_KEY is set at build time (a release build
+// requires it: RELEASE=1 node scripts/check-dist.mjs).
+import Base from '../../layouts/Base.astro';
+import { TOPICS, LIMITS } from '../../lib/contact.ts';
+import { SOCIAL } from '../../lib/site.ts';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+<Base title="Contact" description="Contact The Luxury Liners: booking, press, licensing and fan mail.">
+  <Fragment slot="head">
+    {siteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+    <script src="/js/contact.js" defer></script>
+  </Fragment>
+  <h1>Contact</h1>
+  <p class="lede">For booking, press, licensing or just to say hello, send a message. David reads every one.</p>
+  <form method="post" action="/api/contact" novalidate data-contact>
+    <div class="field">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required maxlength={LIMITS.nameMax} />
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <p class="hint" id="email-hint">So we can reply. We never share it.</p>
+      <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-hint" />
+    </div>
+    <div class="field">
+      <label for="topic">Topic</label>
+      <select id="topic" name="topic" required>
+        {TOPICS.map((t) => <option value={t.value}>{t.label}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required minlength={LIMITS.messageMin} maxlength={LIMITS.messageMax}></textarea>
+    </div>
+    <div class="trap" aria-hidden="true">
+      <label for="website">Leave this empty</label>
+      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="elapsed" value="" />
+    {siteKey && <div class="cf-turnstile field" data-sitekey={siteKey} data-action="contact"></div>}
+    <button type="submit">Send</button>
+  </form>
+  <h2>Elsewhere</h2>
+  <ul class="inline-list">{SOCIAL.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+</Base>

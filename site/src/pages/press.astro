@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import press from '../../data/press.json';
+import { monthYear } from '../lib/dates.ts';
+const items = press.items.filter((p) => p.status === 'publish');
+const placements = press.placements.filter((p) => p.status === 'publish');
+---
+<Base title="Press" description="Press about The Luxury Liners, 1998–2006, and the band’s songs on TV.">
+  <h1>Press</h1>
+  <h2>On TV</h2>
+  <ul>{placements.map((p) => <li>{p.text} <a href={`/music/${p.release}/`}>About the record</a></li>)}</ul>
+  <h2>Coverage</h2>
+  <ul>
+    {items.map((p: any) => (
+      <li>
+        <time datetime={p.date}>{monthYear(p.date)}</time>. <cite>{p.publication}</cite>{p.headline && <>, “{p.headline}”</>}{p.writer && <>, by {p.writer}</>}: {p.type}{p.release ? <> (<a href={`/music/${p.release}/`}>about the record</a>)</> : null}.
+        {p.text && <> {p.text}</>}
+        {p.excerpt && <blockquote><p>{p.excerpt}</p>{p.excerptBy && <footer>{p.excerptBy}</footer>}</blockquote>}
+      </li>
+    ))}
+  </ul>
+  <p>Writing about the band? The <a href="/epk/">press kit</a> has bios, photos and logos, and the <a href="/facts/">Facts page</a> has short answers.</p>
+</Base>

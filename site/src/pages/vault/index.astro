@@ -1,0 +1,34 @@
+---
+// The Vault (plan §5.1; LL-27: history only, no MP3s or downloads of any kind).
+import Base from '../../layouts/Base.astro';
+import Copy from '../../components/Copy.astro';
+import vault from '../../../data/vault.json';
+---
+<Base title="The Vault" description="The Luxury Liners archive: the old free MP3s and cover songs by title, the band journal, and the band’s websites since 2000.">
+  <h1>The Vault</h1>
+  <p class="lede">The band’s history, kept as history. Nothing here is a download: the music is on the streaming services (see <a href="/listen/">Listen</a>).</p>
+  <Copy slot="vault/intro" />
+
+  <h2>In the Vault</h2>
+  <ul>
+    <li><a href="/vault/mp3s/">The old free MP3s</a>: the songs the band’s website used to give away, and where to hear them now.</li>
+    <li><a href="/vault/covers/">Cover songs</a>: songs by other writers the band recorded or played.</li>
+    <li><a href="/vault/journal/">The band journal, 2001–2004</a>.</li>
+  </ul>
+
+  <h2 id="archive-recordings">Archive recordings</h2>
+  <p>The band’s old website offered these recordings as free MP3s. They are listed here as history.</p>
+  <ul>
+    <li><strong>Trunk Box</strong> (1998): a live album from Waco, Texas.</li>
+    <li><strong>Live Liners</strong> (2002): recorded at 12th &amp; Porter, Nashville, on July 18, 2002.</li>
+    <li><strong>From The Vaults, 1997–2001</strong>: early recordings.</li>
+  </ul>
+
+  <h2 id="old-sites">The band’s websites</h2>
+  <p>theluxuryliners.com has been the band’s address since 1998. Its looks, in order:</p>
+  <ul>
+    {vault.oldSites.map((o) => (
+      <li><strong>{o.dates}</strong>: {o.design}{o.wayback && <> <a href={o.wayback}>See it in the Internet Archive</a></>}</li>
+    ))}
+  </ul>
+</Base>

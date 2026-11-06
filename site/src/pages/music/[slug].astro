@@ -1,0 +1,91 @@
+---
+// One page per release, generated from the master data/releases.json (LL-3), with writers (LL-14)
+// and cover-art credits (LL-23). The date is shown once, in the header.
+import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+import Listen from '../../components/Listen.astro';
+import { RELEASES, type Release } from '../../lib/releases.ts';
+import { musicAlbum } from '../../lib/jsonld.ts';
+import { COVER_RIGHTS, SITE } from '../../lib/site.ts';
+
+export function getStaticPaths() {
+  return RELEASES.map((r) => ({ params: { slug: r.slug }, props: { r } }));
+}
+const { r } = Astro.props as { r: Release };
+const writers = (w: string[]) => w.join(' and ').replace(/ and (?=.* and )/g, ', ');
+const desc = `${r.title} by The Luxury Liners: ${r.kind === 'EP' ? 'an EP' : r.kind === 'Album' ? 'an album' : 'a single'} (${r.year}). ${r.blurb}`;
+---
+<Base title={`${r.title} (${r.year})`} description={desc} jsonld={[musicAlbum(r)]} image={`${SITE}${r.cover}-1200.jpg`}>
+  <div class="release-head">
+    <figure>
+      <Cover slug={r.slug} alt={r.coverAlt} eager />
+      <figcaption>
+        {r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)}
+        <span class="credit">{COVER_RIGHTS}</span>
+      </figcaption>
+    </figure>
+    <div>
+      <p class="muted">The Luxury Liners</p>
+      <h1>{r.title}</h1>
+      <p>{r.kind}, {r.dateLabel}. {r.label}{r.catalog && <>, {r.catalog}</>}.</p>
+      <p>{r.blurb}</p>
+      <h2>Listen</h2>
+      <Listen links={r.listen} title={r.title} />
+    </div>
+  </div>
+
+  <h2>Tracks</h2>
+  {r.writersNote && <p class="small muted">{r.writersNote}</p>}
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">#</th><th scope="col">Title</th><th scope="col">Written by</th><th scope="col">Length</th></tr></thead>
+      <tbody>
+        {r.tracks.map((t) => (
+          <tr>
+            <td>{t.n}</td>
+            <td>{t.title}</td>
+            <td>{t.coverOf ? `${t.coverOf} cover` : t.writers.length ? writers(t.writers) : '—'}</td>
+            <td>{t.duration ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {r.players.length > 0 && <><h2>Who plays</h2><ul>{r.players.map((p) => <li>{p}</li>)}</ul></>}
+  {r.production.length > 0 && <><h2>Production</h2><ul>{r.production.map((p) => <li>{p}</li>)}</ul></>}
+  {r.notes.length > 0 && <><h2>Notes</h2><ul>{r.notes.map((p) => <li>{p}</li>)}</ul></>}
+
+  {r.lp && (
+    <section id="lp-2026" aria-labelledby="lp-h">
+      <h2 id="lp-h">On vinyl ({r.lp.year})</h2>
+      <p>In {r.lp.year} Sound As Ever came out on vinyl for the first time, with {r.lp.tracks} tracks (the hidden tracks are not on it). Discogs lists the pressing as 100 copies on Sweden’s {r.lp.label.replace(' (Sweden)', '')}.</p>
+      {r.lp.artwork.length > 0 && <ul>{r.lp.artwork.map((a) => <li>{a.name} {a.role.charAt(0).toLowerCase() + a.role.slice(1)}.</li>)}</ul>}
+    </section>
+  )}
+
+  {r.press.length > 0 && (
+    <>
+      <h2>Press</h2>
+      <ul>
+        {r.press.map((p) => (
+          <li>
+            <cite>{p.publication}</cite>{(p as any).writer && <>, {(p as any).writer}</>}: {p.type}.
+            {(p as any).excerpt && <blockquote><p>{(p as any).excerpt}</p></blockquote>}
+            {(p as any).text && <> {(p as any).text}</>}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Details</h2>
+  <dl class="facts">
+    <dt>Released</dt><dd>{r.dateLabel}</dd>
+    <dt>Label</dt><dd>{r.label}</dd>
+    {r.catalog && <><dt>Catalog number</dt><dd>{r.catalog}</dd></>}
+    {r.upc && <><dt>UPC</dt><dd>{r.upc}</dd></>}
+    {r.discogs && <><dt>Discogs</dt><dd><a href={r.discogs}>{r.title} on Discogs</a></dd></>}
+  </dl>
+  <p><a href="/music/">All releases</a></p>
+</Base>

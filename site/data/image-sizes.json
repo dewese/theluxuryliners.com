@@ -1,0 +1,170 @@
+{
+ "covers/sound-as-ever": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "covers/believe-ep": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "covers/overbored": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "covers/nonetheless": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "covers/shake-it-up-live": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "covers/great-day": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "covers/new-beginning": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ]
+ },
+ "photos/four-2002": {
+  "width": 1096,
+  "height": 848,
+  "widths": [
+   480,
+   960,
+   1096
+  ]
+ },
+ "photos/studio-2000": {
+  "width": 1600,
+  "height": 1052,
+  "widths": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "photos/blue-suits-1998": {
+  "width": 963,
+  "height": 600,
+  "widths": [
+   480,
+   960,
+   963
+  ]
+ },
+ "photos/hard-rock-1998": {
+  "width": 600,
+  "height": 919,
+  "widths": [
+   480,
+   600
+  ]
+ },
+ "photos/backstage-1998": {
+  "width": 844,
+  "height": 619,
+  "widths": [
+   480,
+   844
+  ]
+ },
+ "photos/brosephs": {
+  "width": 894,
+  "height": 600,
+  "widths": [
+   480,
+   894
+  ]
+ },
+ "photos/chads-last-show": {
+  "width": 1600,
+  "height": 1067,
+  "widths": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "photos/district-2001": {
+  "width": 1025,
+  "height": 1515,
+  "widths": [
+   480,
+   960,
+   1025
+  ]
+ },
+ "photos/district-2002": {
+  "width": 1110,
+  "height": 1700,
+  "widths": [
+   480,
+   960,
+   1110
+  ]
+ },
+ "photos/basement": {
+  "width": 1200,
+  "height": 1600,
+  "widths": [
+   480,
+   960,
+   1200
+  ]
+ },
+ "photos/detroit-2003": {
+  "width": 963,
+  "height": 805,
+  "widths": [
+   480,
+   960,
+   963
+  ]
+ },
+ "photos/2008-texas-david-and-chad": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   960,
+   1600
+  ]
+ }
+}

@@ -1,0 +1,60 @@
+---
+// Every page: <head> (title, description, canonical, social card, JSON-LD), header, footer.
+// Cloudflare Web Analytics loads only when PUBLIC_CF_ANALYTICS_TOKEN is set at build time
+// (docs/HANDBOOK.md, "Analytics"); it is cookie-free, so there is no cookie banner.
+import '../styles/global.css';
+import { SITE, BAND, ONE_LINER_SHORT, NAV } from '../lib/site.ts';
+import { graph, musicGroup, website, bandRef } from '../lib/jsonld.ts';
+import Footer from '../components/Footer.astro';
+
+interface Props { title: string; description?: string; jsonld?: object[]; noindex?: boolean; fullBand?: boolean; image?: string }
+const { title, description = ONE_LINER_SHORT, jsonld = [], noindex = false, fullBand = false, image } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, SITE).href;
+const fullTitle = path === '/' ? `${BAND}: power pop since 1997` : `${title} | ${BAND}`;
+const ogImage = image ?? `${SITE}/img/photos/four-2002-1096.jpg`;
+// the full MusicGroup node on home, /facts/ and /people/; a reference elsewhere (plus the WebPage)
+const page = { '@type': 'WebPage', '@id': `${canonical}#page`, url: canonical, name: fullTitle, isPartOf: { '@id': `${SITE}/#website` }, about: bandRef };
+const ld = graph(...(fullBand ? [musicGroup(), website()] : []), page, ...jsonld);
+const token = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const beacon = token ? JSON.stringify({ token }) : null;
+const current = (href: string) => (path === href || (href !== '/' && path.startsWith(href)) ? 'page' : undefined);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={BAND} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    {beacon && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon}></script>}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="logo" href="/"><img src="/logos/roundel-wordmark.svg" alt="The Luxury Liners, home" width="331" height="250" /></a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>{NAV.map((n) => <li><a href={n.href} aria-current={current(n.href)}>{n.label}</a></li>)}</ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

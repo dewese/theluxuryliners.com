@@ -1,0 +1,17 @@
+---
+// A photo with its one caption and its one credit (data/photos.json), the same on every page.
+import { photo, creditLine } from '../lib/photos.ts';
+interface Props { id: string; sizes?: string; caption?: boolean; eager?: boolean }
+const { id, sizes = '(max-width: 40rem) 100vw, 40rem', caption = true, eager = false } = Astro.props;
+const p = photo(id);
+if (!p) throw new Error(`Photo ${id}: not found or not published`);
+const set = (ext: string) => p.widths.map((w) => `/img/photos/${p.id}-${w}.${ext} ${w}w`).join(', ');
+const credit = creditLine(p);
+---
+<figure>
+  <picture>
+    <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+    <img src={`/img/photos/${p.id}-${p.widths[0]}.jpg`} srcset={set('jpg')} sizes={sizes} alt={p.alt} width={p.width} height={p.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  </picture>
+  {caption && <figcaption>{p.caption}.{credit && <span class="credit">{credit}</span>}</figcaption>}
+</figure>

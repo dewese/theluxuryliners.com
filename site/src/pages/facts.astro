@@ -1,0 +1,23 @@
+---
+// Facts (plan §5.4): short cited answers, the same text in FAQPage JSON-LD (visible answers only).
+import Base from '../layouts/Base.astro';
+import facts from '../../data/facts.json';
+import { faqPage } from '../lib/jsonld.ts';
+import { DISAMBIGUATION, ONE_LINER } from '../lib/site.ts';
+const rows = facts.facts.filter((f) => f.status === 'publish');
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+/** {{link:/path/|text}} -> a link (HTML) or the text (JSON-LD). */
+const html = (a: string) => esc(a).replace(/\{\{link:(\/[^|}]*)\|([^}]*)\}\}/g, '<a href="$1">$2</a>');
+const text = (a: string) => a.replace(/\{\{link:(\/[^|}]*)\|([^}]*)\}\}/g, '$2');
+---
+<Base title="Facts" fullBand description="Short, sourced answers about The Luxury Liners: who founded the band, when and where, who is in it, what it released and where to listen." jsonld={[faqPage(rows.map((f) => ({ q: f.q, a: text(f.a) })))]}>
+  <h1>Facts</h1>
+  <p class="lede">{ONE_LINER}</p>
+  <dl class="facts prose">
+    {rows.map((f) => <><dt>{f.q}</dt><dd set:html={html(f.a)} /></>)}
+  </dl>
+  <h2>Not to be confused with</h2>
+  <p class="prose">{DISAMBIGUATION}</p>
+  <h2>How we date things</h2>
+  <p class="prose">{facts.dating}</p>
+</Base>

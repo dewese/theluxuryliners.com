@@ -1,0 +1,15 @@
+---
+import { FOOTER_NAV, SOCIAL, RELATED, COLOPHON, BAND } from '../lib/site.ts';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <nav class="footer-nav" aria-label="More">
+      <ul>{FOOTER_NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+    </nav>
+    <h2>Follow</h2>
+    <ul class="inline-list">{SOCIAL.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+    <h2>Related</h2>
+    <ul class="inline-list">{RELATED.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+    <p class="muted">© 1997–2026 {BAND}. {COLOPHON}</p>
+  </div>
+</footer>

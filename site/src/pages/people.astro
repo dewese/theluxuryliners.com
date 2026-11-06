@@ -1,0 +1,56 @@
+---
+// People (plan §5.1; LL-7: names, band roles and years only; LL-24 early and guest players).
+// Artwork names the release next to every credit; photo credits come from the photos the site
+// actually shows (data/photos.json), so they always match the captions elsewhere.
+import Base from '../layouts/Base.astro';
+import people from '../../data/people.json';
+import artwork from '../../data/artwork.json';
+import { bySlug } from '../lib/releases.ts';
+import { photographers } from '../lib/photos.ts';
+import { COLOPHON } from '../lib/site.ts';
+const pub = <T extends { status: string }>(xs: T[]) => xs.filter((x) => x.status === 'publish');
+const forever = pub(people.forever);
+const art = pub(artwork.credits);
+const shooters = photographers();
+// group the record credits by person
+const records = new Map<string, { role: string; work: string; release: string }[]>();
+for (const r of pub(people.records)) records.set(r.name, [...(records.get(r.name) ?? []), r]);
+---
+<Base title="People" fullBand description="The four forever members of The Luxury Liners, the early and guest players, and the people behind the records, the covers and the photos.">
+  <h1>People</h1>
+  <h2>The four forever members</h2>
+  <dl class="facts">
+    {forever.map((p) => (
+      <>
+        <dt>{p.url ? <a href={p.url}>{p.name}</a> : p.name}</dt>
+        <dd>{p.role}. {p.years}.{(p as any).note && <> {(p as any).note}</>}</dd>
+      </>
+    ))}
+  </dl>
+
+  <h2>Early and guest players</h2>
+  <ul>{pub(people.early).map((p) => <li><strong>{p.name}</strong>: {p.role}, {p.years}</li>)}</ul>
+
+  <h2>On the records</h2>
+  <ul>
+    {[...records].map(([name, rs]) => (
+      <li><strong>{name}</strong>: {rs.map((r, i) => <>{i > 0 && '; '}{r.role.toLowerCase()} on <a href={`/music/${r.release}/`}>{r.work}</a></>)}</li>
+    ))}
+  </ul>
+
+  <h2 id="artwork">Artwork</h2>
+  <ul>
+    {art.map((a) => (
+      <li><strong>{a.name}</strong>: {a.role.charAt(0).toLowerCase() + a.role.slice(1)}, <a href={`/music/${a.release}/${a.edition ? '#lp-2026' : ''}`}>{bySlug(a.release).title}{a.edition && ` (${a.edition})`}</a></li>
+    ))}
+  </ul>
+  <p>{COLOPHON}</p>
+
+  <h2 id="photographers">Photographers</h2>
+  <ul>
+    {shooters.map((s) => (
+      <li><strong>{s.name}</strong>: {s.photos.map((p, i) => <>{i > 0 && '; '}<a href={`/photos/#${p.id}`}>{p.caption}</a></>)}</li>
+    ))}
+  </ul>
+  <p class="muted">Photos without a credit line were taken by the band, by family or with a self-timer.</p>
+</Base>

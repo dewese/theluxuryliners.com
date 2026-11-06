@@ -1,0 +1,168 @@
+{
+  "_about": "The /facts/ page and its FAQPage JSON-LD (only answers that are visible on the page). Every row needs confidence 'confirmed-owner' or 'verified-source' to publish; scripts/validate-data.mjs refuses an 'unverified' or 'single-source' row marked publish unless the answer attributes it in the sentence ('attributed': true). Answers may use {{link:/path/|text}} for internal links.",
+  "facts": [
+    {
+      "q": "Who founded The Luxury Liners?",
+      "a": "David Dewese and Chad Edgington co-founded The Luxury Liners in 1997.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "F4, LL-6"
+    },
+    {
+      "q": "When and where did the band start?",
+      "a": "In 1997. David and Chad chose the name over spring break 1997, in Texas, and moved to Nashville in May 1997. Nashville has been the band’s home town ever since.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-4, LL-5, LL-19"
+    },
+    {
+      "q": "Where does the name come from?",
+      "a": "From the Gram Parsons song “Luxury Liner”. The first album, Sound As Ever, is named after Parsons’s sign-off, “Sound as ever”.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-6, LL-21"
+    },
+    {
+      "q": "Is this Emmylou Harris’s Luxury Liner?",
+      "a": "No. Luxury Liner is an Emmylou Harris album that takes its title from the same Gram Parsons song. The Luxury Liners are a band.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "LL04 §5"
+    },
+    {
+      "q": "Is this Carter Tanton’s Luxury Liners?",
+      "a": "No. Luxury Liners is also the recording name of singer-songwriter Carter Tanton (They’re Flowers, 2013). The Luxury Liners are a different act.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "LL04 §5"
+    },
+    {
+      "q": "Who is in the band?",
+      "a": "The four forever members: David Dewese, Chad Edgington, Scott Carpenter and David “Larry” Wilstermann.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "P8, LL-9"
+    },
+    {
+      "q": "Why is David Wilstermann called “Larry”?",
+      "a": "Because the band already had a David.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "P8"
+    },
+    {
+      "q": "Who else has played in the band?",
+      "a": "Jeff LaFrate (drums, 1997–98), Mark W. Winchester (bass, 1997–98), Kyle Edgington (drums, summer 1998) and Scott Jeffries (tambourine, one show, 1997); and, at shows, Gary Ishee (2004–05), Doli Stepniewski (2006), Grant Johnson and Jeremy Stephens (2007). See {{link:/people/|People}}.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-24"
+    },
+    {
+      "q": "Are they still active?",
+      "a": "Yes. The band never broke up. The four forever members reconnected during the pandemic and started making music again, and released two singles in 2026.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-17, F6"
+    },
+    {
+      "q": "When did Chad Edgington leave Nashville?",
+      "a": "In March 2001. David, Scott and Larry carried on as a trio, and Chad plays on the 2026 singles.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-15, LL-9, F4"
+    },
+    {
+      "q": "What is the newest release?",
+      "a": "“New Beginning”, a two-track single, April 2026.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "F6"
+    },
+    {
+      "q": "What have they released?",
+      "a": "Sound As Ever (2000), the Believe EP (2001), Overbored (2003), Nonetheless (2006), “Shake It Up (Live at the Texas Music Café)” (2021), “Great Day” (2026) and “New Beginning” (2026). See {{link:/music/|Music}}.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "releases.json (P6 dates)"
+    },
+    {
+      "q": "Which labels released the records?",
+      "a": "Echomusic and Litterbug Records released the albums and the EP; the Texas Music Café released the 2021 live single; Litterbug Records released the 2026 singles.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "releases.json"
+    },
+    {
+      "q": "Has their music been on TV?",
+      "a": "Yes. “Dreaming” was used in One Tree Hill (season 1, episode 15, first aired on The WB on February 24, 2004), and “Sunshine” was the theme song of FOX Sports’ US Youth Soccer Show.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "LL02 §3.3, LL04 §2.3"
+    },
+    {
+      "q": "Who wrote the songs?",
+      "a": "David Dewese and Chad Edgington wrote most of Sound As Ever together. David wrote or co-wrote every song on Overbored except “Restless”, by David Wilstermann, and wrote all of Nonetheless. Chad and David wrote “Great Day” and “New Beginning”. Each release page lists the writers song by song.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-14"
+    },
+    {
+      "q": "Who produced the records?",
+      "a": "Mike Poole and Mark Montgomery produced Sound As Ever; Mark Montgomery and the band produced the Believe EP.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "Discogs 6768612, 6768660 (verified-source in LL01 §3.3)"
+    },
+    {
+      "q": "Did they play SXSW?",
+      "a": "Yes: the SESAC Showcase at SXSW 2001.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-16"
+    },
+    {
+      "q": "Were they in Billboard?",
+      "a": "Yes. The band was featured in Billboard in 1998.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-22"
+    },
+    {
+      "q": "How is the band connected to The Foxymorons?",
+      "a": "David Dewese also co-founded The Foxymorons, with Jerry James.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "F5"
+    },
+    {
+      "q": "Is Sound As Ever on vinyl?",
+      "a": "Yes, since 2026. Discogs lists the pressing as 100 copies on Sweden’s Sound Asleep Records.",
+      "confidence": "single-source",
+      "attributed": true,
+      "status": "publish",
+      "source": "LL-23 (the vinyl exists); Discogs 37658859 (label, copies)"
+    },
+    {
+      "q": "Where can I listen?",
+      "a": "On Spotify, Apple Music, Bandcamp, YouTube and the other streaming services. See {{link:/listen/|Listen}}.",
+      "confidence": "verified-source",
+      "status": "publish",
+      "source": "releases.json links"
+    },
+    {
+      "q": "How do I contact the band?",
+      "a": "Use the {{link:/contact/|contact form}}.",
+      "confidence": "confirmed-owner",
+      "status": "publish",
+      "source": "LL-31"
+    },
+    {
+      "q": "Is the Luxury Liner album year 1976 or 1977?",
+      "a": "",
+      "confidence": "unverified",
+      "status": "pending",
+      "source": "contested (plan §4.3); never published"
+    }
+  ],
+  "dating": "Release dates are the dates the streaming services list. Where only a month or a year is known, only the month or year is given."
+}

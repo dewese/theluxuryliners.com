@@ -1,0 +1,21 @@
+---
+// LL-29: the band's known cover songs, by title and original artist.
+import Base from '../../layouts/Base.astro';
+import vault from '../../../data/vault.json';
+const songs = vault.coverSongs.songs.filter((s) => s.status === 'publish');
+---
+<Base title="Cover songs" description="Songs by other writers that The Luxury Liners recorded or played, with the original artists.">
+  <h1>Cover songs</h1>
+  <p class="lede">{vault.coverSongs.intro}</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">Song</th><th scope="col">Original artist</th><th scope="col">Where</th></tr></thead>
+      <tbody>
+        {songs.map((s) => (
+          <tr><td>“{s.title}”</td><td>{s.artist}</td><td>{s.release ? <a href={`/music/${s.release}/`}>{s.context}</a> : s.context}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p><a href="/vault/">Back to the Vault</a></p>
+</Base>

@@ -1,0 +1,28 @@
+---
+// Privacy (plan §5.1). Describes only what this build actually ships: the analytics paragraph
+// appears only when the beacon is built in, the Turnstile paragraph only when the widget is.
+import Base from '../layouts/Base.astro';
+const analytics = !!import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const turnstile = !!import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+<Base title="Privacy" description="What theluxuryliners.com collects (very little) and why.">
+  <h1>Privacy</h1>
+  <div class="prose">
+    <p>This site sets no cookies, has no accounts and keeps nothing in your browser.</p>
+    <h2>Hosting</h2>
+    <p>The site is served by Cloudflare. Like any web host, Cloudflare handles your IP address and browser details to deliver pages and to protect the site from abuse.</p>
+    {analytics && (
+      <>
+        <h2>Visitor counts</h2>
+        <p>We count visits with Cloudflare Web Analytics, which uses no cookies and does not follow you from site to site. It tells us which pages are read, not who reads them.</p>
+      </>
+    )}
+    <h2>The contact form</h2>
+    <p>When you send a message, the name, email address, topic and message you enter are emailed to the band so we can reply. The site does not keep a copy. To stop the form being used for spam, the number of messages sent from one connection is limited for a short time.</p>
+    {turnstile && <p>The form uses Cloudflare Turnstile to check that a person, not a program, is sending it. Turnstile is loaded only on the contact page.</p>}
+    <h2>Links to other sites</h2>
+    <p>Links to Spotify, Apple Music, Bandcamp, YouTube, Instagram, Facebook and other sites take you to those services, which have their own privacy policies. Nothing from them is loaded on this site’s pages.</p>
+    <h2>Questions</h2>
+    <p>Use the <a href="/contact/">contact form</a>.</p>
+  </div>
+</Base>
