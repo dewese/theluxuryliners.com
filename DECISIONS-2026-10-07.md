@@ -63,3 +63,13 @@ Carly's answers to the first Tier 1 questions in `QUESTIONS-FOR-CARLY.md`. **Aut
 | LL-35 | Videos | **Embedding YouTube videos is fine**, including the *One Tree Hill* and FOX Sports clips (with captions where possible). |
 | LL-36 | Social accounts | **Instagram @theluxuryliners and Facebook /theluxuryliners are the band's own and active**; link them in the footer and the structured data. **No SoundCloud.** The band's albums are on **David's Bandcamp** (daviddewese.bandcamp.com), which the site links as the band's Bandcamp. |
 | LL-37 | The 2008 Texas show | **It happened.** David played a solo CD-release show in Texas in 2008 (for *Make The Best Of It*), and **Chad joined him for a few songs**. Carly supplied a photo of the two of them on stage (David and Chad, banjo and acoustic guitar): `assets/source/photos/2008-texas-cd-release-david-and-chad.jpg` (1632×1224). Left-to-right names and the venue still to be confirmed (question 32). |
+
+## Round 5: 2026-11-06
+
+| # | Question | Decision |
+|---|---|---|
+| LL-38 | The 2008 photo | Left to right: **Chad Edgington (banjo), David Dewese (acoustic guitar)**, at David's CD-release show at **Opening Bell Coffee, downtown** (Dallas, Texas), 2008. |
+| LL-39 | Logo designer | Not remembered for sure: "a popular designer in Nashville in 1999, Glen something perhaps". **No designer credit on the site** until a name is confirmed; the colophon says the logos date from 1999–2002. |
+| LL-40 | Newsletter (A4) | **No newsletter.** |
+| LL-41 | AI crawlers (A9) and authority | **Allow all crawlers, AI included.** The goal is for **theluxuryliners.com to be the authoritative source of all information about The Luxury Liners**: full Facts page, JSON-LD, `llms.txt`, sitemap and the off-site fixes (LL-8). |
+| LL-42 | Analytics (A13) | Checked 2026-11-06: **the current Carrd site has no analytics of any kind** (no Google Analytics tag). Proposed, pending Carly's OK: Cloudflare Web Analytics (cookie-free, so no cookie banner) plus Google Search Console and Bing Webmaster Tools. |

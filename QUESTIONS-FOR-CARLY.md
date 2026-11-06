@@ -200,10 +200,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **A4. Newsletter.** daviddewese.com has none (P2). Should the band's site have one?
 - *Why it matters:* a newsletter needs someone to write it; one that stops looks worse than none, and the site is built to look complete without updates.
 - *Proposed default:* **no newsletter**; links to Instagram, Spotify and YouTube instead.
+- **ANSWERED 2026-11-06 (LL-40: no newsletter).**
 
 **A9. AI crawlers.** Allow all crawlers, AI included, as on daviddewese.com (P1)?
 - *Why it matters:* blocking AI crawlers would keep AI answers on the old 2001 bio; allowing them is how the corrected story reaches assistants.
 - *Proposed default:* **allow all**.
+- **ANSWERED 2026-11-06 (LL-41: allow all; the site is to be the authoritative source).**
 
 **A10. The same story on two sites.** daviddewese.com has a full band page and a page for each Luxury Liners release; this site will too. Should each keep its own pages (one focused on David's story, one on the band), with shared identifiers?
 - *Why it matters:* two pages about the same release can compete in search; shared identifiers and cross-links tell engines they describe one thing.
