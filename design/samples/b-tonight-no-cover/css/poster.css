@@ -1,0 +1,297 @@
+/* Sample B, "Tonight, No Cover": gig-poster type on paper, a flyer wall.
+   Two flat inks per theme on a flat ground. No fake grain or distressing. */
+
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: url("../fonts/big-shoulders-display-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-roman.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Light ("paper") is the default. Ratios are WCAG 2.x, checked by tools/contrast.py. */
+:root {
+  --ground: #F4E6D0;      /* paper */
+  --card: #FBF4E8;        /* a fresh flyer pasted on the paper */
+  --ink: #6E1410;         /* oxblood: 9.64:1 on paper */
+  --link: #1F4E79;        /* powder-blue ink: 7.04:1 on paper */
+  --accent-ground: #1F4E79; /* the second ink as a flat block */
+  --accent-ink: #F4E6D0;  /* paper on blue: 7.04:1 */
+  --rule: #6E1410;
+  --tape: rgba(31, 78, 121, 0.18);
+  --logo-ink: #6E1410;
+  --focus: #6E1410;
+  --shadow: 0 1px 0 rgba(110, 20, 16, 0.25), 0 6px 14px rgba(110, 20, 16, 0.12);
+  color-scheme: light;
+}
+/* Dark, "after hours": oxblood ground, paper ink, powder links. */
+:root[data-theme="dark"] {
+  --ground: #6E1410;
+  --card: #4E0D0A;
+  --ink: #F4E6D0;          /* 9.64:1 on oxblood */
+  --link: #CFE3F2;         /* 8.99:1 on oxblood */
+  --accent-ground: #0E2A44;
+  --accent-ink: #F4E6D0;
+  --rule: #F4E6D0;
+  --tape: rgba(207, 227, 242, 0.22);
+  --logo-ink: #F4E6D0;
+  --focus: #CFE3F2;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 8px 18px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 1.125rem/1.6 "Archivo", system-ui, sans-serif;
+  overflow-wrap: break-word;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--link); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 0.16em; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.accent :focus-visible { outline-color: var(--accent-ink); }
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 10;
+  background: var(--ink); color: var(--ground); padding: 0.6rem 1rem; font-weight: 700;
+}
+.skip:focus { top: 1rem; }
+
+.wrap { width: min(72rem, 100% - 2rem); margin-inline: auto; }
+.narrow { max-width: 40rem; }
+
+/* Poster type */
+.bill, h1, h2, h3 {
+  font-family: "Big Shoulders Display", "Archivo", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+  margin: 0;
+}
+h1, h2 { text-wrap: balance; }
+h1 { font-size: clamp(3rem, 11vw, 8.5rem); }
+h2 { font-size: clamp(2.25rem, 6vw, 4.25rem); margin-bottom: 1rem; }
+h3 { font-size: clamp(1.6rem, 3.4vw, 2.25rem); }
+.kicker {
+  font: 700 0.95rem/1.3 "Archivo", sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+}
+.lede { font-size: clamp(1.2rem, 2.2vw, 1.45rem); line-height: 1.5; max-width: 40rem; }
+.small { font-size: 0.95rem; line-height: 1.5; }
+p { margin: 0 0 1rem; }
+
+/* Rules: a printer's double rule, flat */
+.rule { border: 0; border-top: 3px solid var(--rule); box-shadow: 0 5px 0 -3px var(--ground), 0 6px 0 -3px var(--rule); margin: 0; height: 8px; }
+.stars { letter-spacing: 0.5em; font-size: 0.9rem; text-align: center; margin: 0.5rem 0; }
+
+/* Header */
+.masthead { padding: 1rem 0; border-bottom: 3px solid var(--rule); }
+.masthead .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; justify-content: space-between; }
+.home-link { display: block; width: 4.75rem; color: inherit; }
+.home-link svg { display: block; width: 100%; height: auto; }
+.ink { fill: var(--logo-ink); }
+.nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0; padding: 0; }
+.nav a {
+  font: 800 1.5rem/1 "Big Shoulders Display", sans-serif; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--ink); text-decoration: none; padding: 0.35rem 0; display: inline-block;
+  border-bottom: 3px solid transparent;
+}
+.nav a:hover, .nav a[aria-current="page"] { border-bottom-color: currentColor; }
+
+/* Sections */
+section { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+.accent { background: var(--accent-ground); color: var(--accent-ink); }
+.accent a { color: var(--accent-ink); }
+.accent .card { color: var(--ink); }
+.accent .card a { color: var(--link); }
+.card { background: var(--card); box-shadow: var(--shadow); }
+
+/* Home: the bill */
+.poster {
+  border: 4px solid var(--rule);
+  padding: clamp(1rem, 3vw, 2.5rem);
+  position: relative;
+}
+.poster__logo { width: min(34rem, 100%); margin: 0 auto 1rem; }
+.poster__logo svg { width: 100%; height: auto; display: block; }
+.oneliner { text-align: center; margin: 1.25rem auto 0; }
+.status {
+  text-align: center; font: 800 clamp(1.35rem, 3vw, 2rem)/1.1 "Big Shoulders Display", sans-serif;
+  text-transform: uppercase; letter-spacing: 0.03em; margin: 1.25rem 0 0;
+}
+
+.singles { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); margin-top: 2rem; }
+.single { padding: 1rem 1rem 1.25rem; }
+.single img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.single h3 { margin: 1rem 0 0.25rem; font-size: clamp(2rem, 5vw, 3rem); }
+.single .when { font-weight: 700; margin: 0 0 0.5rem; }
+.pin {
+  display: inline-block; font: 700 0.8rem/1 "Archivo", sans-serif; letter-spacing: 0.14em; text-transform: uppercase;
+  border: 2px solid currentColor; padding: 0.35rem 0.5rem; margin-bottom: 0.75rem;
+}
+
+.listen { list-style: none; padding: 0; margin: 0.75rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.listen a {
+  display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.4rem 0.85rem;
+  border: 2px solid currentColor; font-weight: 700; text-decoration: none;
+}
+.listen a:hover { text-decoration: underline; }
+
+.never { text-align: center; }
+.never p {
+  font: 800 clamp(2rem, 6.5vw, 4.75rem)/0.95 "Big Shoulders Display", sans-serif; text-transform: uppercase;
+  margin: 0 auto; max-width: 22ch; text-wrap: balance;
+}
+.never p + p { font: 400 clamp(1.15rem, 2.4vw, 1.45rem)/1.5 "Archivo", sans-serif; text-transform: none; max-width: 36rem; margin-top: 1.25rem; }
+
+/* The flyer wall (era collage) */
+.wall {
+  list-style: none; margin: 2rem 0 0; padding: 0;
+  columns: 3 18rem; column-gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+.wall > li { break-inside: avoid; margin: 0 0 clamp(1.75rem, 3.5vw, 2.5rem); padding-top: 0.7rem; }
+.flyer { margin: 0; padding: 0.6rem 0.6rem 0.85rem; position: relative; }
+.flyer::before { /* masking tape: a flat strip, no texture */
+  content: ""; position: absolute; top: -0.6rem; left: 50%; width: 5rem; height: 1.2rem;
+  transform: translateX(-50%) rotate(-3deg); background: var(--tape);
+}
+.flyer img { width: 100%; }
+.flyer figcaption { margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.45; }
+.flyer .yr { display: block; font: 800 1.6rem/1 "Big Shoulders Display", sans-serif; letter-spacing: 0.03em; }
+.tilt-l { transform: rotate(-1.2deg); }
+.tilt-r { transform: rotate(1deg); }
+.tilt-l2 { transform: rotate(-0.6deg); }
+.tilt-r2 { transform: rotate(1.6deg); }
+.credit { display: block; font-size: 0.85rem; margin-top: 0.25rem; }
+.transcript { font-size: 0.9rem; margin-top: 0.4rem; }
+.transcript summary { cursor: pointer; font-weight: 700; }
+.transcript p { margin: 0.35rem 0 0; font-style: italic; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .flyer { transition: transform 200ms ease-out; }
+  .flyer:hover { transform: rotate(0deg); }
+}
+
+/* The forever members, set as a bill */
+.lineup { list-style: none; margin: 1.5rem 0 0; padding: 0; text-align: center; }
+.lineup li { padding: 0.9rem 0; border-top: 2px solid currentColor; }
+.lineup li:last-child { border-bottom: 2px solid currentColor; }
+.lineup .bill { display: block; font-size: clamp(2rem, 7vw, 4.25rem); }
+.lineup .role { display: block; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.95rem; margin-top: 0.35rem; }
+.note { text-align: center; font-style: italic; margin-top: 1rem; }
+
+/* Ticket-stub doors */
+.doors { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.doors a {
+  display: block; padding: 1.25rem 1rem; text-align: center; text-decoration: none; color: var(--ink);
+  background: var(--card); border: 2px dashed var(--rule);
+  font: 800 2rem/1 "Big Shoulders Display", sans-serif; text-transform: uppercase;
+}
+.doors a span { display: block; font: 700 0.8rem/1.2 "Archivo", sans-serif; letter-spacing: 0.16em; margin-bottom: 0.4rem; }
+.doors a:hover { text-decoration: underline; }
+
+.disambig { font-size: 0.95rem; max-width: 46rem; }
+
+/* Video facade */
+.video { margin: 0; }
+.yt { display: block; position: relative; color: #fff; text-decoration: none; background: #000; aspect-ratio: 16 / 9; overflow: hidden; }
+.yt img { width: 100%; height: 100%; object-fit: cover; opacity: 0.72; }
+.yt__play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.1rem;
+  background: #000; color: #fff; font: 800 1.35rem/1 "Big Shoulders Display", sans-serif; text-transform: uppercase; letter-spacing: 0.04em;
+  border: 3px solid #fff; white-space: nowrap;
+}
+.yt__play svg { width: 1.1rem; height: 1.1rem; fill: currentColor; }
+.yt:hover .yt__play, .yt:focus-visible .yt__play { background: #6E1410; }
+.video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; display: block; }
+.video figcaption { margin-top: 0.5rem; }
+
+/* Release page */
+.release-head { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: start; }
+.release-head .cover { padding: 0.75rem; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1rem; margin: 1.25rem 0 0; }
+.facts dt { font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; padding-top: 0.2rem; }
+.facts dd { margin: 0; }
+.setlist { list-style: none; margin: 0; padding: 0; counter-reset: t; }
+.setlist li {
+  counter-increment: t; display: grid; grid-template-columns: 2.5rem 1fr auto; gap: 0.25rem 0.75rem;
+  align-items: baseline; padding: 0.55rem 0; border-bottom: 2px solid currentColor;
+}
+.setlist li::before { content: counter(t, decimal-leading-zero); font: 800 1.5rem/1 "Big Shoulders Display", sans-serif; }
+.setlist .t { font: 800 clamp(1.5rem, 4vw, 2.25rem)/1 "Big Shoulders Display", sans-serif; text-transform: uppercase; }
+.setlist .d { font-variant-numeric: tabular-nums; font-weight: 700; }
+.setlist .p { grid-column: 2 / -1; font-size: 0.95rem; }
+.two { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); align-items: start; }
+blockquote { margin: 0 0 1.25rem; padding: 0 0 0 1rem; border-left: 4px solid currentColor; }
+blockquote p { font-size: 1.25rem; margin-bottom: 0.35rem; }
+blockquote footer { font-size: 0.95rem; }
+.credits { list-style: none; padding: 0; margin: 0; }
+.credits li { padding: 0.35rem 0; border-bottom: 1px solid currentColor; }
+.rights { font-size: 0.9rem; font-style: italic; }
+
+/* Story chapter */
+.chapter-head { text-align: center; }
+.chapter-head .deck { max-width: 38rem; margin: 1rem auto 0; font-size: clamp(1.2rem, 2.2vw, 1.45rem); }
+.story { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: start; }
+.story .prose p:first-of-type::first-letter {
+  float: left; font: 800 5.2rem/0.8 "Big Shoulders Display", sans-serif; margin: 0.35rem 0.5rem 0 0;
+}
+.story .prose figure { margin: 2rem 0; }
+.aside-bill { padding: 1.25rem; text-align: center; border: 3px solid var(--rule); }
+.aside-bill ol { list-style: none; padding: 0; margin: 0.75rem 0 0; }
+.aside-bill li { padding: 0.75rem 0; border-top: 2px solid currentColor; }
+.aside-bill .bill { display: block; font-size: 1.75rem; }
+.side-stack { display: grid; gap: 2rem; }
+.chapters { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+.chapters a { font-weight: 700; }
+.crumb { font-size: 0.95rem; margin: 0 0 1rem; }
+
+/* Footer */
+.site-foot { border-top: 4px solid var(--rule); padding: 2.5rem 0 3rem; margin-top: 0; }
+.foot-grid { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: start; }
+.foot-logo { width: min(16rem, 100%); }
+.foot-logo svg { width: 100%; height: auto; display: block; }
+.foot-links { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; }
+.foot-links a { display: inline-block; padding: 0.3rem 0; }
+.theme-toggle {
+  font: 700 1rem/1 "Archivo", sans-serif; color: var(--ink); background: transparent;
+  border: 2px solid currentColor; padding: 0.65rem 1rem; min-height: 2.75rem; cursor: pointer; margin-top: 1rem;
+}
+.theme-toggle:hover { background: var(--card); }
+.colophon { font-size: 0.9rem; margin-top: 1.5rem; }
+
+@media (max-width: 52rem) {
+  .release-head, .story, .foot-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 34rem) {
+  body { font-size: 1.0625rem; }
+  .nav a { font-size: 1.3rem; }
+  .yt__play { font-size: 1.05rem; padding: 0.55rem 0.8rem; }
+  .facts { grid-template-columns: 1fr; }
+  .facts dd { margin-bottom: 0.4rem; }
+}
