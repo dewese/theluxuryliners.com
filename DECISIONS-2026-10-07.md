@@ -17,3 +17,18 @@ Carly's answers to the first Tier 1 questions in `QUESTIONS-FOR-CARLY.md`. **Aut
 - **The talent-show story** on the band's 2005 site (Chad's college talent-show band "named The Luxury Liners", which "did indeed win the contest") does not match LL-4's account of how the name was chosen. It stays out of the Story; if it is used at all, it goes in the Vault only as a dated quotation from the 2005 site (question B1 is still open).
 - **Privacy:** "Chad's parents' house" is never located on the site. The site says "over spring break 1997" without naming a place.
 - **Structured data:** settled by LL-5: `foundingDate` 1997, `foundingLocation` Texas, on both sites.
+
+## Round 2: 2026-11-06
+
+| # | Question | Decision |
+|---|---|---|
+| LL-7 | C1. Chad, Scott and Larry on the site | **Names, band roles, years and band-era photos go on the site.** No quotes from them unless they offer one. **Nothing about their lives outside the band, ever.** |
+| LL-8 | E1. Fixing other websites | **Yes**, and ideally the project team does all of it (Wikidata item, AllMusic correction, MusicBrainz, Discogs, Last.fm), after launch, in the band's name, with the LL-6 one-liner. Where an edit needs a login, the team prepares it and the account holder submits it. |
+| LL-9 | B2. Who is in the band now | **The four forever members are the band today:** David Dewese, Chad Edgington, Scott Carpenter and David "Larry" Wilstermann. **All four play on "Great Day" and "New Beginning" (2026).** This reverses the plan's earlier rule that the site never says all four play together today; Chad left Nashville in March 2001 (LL-15) and is in the band again now. |
+| LL-10 | B2. The live "Shake It Up" (2021 single) | Recorded live at the **Texas Music Café in Waco, Texas**, with **Chad on guitar, David on bass and Scott on drums**. (Carly wrote "The Music Music Cafe"; the release and the 2023 compilation name the Texas Music Café, so that name is used.) The line-up places the recording in the Chad-and-Scott years (about 1998–2001); the exact date is still open. |
+| LL-11 | A5. Where the site is built | **In this repository** (dewese/theluxuryliners.com), reusing daviddewese.com's components, checks, editor and handbook. |
+| LL-12 | A6. The old redirect pack | **Not used.** The new site redirects old links to its own pages. |
+| LL-13 | B1 and B3. Talent show; "Great Day" demo | **The college talent-show story is left out entirely** (not in the Story, not in the Vault). **The 2026 "Great Day" single is the same recording as the demo on the 2008 bonus disc; the site does not mention it.** |
+| LL-14 | B4. Songwriting | *Nonetheless*: **David**. "Great Day" and "New Beginning": **Chad and David**. "The Duke Of Gloucester": **David** (possibly shared with Jerry James; not confirmed, so the site credits David until Jerry's share is confirmed). The Discogs credits for *Sound As Ever* and *Overbored* stand otherwise. |
+| LL-15 | B12. When Chad left | **March 2001.** The site says "March 2001" (David's Flickr photo "Chad's Last Show – March 2001"); the 2005 site's "April 2001" is corrected. |
+| LL-16 | B5. SXSW 2001 | **The band played the SESAC Showcase at SXSW 2001.** |

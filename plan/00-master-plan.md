@@ -138,7 +138,7 @@ A one-sitting "browser pass" by a person fixes most of this (Phase 0, §9).
 The band's first album is called *Sound As Ever*. The phrase works as the site's spine on three levels:
 
 1. **The namesake thread.** The band is named after Gram Parsons' song "Luxury Liner" (`LL01` §2.3, verified-source). *Sound As Ever* ends with a hidden track called "The International Submarine Band", the name of Parsons' first band (`LL02` §3.1). The research also notes that Parsons signed letters "Sound as ever"; that link is **unverified as the band's intent** (`LL01` §2.3), so copy uses it only if David confirms (`QUESTIONS-FOR-CARLY.md` B6).
-2. **The friendship.** Two college friends (P21: "college friend"; the 2001 *Nashville Rage* called the band "Former Texans", `LL01` line 84) took a band to Nashville in 1997 "to 'get famous'" (2005 band history, quoted as lore only; `LL01` §2.2). P8 calls David Dewese, Chad Edgington, Scott Carpenter and David "Larry" Wilstermann the four "forever members", and the live site calls them "forever brosephs" (`LL03` §8). **"Forever" is about the friendship, not current membership:** Chad left in 2001 and David carried the band on without him (F4), so Chad was not in the band in 2002 (P23). Yet Chad is in the 2002 photo of all four (P23), the band visited him in July 2002 (`LL01` §4.4), the 2008 band site announced him joining David for a Texas CD-release show (`LL03` §3.2; single-source), and David refuses to say the band broke up: "Although the band members are now scattered across four different states I refuse to say we've broken up" (`LL01` §4.7). **Who is in the band today is not known** (open: `QUESTIONS-FOR-CARLY.md` B2); copy never says or implies that all four play together now.
+2. **The friendship.** Two college friends (P21: "college friend"; the 2001 *Nashville Rage* called the band "Former Texans", `LL01` line 84) took a band to Nashville in 1997 "to 'get famous'" (2005 band history, quoted as lore only; `LL01` §2.2). P8 calls David Dewese, Chad Edgington, Scott Carpenter and David "Larry" Wilstermann the four "forever members", and the live site calls them "forever brosephs" (`LL03` §8). **Owner decision LL-9 (2026-11-06): the four forever members are the band today, and all four play on the 2026 singles.** Chad left Nashville in March 2001 (LL-15) and David carried the band on (F4), so Chad was not in the band in 2002 (P23); but the friendship held: Chad is in the 2002 photo of all four, the band visited him in July 2002 (`LL01` §4.4), the 2008 band site announced him joining David for a Texas CD-release show (`LL03` §3.2), and David refused to say the band broke up (`LL01` §4.7). The 2026 singles bring all four back together on record.
 3. **The return.** In 2026 the band released "Great Day" and "New Beginning", and Sweden's Sound Asleep Records pressed *Sound As Ever* on vinyl for the first time (`LL02` §3.6–§3.8). The sound is, in fact, as ever: a Luxury Liners demo of "Great Day" was already on a 2008 bonus disc, and both titles were on the band site's MP3 list by 2005 (`LL02` D16; `LL03` W4; single-source).
 
 So the site tells **a band that never stopped being a band**: loud and busy for ten years, quiet and scattered for fifteen, and back with new songs. The long quiet stretch is not a gap to explain away; it is part of the story, like the long-distance shape of The Foxymorons (`FM-PLAN` §1).
@@ -169,10 +169,10 @@ One long page in sections at launch; it can split into chapter pages later (§9,
 
 | Topic | Shown on the site as | Source |
 |---|---|---|
-| Who founded the band | "co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville" (F4). The talent-show story and the AllMusic "outlet for David" framing appear only as dated quotations in the Vault, if at all | `LL01` D1; `LL04` D1 |
-| Where it formed | "co-founded in 1997 … took the band to Nashville" (no "formed in Nashville" or "formed in Texas" claim until Carly answers A7) | `LL01` D2; `LL04` D2 |
-| When Chad left | "2001" (the photo title says March, its Flickr date taken says 2001-04-21, the 2005 roster says April) | `LL01` D3; `LL05` A15; B12 |
-| Who is in the band now | Not stated. The four are "forever members" (P8), never "the current line-up"; Chad's membership ended in 2001 (F4, P23). New recordings are credited to "The Luxury Liners" with no personnel until B2 is answered | F4; P8; P23; B2 (open) |
+| Who founded the band | "co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville" (F4, LL-6). The college talent-show story is left out entirely (LL-13); the AllMusic "outlet for David" framing appears only as a dated quotation in the Vault, if at all | `LL01` D1; LL-13 |
+| Where it formed | Named over spring break 1997 in Texas; based in Nashville from May 1997 (LL-4, LL-5). JSON-LD `foundingLocation` Texas; the town is never named | LL-4; LL-5 |
+| When Chad left Nashville | "March 2001" (LL-15; corrects the 2005 roster's April) | LL-15 |
+| Who is in the band now | **The four forever members: David Dewese, Chad Edgington, Scott Carpenter and David "Larry" Wilstermann** (LL-9). All four play on "Great Day" and "New Beginning" (2026). Story: Chad left Nashville in March 2001 and is in the band again today (when he rejoined is an open question) | LL-9; LL-15 |
 | *Billboard* 1998 | not stated as fact until the item is found; at most "the band's 2000 bio mentions a *Billboard* write-up" | `LL01` D5 |
 | Release dates | P6 Spotify dates only; other dates internal | `LL02` D3–D5 |
 | Emmylou Harris's *Luxury Liner* | **no year** (default). Sources split: Wikipedia gives 1976-12-28, citing a Warner reissue note; MusicBrainz, the chart year and the first single give 1977 | `LL04` D8; round-1 critique check 12 |
@@ -230,7 +230,7 @@ URLs use trailing slashes, as on daviddewese.com (`DD-ARCH` §3.2). The legacy t
 ### 5.3 Home page
 
 1. **Name and one line:** the canonical description (§8.1), visible as text.
-2. **Honest status line**, written to age well, e.g. "Founded in 1997. Two new singles in 2026. The band never broke up." (It must not claim that the four forever members play together now; §4.3.) No "latest news", no dates that rot (rule 7). Carly's team edits this one line when something real happens.
+2. **Honest status line**, written to age well, e.g. "Founded in 1997. Two new singles in 2026. The band never broke up." (Per LL-9 it may say all four forever members are the band today; §4.3.) No "latest news", no dates that rot (rule 7). Carly's team edits this one line when something real happens.
 3. **Latest release slot** (pinned, as on daviddewese.com): cover, title, date, listen buttons. It reads well years later ("Latest release: *New Beginning*, April 2026").
 4. **The four forever members** (P8): engraved portraits or a grid, names and roles, the "Larry" story in one line.
 5. **Three doors:** Read the story · Hear the records · Open the Vault.
@@ -356,7 +356,7 @@ daviddewese.com already carries the 7 Luxury Liners releases in its own `data/re
    - "the 2002 line-up" and any caption of the 2002 photo that is not the exact P23 text;
    - † single-founder wording ("formed by Chad Edgington", "David joined", "Chad's band");
    - † "reunion", "broke up" (except "never broke up"), "former member" next to a forever member's name, "one-time";
-   - † current-membership claims about the four: "still members", "same four", "current line-up" or "line-up today" within a sentence naming Chad Edgington (§4.3, B2);
+   - ~~† current-membership claims about the four~~ (dropped by LL-9: the four are the band today);
    - † "Nashville-based" (present tense; `LL04` D4);
    - "isawtheocean", "bigcartel", "noisetrade", "myspace" as links; the band Gmail address; any old postal address or phone number from the 2000 bio; the private family page; the host of the profile of Chad (RD5);
    - "Shake It Up" described as a cover; "Believe" without "Cher";

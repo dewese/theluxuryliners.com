@@ -2,7 +2,7 @@
 
 Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every question now has a "why it matters" line and a proposed default; B2 also asks who is in the band now) for the new theluxuryliners.com, from the five approved research files (`research/01`–`05`) and the master plan (`plan/00-master-plan.md`).
 
-**Answered so far:** A1, A3, A11, A7, A7b and A8 (2026-10-07), recorded in [`DECISIONS-2026-10-07.md`](DECISIONS-2026-10-07.md).
+**Answered so far:** A1, A3, A11, A7, A7b and A8 (2026-10-07); C1, E1, B2, A5, A6, B1, B3, B4, B12 and B5 (2026-11-06), recorded in [`DECISIONS-2026-10-07.md`](DECISIONS-2026-10-07.md).
 
 **How to answer.** Each question has a **proposed default**. If a default is fine, a reply of "OK" (or nothing, by the date the phase needs it) is enough, and the site follows the default. Answers are recorded the way the daviddewese.com decisions were (`DECISIONS-2026-09-29.md`), as new owner decisions that override the research.
 
@@ -38,10 +38,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **C1. Consent: Chad, Scott and Larry.** May the site name Chad Edgington, Scott Carpenter and David "Larry" Wilstermann with their band roles and years, show band photos of them from 1998–2009, and tell the "Larry" story? Would any of them like to give a quote or a memory for the Story?
 - *Why it matters:* they are private people. The research found sources about their lives outside the band, which the site will never use; we want each of them comfortable with how they appear.
 - *Proposed default:* **names, roles, years and band-era photos publish** (P8, R1, P14); **no quotes from them** unless they offer one; nothing about their lives outside the band, ever.
+- **ANSWERED 2026-11-06 (LL-7).**
 
 **E1. Off-site profiles: go-ahead.** May Carly's team (with our written steps) create a Wikidata item for the band, submit a correction to the AllMusic bio, and edit MusicBrainz, Discogs and the Last.fm wiki?
 - *Why it matters:* AI answers and search engines mostly repeat a 2001 AllMusic bio that leaves out Chad and stops in 2001 (it is shown word for word on Apple Music, iHeart and Shazam). One AllMusic fix and a Wikidata item do more for "who are The Luxury Liners?" answers than anything on the site itself (`research/04` §7).
 - *Proposed default:* **yes**, done openly in the band's name, after launch, using the same one-line description as the site.
+- **ANSWERED 2026-11-06 (LL-8: yes, and ideally the team does it all).**
 
 **A11. One source of truth for the band's release data.** daviddewese.com and this site both list the 7 Luxury Liners releases. This project's research corrected some writer and producer credits from Discogs (for example, "Mine" on *Sound As Ever* and "Restless" on *Overbored*). Should this site's data file become the master for Luxury Liners releases, with daviddewese.com copying from it?
 - *Why it matters:* two copies drift apart; then the two sites disagree, and engines notice.
@@ -66,18 +68,22 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **B2. Who is in the band now, and who plays on the new recordings?** The site calls the four "forever members" (P8), but Chad left in 2001 (F4), so the site will not say that all four play together today. Who is in the band now? Who plays on "Great Day" (2026), "New Beginning" (2026) and "Shake It Up (Live at the Texas Music Café)" (2021)? When and where was the live track recorded? (A different live take is on a 2023 Texas Music Café compilation.)
 - *Why it matters:* "who is in the band now?" is one of the first questions fans and engines ask, and the 2021–2026 chapter of the Story is the thinnest.
 - *Proposed default:* **credit the recordings to "The Luxury Liners" with no personnel list**, and **say nothing about current membership** (the four stay "forever members"), until you tell us.
+- **ANSWERED 2026-11-06 (LL-9, LL-10: the four forever members; live track from the Texas Music Café, Waco).**
 
 **A5. A separate repository built from the daviddewese.com template.** Is a separate GitHub repository (proposed `theluxuryliners-com`) fine, reusing daviddewese.com's components, checks, editor (Decap) and handbook?
 - *Why it matters:* your team learns one way of working for both sites, and fixes made on one can be copied to the other.
 - *Proposed default:* **yes**.
+- **ANSWERED 2026-11-06 (LL-11: yes, this repository).**
 
 **A6. The old "handover pack" from the daviddewese.com project.** That project prepared 81 Carrd redirect rows that would send the band's old (2000–2009) URLs to daviddewese.com. Now that the band is getting its own full site, should that pack be skipped?
 - *Why it matters:* if it is pasted now, old links would later have to be moved a second time.
 - *Proposed default:* **don't paste it**; the new site redirects the old URLs to its own pages. Only paste it if the new site slips past mid-2027.
+- **ANSWERED 2026-11-06 (LL-12: not used).**
 
 **B1. The talent-show story.** The band's 2005 website said the name began with a college talent-show band that "did indeed win the contest", before David and Chad "resurrected the name" and moved to Nashville. May the site tell that story, as band lore, after the co-founding line?
 - *Why it matters:* it is a great story, but told badly it contradicts F4 (David as co-founder).
 - *Proposed default:* **not in the Story**; it appears only in the Vault as a dated quotation from the 2005 site, clearly labelled.
+- **ANSWERED 2026-11-06 (LL-13: left out entirely).**
 
 ---
 
@@ -86,6 +92,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **B3. "Great Day": old demo or new recording?** A Luxury Liners demo of "Great Day" is on the 2008 *Make The Best Of It* bonus disc and runs 3:22, exactly as long as the 2026 single. Is the 2026 single that demo (remastered or as is), or a new recording? Are the "Great Day" and "New Beginning" in the band site's 2005 MP3 list the same songs?
 - *Why it matters:* the site must not call it "new" if it is from 2005–08, or "the old demo" if it is new.
 - *Proposed default:* say "**a song the band has played since at least 2008**" and nothing about the recording's age.
+- **ANSWERED 2026-11-06 (LL-13: same recording as the 2008 demo; not mentioned).**
 
 **B4. Songwriting credits.** Discogs gives these; are they right?
 - *Sound As Ever*: Chad and David on every song except "Mine" (Brad Miles, Robert Reynolds and Scott Carpenter).
@@ -96,14 +103,17 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 - "The Duke Of Gloucester" (on both *Sound As Ever* and the Foxymorons' *Calcutta*): whose song is it?
 - *Why it matters:* writer credits appear on every release page and in structured data, and will flow back to daviddewese.com (A11).
 - *Proposed default:* **show the Discogs credits for *Sound As Ever* and *Overbored*** (except one *Overbored* track, where no writer line is shown); **no writer line** for *Nonetheless* and the singles until you answer.
+- **ANSWERED 2026-11-06 (LL-14).**
 
 **B12. When Chad left.** David's Flickr photo is titled "Chad's Last Show - March 2001" (its camera date says 2001-04-21); the band's 2005 roster says April 2001. Which is right?
 - *Why it matters:* it sets the end of the founding era in the Story.
 - *Proposed default:* **"2001"** only (F4).
+- **ANSWERED 2026-11-06 (LL-15: March 2001).**
 
 **B5. SXSW 2001.** "Shake It Up" was on a SESAC promo CD handed out at a SXSW 2001 showcase, and the old site had an "sxsw" photo gallery by June 2001. Did the band play SXSW in 2001? Which showcase?
 - *Why it matters:* "played SXSW" is a strong fact for the Story and the EPK, but we cannot say it without you.
 - *Proposed default:* say only that the song **was on the SESAC SXSW 2001 CD**.
+- **ANSWERED 2026-11-06 (LL-16: yes, the SESAC Showcase).**
 
 **B8. Nudie suits, Manuel, Emmylou Harris and Phil Kaufman.** In a 2001 interview David said the band wore Nudie suits on stage, met the designer Manuel, and that Emmylou Harris and Phil Kaufman came to see them play. May the site tell this as fact, or as "David has said…"?
 - *Why it matters:* it is the best bridge between the band and the Gram Parsons song it is named after, and it helps engines tell the band apart from Emmylou Harris's album.

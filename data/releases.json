@@ -202,12 +202,12 @@
     "duration_seconds": 243,
     "isrc": "USEC40500202",
     "writers": [
-     "Chad Edgington",
      "David Dewese"
     ],
     "producer": "Mike Poole",
-    "writers_source": "Discogs 6768612 (per-track Written-By), read live 2026-10-07; single-source",
-    "duration_discogs_cd": "4:02"
+    "writers_source": "owner (LL-14): David wrote it; possibly shared with Jerry James (unconfirmed). Discogs credits Chad Edgington and David Dewese.",
+    "duration_discogs_cd": "4:02",
+    "writers_confidence": "confirmed-owner (Carly, 2026-11-06; DECISIONS LL-14)"
    },
    {
     "number": 7,
@@ -1509,9 +1509,12 @@
    }
   ],
   "songwriting": {
-   "summary": "Not published in any source read. Discogs 14401612 (re-read live 2026-10-07) has no writer credits.",
+   "summary": "David Dewese wrote the songs (owner, LL-14).",
    "per_track_known": false,
-   "confidence": "gap"
+   "all_tracks": [
+    "David Dewese"
+   ],
+   "confidence": "confirmed-owner (Carly, 2026-11-06; DECISIONS LL-14)"
   },
   "personnel": [
    {
@@ -1733,8 +1736,21 @@
    "summary": "Original Luxury Liners song (P27); writers per Believe EP Discogs credit.",
    "confidence": "confirmed-owner (original) / single-source (writers)"
   },
-  "personnel": [],
-  "personnel_note": "Line-up and recording date not stated anywhere (open question).",
+  "personnel": [
+   {
+    "name": "Chad Edgington",
+    "role": "guitar"
+   },
+   {
+    "name": "David Dewese",
+    "role": "bass"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "drums"
+   }
+  ],
+  "personnel_note": "Owner, LL-10: recorded live at the Texas Music Café in Waco, Texas, with Chad on guitar, David on bass and Scott on drums. That line-up dates it to the Chad-and-Scott years (about 1998–2001); exact date still open.",
   "production": {
    "released_by": "Texas Music Café (Waco, TX), live TV/radio series"
   },
@@ -1767,7 +1783,13 @@
    {
     "url": "https://open.spotify.com/album/1G91ruQwVVxJezHwWFox1H"
    }
-  ]
+  ],
+  "recording": {
+   "venue": "Texas Music Café",
+   "city": "Waco, Texas",
+   "date": null,
+   "confidence": "confirmed-owner (LL-10)"
+  }
  },
  {
   "id": "luxury-liners-2026-great-day",
@@ -1873,11 +1895,32 @@
    }
   ],
   "songwriting": {
-   "summary": "Not published.",
-   "confidence": "gap"
+   "summary": "Chad Edgington and David Dewese (owner, LL-14).",
+   "all_tracks": [
+    "Chad Edgington",
+    "David Dewese"
+   ],
+   "confidence": "confirmed-owner (Carly, 2026-11-06; DECISIONS LL-14)"
   },
-  "personnel": [],
-  "personnel_note": "Who plays on it is not stated (open question).",
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "band member"
+   },
+   {
+    "name": "Chad Edgington",
+    "role": "band member"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "band member"
+   },
+   {
+    "name": "David \"Larry\" Wilstermann",
+    "role": "band member"
+   }
+  ],
+  "personnel_note": "The four forever members play on it (owner, LL-9).",
   "production": {},
   "cover_art": {
    "description": "Red kite on a long string against a blue gradient sky; \"Great Day\" in white serif.",
@@ -1890,7 +1933,7 @@
   },
   "notes": [
    "Owner-confirmed as David's band and a 2026 release (F6). Apple copyright (P) 2026 The Luxury Liners.",
-   "A Luxury Liners demo of \"Great Day\" is track 4 of the 2008 Kool Kat bonus disc and runs 3:22 on Discogs, exactly as long as this single. Whether the 2026 single is that recording (as is, or remastered) or a new one is an open question for David."
+   "INTERNAL, NOT FOR THE SITE (LL-13): the single is the same recording as the demo on the 2008 Kool Kat bonus disc. The site does not mention this."
   ],
   "verification": "confirmed-owner",
   "verification_detail": {
@@ -2045,11 +2088,32 @@
    }
   ],
   "songwriting": {
-   "summary": "Not published.",
-   "confidence": "unverified"
+   "summary": "Chad Edgington and David Dewese (owner, LL-14).",
+   "all_tracks": [
+    "Chad Edgington",
+    "David Dewese"
+   ],
+   "confidence": "confirmed-owner (Carly, 2026-11-06; DECISIONS LL-14)"
   },
-  "personnel": [],
-  "personnel_note": "Not stated (open question).",
+  "personnel": [
+   {
+    "name": "David Dewese",
+    "role": "band member"
+   },
+   {
+    "name": "Chad Edgington",
+    "role": "band member"
+   },
+   {
+    "name": "Scott Carpenter",
+    "role": "band member"
+   },
+   {
+    "name": "David \"Larry\" Wilstermann",
+    "role": "band member"
+   }
+  ],
+  "personnel_note": "The four forever members play on it (owner, LL-9).",
   "production": {},
   "cover_art": {
    "description": "A hand holds up a clear CD case showing a sunburst design and \"NEW BEGINNING\" lettering against a blue sky.",
@@ -2277,7 +2341,8 @@
    "discogs": "https://www.discogs.com/release/8057090"
   },
   "notes": [
-   "Promo CD handed out at a SESAC showcase at SXSW 2001 (Discogs notes). Probably the Believe EP recording; not confirmed."
+   "Promo CD handed out at a SESAC showcase at SXSW 2001 (Discogs notes). Probably the Believe EP recording; not confirmed.",
+   "The band played the SESAC Showcase at SXSW 2001 (owner, LL-16)."
   ],
   "verification": "verified-source",
   "verification_detail": {
