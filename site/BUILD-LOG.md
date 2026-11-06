@@ -88,7 +88,7 @@ release page does not print it, but the copy track's People, Facts and bios do.
 315 redirect sources (query strings stripped; several `/go/?…` rows collapse into one), 288 paths
 answer 410, 9 query redirects in the Worker (`run_worker_first` for `/` and `/index.php`), bot and
 plugin probes, `/.well-known/` and `/cdn-cgi/` left as 404. No chains; every internal target is
-checked to exist in `dist/`. Targets not in v1.0 fall back to the nearest existing page: 34 journal
+checked to exist in `dist/`. Targets not in v1.0 fall back to the nearest existing page: 33 journal
 months → `/vault/journal/` (they move to their month automatically once a month is published,
 LL-25); `/vault/news/`, `/vault/trunk-box/`, `/vault/live-liners/` → `/vault/`; `/lyrics/` →
 `/music/overbored/` (the old lyrics page held the Overbored lyrics). `/sitemap.xml` → 301 to
