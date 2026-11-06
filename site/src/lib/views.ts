@@ -28,12 +28,17 @@ export const releaseHref = (releaseId?: string | null): string | undefined => {
 };
 
 // ---------- home ----------
+/** A home-page single blurb must say something particular (not filler) and carry no date: the
+ *  date is printed once, next to it (the critics' notes on the lost run; tests/dist/pages.test.mjs). */
+export const blurbOk = (b: string) => b.replace(/[*“”"]/g, '').trim().length > 30 && !/\b(19|20)\d\d\b|January|February|March|April|May|June|July|August|September|October|November|December/.test(b);
 export function homeView() {
   const h = md('home.md');
   const d = h?.data ?? {};
   const blurb = (slug: string) => {
     const s = (d.singles ?? []).find((x: any) => slugFor(x.release_id) === slug);
-    return s?.blurb ? inl(s.blurb) : esc(BLURBS[slug]);
+    if (s?.blurb && blurbOk(s.blurb)) return inl(s.blurb);
+    if (s?.blurb) console.warn(`content: home.md: the blurb for ${slug} ("${s.blurb}") is too thin or carries a date; the site's own blurb is used (BUILD-LOG, "Home blurbs")`);
+    return esc(BLURBS[slug]);
   };
   const members = (d.members ?? []).length
     ? d.members.map((m: any) => ({ nameHtml: inl(m.name), roleHtml: inl(m.role) }))

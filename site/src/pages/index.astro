@@ -45,7 +45,6 @@ const v = homeView();
       {v.members.map((m) => <li><strong set:html={m.nameHtml} />: <span set:html={m.roleHtml} /></li>)}
     </ul>
     <p><span set:html={v.membersNoteHtml} /> {SPREAD}</p>
-    {v.bodyHtml && <div class="prose" set:html={v.bodyHtml} />}
     <p><a href="/people/">Everyone who has played in the band</a></p>
   </section>
 

@@ -143,7 +143,7 @@ if (!existsSync(join(dist, '_redirects'))) hits.push('_redirects: missing (run n
 // keys: required for a release build
 const contact = existsSync(join(dist, 'contact/index.html')) ? readFileSync(join(dist, 'contact/index.html'), 'utf8') : '';
 const hasTurnstile = /challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/.test(contact) && /class="cf-turnstile[^"]*"[^>]*data-sitekey="[^"]+"/.test(contact);
-const pages = all.filter((f) => f.endsWith('.html'));
+const pages = all.filter((f) => f.endsWith('.html') && !relative(dist, f).startsWith('admin/')); // the Decap editor shell is not a site page
 const withBeacon = pages.filter((f) => /static\.cloudflareinsights\.com\/beacon\.min\.js[^>]*data-cf-beacon='\{[^']*"token":"[^"]+"/.test(readFileSync(f, 'utf8').replace(/data-cf-beacon="([^"]*)"/, (m, v) => `data-cf-beacon='${decode(v)}'`))).length;
 if (RELEASE) {
   if (!hasTurnstile) hits.push('missing key: PUBLIC_TURNSTILE_SITE_KEY (no Turnstile on /contact/)');

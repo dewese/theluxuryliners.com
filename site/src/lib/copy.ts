@@ -9,7 +9,7 @@ import { mdToHtml } from './markdown.ts';
 
 const here = dirname(fileURLToPath(import.meta.url));
 // site/src/lib -> repository root; in a built chunk the path differs, so fall back to cwd (site/)
-export const CONTENT_DIR = [join(here, '..', '..', '..', 'content'), join(process.cwd(), '..', 'content')].find((p) => existsSync(p)) ?? join(process.cwd(), '..', 'content');
+export const CONTENT_DIR = process.env.CONTENT_DIR || ([join(here, '..', '..', '..', 'content'), join(process.cwd(), '..', 'content')].find((p) => existsSync(p)) ?? join(process.cwd(), '..', 'content'));
 
 /** The HTML for a copy slot (e.g. "story/01-two-texans"), or null if the copy track has not written it. */
 export function copy(slot: string): string | null {
