@@ -8,13 +8,15 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 export function mdInline(s: string): string { return inline(s); }
 
 const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const LINK = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g;
+const LINK = /\[([^\]]+)\]\(((?:https?:\/\/|\/(?!\/))[^)\s]*)\)/g; // '//host' is not an internal path (security audit round 4)
 
 function inline(s: string): string {
   // Link targets are taken out before smart() and escaping (security audit round 3, S2): smart()
   // curls quotes in the link text only, and the raw target is attribute-escaped. The brackets
   // stay in place so smart() sees the same context as before; U+E001 n U+E002 marks target n.
   const targets: string[] = [];
+  // Copy may not carry the marker characters itself (security audit round 4): strip them first.
+  s = s.replace(/[\uE001\uE002]/g, '');
   const marked = s.replace(LINK, (_m, text: string, href: string) => `[${text}]\uE001${targets.push(href) - 1}\uE002`);
   return esc(smart(marked))
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')

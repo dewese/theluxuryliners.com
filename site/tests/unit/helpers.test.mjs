@@ -63,3 +63,11 @@ test('contact rules: fields, honeypot, header-safe cleaning', () => {
   assert.equal(isTrapped({ ...ok, website: 'spam' }), true);
   assert.equal(clean('a\r\nBcc: x y'), 'a Bcc: x y');
 });
+
+test('markdown: copy cannot forge link markers, and //host is not an internal link (security round 4)', () => {
+  assert.doesNotThrow(() => mdInline('a [x]9 b'));
+  assert.doesNotMatch(mdInline('a [x]9 b'), /<a /);
+  assert.doesNotMatch(mdInline('[one](/a/) and [two]0'), /<a href="\/a\/">two/);
+  assert.doesNotMatch(mdInline('[x](//evil.example/)'), /<a /);
+  assert.match(mdInline('[x](/story/)'), /<a href="\/story\/">x<\/a>/);
+});

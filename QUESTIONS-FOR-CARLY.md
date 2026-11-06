@@ -44,6 +44,9 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 - *Why it matters:* LL-7 says the founding town is never public, and the address lives only in the Worker.
 - *Proposed default:* keep the role wording. Launch waits for this OK and the history answer.
 
+**G4. The CI secret `PRIVATE_LITERALS_KEY`.** The automatic check on pull requests scans for the private words (contact address, founding town and the like) using a secret key. Until the key is added as a GitHub Actions secret, CI runs everything else and only warns, so a CMS edit that added a private word would pass CI (release builds still refuse to run without the key). Add the secret in the repository's Settings, Secrets and variables, Actions; then remove the two `PRIVATE_LITERALS_OPTIONAL` lines from `.github/workflows/ci.yml` (security audit round 4).
+- *Proposed default:* add the secret before launch. Launch waits for it.
+
 ---
 
 ## Tier 1: needed now
