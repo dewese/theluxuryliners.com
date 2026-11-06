@@ -81,7 +81,9 @@ export function fillForm(html: string, errors: Record<string, string>, input: Pa
   const items = keys.map((k) => (FIELDS as readonly string[]).includes(k) ? `<li><a href="#${k}">${esc(errors[k])}</a></li>` : `<li>${esc(errors[k])}</li>`).join('');
   const summary = `<h2 class="h3">Your message was not sent</h2><p>Please fix ${keys.length === 1 ? 'this' : 'these'} and send it again. Everything you typed is still here.</p><ul>${items}</ul>`;
   let out = html.replace(/<title>/, '<title>Error: ');
-  out = out.replace(/(<div class="error-summary"[^>]*?)\shidden(?:="")?([^>]*>)<\/div>/, (_m, a, b) => `${a} role="alert"${b}${summary}</div>`);
+  // autofocus: without JavaScript the page loads with focus on the summary, not at the top
+  // (audit-a11y round 2, m3); role=alert stays for screen readers that announce on load
+  out = out.replace(/(<div class="error-summary"[^>]*?)\shidden(?:="")?([^>]*>)<\/div>/, (_m, a, b) => `${a} role="alert" autofocus${b}${summary}</div>`);
   for (const f of FIELDS) {
     const msg = errors[f];
     if (msg) out = out.replace(new RegExp(`<p class="field-error" id="${f}-error" hidden(?:="")?></p>`), () => `<p class="field-error" id="${f}-error">${esc(msg)}</p>`);
@@ -113,6 +115,25 @@ const refuse = (req: Request, env: ContactEnv, status: number, errors: Record<st
   wantsJson(req) ? Promise.resolve(json(status, { ok: false, errors })) : formPage(req, env, status, errors, input);
 const sent = (req: Request) => wantsJson(req) ? json(200, { ok: true }) : withSecurityHeaders(new Response(null, { status: 303, headers: { location: '/contact/sent/', 'cache-control': 'no-store' } }));
 
+/** The request body, or null as soon as it passes `max` bytes (the rest is never read). */
+export async function readCapped(req: Request, max: number): Promise<ArrayBuffer | null> {
+  if (!req.body) return new ArrayBuffer(0);
+  const reader = req.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > max) { await reader.cancel().catch(() => {}); return null; }
+    chunks.push(value);
+  }
+  const out = new Uint8Array(size);
+  let at = 0;
+  for (const c of chunks) { out.set(c, at); at += c.byteLength; }
+  return out.buffer;
+}
+
 export async function verifyTurnstile(token: string, ip: string | null, env: ContactEnv, fetcher: typeof fetch = fetch): Promise<boolean> {
   const hosts = hostnames(env);
   if (!env.TURNSTILE_SECRET || !hosts.length) return false;
@@ -141,11 +162,16 @@ export async function handleContact(req: Request, env: ContactEnv, deps: { makeM
   if (declared > MAX_BODY) return refuse(req, env, 413, { form: MESSAGES.tooLong });
 
   const ip = req.headers.get('cf-connecting-ip');
+  // without Cloudflare's client address every such request shares one rate-limit bucket: log it
+  // so a misrouted deployment shows up (audit-security round 2, minor)
+  if (!ip) log('contact_no_client_ip');
   try { if (!(await env.RL_CONTACT.limit({ key: ip ?? 'unknown' })).success) return refuse(req, env, 429, { form: MESSAGES.busy }); }
   catch { log('contact_limiter_failed'); return refuse(req, env, 503, { form: MESSAGES.unavailable }); }
 
-  const buf = await req.arrayBuffer();
-  if (buf.byteLength > MAX_BODY) return refuse(req, env, 413, { form: MESSAGES.tooLong });
+  // read at most MAX_BODY bytes: a body sent without Content-Length (chunked) is never read in full
+  // before the 413 (audit-security round 2, S3)
+  const buf = await readCapped(req, MAX_BODY);
+  if (buf === null) return refuse(req, env, 413, { form: MESSAGES.tooLong });
   let form: FormData;
   try { form = await new Request(req.url, { method: 'POST', headers: { 'content-type': req.headers.get('content-type')! }, body: buf }).formData(); }
   catch { return text('Bad request', 400); }

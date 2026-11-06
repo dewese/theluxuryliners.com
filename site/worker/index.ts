@@ -8,6 +8,8 @@
 // Any other hostname (staging) gets noindex on every response and a Disallow-all robots.txt.
 // Every response carries the security headers, staging included (audit-security round 1, S3), and
 // an unexpected error gives a plain 500 page with them instead of Cloudflare's error 1101 (S2).
+// Under /admin/ the editor's own CSP and COOP replace the site's (worker/headers.ts ADMIN_HEADERS),
+// as dist/_headers does for static responses (audit-security round 2, S2).
 import { handleContact, type ContactEnv } from './api/contact.ts';
 import { withSecurityHeaders, text } from './security.ts';
 import { STAGING_ROBOTS, isStagingHost, isGone, queryRedirect } from './routing.ts';
@@ -36,9 +38,9 @@ export default {
       const url = new URL(req.url);
       if (isStagingHost(url.hostname, env)) {
         if (url.pathname === '/robots.txt') return withSecurityHeaders(new Response(STAGING_ROBOTS, { headers: { 'content-type': 'text/plain; charset=utf-8', 'x-robots-tag': 'noindex, nofollow' } }));
-        return withSecurityHeaders(noindex(await respond(req, env, url)));
+        return withSecurityHeaders(noindex(await respond(req, env, url)), url.pathname);
       }
-      return withSecurityHeaders(await respond(req, env, url));
+      return withSecurityHeaders(await respond(req, env, url), url.pathname);
     } catch {
       console.log(JSON.stringify({ event: 'worker_error' }));
       return withSecurityHeaders(new Response(ERROR_PAGE, { status: 500, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } }));

@@ -2,10 +2,10 @@
 chapter: 2
 slug: nudie-suits
 title: Nudie suits and Nashville clubs
-years: "1997–1999"
+years: "1997–1998"
 era: powder
 summary: Emmylou Harris in the audience, suits by Manuel, Billboard, and a drummer for keeps.
-description: "Nudie suits and Nashville clubs (1997–1999): Emmylou Harris in the audience, suits by Manuel, a feature in Billboard and a drummer for keeps."
+description: "Nudie suits and Nashville clubs (1997–1998): Emmylou Harris in the audience, suits by Manuel, a feature in Billboard and a drummer for keeps."
 sources:
   - claim: Played Billy Block's Western Beat Roots Revival at Zanies, Nashville, probably autumn 1997 or winter 1998, and met Emmylou Harris and Phil Kaufman there
     source: DECISIONS-2026-10-07.md LL-20 (told as fact)

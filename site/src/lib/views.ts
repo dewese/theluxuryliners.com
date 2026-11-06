@@ -190,7 +190,7 @@ export function showsView() {
     };
   }
   return {
-    introHtml: 'The shows we know about. Most of the 2001–2004 dates come from the journal the band kept on its website. The list is not complete.', noteHtml: null,
+    introHtml: 'The shows we know about. The list is not complete.', noteHtml: null,
     rows: sortShows(siteShows.shows as any[]).map((s: any) => ({ when: s.when, datetime: s.date, whereHtml: esc(where(s)), noteHtml: esc(s.note ?? ''), href: s.release ? `/music/${s.release}/` : undefined, photo: s.photo })),
   };
 }

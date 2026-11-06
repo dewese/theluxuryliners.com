@@ -2,7 +2,7 @@
 page: home
 title: The Luxury Liners
 one_liner: "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'."
-status_line: Founded in 1997. Two new singles in 2026. The band never broke up.
+status_line: Founded in 1997. Two new singles in 2026.
 latest_release:
   release_id: luxury-liners-2026-new-beginning
   label: "Latest release: New Beginning, April 2026"
@@ -61,4 +61,4 @@ notes_internal: >-
 
 The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.
 
-Founded in 1997. Two new singles in 2026. The band never broke up.
+Founded in 1997. Two new singles in 2026.

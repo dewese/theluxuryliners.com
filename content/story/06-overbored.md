@@ -41,6 +41,6 @@ notes_internal: >-
 
 *Overbored*, the trio’s first album, came out in May 2003 on Litterbug Records. Doug Nightwine recorded it, Chris Henning mixed it, and Paul Seykora added keyboards. David wrote or co-wrote nearly all of the songs, Larry wrote “Restless”, and David made the cover.
 
-The band’s one-sheet pitched it as “the perfect CD for traveling up the 5 from San Diego to L.A.” In *Metroland*, Erik Hage called “Waiting for the Sun” “drop-dead perfect pop-rock”. *Performing Songwriter* called the album “a must-have for all power pop fans.”
+The band’s one-sheet pitched it as “the perfect CD for traveling up the 5 from San Diego to L.A.” In *Metroland*, Erik Hage called “Waiting For The Sun” “drop-dead perfect pop-rock”. *Performing Songwriter* called the album “a must-have for all power pop fans.”
 
 Two of its songs went to television. “Dreaming” was used in *One Tree Hill* (season 1, episode 15, “Suddenly Everything Has Changed”), first shown on The WB on February 24, 2004. “Sunshine” became the theme of FOX Sports’ *US Youth Soccer Show*.

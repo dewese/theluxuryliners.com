@@ -37,7 +37,10 @@
       "vars": {
         "SITE_HOSTNAME": "theluxuryliners.com",
         "CONTACT_HOSTNAMES": "staging.theluxuryliners.com",
-        "CONTACT_FROM": "contact-form@theluxuryliners.com"
+        "CONTACT_FROM": "contact-form@theluxuryliners.com",
+        // staging also refuses a message without a verified token, so a missing staging secret
+        // fails closed (audit-security round 2, S2)
+        "REQUIRE_TURNSTILE": "1"
       },
       "ratelimits": [{ "name": "RL_CONTACT", "namespace_id": "3002", "simple": { "limit": 3, "period": 60 } }],
       "send_email": [{ "name": "SEND_EMAIL" }]

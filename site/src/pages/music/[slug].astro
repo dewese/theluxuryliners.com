@@ -13,7 +13,7 @@ import YouTube from '../../components/YouTube.astro';
 import { RELEASES, VIDEOS, neighbours, totalTime, type Release } from '../../lib/releases.ts';
 import { storyView } from '../../lib/views.ts';
 import { musicAlbum } from '../../lib/jsonld.ts';
-import { COVER_RIGHTS, SITE } from '../../lib/site.ts';
+import { COVER_RIGHTS, COVER_RIGHTS_LINE, SITE } from '../../lib/site.ts';
 import { monthYear } from '../../lib/dates.ts';
 
 export function getStaticPaths() {
@@ -32,9 +32,8 @@ const total = totalTime(r);
 const video = VIDEOS[r.slug];
 const quotes = r.press.filter((p: any) => p.excerpt);
 // Press lines (audit-design polish 8): the place goes outside the italic title, each item is dated,
-// and "Review of <this record>" is just "Review" on the record's own page.
+// and the kind ("Review") is left out on the record's own page; /press/ keeps it (design r2 m8).
 const pubParts = (pub: string): [string, string | null] => { const m = /^(.*?) \(([^()]+)\)$/.exec(pub); return m ? [m[1], m[2]] : [pub, null]; };
-const kind = (t?: string | null) => (t && t === `Review of ${r.title}` ? 'Review' : t ?? null);
 const otherPress = r.press.filter((p: any) => !p.excerpt);
 // the Story chapter about this record, if there is one
 const chapter = storyView().chapters.find((c) => c.release === r.slug || (r.slug === 'great-day' && c.release === 'new-beginning'));
@@ -64,8 +63,9 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
         <figure class="release__cover">
           <Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) calc(100vw - 2rem), 36rem" />
           <figcaption>
-            {r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)}
-            {' '}<span>{COVER_RIGHTS}</span>
+            {r.artwork.length
+              ? <>{r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)}{' '}<span>{COVER_RIGHTS}</span></>
+              : <span>{COVER_RIGHTS_LINE}</span>}
           </figcaption>
         </figure>
       </div>
@@ -146,19 +146,19 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
     </section>
   )}
   {otherPress.length > 0 && (
-    <section class="band" aria-labelledby="more-press">
+    <section class:list={['band', video && 'band--short-end']} aria-labelledby="more-press">
       <div class="wrap"><div class="measure">
         <SecHead id="more-press">{quotes.length ? 'More press' : 'Press'}</SecHead>
         <ul class="rows">
-          {otherPress.map((p: any) => <li><cite>{pubParts(p.publication)[0]}</cite>{pubParts(p.publication)[1] && <> ({pubParts(p.publication)[1]})</>}{p.writer && <>, {p.writer}</>}{p.date && <>, {monthYear(p.date)}</>}{kind(p.type) && <>: {kind(p.type)}</>}.{p.text && <> {p.text}</>}</li>)}
+          {otherPress.map((p: any) => <li><cite>{pubParts(p.publication)[0]}</cite>{pubParts(p.publication)[1] && <> ({pubParts(p.publication)[1]})</>}{p.writer && <>, {p.writer}</>}{p.date && <>, {monthYear(p.date)}</>}.{p.text && <> {p.text}</>}</li>)}
         </ul>
       </div></div>
     </section>
   )}
 
   {video && (
-    <section class="band" aria-labelledby="vid">
-      <div class="wrap two-col two-col--media">
+    <section class="band band--tight surface" aria-labelledby="vid">
+      <div class="wrap two-col two-col--media two-col--top">
         <div>
           <SecHead id="vid">Watch “{video.song}”</SecHead>
           {chapter && <p>Chapter {chapter.n} of the Story tells this part of the band’s history: <a href={chapter.href}>read “<span set:html={chapter.titleHtml} />”</a>.</p>}
@@ -168,7 +168,7 @@ const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} co
     </section>
   )}
 
-  <nav class="band band--tight surface" aria-label="Releases">
+  <nav class:list={['band band--tight', !video && 'surface']} aria-label="Releases">
     <div class="wrap">
       {!video && chapter && <p>Chapter {chapter.n} of the Story tells this part of the band’s history: <a href={chapter.href}>read “<span set:html={chapter.titleHtml} />”</a>.</p>}
       <div class="pager">

@@ -204,6 +204,10 @@ table { border-collapse: collapse; width: 100%; }
   font-weight: 700; font-size: 0.9375rem; background: transparent; transition: background-color 0.15s, color 0.15s;
 }
 .pill .dot { height: 1.15em; width: auto; }
+.pill--plain { padding-left: 16px; }
+.records .h3 { margin-bottom: 4px; }
+.records .h3 a { color: var(--head); text-decoration: none; }
+.records .h3 a:hover { text-decoration: underline; }
 .pill:hover { background: var(--ink); color: var(--bg); }
 .red .pill, .sky .pill { color: var(--on-fill); }
 .red .pill:hover, .sky .pill:hover { background: #ffffff; color: #111111; }
@@ -229,6 +233,14 @@ table { border-collapse: collapse; width: 100%; }
   .hero .status { order: 4; }
   .logo-full { width: min(100%, 190px); }
   .stack { width: min(100%, 300px); }
+}
+/* Small phones: a shorter run-up to the cover, so at least 250 px of it is on a 320x568 first
+   screen (design r2 S1; browser test) */
+@media (max-width: 479.98px) {
+  .hero { padding-top: 20px; }
+  .hero__grid { gap: 14px; }
+  .logo-full { width: min(100%, 150px); }
+  .hero__latest .kicker { margin-bottom: 10px; }
 }
 .hero .lede { font-weight: 500; }
 .status {
@@ -267,7 +279,8 @@ table { border-collapse: collapse; width: 100%; }
 }
 .yt__roundel { position: absolute; left: 50%; top: 42%; translate: -50% -50%; height: 34%; width: auto; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)); transition: transform 0.2s; }
 .yt__label {
-  position: absolute; bottom: clamp(12px, 3vw, 24px); left: 50%; translate: -50% 0; white-space: nowrap;
+  position: absolute; bottom: clamp(12px, 3vw, 24px); left: 50%; translate: -50% 0;
+  white-space: normal; max-width: calc(100% - 24px); width: max-content; text-align: center; /* a long title wraps, never clips (a11y r2 m5) */
   background: #ffffff; color: #111111; border-radius: 999px; padding: 8px 18px; font-weight: 750; font-size: 0.9375rem;
 }
 .yt:hover .yt__roundel { transform: scale(1.06) rotate(-6deg); }
@@ -286,6 +299,13 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .collage figure { color: #ffffff; }
 .collage figcaption { color: #ffffff; }
 .collage figure:not(.col-jump) img { border: 6px solid #ffffff; box-shadow: var(--shadow); background: #ffffff; }
+/* From 360 px the four small frames go two-up; the cut-out, the 2002 photo and (below 480 px) the
+   2003 frame stay full width (design S2; design r2 m6) */
+@media (min-width: 360px) and (max-width: 479.98px) {
+  .collage { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .col-1, .col-2, .col-7, .col-more { grid-column: 1 / -1; }
+  .collage figcaption { font-size: 0.8125rem; }
+}
 /* From 480 px the small frames go two-up; the cut-out and the 2002 photo stay full width (design S2) */
 @media (min-width: 480px) and (max-width: 999.98px) {
   .collage { grid-template-columns: 1fr 1fr; }
@@ -302,7 +322,7 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
       "c1 c1 c1 c1 c2 c2 c2 c2 c2 c2 c2 c2"
       "c3 c3 c3 c3 c2 c2 c2 c2 c2 c2 c2 c2"
       "c4 c4 c4 c4 c5 c5 c5 c5 c6 c6 c6 c6"
-      ".  .  c7 c7 c7 c7 c7 c7 c7 c7 .  .";
+      "c8 c8 c8 c8 c7 c7 c7 c7 c7 c7 c7 c7";
     align-items: start;
   }
   .col-1 { grid-area: c1; }
@@ -312,7 +332,11 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
   .col-5 { grid-area: c5; transform: rotate(2deg); }
   .col-6 { grid-area: c6; transform: rotate(-1.2deg); }
   .col-7 { grid-area: c7; transform: rotate(1deg); }
+  /* the 2003 frame sits at the right edge and "All the photos" is a door in the cell it frees (design r2 m5) */
+  .col-more { grid-area: c8; align-self: center; justify-self: center; }
 }
+.col-more { margin: 0; align-self: center; }
+.col-more .pill { font-size: 1rem; }
 .col-jump { position: relative; padding: 6% 4% 0; }
 .ring { aspect-ratio: 1; width: 100%; border-radius: 50%; border: clamp(18px, 3.4vw, 40px) solid #ffffff; }
 .col-jump .jump { position: absolute; left: 8%; top: 0; width: 84%; }
@@ -346,7 +370,8 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .doors a:hover { background: var(--ink); color: var(--bg); }
 /* list doors (/music/ "Also"): the dot and the title share a row, the text starts at the card's
    own edge (audit-design polish 2) */
-.doors--list a { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px 14px; border-radius: 28px; }
+.doors--list li { display: flex; }
+.doors--list a { height: 100%; width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px 14px; border-radius: 28px; }
 .doors--list a > span:not(.doors__sub) { min-width: 0; overflow-wrap: break-word; }
 .doors__sub { grid-column: 1 / -1; font-family: "Archivo", sans-serif; text-transform: none; font-size: 1rem; font-weight: 500; }
 .disamb { max-width: 60em; margin: 0; }
@@ -377,6 +402,11 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .two-col { display: grid; gap: 48px; }
 @media (min-width: 900px) { .two-col { grid-template-columns: 7fr 5fr; gap: 64px; } .two-col--media { grid-template-columns: 5fr 7fr; align-items: center; } }
 .two-col > * { min-width: 0; }
+@media (min-width: 900px) { .two-col--top { align-items: start; } }
+/* a press list followed by a video band: one short gap, not two section paddings (design r2 S3) */
+.band--short-end { padding-bottom: clamp(20px, 3vw, 40px); }
+.home-video { margin-top: clamp(32px, 5vw, 56px); }
+.home-video .video { max-width: none; }
 
 .tracks { list-style: none; }
 .track {
@@ -513,7 +543,8 @@ input, select, textarea {
 textarea { min-height: 10rem; }
 .button, button[type="submit"] {
   display: inline-flex; align-items: center; gap: 0.5em; min-height: 48px; font: 800 1rem/1 "Archivo", sans-serif; padding: 12px 26px;
-  border: 0; border-radius: 999px; background: var(--red-fill); color: #ffffff; cursor: pointer;
+  border: 2px solid transparent; border-radius: 999px; background: var(--red-fill); color: #ffffff; cursor: pointer;
+  /* a transparent border, not none: forced colours draw it, so the button keeps its edge (a11y r2 S2) */
 }
 button[type="submit"]:hover { background: var(--ink); color: var(--bg); }
 .hint { font-size: 0.9375rem; color: var(--muted); margin: 0 0 6px; }
@@ -547,6 +578,9 @@ button[type="submit"]:hover { background: var(--ink); color: var(--bg); }
   .theme-switch__knob::after { background: Canvas; box-shadow: none; }
   .logo-full { color: CanvasText; }
   .error-summary, .field-error { forced-color-adjust: auto; }
+  /* the current-page marker survives forced colours: only the current (or hovered) link is underlined (a11y r2 S1) */
+  .nav a { border-bottom-color: Canvas; }
+  .nav a[aria-current="page"], .nav a:hover { border-bottom-color: Highlight; }
 }
 
 /* ---------------------------------------------------------------- motion */
@@ -563,5 +597,17 @@ button[type="submit"]:hover { background: var(--ink); color: var(--bg); }
   .nav a { letter-spacing: 0.06em; font-size: 0.8125rem; }
   .brand .dot { height: 38px; }
   .brand__word { height: 28px; }
+  /* two rows, not three: the knob is pinned to the right of the logo row and the nav spans the
+     second row (design r2 S1; at most 110 px tall at 320-414 px, browser test) */
+  .masthead__bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 12px; padding-block: 10px 6px; }
+  .masthead__right { display: contents; }
+  .brand { grid-column: 1; grid-row: 1; }
+  .theme-switch { grid-column: 2; grid-row: 1; }
+  .nav { grid-column: 1 / -1; grid-row: 2; }
+  .nav a { padding: 4px 0; }
+}
+@media (max-width: 359.98px) {
+  .nav ul { gap: 2px 10px; }
+  .nav a { letter-spacing: 0.02em; }
 }
 .all-link { margin: 28px 0 0; }

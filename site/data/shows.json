@@ -11,7 +11,7 @@
     { "date": "2001-08-09", "when": "August 9, 2001", "venue": "The Basement", "city": "Nashville", "note": "A 14-song set.", "status": "publish", "source": "journal 2001-08" },
     { "date": "2001-08-12", "when": "August 12, 2001", "venue": "12th & Porter", "city": "Nashville", "note": "“The new three piece configuration.”", "status": "publish", "source": "journal 2001-08" },
     { "date": "2001-09-21", "when": "September 21, 2001", "venue": "Borders (acoustic)", "city": "Nashville area", "note": "First performances of “Sunshine” and “Dreaming”.", "status": "publish", "source": "journal 2001-09" },
-    { "date": "2001-09", "sort": "2001-09-25", "when": "Late September 2001", "venue": null, "city": "Ohio and Michigan", "note": "The first trip out of the region.", "status": "publish", "source": "journal 2001-10" },
+    { "date": "2001-09", "sort": "2001-09-25", "when": "Late September 2001", "venue": null, "city": "Ohio and Michigan", "note": "The band’s first trip to Ohio and Michigan.", "status": "publish", "source": "journal 2001-10" },
     { "date": "2001-10-11", "when": "October 11, 2001", "venue": "12th & Porter", "city": "Nashville", "note": "Music-conference showcase.", "status": "publish", "source": "journal 2001-10" },
     { "date": "2001-11-14", "when": "November 14, 2001", "venue": "Jillian’s", "city": "Nashville", "note": "A cancer-research benefit with Nashville Predators players.", "status": "publish", "source": "journal 2001-11" },
     { "date": "2002-03-01", "when": "March 1, 2002", "venue": "The Basement", "city": "Nashville", "note": "First show of 2002.", "status": "publish", "source": "journal 2002-03" },
@@ -28,7 +28,7 @@
     { "date": "2003-10", "sort": "2003-10-05", "when": "Early October 2003", "venue": null, "city": "Columbia, South Carolina", "note": "First performances of “Circles” and “Still In Love”.", "status": "publish", "source": "journal 2003-10" },
     { "date": "2003-10-18", "when": "October 18, 2003", "venue": null, "city": "East Nashville", "note": "A surprise cover of Gram Parsons’ “Luxury Liner”.", "status": "publish", "source": "journal 2003-10" },
     { "date": "2004-03", "sort": "2004-03-05", "when": "Early March 2004", "venue": "The End", "city": "Nashville", "status": "publish", "source": "journal 2004-03" },
-    { "date": "2008", "when": "2008", "venue": "Opening Bell Coffee", "city": "Dallas, Texas", "note": "David Dewese’s solo CD-release show for Make The Best Of It; Chad Edgington joined him for a few songs.", "photo": "2008-texas-david-and-chad", "status": "publish", "source": "LL-37, LL-38" }
+    { "date": "2008", "when": "2008", "venue": "Opening Bell Coffee", "city": "Dallas, Texas", "note": "Not a Luxury Liners show: David Dewese’s solo CD-release show for Make The Best Of It; Chad Edgington joined him for a few songs.", "photo": "2008-texas-david-and-chad", "status": "publish", "source": "LL-37, LL-38" }
   ],
   "placements": "see press.json placements"
 }

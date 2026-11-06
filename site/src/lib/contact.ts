@@ -31,6 +31,7 @@ export const MESSAGES = {
   busy: 'Too many messages have been sent from here recently. Please wait a little while and try again.',
   turnstile: 'The spam check couldn’t confirm you’re human. Please try again.',
   noToken: 'This message couldn’t be checked for spam. Please turn on JavaScript and send it again.',
+  checking: 'The spam check is still running. Please wait a moment and send it again.',
   unavailable: 'The contact form isn’t working just now. Please try again later.',
   tooLong: 'That message is too long.',
   sendFailed: 'Your message could not be sent just now. Please try again later.',

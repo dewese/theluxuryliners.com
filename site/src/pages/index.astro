@@ -27,6 +27,14 @@ const shortListen = (r: typeof singles[number]) => r.listen.filter((l) => ['spot
 const fullDate = (iso: string) => /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : iso;
 const fourNote = 'Chad had left Nashville in March 2001. All four play on the 2026 singles.';
 const video = VIDEOS['great-day'];
+// sizes from the real layout (design r2 m7). From 1000 px the 2002 anchor (index 1) and the 2003
+// frame (last) are two-thirds wide and the four small frames a third; below 1000 px the anchor is
+// full width; the small frames go two-up from 360 px (design r2 m6) and the 2003 frame from 480 px.
+const collageSizes = (i: number) => i === 1
+  ? '(max-width: 62.49rem) calc(100vw - 2rem), min(58vw, 800px)'
+  : i === COLLAGE.length - 1
+    ? '(max-width: 29.99rem) calc(100vw - 2rem), (max-width: 62.49rem) 50vw, min(58vw, 800px)'
+    : '(max-width: 22.49rem) calc(100vw - 2rem), (max-width: 62.49rem) 50vw, min(30vw, 400px)';
 ---
 <Base title="Home" fullBand>
   <section class="hero sky" aria-labelledby="h1t">
@@ -39,7 +47,7 @@ const video = VIDEOS['great-day'];
       <div class="hero__latest">
         <p class="kicker">{latestLabel}</p>
         <div class="stack">
-          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager priority alt={LATEST.coverAlt} sizes="(max-width: 43.7rem) min(84vw, 252px), (max-width: 56rem) 84vw, 28rem" /></a>
+          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager priority alt={LATEST.coverAlt} sizes="(max-width: 43.7rem) min(84vw, 252px), (max-width: 56rem) 84vw, min(37vw, 532px)" /></a>
           <a href="/music/great-day/" class="stack__back"><Cover slug="great-day" eager alt={bySlug('great-day').coverAlt} sizes="(max-width: 43.7rem) 120px, (max-width: 56rem) 40vw, 14rem" /></a>
         </div>
         <Listen links={heroListen} title={LATEST.title} variant="hero" />
@@ -68,7 +76,15 @@ const video = VIDEOS['great-day'];
           );
         })}
       </div>
-      {video && <YouTube {...video} />}
+      {video && (
+        <div class="two-col two-col--media home-video">
+          <div>
+            <h3 class="h3">Watch “{video.song}”</h3>
+            <p>The first of the two 2026 singles. <a href="/music/great-day/">About the record</a></p>
+          </div>
+          <YouTube {...video} />
+        </div>
+      )}
     </div>
   </section>
 
@@ -79,9 +95,9 @@ const video = VIDEOS['great-day'];
       <div class="collage">
         {COLLAGE.map((p, i) => (p as any).cutout
           ? <Cutout id={p.id} class={`col-${i + 1}`} />
-          : <Photo id={p.id} class={`col-${i + 1}`} sizes="(max-width: 40rem) 100vw, (max-width: 62rem) 50vw, 40rem" note={p.id === 'four-2002' ? fourNote : undefined} />)}
+          : <Photo id={p.id} class={`col-${i + 1}`} sizes={collageSizes(i)} note={p.id === 'four-2002' ? fourNote : undefined} />)}
+        <p class="col-more"><a class="pill" href="/photos/"><Dot /><span>All the photos</span></a></p>
       </div>
-      <p class="small"><a href="/photos/">All the photos</a></p>
     </div>
   </section>
 

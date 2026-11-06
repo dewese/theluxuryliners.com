@@ -11,6 +11,7 @@ import { ONE_LINER, NEVER_BROKE_UP, COLOPHON } from '../lib/site.ts';
 import { RELEASES } from '../lib/releases.ts';
 import { PHOTOS } from '../lib/photos.ts';
 import press from '../../data/press.json';
+import { monthYear } from '../lib/dates.ts';
 import { epkView } from '../lib/views.ts';
 const v = epkView();
 const quotes = press.items.filter((p: any) => p.status === 'publish' && p.excerpt && !p.excerptBy);
@@ -54,7 +55,7 @@ const LOGOS = [
     <div class="wrap">
       <SecHead id="quotes" ink>Press quotes</SecHead>
       <ul class="quotes">
-        {quotes.map((q: any) => <li><blockquote><p>“{q.excerpt}”</p></blockquote><p class="cite">{q.writer && <>{q.writer}, </>}<cite>{q.publication}</cite></p></li>)}
+        {quotes.map((q: any) => <li><blockquote><p>“{q.excerpt}”</p></blockquote><p class="cite">{q.writer && <>{q.writer}, </>}<cite>{q.publication}</cite>, <time datetime={q.date}>{monthYear(q.date)}</time></p></li>)}
       </ul>
     </div>
   </section>
@@ -85,7 +86,7 @@ const LOGOS = [
     </section>
     <section aria-labelledby="contact">
       <SecHead id="contact">Contact</SecHead>
-      <p class="intro">{v.contactHtml ? <span set:html={v.contactHtml} /> : 'Use the contact form.'} <a href="/contact/?topic=press">Contact the band</a>.</p>
+      <p class="intro">{v.contactHtml ? <span set:html={v.contactHtml} /> : <>Use the <a href="/contact/?topic=press">contact form</a>.</>}</p>
     </section>
   </div>
 </Base>

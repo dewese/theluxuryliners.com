@@ -16,7 +16,7 @@ export const NEVER_BROKE_UP =
   'The band never broke up. The four forever members reconnected during the pandemic and started making music again.';
 
 /** Plan §5.3 item 2: the honest status line; Carly's team edits it when something real happens. */
-export const STATUS_LINE = 'Founded in 1997. Two singles in 2026. The band never broke up.';
+export const STATUS_LINE = 'Founded in 1997. Two singles in 2026.';
 
 /** Plan §8.4: disambiguation, visible on Home and Facts, in JSON-LD and llms.txt. No year for Luxury Liner (§4.3). */
 export const DISAMBIGUATION =

@@ -64,7 +64,7 @@ const NOTES: Record<string, string[]> = {
   nonetheless: [],
   'shake-it-up-live': ['Recorded live at the Texas Music Café in Waco, Texas, in autumn 1998. The song first appeared on the Believe EP (2001).'],
   'great-day': [],
-  'new-beginning': ['Track 2 is “Great Day”.'],
+  'new-beginning': ['Track 2 is “Great Day”, the February single.'],
 };
 /** One-line blurbs for the home page and the Music list: what is true and particular about each
  *  record. Never filler, never a date (the date is shown next to it). */
@@ -73,7 +73,7 @@ export const BLURBS: Record<string, string> = {
   'believe-ep': 'Three songs: two originals, including “Shake It Up”, and a cover of Cher’s “Believe”.',
   overbored: 'The first album by the trio, with “Dreaming”, heard on One Tree Hill.',
   nonetheless: 'Twelve songs, all written by David Dewese.',
-  'shake-it-up-live': 'The Believe EP original, recorded live in Waco, Texas, in autumn 1998, with Chad on guitar, David on bass and Scott on drums.',
+  'shake-it-up-live': 'Recorded live in Waco, Texas, in autumn 1998, with Chad on guitar, David on bass and Scott on drums. The studio version is on the Believe EP (2001).',
   'great-day': 'Written by Chad Edgington and David Dewese, with all four forever members playing.',
   'new-beginning': 'A second song by Chad Edgington and David Dewese with all four forever members playing, paired with “Great Day”.',
 };
@@ -113,11 +113,15 @@ const COVER_ART: Record<string, string> = {
   overbored: 'three figures in coats hanging upside down on an off-white ground, the title small below',
   nonetheless: 'a long dark dress on a hanger on an off-white ground, the band name and title across the top',
   'great-day': 'a red kite on a long string against a deep blue sky, “Great Day” in white serif lettering',
+  'shake-it-up-live': 'three band members in Western stage suits on a white ground, two of them leaping, under the band name with a red X, “Live at the Texas Music Cafe” below',
   'new-beginning': 'a hand holds up a clear CD case with a rainbow sunburst design and “New Beginning” lettering against a bright blue sky',
 };
 const coverAlt = (r: Raw, title: string) => {
   const art = COVER_ART[SLUGS[r.id]];
-  return art ? `Cover of ${title} by The Luxury Liners: ${art}.` : `Sleeve art for ${title} by The Luxury Liners.`;
+  // "Sleeve art for", not "Cover of", before a song title: "Cover of Shake It Up" reads as a cover
+  // version (P27; the copy checker's shake-it-up-cover rule)
+  const lead = /^Shake It Up/.test(title) ? 'Sleeve art for' : 'Cover of';
+  return art ? `${lead} ${title} by The Luxury Liners: ${art}.` : `Sleeve art for ${title} by The Luxury Liners.`;
 };
 
 export function release(id: string): Release {

@@ -18,7 +18,8 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, dirname, extname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { PRIVATE_HASHES, privateHits, privateLines, sha256 as sha } from './private-literals.mjs';
+import { PRIVATE_HASHES, KEY as PRIVATE_KEY, privateHits, privateLines, digest } from './private-literals.mjs';
+import { fileHasGps, bufferHasGps } from './exif-gps.mjs';
 export { privateHits };
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -67,14 +68,16 @@ const R = [];
 const rule = (id, level, scope, re, msg, extra = {}) => R.push({ id, level, scope, re, msg, ...extra });
 
 // Privacy (plan §2 item 3, LL-7, LL-31)
-// Private literals are matched by SHA-256 of a lower-cased token, never written here: the
-// matcher and the hash list live in content/private-literals.mjs (shared with site/scripts/check-dist.mjs).
+// Private literals are matched by a keyed digest (HMAC-SHA256) of a lower-cased token, never written
+// here: the matcher and the digest list live in content/private-literals.mjs (shared with
+// site/scripts/check-dist.mjs).
 let privateHashes = PRIVATE_HASHES; // the self-test swaps in a synthetic list
+let privateKey = PRIVATE_KEY;       // and, on a machine without the key, a synthetic key
 
 // Privacy (plan §2 item 3, LL-7, LL-31)
 rule('private-literal', 'error', 'all', null, 'A private name or address (hash match) must never appear in copy, data or the built site.', {
-  test: (t) => privateHits(t, privateHashes).length > 0,
-  detail: (t) => privateHits(t, privateHashes).join('; '),
+  test: (t) => privateHits(t, privateHashes, privateKey).length > 0,
+  detail: (t) => privateHits(t, privateHashes, privateKey).join('; '),
 });
 rule('email-address', 'error', 'all', /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i, 'No email addresses in copy or data (the band Gmail and the contact address stay private).');
 rule('phone-number', 'error', 'all', /(?:\(\d{3}\)\s?|\b\d{3}[-.\s])\d{3}[-.]\d{4}\b/, 'No phone numbers (old site privacy flags).');
@@ -378,12 +381,12 @@ function checkDist(dir) {
 // "Owner decisions needed"). Nothing else may be added here without an owner decision.
 export const REPO_EXCEPTIONS = new Set(['DECISIONS-2026-10-07.md']);
 const BINARY = /\.(png|jpe?g|webp|avif|gif|ico|woff2?|ttf|otf|pdf|mp3|zip|gz|psd|tiff?|bmp|eps|ai)$/i;
-export function repoHits(rel, text, hashes = privateHashes) {
+export function repoHits(rel, text, hashes = privateHashes, key = privateKey) {
   const out = [];
   const lines = text.split('\n');
   const unescaped = text.replace(/\\[a-zA-Z]/g, ' ').replace(/\\(.)/g, '$1');
   const seen = new Set();
-  for (const src of [text, unescaped]) for (const { line, labels } of privateLines(src, hashes)) {
+  for (const src of [text, unescaped]) for (const { line, labels } of privateLines(src, hashes, key)) {
     if (seen.has(line)) continue;
     seen.add(line);
     out.push({ level: 'error', rule: 'private-literal-repo', file: rel, loc: `line ${line}`, msg: `A private literal is in a tracked file of this public repository: ${labels.join('; ')}.`, text: `line ${line}` });
@@ -394,6 +397,11 @@ function checkRepo(root) {
   const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, maxBuffer: 64 * 1024 * 1024 }).toString().split('\0').filter(Boolean);
   const issues = [];
   for (const rel of files) {
+    // a tracked photo must not carry the place it was taken (EXIF GPS): Decap uploads go straight
+    // into this public repository (audit-security round 2, minor)
+    if (/\.(jpe?g|png|webp)$/i.test(rel) && existsSync(join(root, rel)) && fileHasGps(join(root, rel))) {
+      issues.push({ level: 'error', rule: 'image-gps-repo', file: rel, loc: 'EXIF', msg: 'This image carries GPS position data (EXIF) in a tracked file of this public repository. Strip it before committing.', text: 'EXIF GPS' });
+    }
     if (BINARY.test(rel) || REPO_EXCEPTIONS.has(rel)) continue;
     const p = join(root, rel);
     if (!existsSync(p)) continue;
@@ -445,7 +453,8 @@ function selfTest() {
   ];
   // Synthetic private tokens prove the hash matcher (unigram, dotted file name, address, word pair)
   // without writing any real private literal into this public file.
-  privateHashes = new Map([...PRIVATE_HASHES, ...['zz.private@example.test', 'zzfamily.html', 'zzpriv zzcollege'].map((t) => [sha(t), 'synthetic'])]);
+  privateKey = PRIVATE_KEY ?? 'zz-self-test-key';
+  privateHashes = new Map([...PRIVATE_HASHES, ...['zz.private@example.test', 'zzfamily.html', 'zzpriv zzcollege'].map((t) => [digest(t, privateKey), 'synthetic'])]);
   let fail = 0;
   if (![...PRIVATE_HASHES.keys()].every((h) => /^[0-9a-f]{64}$/.test(h))) { fail++; console.log('FAIL private hash list malformed'); }
   for (const [expect, text] of cases) {
@@ -476,11 +485,24 @@ function selfTest() {
   if (!repoHits('x.md', 'see zzfamily.html here').length) { fail++; console.log('FAIL repo: plain literal'); }
   if (!repoHits('x.mjs', "/\\bzzfamily\\.html\\b/").length) { fail++; console.log('FAIL repo: escaped literal'); }
   if (repoHits('x.md', 'nothing private here').length) { fail++; console.log('FAIL repo: clean text flagged'); }
+  // --repo: a JPEG whose EXIF has a GPS directory is caught; one without is not
+  const exifJpeg = (gpsEntries) => {
+    const tiff = Buffer.alloc(8 + 2 + 12 + 4 + 2 + 12 * gpsEntries + 4);
+    tiff.write('II', 0, 'latin1'); tiff.writeUInt16LE(42, 2); tiff.writeUInt32LE(8, 4);
+    tiff.writeUInt16LE(1, 8); tiff.writeUInt16LE(0x8825, 10); tiff.writeUInt16LE(4, 12); tiff.writeUInt32LE(1, 14); tiff.writeUInt32LE(26, 18);
+    tiff.writeUInt16LE(gpsEntries, 26);
+    for (let k = 0; k < gpsEntries; k++) tiff.writeUInt16LE(k + 1, 28 + 12 * k);
+    const app1 = Buffer.concat([Buffer.from('Exif\0\0', 'latin1'), tiff]);
+    const head = Buffer.from([0xff, 0xd8, 0xff, 0xe1, (app1.length + 2) >> 8, (app1.length + 2) & 255]);
+    return Buffer.concat([head, app1, Buffer.from([0xff, 0xda, 0, 2])]);
+  };
+  if (!bufferHasGps(exifJpeg(2))) { fail++; console.log('FAIL image-gps: GPS not caught'); }
+  if (bufferHasGps(exifJpeg(0))) { fail++; console.log('FAIL image-gps: empty GPS directory flagged'); }
   // --dist source sentences: a sentence naming Discogs is caught; a link or a one-word label is not
   if (!sourceSentenceHits('<p>Discogs lists the pressing as 100 copies.</p>').length) { fail++; console.log('FAIL source-sentence: not caught'); }
   if (!sourceSentenceHits('<p class="meta">Writers as Discogs credits them.</p>').length) { fail++; console.log('FAIL source-sentence: writers note not caught'); }
   if (sourceSentenceHits('<dl><dt>Discogs</dt><dd><a href="https://www.discogs.com/x">Overbored on Discogs</a></dd></dl>').length) { fail++; console.log('FAIL source-sentence: link flagged'); }
-  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 15} checks passed`);
+  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 17} checks passed`);
   return fail;
 }
 

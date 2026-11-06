@@ -13,11 +13,12 @@ import { RELEASES } from '../lib/releases.ts';
   </PageHead>
   <div class="wrap page-body">
     <SecHead id="rbr">Record by record</SecHead>
-    <ul class="rows">
+    <ul class="rows records">
       {RELEASES.map((r) => (
         <li>
-          <h3 id={`l-${r.slug}`} class="h3"><a href={`/music/${r.slug}/`}>{r.title}</a> <span class="meta">({r.dateLabel})</span></h3>
-          <Listen links={r.listen} title={r.title} variant="small" />
+          <h3 id={`l-${r.slug}`} class="h3"><a href={`/music/${r.slug}/`}>{r.title}</a></h3>
+          <p class="meta">{r.kind}, {r.dateLabel}</p>
+          <Listen links={r.listen} title={r.title} variant="small" plain />
         </li>
       ))}
     </ul>

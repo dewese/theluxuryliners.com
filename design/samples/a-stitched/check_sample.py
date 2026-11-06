@@ -29,31 +29,47 @@ ONE_LINER = ("The Luxury Liners are a power-pop band co-founded in 1997 by David
 LL17 = "The band never broke up. The four forever members reconnected during the pandemic and started making music again."
 P23 = "David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter in 2002"
 
-# Private literals (the founding-story town and the rest) are matched by the SHA-256 of a
-# lower-cased token, never written in this public repository; the same hashes as
-# content/private-literals.mjs (the source of truth: add new ones there and here).
-import hashlib
+# Private literals (the founding-story town and the rest) are matched by a keyed digest
+# (HMAC-SHA256) of a lower-cased token, never written in this public repository; the same
+# digests as content/private-literals.mjs (the source of truth: add new ones there and here).
+import hashlib, hmac
+def _private_key():
+    """PRIVATE_LITERALS_KEY, else the git-ignored data/private/private-literals.key (None: no check)."""
+    k = os.environ.get("PRIVATE_LITERALS_KEY", "").strip()
+    if k:
+        return k
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "data", "private", "private-literals.key")
+    try:
+        return open(p).read().strip() or None
+    except OSError:
+        return None
+PRIVATE_KEY = _private_key()
+def _digest(s, key=None):
+    return hmac.new((key or PRIVATE_KEY).encode(), s.encode(), hashlib.sha256).hexdigest()
 PRIVATE_HASHES = {
-    "bd69e39fea034e7dab1702391ba0af52d8bb4cfddeefef293bf9ae1577a013ea",
-    "81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a",
-    "7b8bd6c0abf53d22888beafc48830e1156907dd4ec7e6ea31e55a0dd6dc5a969",
-    "f6a761f669dfeafd8086a367b336cbee496a1b13ac5128c8cb9346ca7891ccf3",
-    "270e826aaea2ede6497f2383a2e0c2fe418a737a8224fc8888e4821158342f5d",
-    "921329720029ded97c7725d6a6508f110e9488d3bbf614a33babec8f3ea383a6",
-    "0c6193e11c89c15a1715161c094efa47adfc6585cd66021968336d5b4d4fc321",
-    "2c96398674dbc4e58b556e6fbf53f85b80be112a3c9113851f431d3a67275208",
+    "8acbf0d82b2b671ff0e3fbcaeb0218e817b3d173fd31d894144e0cc5f32f735e",
+    "ea6ce4733b8604c4800279fb041c0529dbb0752854ecacfed8386f465a1dcb37",
+    "708aadc7fe42db927f180a49b7f33ec17e546fc654d615f75be87c882f3f6812",
+    "6fc1e9b9955b7845b6f47a327b6eb949905c8ff02c757d359c88c13aa2338d20",
+    "d7cdad84a3be17cc5a28986250ad3a0b283484169f7f88081529d5146a9ecab0",
+    "5873f749d4392e386d5276f406a47c24fd2943bcadcae78d948ab057bf2ed8e8",
+    "6b8af0fa26a6764f737bfcea3f1acaf9416ef4ef5f58b9af551897b03ebf8d40",
+    "d5666a5ac38c2934235aaa8bee2cf08f60b6580609e72e93d806dad75e75253f",
 }
 
 
-def private_hit(text, hashes=PRIVATE_HASHES):
-    """The first token (or word pair) of the text whose hash is private, else None."""
+def private_hit(text, hashes=PRIVATE_HASHES, key=None):
+    """The first token (or word pair) of the text whose digest is private, else None (also None
+    when there is no key on this machine: the check is off, as in content/private-literals.mjs)."""
+    if not (key or PRIVATE_KEY):
+        return None
     toks = re.findall(r"[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]", text.lower())
     for k, t in enumerate(toks):
         cands = [t] + [p for p in re.split(r"[.@/_-]+", t) if p]
         if k + 1 < len(toks):
             cands += [t + " " + toks[k + 1], t + toks[k + 1]]
         for c in cands:
-            if hashlib.sha256(c.encode()).hexdigest() in hashes:
+            if _digest(c, key) in hashes:
                 return c
     return None
 
@@ -195,7 +211,7 @@ def self_test():
     }
     missed = [k for k, v in bad.items() if not any(f"[{k}]" in e for e in scan_file("t.html", v, ".html"))]
     # the hashed matcher, on a synthetic token (never a real private literal)
-    if private_hit("see zz-synthetic here", {hashlib.sha256(b"zz-synthetic").hexdigest()}) is None:
+    if private_hit("see zz-synthetic here", {_digest("zz-synthetic", "zz-self-test-key")}, "zz-self-test-key") is None:
         missed.append("town (hashed matcher)")
     if missed:
         print("self-test: rules that did not fire:", missed)

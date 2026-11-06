@@ -23,6 +23,18 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 
 ---
 
+## Launch gate: must be answered before launch (added 2026-11-06, audits round 2)
+
+**G1. Journal-derived shows and Story chapter 5 (LL-25).** The 2001–04 rows on the Shows page, and the shows named in Story chapter 5 ("The journal years"), were taken from the band's 2001–04 journal: dates, venues and short paraphrased notes (the quotes are already held). LL-25 says David approves each journal month before it goes live. Does David approve these derived rows and chapter 5 as they stand?
+- *Why it matters:* LL-25 is about the journal; these lines come from it, and no approval for them is recorded yet.
+- *Proposed default:* none: the site does not launch until David answers. **If he says no**, the team sets `"publish": false` on those rows in `content/shows.json` and trims chapter 5 to what other sources support.
+
+**G2. The 2001 *Nashville Scene* profile.** The Press page lists the July 2001 *Nashville Scene* profile of David by Noel Murray. The article names members' family, so the site lists it without its title and never links a copy. May the site give its title?
+- *Why it matters:* the title helps readers find the piece, but the piece itself goes beyond the band (LL-7).
+- *Proposed default:* listed without the title (as now).
+
+---
+
 ## Tier 1: needed now
 
 **A1. Launch strategy.** Is it OK to launch an "authoritative core" first (Home, Story, Music with a page per release, People, Press, Shows, Vault starter, Photos, Facts, EPK, Listen, Contact) and add depth in layers afterwards (full journal, lyrics, song pages, show archive, more audio)?

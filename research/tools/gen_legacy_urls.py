@@ -8,12 +8,14 @@ LIVE = sys.argv[1]
 OUT = '/home/user/theluxuryliners.com/data/legacy-urls.json'
 # Rows whose path names a private literal go to a git-ignored file, never the public repo.
 PRIVATE_OUT = '/home/user/theluxuryliners.com/data/private/legacy-urls.private.json'
-import hashlib, re as _re
-# SHA-256 of private tokens (content/private-literals.mjs); the literals are never written here.
+import hashlib, hmac, os, re as _re
+# Keyed digests (HMAC-SHA256) of private tokens (content/private-literals.mjs P2-P4); the literals
+# are never written here. The key: PRIVATE_LITERALS_KEY or the git-ignored data/private/private-literals.key.
+PRIVATE_KEY = os.environ.get('PRIVATE_LITERALS_KEY', '').strip() or open('/home/user/theluxuryliners.com/data/private/private-literals.key').read().strip()
 PRIVATE_HASHES = {
-    '81963d441096beff3a2867e7fbffe88e81a21e90fb6684a4c239b68e9d2b937a',
-    '7b8bd6c0abf53d22888beafc48830e1156907dd4ec7e6ea31e55a0dd6dc5a969',
-    'f6a761f669dfeafd8086a367b336cbee496a1b13ac5128c8cb9346ca7891ccf3',
+    'ea6ce4733b8604c4800279fb041c0529dbb0752854ecacfed8386f465a1dcb37',
+    '708aadc7fe42db927f180a49b7f33ec17e546fc654d615f75be87c882f3f6812',
+    '6fc1e9b9955b7845b6f47a327b6eb949905c8ff02c757d359c88c13aa2338d20',
 }
 def is_private(path):
     toks = _re.findall(r'[a-z0-9][a-z0-9@._-]*[a-z0-9]|[a-z0-9]', path.lower())
@@ -21,7 +23,7 @@ def is_private(path):
     for t in toks:
         cands.add(t)
         cands.update(p for p in _re.split(r'[.@/_-]+', t) if p)
-    return any(hashlib.sha256(c.encode()).hexdigest() in PRIVATE_HASHES for c in cands)
+    return any(hmac.new(PRIVATE_KEY.encode(), c.encode(), hashlib.sha256).hexdigest() in PRIVATE_HASHES for c in cands)
 
 rows = json.load(open(CDX))[1:]
 dd = {x['path']: x['target'] for x in json.load(open(LLA))}

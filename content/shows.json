@@ -2,7 +2,6 @@
   "_about": "Shows page data. Rows are sorted by [sort_key, id]. sort_key is YYYY-MM-DD with 00 for an unknown month or day, so a row known only to the year sorts before the dated rows of that year, and a season or range sorts by its first possible month. Where a post says early, mid or late in a month, a representative day (about 05, 15 or 25) stands in so the row sorts sensibly; date_precision then stays \"month\" and the display text says early/mid/late. date_precision is one of: day, approx-day, month, month-range, season, season-range, year. Public fields: date_display, venue, place, note. Internal: source, confidence, notes_internal, and rows with \"publish\": false. The 2001-04 rows are the band's own journal: the band's account, not a verified gig list.",
   "checked_on": "2026-11-06",
   "intro": "Shows that can be dated, from the band’s own records and memories. The list grows as more turns up.",
-  "journal_note": "Shows from 2001 to 2004 come from the band’s journal.",
   "shows": [
     {
       "id": "1997-western-beat-roots-revival-zanies",
@@ -138,7 +137,7 @@
       "date_precision": "month",
       "venue": "Shows in Ohio and Michigan",
       "place": "Ohio and Michigan",
-      "note": "The first trip out of the region.",
+      "note": "The band’s first trip to Ohio and Michigan.",
       "source": "dd research/04 §5.2 journal table; months 2001_09 and 2001_10",
       "confidence": "verified-source",
       "notes_internal": "sort_key day 22 only places 'late September' after the 21 Sept row."
@@ -328,7 +327,7 @@
       "date_display": "February 20 and 21, 2003",
       "sort_key": "2003-02-20",
       "date_precision": "day",
-      "venue": "Two Nashville shows",
+      "venue": "Two shows",
       "place": "Nashville, Tennessee",
       "note": "Part of three shows in one week.",
       "source": "dd research/04 §5.2 journal table; 2003_02 archive",
@@ -502,7 +501,7 @@
       "date_precision": "year",
       "venue": "Opening Bell Coffee",
       "place": "Dallas, Texas",
-      "note": "David’s CD-release show for his solo album *Make The Best Of It*. Chad joined him for a few songs.",
+      "note": "Not a Luxury Liners show: David’s CD-release show for his solo album *Make The Best Of It*. Chad joined him for a few songs.",
       "kind": "david-solo-with-chad",
       "photo": "assets/source/photos/2008-texas-cd-release-david-and-chad.jpg",
       "source": "DECISIONS-2026-10-07.md LL-37, LL-38",

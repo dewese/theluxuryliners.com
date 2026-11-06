@@ -2,7 +2,7 @@
 page: epk
 title: Press kit
 intro: Bios, facts and contact for writers, programmers and promoters. Use any of the bios as written.
-contact_line: To reach the band, use the form on the Contact page.
+contact_line: To reach the band, use the [contact form](/contact/?topic=press).
 bios:
   - id: short
     heading: Short bio

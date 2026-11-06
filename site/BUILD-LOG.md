@@ -185,7 +185,7 @@ David to approve (or not) when the months are reviewed:
 | Where | Quote removed | Now reads |
 |---|---|---|
 | /shows/, 2001-08-12, 12th & Porter | "The new three piece configuration." | One of the first shows as a trio. |
-| /shows/, late September 2001, Ohio and Michigan | "We lost a little money." | The first trip out of the region. |
+| /shows/, late September 2001, Ohio and Michigan | "We lost a little money." | The band’s first trip to Ohio and Michigan. (round 2, copy B1) |
 | /shows/, 2002-05-31, House of Blues, Las Vegas | "All of nevada was rocked last friday night." | A conference showcase. |
 | /shows/, mid-June 2003 | venue "“Our detroit tour”" | A Detroit tour |
 | /shows/, 2003-02-20 | "Part of “three shows in one week”." | Part of three shows in one week. |
@@ -320,7 +320,9 @@ in the repository.
 
 1. **Private literals already in public history** (security B1): accept them, approve a history
    purge (`git filter-repo`, which needs a force-push and invalidates clones), or make the
-   repository private. Nothing in the current tree names them.
+   repository private. Nothing in the current tree names them. Round 2: this also covers the
+   contact address written into `critiques/audit-copy-round2.md` line 5 by commit `5eaab60`
+   (reworded in the tree, still in history) and the earlier unsalted digests.
 2. **`DECISIONS-2026-10-07.md`**: LL-4 names the founding-story town and the LL-31 row names the
    contact address. Only the owner edits that file; `check-content --repo` exempts it
    (`REPO_EXCEPTIONS`) until it is reworded.
@@ -333,3 +335,111 @@ in the repository.
 Verification (2026-11-06): `npm test`: data, unit, dist, jsonld, repo and axe all PASS (axe
 370/370; behaviour 200/200). `node content/check-content.mjs --dist dist`: 0 errors.
 `node content/check-content.mjs --repo`: 0 errors. `--self-test`: all checks passed.
+
+## Round 2 audits: fixes (2026-11-06)
+
+Reports: `critiques/audit-{copy,security,a11y,design}-round2.md`. Owner decisions applied as
+before: LL-44 (design C "Roundel"), LL-45 (Amy Wilstermann credited for the 2003 photos, credit
+line only).
+
+### Blocking
+
+| Finding | Fix | Guard |
+|---|---|---|
+| copy B1: Ohio and Michigan "the first trip out of the region" (false: Waco 1998, SXSW 2001 came first) | "The band’s first trip to Ohio and Michigan." in `content/shows.json` (and the site fallback) | dist test `copy B1` (`tests/dist/audit2.test.mjs`) |
+| copy B2: /vault/ gave Live Liners one date | "two sets at 12th & Porter, Nashville: electric on July 18 and acoustic on November 17, 2002", as ch. 5, /shows/ and releases.json | dist test `copy B2` |
+| security B1 / design B1: `npm test` red, the contact address written in `critiques/audit-copy-round2.md` line 5 | reworded to "The contact address does not appear anywhere in dist"; the file is **not** in `REPO_EXCEPTIONS`; new rule in `critiques/README.md` and `content/CHECK.md`: critiques and logs name a private literal by its role, never by its value. The literal stays in history (commit `5eaab60`): added to "Owner decisions needed" item 1 | `repo` suite (`check-content --repo`) green |
+| security B2: /admin/ blank (Decap ran in `<head>` before `<body>` existed) | the pinned script (same SRI) moved to the end of `<body>` in `public/admin/index.html` | dist test (no script in `<head>`, Decap last in `<body>`); browser test in `behaviour.mjs`: the real pinned bundle under `ADMIN_CSP` shows "Login with GitHub" with no script error and no CSP violation (needs unpkg.com; prints a NOTE and does not run offline, the dist test runs either way) |
+
+### Should fix: done
+
+- **Accessibility.** S1 forced colours: nav links get `Canvas` underlines, the current (and
+  hovered) link `Highlight`; S2 submit buttons have `border: 2px solid transparent`, so forced
+  colours draw an edge (both browser-tested); m1 the live single's cover alt describes the art
+  (three members in Western stage suits, two leaping, under the band name with a red X); m2 the
+  statement says "We aim to reply within 10 working days" (S1/S2 are fixed, so they are not listed
+  as known limitations); m3 the Worker's no-JS error page puts `autofocus` on the error summary
+  (`role=alert` kept); m4 `contact.js` refuses a send before the Turnstile token arrives with "The
+  spam check is still running…" (`MESSAGES.checking`); m5 `.yt__label` wraps (`white-space:
+  normal; max-width: calc(100% - 24px); text-align: center`), browser-tested at 320 px, text 200%.
+- **Copy.** Ch. 9 "Precious To My Heart" (listed as "Precious" on *Sound As Ever*…); LL-25 is now
+  launch-gate question **G1** in `QUESTIONS-FOR-CARLY.md` (if David says no: `publish: false` on the
+  journal-derived rows and trim ch. 5); the /shows/ journal provenance note is gone (content and
+  fallback); the hero factline no longer repeats "The band never broke up." (`content/home.md`,
+  `STATUS_LINE`); the live single's blurb puts the 1998 take first and the 2001 EP second; Facts
+  "How dates are given" trimmed to the reader-facing sentences; /press/ drops "LN"; the 2001
+  *Nashville Scene* profile is listed without its title (question **G2**); the 2008 row reads "Not a
+  Luxury Liners show: …" (the page keeps 1997–2008); "Two shows, Nashville, Tennessee"; New
+  Beginning "Track 2 is “Great Day”, the February single." (no earlier version, LL-13); ch. 6
+  "Waiting For The Sun" outside the quotation; EPK press quotes dated (month and year); one EPK
+  contact link ("To reach the band, use the [contact form]"); ch. 2 is "1997–1998" (nothing in it
+  happens in 1999; no 1999 content invented).
+- **Security.** S1 private literals are matched by **HMAC-SHA256** under a key
+  (`PRIVATE_LITERALS_KEY`, else the git-ignored `data/private/private-literals.key`), with generic
+  labels `private literal P1…P8`; the plain literals and what each is are in the git-ignored
+  `data/private/private-literals.json`; `node content/private-literals.mjs --digest|--rebuild`.
+  Without the key, importing the matcher throws in CI and with `RELEASE=1` (fail closed) and warns
+  and matches nothing on a developer machine. The three Python sample checkers and
+  `research/tools/gen_legacy_urls.py` use the same digests and key. S2 `ADMIN_CSP`/`ADMIN_HEADERS`
+  live in `worker/headers.ts`; `withSecurityHeaders(res, pathname)` applies the editor CSP, COOP
+  `same-origin-allow-popups` and noindex under `/admin/` (staging runs the Worker first), and
+  `build-headers.mjs` uses the same constant; staging vars set `REQUIRE_TURNSTILE: "1"`. S3 the
+  contact body is stream-read and abandoned past `MAX_BODY` (`readCapped()`), so a chunked 5 MB body
+  is not read before the 413. Minor: CI actions pinned to commit SHAs (checkout v4.3.1,
+  setup-node v4.4.0) and the key passed from the `PRIVATE_LITERALS_KEY` secret; `check-content
+  --repo` refuses a tracked image with EXIF GPS data (`content/exif-gps.mjs`; JPEG, PNG, WebP; two
+  self-test probes) and the two tracked Flickr originals that had it
+  (`assets/source/photos/flickr/530769090_…`, `530879249_…`) had their GPS directory zeroed in
+  place (pixels and size unchanged; `data/assets.json` sha256 and status updated); a request with
+  no `cf-connecting-ip` logs `contact_no_client_ip`. Handbook §11: the secret, the pins, GPS.
+- **Design.** S1 below 480 px the masthead is a grid: logo and knob on row 1, the nav on row 2;
+  below 360 px tighter nav tracking and gap (browser test: at most 110 px and one nav row at
+  320x568, 375x667, 414x896, JS on and off; at least 250 px of the New Beginning cover on the first
+  screen at 320x568). S2 the home "Great Day" facade sits in a `two-col--media` row beside a short
+  "Watch “Great Day”" head and a link to the record (option b; option a would put the Great Day
+  cover on home a third time, against design-c round 1 M3). S3 the release-page video is its own
+  `band surface` band, top-aligned, with "More press" ending short above it (`band--short-end`)
+  and the pager on the page ground. m1 `.doors--list` cards are equal height (`li` flex, link
+  `height: 100%`). m2 /listen/: per-record pills are plain (`<Listen plain>`), record names are
+  `.h3` heading links in `--head`, underlined on hover, the date on its own meta line. m3 /contact/
+  kicker "Booking, press and hello". m4 a cover with no credit reads "Cover art: all rights reserved
+  by the rights holders." (release and chapter pages; no artist invented). m5 the 2003 frame sits
+  at the right of the last collage row and "All the photos" is a pill door in the freed cell. m6 at
+  360–479 px the four small collage frames go two-up. m7 `sizes` from the real layout (hero cover
+  `min(37vw, 532px)`; collage anchors `min(58vw, 800px)`, small frames `min(30vw, 400px)`, 50vw
+  when two-up). m8 release pages drop the press kind (": Review."); /press/ keeps it.
+
+### Skipped, with reasons
+
+- **a11y m2, "list S1/S2 under Known limitations until fixed":** both are fixed in this round, so
+  listing them would be untrue.
+- **Copy, /press/ "Catching Up Fast" title:** not confirmed with David here; listed without the title
+  (the audit's alternative) and asked as G2.
+
+### Tests added or changed (none weakened)
+
+`tests/dist/audit2.test.mjs` (15 tests); `tests/unit/worker.test.mjs` +4 (admin headers through the
+Worker on staging and production, staging `REQUIRE_TURNSTILE`, chunked body 413 after at most
+`MAX_BODY` + a few chunks, missing client IP logged); the fillForm test now also requires
+`autofocus` on the summary. `tests/browser/behaviour.mjs`: forced-colours nav marker and button
+edge, masthead height and nav rows at three phone sizes (JS on and off), cover on the first screen at
+320x568, the video label at 320 px / 200 %, and /admin/ with the real Decap bundle.
+`content/check-content.mjs --self-test`: +2 EXIF GPS probes; the private-literal probes use a keyed
+digest (a synthetic key when the machine has none).
+
+### Owner decisions needed (round 2 additions)
+
+1. **Private literals already in public history** (item 1 above) now also include the contact
+   address written into `critiques/audit-copy-round2.md` in commit `5eaab60` (removed from the
+   tree in this round), and the old unsalted SHA-256 digests in earlier commits of
+   `content/private-literals.mjs` and the Python checkers (reversible by a word-list attack). The
+   same three choices apply: accept, approve a history purge, or make the repository private.
+2. **CI secret:** add `PRIVATE_LITERALS_KEY` to the GitHub repository (handbook §11). Until then
+   the CI `checks` job fails closed.
+3. **G1 / G2** in `QUESTIONS-FOR-CARLY.md` (LL-25 journal-derived shows and ch. 5; the 2001
+   *Nashville Scene* title) are launch gates.
+
+Verification (2026-11-06, round 2): `npm test`: data, unit (86 tests), dist, jsonld, repo
+(self-test 53/53) and axe (370/370; behaviour 223/223, the /admin/ check ran with the real bundle)
+all PASS. `node content/check-content.mjs --dist site/dist`: 0 errors (12 deliberate warnings);
+`node content/check-content.mjs`: 0 errors. Not deployed.

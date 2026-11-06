@@ -18,6 +18,20 @@ export const CSP = [
   'upgrade-insecure-requests',
 ].join('; ');
 
+/** /admin/ (Decap CMS) loads its editor from a CDN, so it gets its own CSP: only the pinned Decap
+ *  file (which also carries an SRI hash in public/admin/index.html), no plugins, no <base>. The
+ *  editor signs in through a cross-origin OAuth popup that hands the token back with
+ *  window.opener.postMessage, so /admin/ uses COOP same-origin-allow-popups (audit-security
+ *  round 1, S5). Used by scripts/build-headers.mjs (dist/_headers) and by the Worker, which runs
+ *  first for every path on staging (audit-security round 2, S2). */
+export const ADMIN_CSP = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com/decap-cms@3.17.1/dist/decap-cms.js; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://github.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'";
+export const ADMIN_HEADERS: Record<string, string> = {
+  'Content-Security-Policy': ADMIN_CSP,
+  'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+  'X-Robots-Tag': 'noindex',
+};
+export const isAdminPath = (pathname: string) => pathname === '/admin' || pathname.startsWith('/admin/');
+
 export const SECURITY_HEADERS: Record<string, string> = {
   'Content-Security-Policy': CSP,
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',

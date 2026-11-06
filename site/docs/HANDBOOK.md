@@ -186,6 +186,15 @@ That is enforced on GitHub, not just agreed (set it up once, Settings → Branch
 - require the status check **`checks`** (`.github/workflows/ci.yml`: `npm ci`, `npm test`, the
   content checker) to pass, and the branch to be up to date;
 - do not allow force pushes or deletions; include administrators.
+Also add the repository secret **`PRIVATE_LITERALS_KEY`** (Settings → Secrets and variables →
+Actions): the contents of the git-ignored `data/private/private-literals.key`, which the developer
+keeps with the other secrets. The `repo` and `dist` checks match a few private literals by a keyed
+digest (`content/private-literals.mjs`); without the key they fail closed in CI and in release
+builds, so the `checks` job stays red until the secret is set. The actions in `ci.yml` are pinned
+to commit SHAs; to upgrade one, change the SHA and the tag in its comment together.
+Uploads through the editor land in this public repository as they are: the `repo` check refuses
+an image that carries GPS position data (EXIF). Strip it first (for example, export the photo
+again with location turned off).
 Setup (once): create a GitHub OAuth app for the editor and a small Cloudflare Worker that does the
 sign-in (the "Decap GitHub OAuth" helper), then set `base_url` in `config.yml`. Until then, edit
 the files directly and run the checks. The helper must:
@@ -194,9 +203,11 @@ the files directly and run the checks. The helper must:
   `Cross-Origin-Opener-Policy: same-origin-allow-popups`; every other page keeps `same-origin`);
 - ask GitHub for the narrowest scope that works: `public_repo` for this public repository (never
   `repo`), and keep the OAuth app's callback URL to the helper's own address.
-The editor's script is pinned (`decap-cms@3.17.1`) with a Subresource Integrity hash in
-`public/admin/index.html`, and `/admin/`'s own Content-Security-Policy allows that one file
-only. To upgrade, change the version in both places and recompute the hash (the comment in
+The editor's script sits at the end of the page body (in the head it ran before the body existed
+and the editor was blank). It is pinned (`decap-cms@3.17.1`) with a Subresource Integrity hash in
+`public/admin/index.html`, and `/admin/`'s own Content-Security-Policy (`ADMIN_CSP` in
+`site/worker/headers.ts`, used by `dist/_headers` and by the Worker, which serves every path on
+staging) allows that one file only. To upgrade, change the version in both places and recompute the hash (the comment in
 `index.html` shows how).
 
 ## 12. Publishing, the release build, and rolling back

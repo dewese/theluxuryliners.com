@@ -5,6 +5,8 @@
 //  - on submit the rules stated on the page are checked (the same rules as src/lib/contact.ts,
 //    read from the #contact-rules JSON block): an error summary that links to each field, aria-invalid,
 //    each message tied to its field with aria-describedby, and nothing typed is lost
+//  - with the Turnstile widget on the page, a send before its token arrives says the check is
+//    still running
 //  - a valid form is sent with fetch (Accept: application/json); the Worker's errors are shown
 //    the same way, and a sent message goes to /contact/sent/
 (function () {
@@ -88,6 +90,12 @@
     form.querySelector('input[name="elapsed"]').value = String(Math.round((Date.now() - t0) / 1000));
     var errors = validate();
     if (Object.keys(errors).length) { ev.preventDefault(); show(errors); return; }
+    // with the Turnstile widget on the page, wait for its token: a send before it arrives would
+    // be refused with the "turn on JavaScript" message, though JavaScript is on (audit-a11y round 2, m4)
+    if (form.querySelector('.cf-turnstile')) {
+      var tok = form.querySelector('input[name="cf-turnstile-response"]');
+      if (!tok || !tok.value) { ev.preventDefault(); show({ form: M.checking || M.unavailable }); return; }
+    }
     if (!window.fetch || !window.URLSearchParams || !window.FormData) return; // a plain post
     ev.preventDefault();
     clear();

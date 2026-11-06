@@ -18,10 +18,11 @@ jobs:
       run:
         working-directory: site
     steps:
-      - uses: actions/checkout@v4
+      # actions pinned to full commit SHAs (audit-security round 2, minor); the tag is in the comment
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22.18
           cache: npm
@@ -29,7 +30,12 @@ jobs:
       - run: npm ci
       # the browser suite drives the Chrome that GitHub's Ubuntu runners already have; nothing
       # is downloaded (the handbook's rule: never `playwright install`)
+      # the private-literal check needs its key (content/private-literals.mjs); without the secret
+      # it fails closed here (CI is set), never silently passes
       - run: npm test
         env:
           CHROMIUM: /usr/bin/google-chrome
+          PRIVATE_LITERALS_KEY: ${{ secrets.PRIVATE_LITERALS_KEY }}
       - run: node ../content/check-content.mjs --dist dist
+        env:
+          PRIVATE_LITERALS_KEY: ${{ secrets.PRIVATE_LITERALS_KEY }}

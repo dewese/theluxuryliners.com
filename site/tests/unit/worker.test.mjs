@@ -4,12 +4,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { isGone, queryRedirect, isStagingHost, safeDecode } from '../../worker/routing.ts';
-import { handleContact, fillForm, verifyTurnstile } from '../../worker/api/contact.ts';
+import { handleContact, fillForm, verifyTurnstile, readCapped, MAX_BODY } from '../../worker/api/contact.ts';
 import worker, { respond } from '../../worker/index.ts';
 import { MESSAGES } from '../../src/lib/contact.ts';
 import { buildMime } from '../../worker/api/mime.ts';
 import { GONE, QUERY_REDIRECTS } from '../../worker/gone.ts';
-import { SECURITY_HEADERS } from '../../worker/headers.ts';
+import { SECURITY_HEADERS, ADMIN_CSP, ADMIN_HEADERS } from '../../worker/headers.ts';
 
 test('routing: 410 for old files, query redirects, staging host', () => {
   assert.ok(GONE.length > 100);
@@ -120,7 +120,8 @@ test('contact: a refused message without JavaScript gets the form again, filled 
   const input = { name: 'David "Larry" <b>', email: 'nope', topic: 'fan-mail', message: 'Hi & <script>x</script>' };
   const out = fillForm(CONTACT_HTML, { email: MESSAGES.email, form: MESSAGES.tooFast }, input);
   assert.match(out, /<title>Error: Contact/);
-  assert.match(out, /<div class="error-summary" data-contact-errors tabindex="-1" role="alert"><h2 class="h3">Your message was not sent<\/h2>/);
+  // focus starts on the summary without JavaScript (audit-a11y round 2, m3)
+  assert.match(out, /<div class="error-summary" data-contact-errors tabindex="-1" role="alert" autofocus><h2 class="h3">Your message was not sent<\/h2>/);
   assert.match(out, /<li><a href="#email">Enter a full email address/);
   assert.match(out, /<p class="field-error" id="email-error">Enter a full email address/);
   assert.match(out, /<p class="field-error" id="name-error" hidden><\/p>/, 'no error, slot stays hidden');
@@ -212,4 +213,55 @@ test('the contact address is configured only as a secret', () => {
   const w = readFileSync(new URL('../../wrangler.jsonc', import.meta.url), 'utf8');
   assert.doesNotMatch(w, /CONTACT_TO"\s*:/, 'CONTACT_TO is a secret, never a var');
   assert.doesNotMatch(w, /@dewese\.com|@gmail\.com/);
+});
+
+// ---- round 2 (critiques/audit-security-round2.md)
+
+test('security r2 S2: /admin/ keeps the editor CSP and COOP through the Worker (staging runs the Worker first)', async () => {
+  const env = SITE_ENV({ ASSETS: ASSETS({ '/admin/': '<!doctype html><title>Editor</title>', '/404': '404' }) });
+  for (const host of ['staging.theluxuryliners.com', 'theluxuryliners.com']) {
+    const res = await worker.fetch(new Request(`https://${host}/admin/`), env);
+    assert.equal(res.status, 200, host);
+    assert.equal(res.headers.get('content-security-policy'), ADMIN_CSP, `${host}: admin CSP`);
+    assert.equal(res.headers.get('cross-origin-opener-policy'), 'same-origin-allow-popups', `${host}: admin COOP`);
+    assert.match(res.headers.get('x-robots-tag'), /noindex/, host);
+    assert.equal(res.headers.get('strict-transport-security'), SECURITY_HEADERS['Strict-Transport-Security'], `${host}: the other headers stay`);
+  }
+  const other = await worker.fetch(new Request('https://staging.theluxuryliners.com/administrator/'), env);
+  assert.equal(other.headers.get('content-security-policy'), SECURITY_HEADERS['Content-Security-Policy'], 'only /admin/ gets the editor CSP');
+  const h = readFileSync(new URL('../../dist/_headers', import.meta.url), 'utf8');
+  assert.ok(h.includes(`Content-Security-Policy: ${ADMIN_CSP}`), 'dist/_headers uses the same ADMIN_CSP');
+  assert.equal(ADMIN_HEADERS['Content-Security-Policy'], ADMIN_CSP);
+});
+
+test('security r2 S2: staging requires Turnstile too', () => {
+  const w = readFileSync(new URL('../../wrangler.jsonc', import.meta.url), 'utf8');
+  const staging = w.slice(w.indexOf('"staging"'));
+  assert.match(staging.slice(0, staging.indexOf('"ratelimits"')), /"REQUIRE_TURNSTILE": "1"/);
+});
+
+test('security r2 S3: a body with no Content-Length is read only up to MAX_BODY, then 413', async () => {
+  let pulled = 0;
+  const chunk = new Uint8Array(64 * 1024).fill(97);
+  const body = new ReadableStream({ pull(c) { pulled += chunk.byteLength; if (pulled > 5 * 1024 * 1024) c.close(); else c.enqueue(chunk); } });
+  const req = new Request('https://theluxuryliners.com/api/contact', {
+    method: 'POST', body, duplex: 'half',
+    headers: { 'content-type': 'application/x-www-form-urlencoded', 'sec-fetch-site': 'same-origin', origin: 'https://theluxuryliners.com', accept: 'application/json', 'cf-connecting-ip': '192.0.2.1' },
+  });
+  assert.equal(req.headers.get('content-length'), null);
+  const res = await handleContact(req, ENV(), { makeMessage });
+  assert.equal(res.status, 413);
+  assert.ok(pulled <= MAX_BODY + 3 * chunk.byteLength, `read ${pulled} bytes of a 5 MB body before the 413`);
+  // a small body is read whole
+  assert.equal((await readCapped(new Request('https://x/', { method: 'POST', body: 'a=1' }), MAX_BODY)).byteLength, 3);
+  assert.equal(await readCapped(new Request('https://x/', { method: 'POST', body: 'x'.repeat(MAX_BODY + 1) }), MAX_BODY), null);
+});
+
+test('security r2 minor: a request without cf-connecting-ip is logged (shared rate-limit bucket)', async () => {
+  const logs = [];
+  const orig = console.log;
+  console.log = (m) => logs.push(String(m));
+  try { await handleContact(form({ ...GOOD }), ENV({ ALLOW_NO_JS_CONTACT: '1' }), { makeMessage }); }
+  finally { console.log = orig; }
+  assert.ok(logs.some((l) => l.includes('contact_no_client_ip')), logs.join(' '));
 });
