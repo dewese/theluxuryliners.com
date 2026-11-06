@@ -146,10 +146,12 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **C3. Chad's college.** One source names the college where David and Chad met. You approved "college friend" (P21). May the site name the college?
 - *Why it matters:* it is a detail about a private person's life.
 - *Proposed default:* **no**; "college friend" only.
+- **ANSWERED 2026-11-06 (covered by LL-7: no, "college friend" only).**
 
 **C4. The magazine profile of Chad.** A magazine profiled Chad's life after the band and mentions band facts (the production deal, *Billboard*, the years). May the site cite it?
 - *Why it matters:* it is public, but it is mainly about Chad's private life now.
 - *Proposed default:* **never cited, quoted or linked**; used internally only, with Chad's OK.
+- **ANSWERED 2026-11-06 (covered by LL-7: never cited, quoted or linked).**
 
 **C5. The band journal (2001–04).** The old site's journal has 33 months of posts: shows, trips and band life, plus some friends' names and personal news. Who should approve each month before it goes into the Vault?
 - *Why it matters:* it is the richest first-hand source, and it needs a privacy pass.
