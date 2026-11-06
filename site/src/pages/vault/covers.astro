@@ -6,7 +6,7 @@ import { coversView } from '../../lib/views.ts';
 const v = coversView();
 ---
 <Base title="Cover songs" description="Songs by other writers that The Luxury Liners recorded or played, with the original artists.">
-  <PageHead title="Cover songs" size="l" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'Cover songs' }]}>
+  <PageHead title="Cover songs" size="l" tone="red" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'Cover songs' }]}>
     <p class="lede" set:html={v.introHtml} />
   </PageHead>
   <div class="wrap page-body">

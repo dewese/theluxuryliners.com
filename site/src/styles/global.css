@@ -369,7 +369,8 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .release__cover img { box-shadow: var(--shadow); border-radius: 3px; }
 .factline { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 0; font-weight: 700; margin-bottom: 20px; }
 .factline li { display: inline-flex; align-items: center; }
-.factline li + li::before {
+/* the separator trails each item, so a wrapped line never starts with a dot (design polish 10) */
+.factline li:not(:last-child)::after {
   content: ""; display: inline-block; width: 0.55em; height: 0.75em; margin: 0 0.7em; border-radius: 50%;
   background: var(--head); transform: rotate(-22deg);
 }
@@ -390,6 +391,7 @@ figcaption { font-size: 0.9375rem; color: var(--muted); margin-top: 10px; line-h
 .oval::before { content: ""; position: absolute; inset: -3px 5px; border-radius: 50%; background: var(--red-fill); transform: rotate(-22deg); z-index: -1; }
 .track__title { font-weight: 750; font-size: 1.0625rem; }
 .track__dur { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.9375rem; }
+.tracks + .h3, .tracks + h3 { margin-top: 1.5em; } /* space above NOTES (design polish 9) */
 .track__note { grid-column: 2 / -1; margin: 4px 0 0; font-size: 0.9375rem; color: var(--muted); }
 
 .credits { margin: 0 0 32px; }
@@ -495,6 +497,8 @@ dl.facts dd { margin: 6px 0 0; }
 /* ---------------------------------------------------------------- photos */
 .gallery { display: grid; gap: 32px 28px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); align-items: start; }
 .gallery img { box-shadow: var(--shadow); }
+/* a portrait photo spans two rows and the grid fills the holes beside it (design polish 7) */
+@media (min-width: 40rem) { .gallery { grid-auto-flow: row dense; } .gallery .is-tall { grid-row: span 2; } }
 .gallery [id] { scroll-margin-top: 24px; }
 .era + .era { margin-top: clamp(48px, 7vw, 80px); }
 .logo-tile { padding: 24px; background: #ffffff; border: 2px solid var(--line); border-radius: 18px; }

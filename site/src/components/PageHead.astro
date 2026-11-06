@@ -1,6 +1,10 @@
 ---
 // The head of an inner page: breadcrumb, kicker, the page's one h1 in Archivo Black capitals, and
 // a lede (slot). tone "red" or "sky" fills the band.
+// The rule (audit-design round 1, polish 1): a section's children share its hub's head.
+//   sky   the "now" layer: Music (and Compilations), People, Listen, Contact (and the thank-you page)
+//   red   the history: Story and its chapters, the Vault and everything in it, the press kit, 404, 410
+//   plain reference pages that stand alone: Facts, Press, Shows, Photos, Privacy, Accessibility
 interface Props { title: string; titleHtml?: string; kicker?: string; crumbs?: { href?: string; label: string }[]; tone?: 'plain' | 'red' | 'sky' | 'surface'; size?: 'xl' | 'l' }
 const { title, titleHtml, kicker, crumbs = [], tone = 'plain', size = 'xl' } = Astro.props;
 import { fitClasses } from '../lib/typo.ts';

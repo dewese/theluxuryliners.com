@@ -8,7 +8,7 @@ import { SLUGS, BLURBS, bySlug } from './releases.ts';
 import { sortKey } from './dates.ts';
 import { sortShows, where } from './shows.ts';
 import { PHOTOS } from './photos.ts';
-import { members } from './members.ts';
+import { members, rolesSentence } from './members.ts';
 import siteFacts from '../../data/facts.json';
 import sitePeople from '../../data/people.json';
 import siteArtwork from '../../data/artwork.json';
@@ -58,7 +58,7 @@ export function homeView() {
     return inl(s.blurb);
   };
   // Roles come from the one members source (members.ts), the same as /people/ and the JSON-LD.
-  const memberList = members().map((m) => ({ nameHtml: esc(m.name), roleHtml: esc(m.roles.join(', ')), years: m.years, lineHtml: inl(m.line), url: m.url }));
+  const memberList = members().map((m) => ({ nameHtml: esc(m.name), roleHtml: esc(rolesSentence(m)), years: m.years, lineHtml: inl(m.line), url: m.url }));
   return {
     statusLine: smart(d.status_line ?? STATUS_LINE),
     latestLabel: d.latest_release?.label ? smart(d.latest_release.label) : null,
@@ -116,7 +116,7 @@ const coverOk = (releaseId?: string | null) => !PENDING_COVER_SLUGS.includes(slu
  *  guitar on Nonetheless"), so the years never read as covering a later, separate role (LL-24). */
 const earlyRoles = (roles: string[], years: string, h: (s: string) => string) =>
   roles.length > 1 && years ? `${h(roles[0])}, ${esc(years)}; ${roles.slice(1).map(h).join('; ')}` : `${roles.map(h).join(', ')}${years ? `, ${esc(years)}` : ''}`;
-const foreverRows = () => members().map((m) => ({ nameHtml: esc(m.name), url: m.url, roles: m.roles.join(', '), years: m.years, lineHtml: inl(m.line) }));
+const foreverRows = () => members().map((m) => ({ nameHtml: esc(m.name), url: m.url, roles: rolesSentence(m), years: m.years, lineHtml: inl(m.line) }));
 export function peopleView() {
   const c = json('people.json');
   const art = siteArtwork.credits.filter((a) => a.status === 'publish');

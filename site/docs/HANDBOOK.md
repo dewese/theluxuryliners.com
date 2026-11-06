@@ -99,7 +99,8 @@ In `site/`: `npm test` builds the site and runs:
 | `unit` | small helpers, the Worker (contact form, old addresses), the LL-3 comparison, and rules over the built pages (writers, credits, shows order, no bonus-disc mention, privacy page…) |
 | `dist` | the copy, privacy and owner-decision rules over every built file; plus the copy team's own checker (`content/check-content.mjs --dist-only`) |
 | `jsonld` | the structured data search engines read |
-| `axe` | accessibility (WCAG 2.2 AA rules) on every page, desktop and phone width, with and without JavaScript |
+| `repo` | no tracked file of this public repository holds a private literal (`content/check-content.mjs --repo`, hashed matcher in `content/private-literals.mjs`) |
+| `axe` | accessibility (WCAG 2.2 AA rules) on every page, desktop and phone width, with and without JavaScript; then the contact form's errors, forced colours, headings that break inside a word, the first screen on a phone and text resized to 200% (`tests/browser/behaviour.mjs`) |
 A failure names the page and the rule. `node tests/run.mjs axe` runs one suite.
 
 ## 7. Setting up on a laptop
@@ -123,6 +124,15 @@ The site is a Cloudflare Worker with static assets (free plan), configured in `s
    an old address from `dist/_redirects`, an old image path from `worker/gone.ts` → 410), then
    remove the domain from Carrd. **Do not** put a redirect rule in front of Carrd (Error 1000).
 5. The domain renews **2027-03-19**: confirm auto-renew at GoDaddy.
+6. **Zone settings that break the site's security policy.** Turn **off** Rocket Loader, Email
+   Address Obfuscation (Scrape Shield) and automatic Web Analytics injection (Web Analytics →
+   "Enable with JS snippet", never "automatic setup"). Each injects inline scripts, which the
+   Content-Security-Policy blocks, so pages would break or log errors. The site adds its own
+   analytics beacon when built with the token (chapter 10).
+7. **Staging behind Cloudflare Access.** Zero Trust → Access → Applications → add
+   `staging.theluxuryliners.com` with a policy for the team's email addresses only, so drafts are
+   never public. Every staging response is `noindex` and carries the same security headers as
+   production.
 
 ## 9. The contact form: Turnstile and the secrets
 The form posts to `/api/contact` (the Worker). The address messages go to is **never** in the
@@ -137,15 +147,19 @@ repository or a page: it is a Worker secret.
      enter it together)
 4. Test on staging: send a message; it arrives with the subject `[theluxuryliners.com] <topic>`.
    A message sent with JavaScript off arrives marked `[no Turnstile]`.
-5. **Known spam route, and how to close it.** So that the form also works with JavaScript off,
-   the Worker accepts a message without a Turnstile token when the request says it came from
-   this site (`Sec-Fetch-Site: same-origin`). Browsers send that header honestly, but any script
-   can fake it, so a spammer can skip Turnstile this way. The honeypot field, the timing check and
-   the rate limit still apply, and such messages arrive marked `[no Turnstile]`. If spam marked
-   `[no Turnstile]` starts to arrive, close the route: add `"REQUIRE_TURNSTILE": "1"` to `vars`
-   in `wrangler.jsonc` (both environments) and deploy the Worker. From then on every message
-   needs Turnstile, and visitors without JavaScript see the "no spam check" message and are
-   asked to turn JavaScript on.
+5. **Turnstile is required.** Production has `"REQUIRE_TURNSTILE": "1"` in `wrangler.jsonc`, and
+   the Worker refuses any message without a verified Turnstile token whenever `TURNSTILE_SECRET`
+   is set (a script can fake the browser's "sent from this site" header, so that is no longer
+   enough). Set `TURNSTILE_SECRET` **before** the first deploy, or the form refuses everything.
+   Visitors without JavaScript see the form again with a note asking them to turn JavaScript on;
+   the accessibility page says so once the site key is built in. To accept messages without
+   JavaScript again (marked `[no Turnstile]`, with the honeypot, timing check and rate limit
+   still applied), the owner must decide it: then remove `REQUIRE_TURNSTILE` and add
+   `"ALLOW_NO_JS_CONTACT": "1"` to `vars`.
+   The rate limit runs before anything else costly, so a flood of bad tokens never reaches
+   Cloudflare's siteverify. The form may be sent from `theluxuryliners.com` and
+   `www.theluxuryliners.com` (`CONTACT_HOSTNAMES`); the `www` → apex redirect (chapter 8) is
+   still the main path.
 6. Limits: three messages a minute per connection (`ratelimits` in `wrangler.jsonc`). Check the
    Workers usage chart monthly; the free plan's daily limit is far above what the form needs.
 
@@ -166,9 +180,24 @@ repository or a page: it is a Worker secret.
 `/admin/` is the editor (configured in `site/public/admin/config.yml`). It edits the Story
 chapters, the home page, the press-kit bios and the photo records. Every change is a draft:
 Draft → In review → Ready; the checks run on it, and a second person publishes it.
+That is enforced on GitHub, not just agreed (set it up once, Settings → Branches → Add rule for
+`main`):
+- require a pull request before merging, with **one approving review**;
+- require the status check **`checks`** (`.github/workflows/ci.yml`: `npm ci`, `npm test`, the
+  content checker) to pass, and the branch to be up to date;
+- do not allow force pushes or deletions; include administrators.
 Setup (once): create a GitHub OAuth app for the editor and a small Cloudflare Worker that does the
 sign-in (the "Decap GitHub OAuth" helper), then set `base_url` in `config.yml`. Until then, edit
-the files directly and run the checks.
+the files directly and run the checks. The helper must:
+- hand the token back with `window.opener.postMessage(message, "https://theluxuryliners.com")`,
+  naming the site's origin, never `"*"` (`/admin/` allows the sign-in popup to talk back with
+  `Cross-Origin-Opener-Policy: same-origin-allow-popups`; every other page keeps `same-origin`);
+- ask GitHub for the narrowest scope that works: `public_repo` for this public repository (never
+  `repo`), and keep the OAuth app's callback URL to the helper's own address.
+The editor's script is pinned (`decap-cms@3.17.1`) with a Subresource Integrity hash in
+`public/admin/index.html`, and `/admin/`'s own Content-Security-Policy allows that one file
+only. To upgrade, change the version in both places and recompute the hash (the comment in
+`index.html` shows how).
 
 ## 12. Publishing, the release build, and rolling back
 - `npm run build:production` is the build that goes live. It is strict: it fails on any
@@ -178,7 +207,10 @@ the files directly and run the checks.
   good one → Rollback. Or `npx wrangler rollback`.
 
 ## 13. Old addresses (redirects and 410s)
-Every address of the band's old websites (675, in `data/legacy-urls.json`) has an answer:
+Every address of the band's old websites (675) has an answer. 670 are in `data/legacy-urls.json`;
+the five that name the old family page and its images are kept out of this public repository, in
+`data/private/legacy-urls.private.json` (git-ignored; the developer keeps a copy with the other
+secrets), and the build merges them when the file is there:
 - moved pages go to their new page (301), listed in `dist/_redirects`, generated by
   `site/scripts/build-redirects.mjs` (never edit `_redirects` by hand). Every target must exist;
   addresses whose page does not exist yet (a journal month, the old news) go to the nearest page

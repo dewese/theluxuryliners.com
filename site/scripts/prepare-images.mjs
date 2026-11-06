@@ -6,7 +6,7 @@
 // data/image-sizes.json (dimensions for width/height attributes) and public/favicon.ico.
 // Skips files that are already up to date. Usage: node scripts/prepare-images.mjs [--force]
 import sharp from 'sharp';
-import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync, readdirSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -29,10 +29,22 @@ const COVERS = {
 };
 const photos = JSON.parse(readFileSync(join(site, 'data', 'photos.json'), 'utf8')).photos.filter((p) => p.status === 'publish');
 
-async function variants(key, src, widths) {
+// Scan borders (audit-design polish 6): a photo's `trim` in data/photos.json is [top, right,
+// bottom, left] in percent of the master, cut before resizing. Never hidden with object-fit.
+async function source(abs, trim) {
+  const img = sharp(abs).rotate();
+  if (!trim) return img;
+  const m = await sharp(abs).rotate().toBuffer({ resolveWithObject: true }).then((r) => r.info);
+  const [t, r, b, l] = trim.map((v) => v / 100);
+  const left = Math.round(m.width * l), top = Math.round(m.height * t);
+  return sharp(await img.toBuffer()).extract({ left, top, width: m.width - left - Math.round(m.width * r), height: m.height - top - Math.round(m.height * b) });
+}
+
+async function variants(key, src, widths, trim = null) {
   const abs = join(root, src);
   if (!existsSync(abs)) throw new Error(`prepare-images: missing master ${src}`);
-  const meta = await sharp(abs).metadata();
+  const meta = trim ? await (await source(abs, trim)).toBuffer({ resolveWithObject: true }).then((r) => r.info) : await sharp(abs).metadata();
+  const stale = JSON.stringify(sizes[key]?.trim ?? null) !== JSON.stringify(trim);
   const usable = widths.filter((w) => w < meta.width);
   if (!usable.length || usable.at(-1) < Math.min(meta.width, widths.at(-1))) usable.push(Math.min(meta.width, widths.at(-1)));
   const ws = [...new Set(usable)].sort((a, b) => a - b);
@@ -42,30 +54,33 @@ async function variants(key, src, widths) {
   for (const w of ws) {
     for (const fmt of ['jpg', 'webp']) {
       const f = join(out, `${key}-${w}.${fmt}`);
-      if (!force && existsSync(f) && statSync(f).mtimeMs > mtime) continue;
-      const img = sharp(abs).rotate().resize({ width: w, withoutEnlargement: true }).toColorspace('srgb');
+      if (!force && !stale && existsSync(f) && statSync(f).mtimeMs > mtime) continue;
+      const img = (await source(abs, trim)).resize({ width: w, withoutEnlargement: true }).toColorspace('srgb');
       await (fmt === 'jpg' ? img.jpeg({ quality: 82, mozjpeg: true }) : img.webp({ quality: 80 })).toFile(f);
     }
   }
   const h = Math.round((meta.height / meta.width) * ws.at(-1));
   // keep whichever encoding is smaller (audit-qa round 1, M5): when a WebP copy is no smaller than
   // its JPEG, the page offers the JPEG alone (Photo/Cover drop the WebP <source>)
+  // drop copies at widths this image no longer has (after a trim), so they never ship
+  const base = key.split('/').pop();
+  for (const f of readdirSync(dir)) { const m = new RegExp(`^${base}-(\\d+)\\.(jpg|webp)$`).exec(f); if (m && !ws.includes(Number(m[1]))) unlinkSync(join(dir, f)); }
   const webp = ws.every((w) => statSync(join(out, `${key}-${w}.webp`)).size < statSync(join(out, `${key}-${w}.jpg`)).size);
-  sizes[key] = { width: ws.at(-1), height: h, widths: ws, webp };
+  sizes[key] = { width: ws.at(-1), height: h, widths: ws, webp, ...(trim ? { trim } : {}) };
 }
 
 // Social cards (audit-seo round 1, S5/S6): 1200x630, the shape summary_large_image shows uncropped.
-async function card(key, src) {
+async function card(key, src, trim = null) {
   const abs = join(root, src);
   const f = join(out, 'cards', `${key}.jpg`);
   mkdirSync(dirname(f), { recursive: true });
-  if (!force && existsSync(f) && statSync(f).mtimeMs > statSync(abs).mtimeMs) return;
-  await sharp(abs).rotate().resize(1200, 630, { fit: 'cover', position: sharp.strategy.attention }).toColorspace('srgb').jpeg({ quality: 82, mozjpeg: true }).toFile(f);
+  if (!force && !trim && existsSync(f) && statSync(f).mtimeMs > statSync(abs).mtimeMs) return;
+  await (await source(abs, trim)).resize(1200, 630, { fit: 'cover', position: sharp.strategy.attention }).toColorspace('srgb').jpeg({ quality: 82, mozjpeg: true }).toFile(f);
 }
 
 for (const [slug, src] of Object.entries(COVERS)) await variants(`covers/${slug}`, src, [300, 600, 1200]);
-for (const p of photos) await variants(`photos/${p.id}`, p.src, [480, 960, 1600]);
-for (const p of photos) await card(p.id, p.src);
+for (const p of photos) await variants(`photos/${p.id}`, p.src, [480, 960, 1600], p.trim ?? null);
+for (const p of photos) await card(p.id, p.src, p.trim ?? null);
 writeFileSync(sizesFile, JSON.stringify(sizes, null, 1) + '\n');
 
 // ---- logos: viewBox crops of the derived sheets (verbatim artwork) ----

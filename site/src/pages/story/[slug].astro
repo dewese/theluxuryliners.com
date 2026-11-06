@@ -22,7 +22,7 @@ export function getStaticPaths() {
 }
 const { c, prev, next, all } = Astro.props as { c: Chapter; prev: Chapter | null; next: Chapter | null; all: Chapter[] };
 const r = c.release ? bySlug(c.release) : null;
-const listen = r ? r.listen.filter((l) => ['spotify', 'apple_music', 'bandcamp', 'youtube_music'].includes(l.key)) : [];
+const listen = r ? r.listen.filter((l) => ['spotify', 'apple_music', 'bandcamp', 'youtube_music', 'tidal', 'deezer'].includes(l.key)) : []; // the release page's services (design-c m6)
 // the head shows the record's cover; the chapter photo then sits in the text. Without a record, the
 // photo heads the chapter.
 const headPhoto = !r && c.photo ? c.photo : null;

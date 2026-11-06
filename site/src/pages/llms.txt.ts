@@ -2,7 +2,7 @@
 import type { APIRoute } from 'astro';
 import { SITE, ONE_LINER, NEVER_BROKE_UP, DISAMBIGUATION, SAME_AS, SPREAD } from '../lib/site.ts';
 import { RELEASES } from '../lib/releases.ts';
-import { members, yearsInWords } from '../lib/members.ts';
+import { members, yearsInWords, rolesSentence } from '../lib/members.ts';
 import press from '../../data/press.json';
 import { storyView, factsView } from '../lib/views.ts';
 import { smart } from '../lib/typo.ts';
@@ -22,7 +22,7 @@ export const GET: APIRoute = () => {
     `${NEVER_BROKE_UP} The band was founded in Texas in 1997 and moved to Nashville in May 1997. ${SPREAD}`,
     '',
     '## Members (the four forever members)',
-    ...forever.map((p) => `- ${p.name} (${yearsInWords(p.years)}): ${p.roles.join(', ')}.${p.line ? ` ${p.line.replace(/\*/g, '')}` : ''}`),
+    ...forever.map((p) => `- ${p.name} (${yearsInWords(p.years)}): ${rolesSentence(p)}.${p.line ? ` ${p.line.replace(/\*/g, '')}` : ''}`),
     '',
     '## Releases',
     ...RELEASES.slice().reverse().map((r) => `- [${r.title}](${SITE}/music/${r.slug}/): ${r.kind}, ${r.dateLabel}, ${r.label}`),

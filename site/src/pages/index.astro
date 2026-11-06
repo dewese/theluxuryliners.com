@@ -22,7 +22,9 @@ const heroListen = [
   ...LATEST.listen.filter((l) => l.key === 'spotify').map((l) => ({ ...l, label: `${LATEST.title} on Spotify` })),
   ...LATEST.listen.filter((l) => l.key === 'apple_music'),
 ];
-const shortListen = (r: typeof singles[number]) => r.listen.filter((l) => ['spotify', 'apple_music', 'youtube_music', 'bandcamp'].includes(l.key));
+const shortListen = (r: typeof singles[number]) => r.listen.filter((l) => ['spotify', 'apple_music', 'youtube_music', 'bandcamp', 'tidal', 'deezer'].includes(l.key));
+// the 2026 singles keep their exact release dates on their cards (design polish 13; LL-26)
+const fullDate = (iso: string) => /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : iso;
 const fourNote = 'Chad had left Nashville in March 2001. All four play on the 2026 singles.';
 const video = VIDEOS['great-day'];
 ---
@@ -57,7 +59,7 @@ const video = VIDEOS['great-day'];
               <a href={`/music/${r.slug}/`} aria-hidden="true" tabindex="-1"><Cover slug={r.slug} alt="" sizes="(max-width: 33rem) 160px, 12rem" /></a>
               <div>
                 <h3 id={`s-${r.slug}`}><a href={`/music/${r.slug}/`}>{r.title}</a></h3>
-                <p class="meta">{r.kind}, {r.dateLabel} · {r.label}</p>
+                <p class="meta">{r.kind}, {fullDate(r.date)} · {r.label}</p>
                 {blurb && <p class="blurb" set:html={blurb} />}
                 {r.artwork.map((a) => <p class="meta">{a.role}: {a.name}</p>)}
                 <Listen links={shortListen(r)} title={r.title} variant="small" />
@@ -90,7 +92,7 @@ const video = VIDEOS['great-day'];
         {v.members.map((m) => (
           <li>
             <h3><Dot /><span set:html={m.nameHtml} /></h3>
-            <p class="roles"><span set:html={m.roleHtml} /> <span class="years">{m.years.replace(/–$/, ' to today')}</span></p>
+            <p class="roles"><span set:html={m.roleHtml} />. <span class="years">{m.years.replace(/–$/, ' to today')}</span></p>
             {m.lineHtml && <p set:html={m.lineHtml} />}
           </li>
         ))}

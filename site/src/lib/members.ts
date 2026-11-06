@@ -30,3 +30,8 @@ export function members(): Member[] {
 export const bandRoles = (m: Member) => m.roles.filter((x) => !/^co-?founder$/i.test(x));
 /** Years in words for plain text ("1998–" -> "1998 to today"). */
 export const yearsInWords = (y: string) => y.replace(/–$/, ' to today');
+/** The roles as home and /people/ print them, in sentence case as in the approved sample
+ *  ("Co-founder. Guitar, bass, lead vocals, songs"; audit-design round 1, polish 3). The second
+ *  part is the JSON-LD roleName, word for word. */
+export const sentenceCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+export const rolesSentence = (m: Member) => `${m.founder ? 'Co-founder. ' : ''}${sentenceCase(bandRoles(m).join(', '))}`;

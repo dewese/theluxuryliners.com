@@ -1,7 +1,7 @@
 // Structured data (plan §8.2, owner decisions LL-5 and LL-9). One MusicGroup on every page
 // (by @id; the full node on the home page), a MusicAlbum per release page, FAQPage on /facts/
 // for answers visible there. scripts/check-jsonld.mjs checks every page.
-import { members, bandRoles, type Member } from './members.ts';
+import { members, bandRoles, sentenceCase, type Member } from './members.ts';
 import { SITE, BAND, ONE_LINER, DISAMBIGUATION, SAME_AS } from './site.ts';
 import { isoDuration } from './dates.ts';
 import { RELEASES, type Release } from './releases.ts';
@@ -32,7 +32,7 @@ export function musicGroup() {
     foundingDate: '1997',
     foundingLocation: { '@type': 'Place', name: 'Texas', address: { '@type': 'PostalAddress', addressRegion: 'TX', addressCountry: 'US' } },
     founder: founders.map(person),
-    member: forever.map((p) => ({ '@type': 'OrganizationRole', roleName: bandRoles(p).join(', '), startDate: p.startDate, member: person(p) })),
+    member: forever.map((p) => ({ '@type': 'OrganizationRole', roleName: sentenceCase(bandRoles(p).join(', ')), startDate: p.startDate, member: person(p) })),
     // LL-19: Nashville is the band's home town. Band-level only, never a place per member (LL-7).
     location: { '@type': 'Place', name: 'Nashville, Tennessee', address: { '@type': 'PostalAddress', addressLocality: 'Nashville', addressRegion: 'TN', addressCountry: 'US' } },
     album: RELEASES.map((r) => ({ '@type': 'MusicAlbum', '@id': `${SITE}/music/${r.slug}/#album`, name: r.title, url: `${SITE}/music/${r.slug}/` })),

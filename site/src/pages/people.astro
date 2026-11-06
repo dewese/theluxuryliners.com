@@ -28,8 +28,8 @@ const shooters = photographers();
         <dl class="facts">
           {v.forever.map((p) => (
             <>
-              <dt>{p.url ? <a href={p.url} set:html={p.nameHtml} /> : <span set:html={p.nameHtml} />}</dt>
-              <dd>{p.roles}{p.years && <> ({p.years.replace(/–$/, ' to today')})</>}.{p.lineHtml && <> <span set:html={p.lineHtml} /></>}</dd>
+              <dt><span set:html={p.nameHtml} />{p.years && <> <span class="years">({p.years.replace(/–$/, ' to today')})</span></>}</dt>
+              <dd>{p.roles}.{p.lineHtml && <> <span set:html={p.lineHtml} /></>}</dd>
             </>
           ))}
         </dl>
@@ -45,7 +45,7 @@ const shooters = photographers();
       </div>
       <div>
         <SecHead id="records">On the records</SecHead>
-        <ul class="rows">{v.records.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} />{p.years && <>, {p.years}</>}</li>)}</ul>
+        <ul class="rows">{v.records.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} />{p.years && !p.rolesHtml.includes(p.years) && <>, {p.years}</>}</li>)}</ul>
       </div>
     </div>
   </section>

@@ -12,7 +12,7 @@ import { smart } from '../../lib/typo.ts';
 const songs = vault.oldMp3s.songs.map((s: any) => ({ ...s, title: smart(s.title), app: s.appearance ? APPEARANCES.find((a) => a.id === s.appearance) : undefined }));
 ---
 <Base title="The old free MP3s" description="The songs The Luxury Liners’ old website gave away as MP3s, and where to hear them today.">
-  <PageHead title="The old free MP3s" size="l" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'The old free MP3s' }]}>
+  <PageHead title="The old free MP3s" size="l" tone="red" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'The old free MP3s' }]}>
     <p class="lede">In the early 2000s the band’s website gave away MP3s. The files are long gone; most of these songs stream today on the records below, and the rest of the band’s music is on <a href="/listen/">the streaming services</a>.</p>
   </PageHead>
   <div class="wrap page-body">

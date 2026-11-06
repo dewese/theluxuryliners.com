@@ -20,10 +20,10 @@ It runs in the same **multi-agent gauntlet** format as daviddewese.com, foxymoro
 | `research/03-web-archaeology.md` | The old theluxuryliners.com, 2000–2026: seven design eras, old copy, free audio, the band journal, newsletters, other web presences, the legacy-URL plan, privacy flags |
 | `research/04-press-and-digital-footprint.md` | 26 press items, platform bios and where they come from, knowledge-graph state, name collisions, prioritised off-site corrections, `sameAs` list and JSON-LD sketch |
 | `research/05-assets-and-photos.md` | Covers, 274 Flickr photos (248 usable), engraved portraits, logos, flyers, credit and caption rules, wish-list |
-| `research/legacy/live-status-2026-10-07.tsv` | Live HTTP status of all 675 archived URLs, checked 2026-10-07 |
+| `research/legacy/live-status-2026-10-07.tsv` | Live HTTP status of the archived URLs (private-page rows left out), checked 2026-10-07 |
 | `research/tools/gen_legacy_urls.py` | Regenerates `data/legacy-urls.json` (rules in `classify()`) |
 | `data/releases.json` | 21 release objects: 7 releases, 1 reissue, 8 appearances, 4 archive items, 1 lead |
-| `data/legacy-urls.json` | 675 legacy URLs, each with a status, era, category, action and suggested target |
+| `data/legacy-urls.json` | 670 of the 675 legacy URLs, each with a status, era, category, action and suggested target (the 5 private-page rows are in the git-ignored `data/private/`) |
 | `data/assets.json` | 310 image records with size, SHA-256, credit status, alt text and caption rules |
 | `assets/source/covers/` | 6 owner cover masters (byte-identical copies of the daviddewese.com masters) |
 | `assets/source/photos/` | The 2002 photo of all four; 2 Kristin Barlowe portraits of David (`solo-archive/`); 98 Flickr originals (`flickr/`) and 150 web-size copies (`flickr-web/`) |

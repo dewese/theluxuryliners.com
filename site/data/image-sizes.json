@@ -81,41 +81,64 @@
  },
  "photos/studio-2000": {
   "width": 1600,
-  "height": 1052,
+  "height": 1058,
   "widths": [
    480,
    960,
    1600
   ],
-  "webp": true
+  "webp": true,
+  "trim": [
+   0,
+   0.6,
+   0,
+   0
+  ]
  },
  "photos/blue-suits-1998": {
-  "width": 963,
-  "height": 600,
+  "width": 880,
+  "height": 591,
   "widths": [
    480,
-   960,
-   963
+   880
   ],
-  "webp": true
+  "webp": true,
+  "trim": [
+   0,
+   8.6,
+   1.5,
+   0
+  ]
  },
  "photos/hard-rock-1998": {
-  "width": 600,
-  "height": 919,
+  "width": 594,
+  "height": 891,
   "widths": [
    480,
-   600
+   594
   ],
-  "webp": false
+  "webp": true,
+  "trim": [
+   1.6,
+   0,
+   1.4,
+   1
+  ]
  },
  "photos/backstage-1998": {
-  "width": 844,
-  "height": 619,
+  "width": 837,
+  "height": 594,
   "widths": [
    480,
-   844
+   837
   ],
-  "webp": true
+  "webp": true,
+  "trim": [
+   4,
+   0.8,
+   0,
+   0
+  ]
  },
  "photos/brosephs": {
   "width": 894,
