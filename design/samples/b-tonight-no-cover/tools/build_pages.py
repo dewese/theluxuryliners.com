@@ -5,7 +5,7 @@ Substitutions:
   {{HEAD title|description}}  the shared <head>
   {{HEADER page}}             masthead with the stacked LXL logo inlined
   {{FOOTER}}                  footer with the red roundel + spaced wordmark inlined
-  {{LOGO name}}               any logo from logos/, inlined (paths verbatim)
+  {{LOGO name}}               any logo from logos/, as two <img> (one per theme)
 Every <img> under img/ gets width and height read from the file.
 Run:  python3 tools/build_pages.py
 """
@@ -16,15 +16,13 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 SAMPLE = os.path.dirname(HERE)
 SRC = os.path.join(HERE, "src")
-INK = 'fill="rgb(13.7'  # the sheets' near-black ink, both sheets
 
 
 def logo(name):
-    svg = open(os.path.join(SAMPLE, "logos", name + ".svg")).read().strip()
-    svg = svg.replace("<svg ", '<svg aria-hidden="true" focusable="false" ', 1)
-    # tag the near-black ink so CSS can paint it in the theme ink; d is untouched
-    svg = re.sub(r'<path (?=[^>]*' + re.escape(INK) + ')', '<path class="ink" ', svg)
-    return svg
+    """Both theme variants as <img>; CSS shows the one for the current theme.
+    Decorative here: every use sits beside visually hidden text or a heading."""
+    return (f'<img class="logo logo--light" src="logos/{name}--oxblood.svg" alt="">'
+            f'<img class="logo logo--dark" src="logos/{name}--paper.svg" alt="">')
 
 
 NAV = [("story-nudie-suits.html", "Story", "story"), ("overbored.html", "Music", "music"),

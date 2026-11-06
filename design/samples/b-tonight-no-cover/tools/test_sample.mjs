@@ -66,7 +66,7 @@ for (const [name, file] of PAGES) {
     for (const v of res.violations) fail(`${label}: axe ${v.id} (${v.nodes.length}) ${v.nodes.slice(0, 3).map((n) => n.target.join(" ")).join(" | ")}`);
     if (!res.violations.length) console.log(`ok   ${label}: axe 0 violations, ${res.passes.length} rules passed, overflow 0`);
 
-    if (SHOTS && run.tag !== "375-light" && run.tag !== "320-dark") {
+    if (SHOTS && ["desktop-light", "desktop-dark", "375-dark"].includes(run.tag)) {
       fs.mkdirSync(path.join(SAMPLE, "screenshots"), { recursive: true });
       await page.screenshot({ path: path.join(SAMPLE, "screenshots", `${name}-${run.tag}.png`), fullPage: true });
     }

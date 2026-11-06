@@ -5,9 +5,11 @@ Every <path> element (its d, fill rule, colour and transform) is copied byte for
 byte from the sheet; only a tight viewBox is computed around each mark. Nothing
 is redrawn. Run from anywhere:  python3 tools/extract_logos.py
 
-Pages inline these files. In the pages the sheet's near-black ink
-rgb(13.7%, 12.2%, 12.5%) is given class="ink" so CSS can paint it in the theme
-ink; the red, slate and white fills are left exactly as drawn.
+Each mark is also written in two ink variants for the two themes:
+  <name>--oxblood.svg  near-black ink rgb(13.7%, 12.2%, 12.5%) -> #6E1410 (paper theme)
+  <name>--paper.svg    near-black ink -> #F4E6D0 (after-hours theme)
+Only that fill value changes; every d, fill rule, transform and the red, slate
+and white fills stay exactly as drawn. Pages load the variants with <img>.
 """
 import os
 import re
@@ -43,6 +45,10 @@ def write(name, raws, pad=1.0):
     svg = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}">\n' + "\n".join(raws) + "\n</svg>\n"
     with open(os.path.join(OUT, name), "w") as fh:
         fh.write(svg)
+    for suffix, colour in (("oxblood", "#6E1410"), ("paper", "#F4E6D0")):
+        var = re.sub(r'fill="rgb\(13\.72[0-9.%, ]*\)"', f'fill="{colour}"', svg)
+        with open(os.path.join(OUT, name.replace(".svg", f"--{suffix}.svg")), "w") as fh:
+            fh.write(var)
     print(name, vb, len(raws), "paths")
 
 
@@ -56,7 +62,6 @@ def main():
     #   36 stacked "THE LUXURY LINERS" with the crossed X.
     write("stacked-lxl.svg", m[33:37])
     write("roundel-red-spaced.svg", m[17:33])
-    write("roundel-black.svg", m[0:1])
     # logos-ai-sheet.svg: 0 red roundel; 1-15 condensed wordmark over it.
     write("condensed-over-roundel.svg", ai[0:16])
 
