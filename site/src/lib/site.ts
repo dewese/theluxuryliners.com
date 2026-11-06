@@ -4,12 +4,12 @@
 export const SITE = 'https://theluxuryliners.com';
 export const BAND = 'The Luxury Liners';
 
-/** LL-6: the canonical one-liner, verbatim. */
+/** LL-6: the canonical one-liner, byte for byte as approved (straight quotes around 'Luxury
+ *  Liner' included). It is the one string the curly-quote pass (typo.ts) never touches, so it reads
+ *  the same on every page, in JSON-LD and in llms.txt; content/check-content.mjs --dist compares it
+ *  raw. */
 export const ONE_LINER =
-  'The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song ‘Luxury Liner’.';
-/** The first sentence alone (meta descriptions that need to be short). */
-export const ONE_LINER_SHORT =
-  'The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together.';
+  "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.";
 
 /** LL-17: exact site wording. */
 export const NEVER_BROKE_UP =

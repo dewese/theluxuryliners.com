@@ -1,0 +1,18 @@
+---
+// The head of an inner page: breadcrumb, kicker, the page's one h1 in Archivo Black capitals, and
+// a lede (slot). tone "red" or "sky" fills the band.
+interface Props { title: string; titleHtml?: string; kicker?: string; crumbs?: { href?: string; label: string }[]; tone?: 'plain' | 'red' | 'sky' | 'surface'; size?: 'xl' | 'l' }
+const { title, titleHtml, kicker, crumbs = [], tone = 'plain', size = 'xl' } = Astro.props;
+---
+<header class:list={['page-head', tone !== 'plain' && tone]}>
+  <div class="wrap">
+    {crumbs.length > 0 && (
+      <nav class="crumbs" aria-label="Breadcrumb"><ol>
+        {crumbs.map((c) => <li>{c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}</li>)}
+      </ol></nav>
+    )}
+    {kicker && <p class="kicker">{kicker}</p>}
+    {titleHtml ? <h1 class:list={['title-xl', size === 'l' && 'title-l']} set:html={titleHtml} /> : <h1 class:list={['title-xl', size === 'l' && 'title-l']}>{title}</h1>}
+    <slot />
+  </div>
+</header>

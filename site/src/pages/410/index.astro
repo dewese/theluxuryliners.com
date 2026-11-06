@@ -1,8 +1,21 @@
 ---
 // The body of the Worker's 410 Gone responses (old files from the band's earlier websites).
 import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import Dot from '../../components/Dot.astro';
 ---
 <Base title="This page is gone" noindex>
-  <h1>This page is gone</h1>
-  <p>This address belonged to one of the band’s earlier websites, and its file is no longer here. The music is on <a href="/listen/">the streaming services</a>, and the band’s history is in <a href="/story/">the story</a> and <a href="/vault/">the Vault</a>.</p>
+  <PageHead title="This page is gone" tone="red" kicker="410">
+    <p class="lede">This address belonged to one of the band’s earlier websites, and its file is no longer here. The music is on <a href="/listen/">the streaming services</a>, and the band’s history is in <a href="/story/">the story</a> and <a href="/vault/">the Vault</a>.</p>
+  </PageHead>
+  <div class="band surface">
+    <div class="wrap">
+      <h2 class="visually-hidden">Where to go</h2>
+      <ul class="doors">
+        <li><a href="/listen/"><Dot /><span>Listen</span></a></li>
+        <li><a href="/story/"><Dot /><span>The story</span></a></li>
+        <li><a href="/vault/"><Dot /><span>The Vault</span></a></li>
+      </ul>
+    </div>
+  </div>
 </Base>

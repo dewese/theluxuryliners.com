@@ -1,19 +1,33 @@
 ---
 // Facts (plan §5.4): short answers, the same text in FAQPage JSON-LD (visible answers only).
 import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
 import { factsView } from '../lib/views.ts';
 import { faqPage } from '../lib/jsonld.ts';
 import { DISAMBIGUATION } from '../lib/site.ts';
+import { smart } from '../lib/typo.ts';
 const v = factsView();
 ---
 <Base title="Facts" fullBand description="Short answers about The Luxury Liners: who founded the band, when and where, who is in it, what it released and where to listen." jsonld={[faqPage(v.rows.filter((r) => r.faq).map((r) => ({ q: r.q, a: r.aText })))]}>
-  <h1>Facts</h1>
-  {v.introHtml && <div class="lede" set:html={v.introHtml} />}
-  <dl class="facts prose">
-    {v.rows.map((f) => <><dt>{f.q}</dt><dd set:html={f.aHtml} /></>)}
-  </dl>
-  <h2>Not to be confused with</h2>
-  <p class="prose">{DISAMBIGUATION}</p>
-  <h2>{v.datingHeading}</h2>
-  <p class="prose">{v.dating}</p>
+  <PageHead title="Facts" kicker="Short answers">
+    {v.introHtml && <div class="lede" set:html={v.introHtml} />}
+  </PageHead>
+  <div class="band surface">
+    <div class="wrap">
+      <dl class="facts">
+        {v.rows.map((f) => <><dt>{smart(f.q)}</dt><dd set:html={f.aHtml} /></>)}
+      </dl>
+    </div>
+  </div>
+  <div class="wrap page-body">
+    <section aria-labelledby="nc">
+      <SecHead id="nc">Not to be confused with</SecHead>
+      <p class="measure">{DISAMBIGUATION}</p>
+    </section>
+    <section aria-labelledby="dating">
+      <SecHead id="dating">{v.datingHeading}</SecHead>
+      <p class="measure">{smart(v.dating)}</p>
+    </section>
+  </div>
 </Base>

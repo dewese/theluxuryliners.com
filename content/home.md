@@ -10,7 +10,7 @@ singles_intro: Two singles in 2026, both written by Chad and David and played by
 singles:
   - release_id: luxury-liners-2026-new-beginning
     title: New Beginning
-    blurb: Two tracks, “New Beginning” and “Great Day”.
+    blurb: null
   - release_id: luxury-liners-2026-great-day
     title: Great Day
     blurb: null
@@ -56,7 +56,7 @@ notes_internal: >-
   LL-26: no recent photo; the page leads with the 2026 singles. LL-32: the hero is
   a collage of era photos (build track). Singles blurbs deliberately carry no
   dates (the release cards show them) and nothing about either recording's history
-  (LL-13). The Great Day blurb is left empty on purpose: the singles intro already gives the writers and players, so repeating them would be padding. No newsletter sign-up (LL-40).
+  (LL-13). Both blurbs are left empty on purpose: the singles intro already gives the writers and players, and a track list (New Beginning has "Great Day" as track 2) says less than the card itself, so either line would be padding (critiques build-skeleton round 2 item 1, build-copy round 3 B-1). null means no blurb; the build renders nothing and never substitutes its own. No newsletter sign-up (LL-40).
 ---
 
 The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.

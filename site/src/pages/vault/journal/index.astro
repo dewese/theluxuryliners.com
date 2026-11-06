@@ -2,10 +2,14 @@
 // LL-25: each month of the 2001–04 journal goes live only after a privacy pass and David's OK.
 // None has cleared yet; months appear here as /vault/journal/<yyyy-mm>/ when they do.
 import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
 ---
 <Base title="The band journal, 2001–2004" description="The journal The Luxury Liners kept on their website from 2001 to 2004.">
-  <h1>The band journal, 2001–2004</h1>
-  <p class="lede">From 2001 to 2004 the band kept a journal on its website: shows, road trips and recording news, month by month. The months are being prepared and will appear here one by one.</p>
-  <p>Until then, the <a href="/shows/">Shows</a> page lists the dates the journal records.</p>
-  <p><a href="/vault/">Back to the Vault</a></p>
+  <PageHead title="The band journal" kicker="2001–2004" size="l" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'The band journal' }]}>
+    <p class="lede">From 2001 to 2004 the band kept a journal on its website: shows, road trips and recording news, month by month. The months are being prepared and will appear here one by one.</p>
+  </PageHead>
+  <div class="wrap page-body">
+    <p class="intro">Until then, the <a href="/shows/">Shows</a> page lists the dates the journal records.</p>
+    <p><a href="/vault/">Back to the Vault</a></p>
+  </div>
 </Base>

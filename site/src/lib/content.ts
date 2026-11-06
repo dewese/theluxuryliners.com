@@ -79,5 +79,6 @@ export function sections(body: string): Record<string, string> {
   return out;
 }
 
-/** Photographers whose credits are not yet confirmed: never printed, whatever a file says. */
-export const PENDING_CREDITS = ['Amy Wilstermann'];
+/** Photographers whose credits are not yet confirmed: never printed, whatever a file says.
+ *  Empty since 2026-11-06: LL-45 cleared Amy Wilstermann's credit for the 2003 photos. */
+export const PENDING_CREDITS: string[] = [];

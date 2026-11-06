@@ -86,7 +86,8 @@ checks. The house rules, in plain words:
    readers (`alt`), and `credit` (the photographer's name) or `null` when the band, family or a
    self-timer took it. Name people only where the band has confirmed who they are.
 3. A photographer whose credit is not confirmed yet: set `status` to `pending`. The site will not
-   show the photo until the credit is confirmed (the Amy Wilstermann 2003 set waits for this).
+   show the photo until the credit is confirmed. (The Amy Wilstermann 2003 set was cleared by LL-45:
+   credit line only.)
 4. The 2002 photo of the four is always captioned exactly "David Wilstermann, Chad Edgington,
    David Dewese and Scott Carpenter in 2002", never "line-up".
 

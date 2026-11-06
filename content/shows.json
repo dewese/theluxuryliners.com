@@ -7,7 +7,7 @@
     {
       "id": "1997-western-beat-roots-revival-zanies",
       "date_display": "Probably autumn 1997 or winter 1998",
-      "sort_key": "1997-10-00",
+      "sort_key": "1997-09-00",
       "date_precision": "season-range",
       "venue": "Billy Block’s Western Beat Roots Revival, Zanies",
       "place": "Nashville, Tennessee",
@@ -116,7 +116,7 @@
       "date_precision": "day",
       "venue": "12th & Porter",
       "place": "Nashville, Tennessee",
-      "note": "“The new three piece configuration.”",
+      "note": "One of the first shows as a trio.",
       "source": "dd research/04 §5.2 journal table; 2001_08 archive",
       "confidence": "verified-source"
     },
@@ -134,11 +134,11 @@
     {
       "id": "2001-09-ohio-michigan",
       "date_display": "Late September 2001",
-      "sort_key": "2001-09-22",
+      "sort_key": "2001-09-25",
       "date_precision": "month",
       "venue": "Shows in Ohio and Michigan",
       "place": "Ohio and Michigan",
-      "note": "The first trip out of the region. “We lost a little money.”",
+      "note": "The first trip out of the region.",
       "source": "dd research/04 §5.2 journal table; months 2001_09 and 2001_10",
       "confidence": "verified-source",
       "notes_internal": "sort_key day 22 only places 'late September' after the 21 Sept row."
@@ -228,7 +228,7 @@
       "date_precision": "day",
       "venue": "House of Blues, Mandalay Bay",
       "place": "Las Vegas, Nevada",
-      "note": "A conference showcase. “All of nevada was rocked last friday night.”",
+      "note": "A conference showcase.",
       "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020808065530/http://www.theluxuryliners.com:80/2002_06_01_archives.html",
       "confidence": "verified-source"
     },
@@ -330,7 +330,7 @@
       "date_precision": "day",
       "venue": "Two Nashville shows",
       "place": "Nashville, Tennessee",
-      "note": "Part of “three shows in one week”.",
+      "note": "Part of three shows in one week.",
       "source": "dd research/04 §5.2 journal table; 2003_02 archive",
       "confidence": "verified-source"
     },
@@ -407,7 +407,7 @@
       "date_display": "Mid-June 2003",
       "sort_key": "2003-06-15",
       "date_precision": "month",
-      "venue": "“Our detroit tour”",
+      "venue": "A Detroit tour",
       "place": "Detroit area, Michigan",
       "note": null,
       "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20030810183228/http://www.theluxuryliners.com:80/2003_06_01_archives.html",

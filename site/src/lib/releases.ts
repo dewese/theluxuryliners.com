@@ -5,6 +5,7 @@ import raw from '../../../data/releases.json';
 import artwork from '../../data/artwork.json';
 import press from '../../data/press.json';
 import { monthYear } from './dates.ts';
+import { smart } from './typo.ts';
 
 type Raw = (typeof raw)[number] & Record<string, any>;
 
@@ -82,6 +83,14 @@ export const BLURBS: Record<string, string> = {
   'new-beginning': 'A second song by Chad Edgington and David Dewese with all four forever members playing, paired with “Great Day”.',
 };
 
+/** Click-to-load YouTube videos (LL-35), shown behind a facade: nothing is requested from YouTube
+ *  until the reader presses play, and then only from youtube-nocookie.com. Each video has its own
+ *  caption, never copy about another song (critique design-c round 1, M1). */
+export const VIDEOS: Record<string, { id: string; song: string; caption: string }> = {
+  'great-day': { id: 'qjZaiwO7KXI', song: 'Great Day', caption: '“Great Day” on YouTube.' },
+  overbored: { id: 'M0FOgNUWHlw', song: 'Equasue', caption: '“Equasue”, from the band’s own YouTube channel.' },
+};
+
 const KIND: Record<string, string> = { album: 'Album', ep: 'EP', single: 'Single' };
 const LISTEN_LABELS: Record<string, string> = { spotify: 'Spotify', apple_music: 'Apple Music', bandcamp: 'Bandcamp', youtube_music: 'YouTube Music', tidal: 'Tidal', deezer: 'Deezer', amazon_music: 'Amazon Music' };
 
@@ -111,14 +120,14 @@ export function release(id: string): Release {
     const over = WRITER_OVERRIDES[slug]?.(t.title);
     const cover = t.original_artist ?? (t.title === 'Believe' && slug === 'believe-ep' ? 'Cher' : undefined);
     return {
-      n: t.number ?? i + 1, title: t.title, duration: t.duration ?? undefined,
+      n: t.number ?? i + 1, title: smart(t.title), duration: t.duration ?? undefined,
       writers: cover ? [] : (over ?? t.writers ?? []), isrc: t.isrc ?? undefined, coverOf: cover,
     };
   });
   const listen = Object.entries(r.links ?? {}).filter(([, v]) => typeof v === 'string' && v).map(([k, v]) => ({ key: k, label: LISTEN_LABELS[k] ?? k, href: v as string }));
   const art = artwork.credits.filter((c) => c.release === slug && c.status === 'publish');
   const out: Release = {
-    id, slug, title: r.title, kind: KIND[r.type] ?? r.type, date: r.release_date, dateLabel: monthYear(r.release_date), year: r.release_date.slice(0, 4),
+    id, slug, title: smart(r.title), kind: KIND[r.type] ?? r.type, date: r.release_date, dateLabel: monthYear(r.release_date), year: r.release_date.slice(0, 4),
     label: r.label, catalog: r.catalog_number ?? undefined, upc: r.upc ?? undefined, tracks, writersNote: WRITERS_ATTRIBUTED[slug],
     listen, discogs: r.other_links?.discogs ?? r.links?.discogs ?? undefined,
     cover: `/img/covers/${slug}`, coverAlt: coverAlt(r, r.title),
@@ -140,6 +149,18 @@ export function release(id: string): Release {
 /** The seven releases with pages, newest first. */
 export const RELEASES: Release[] = Object.keys(SLUGS).map(release).sort((a, b) => b.date.localeCompare(a.date));
 export const bySlug = (slug: string) => RELEASES.find((r) => r.slug === slug)!;
+/** The releases before and after this one, in release order (the pager on each release page). */
+export function neighbours(slug: string): { prev?: Release; next?: Release } {
+  const old = RELEASES.slice().reverse();
+  const i = old.findIndex((r) => r.slug === slug);
+  return { prev: old[i - 1], next: old[i + 1] };
+}
+/** Total running time ("36:23") when every track has a length. */
+export function totalTime(r: Release): string | undefined {
+  if (!r.tracks.length || r.tracks.some((t) => !t.duration)) return undefined;
+  const s = r.tracks.reduce((n, t) => { const [m, ss] = t.duration!.split(':').map(Number); return n + m * 60 + ss; }, 0);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+}
 export const LATEST = RELEASES[0];
 
 /** Compilations and bonus discs (/music/appearances/). Third-party art is never hosted. */
@@ -159,7 +180,7 @@ export const APPEARANCES: Appearance[] = Object.entries(APPEARANCE_PUBLIC).map((
     .filter(([, v]) => typeof v === 'string' && v).map(([k, v]) => ({ label: LISTEN_LABELS[k] ?? (k === 'discogs' ? 'Discogs' : k), href: v as string }));
   const label = pub.label ?? (r.label && r.label !== 'None' ? r.label : undefined);
   return {
-    id, title: r.title, year: r.release_date.slice(0, 4), label: label || undefined,
-    songs: pub.songs === null ? [] : (r.tracklist ?? []).map((t: any) => t.title), note: pub.note, links,
+    id, title: smart(r.title), year: r.release_date.slice(0, 4), label: label || undefined,
+    songs: pub.songs === null ? [] : (r.tracklist ?? []).map((t: any) => smart(t.title)), note: pub.note, links,
   };
 }).sort((a, b) => a.year.localeCompare(b.year));

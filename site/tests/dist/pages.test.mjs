@@ -29,21 +29,37 @@ test('home leads with the 2026 singles and the one-liner (LL-6, LL-26), with the
   const singles = h.indexOf('The 2026 singles'), collage = h.indexOf('class="collage"');
   assert.ok(singles > 0 && collage > singles, 'singles before the collage');
   assert.ok(h.includes('/music/new-beginning/') && h.includes('/music/great-day/'));
-  assert.ok((h.match(/<figure>/g) ?? []).length >= 3, 'a collage of several photos');
+  const collageHtml = h.slice(collage, h.indexOf('</section>', collage));
+  assert.ok((collageHtml.match(/<figure\b/g) ?? []).length >= 5, 'a collage of several photos');
+  assert.match(collageHtml, /Powder-blue suits|Backstage, 1998/, 'the 1998 suits are in the collage (LL-32)');
   assert.ok(h.includes('David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter in 2002'), 'the forever-members photo, exact caption');
 });
 
-test('home singles blurbs: not filler, no dates repeated in the blurb', () => {
+test('home singles blurbs: the copy track’s value or nothing; never filler, a track list or a date', () => {
   const h = page('');
-  const cards = [...h.matchAll(/<article class="card">([\s\S]*?)<\/article>/g)].map((m) => m[1]);
+  const cards = [...h.matchAll(/<article class="single"[^>]*>([\s\S]*?)<\/article>/g)].map((m) => m[1]);
   assert.equal(cards.length, 2);
-  for (const c of cards) {
-    const ps = [...c.matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/g)].map((m) => text(m[1]).trim());
-    const blurb = ps.find((p) => !/^Single,/.test(p));
-    assert.ok(blurb && blurb.length > 30, `a real blurb: ${blurb}`);
+  // content/home.md: the blurb rendered is exactly the content's; null renders no blurb at all
+  // (critiques build-copy round 3 B-1, build-skeleton round 2 item 1)
+  const home = readFileSync(join(site, '..', 'content', 'home.md'), 'utf8');
+  const fm = home.split(/^---$/m)[1];
+  const want = [...fm.matchAll(/release_id: luxury-liners-2026-([a-z-]+)\n\s+title: [^\n]+\n\s+blurb: ([^\n]*)/g)].map((m) => [m[1], m[2].trim()]);
+  assert.equal(want.length, 2, 'both singles are in content/home.md');
+  for (const [slug, raw] of want) {
+    const card = cards.find((c) => c.includes(`/music/${slug}/`));
+    assert.ok(card, slug);
+    const b = /<p class="blurb">([\s\S]*?)<\/p>/.exec(card);
+    if (raw === 'null' || raw === '') { assert.equal(b, null, `${slug}: blurb is null in content, so none is rendered`); continue; }
+    assert.ok(b, `${slug}: the content blurb is rendered`);
+    const blurb = text(b[1]).trim();
+    assert.equal(norm(blurb), norm(raw.replace(/^"(.*)"$/, '$1').replace(/\*/g, '')), `${slug}: the content's own words`);
+    assert.ok(blurb.length > 30, `a real blurb: ${blurb}`);
+    assert.doesNotMatch(blurb, /^(?:one|two|three|\d+) (?:tracks?|songs?)\b/i, 'not a bare track list');
     assert.doesNotMatch(blurb, /\b(19|20)\d\d\b|January|February|March|April|May|June|July|August|September|October|November|December/, `no date in the blurb: ${blurb}`);
     assert.doesNotMatch(blurb.replace(/“[^”]*”/g, ''), /\b(new|latest|brand)\b/i, 'no stale-making words (song titles aside)');
   }
+  // the site never substitutes its own padded line ("with all four forever members playing")
+  for (const c of cards) assert.doesNotMatch(text(c), /with all four forever members playing/);
 });
 
 test('release pages: writers (LL-14) and cover-art credits (LL-23)', () => {
@@ -76,14 +92,27 @@ test('People › Artwork names the release next to every credit', () => {
   for (const li of items) assert.match(li, /<a href="\/music\/[a-z-]+\/(#lp-2026)?">/, `release link in: ${text(li)}`);
 });
 
-test('photo credits are the same on every page; pending credits never print', () => {
+test('photo credits are the same on every page; Amy Wilstermann credited on the 2003 photos only (LL-45)', () => {
   const credits = (h) => new Set([...h.matchAll(/class="credit">Photo: ([^<]+?)\.?</g)].map((m) => m[1].trim()));
   const fromPhotos = credits(page('photos'));
-  for (const p of ['', 'story', 'epk']) for (const c of credits(page(p))) assert.ok(fromPhotos.has(c), `${c} on /${p}/ but not on /photos/`);
+  const storyPages = readdirSync(join(dist, 'story'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => `story/${d.name}`);
+  for (const p of ['', 'story', ...storyPages, 'epk', 'music/overbored']) for (const c of credits(page(p))) assert.ok(fromPhotos.has(c), `${c} on /${p}/ but not on /photos/`);
   const people = page('people');
   const sec = text(people.slice(people.indexOf('id="photographers"')));
   for (const c of fromPhotos) assert.ok(sec.includes(c), `/people/ lists ${c}`);
-  for (const f of walk(dist).filter((f) => f.endsWith('.html'))) assert.doesNotMatch(readFileSync(f, 'utf8'), /Photo: Amy Wilstermann/, f);
+  // LL-45: "Photo: Amy Wilstermann" on the 2003 shoot, credit line only
+  const photos = JSON.parse(readFileSync(join(site, 'data', 'photos.json'), 'utf8')).photos;
+  const amy = photos.filter((p) => p.credit === 'Amy Wilstermann');
+  assert.ok(amy.length >= 1 && amy.every((p) => p.year === '2003' && p.status === 'publish'), 'her 2003 photos are published with her credit');
+  assert.ok(fromPhotos.has('Amy Wilstermann'), '/photos/ credits her');
+  assert.match(sec, /Amy Wilstermann \(2003\)/, '/people/ credits her for 2003');
+  for (const f of walk(dist).filter((f) => /\.(html|txt)$/.test(f))) {
+    const h = readFileSync(f, 'utf8');
+    // every mention is a credit line or the People photographers row, and nothing ties her to anyone
+    const mentions = [...h.matchAll(/Amy Wilstermann/g)].map((m) => h.slice(Math.max(0, m.index - 40), m.index + 60));
+    for (const m of mentions) assert.match(m, /Photo: Amy Wilstermann|<strong>Amy Wilstermann<\/strong> \(2003\)/, `${f}: ${m}`);
+    assert.doesNotMatch(text(h), /Amy Wilstermann[^.]{0,80}\b(?:wife|sister|married|daughter|mother|relative|family|Larry|David)\b|\b(?:wife|sister|married|daughter|mother|relative)\b[^.]{0,80}Amy Wilstermann/i, f);
+  }
 });
 
 test('/shows/: sorted by date, notes kept, no leading comma for a missing venue', () => {

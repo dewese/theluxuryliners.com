@@ -1,26 +1,32 @@
 ---
 // Known shows: sorted by date (approximate dates by their sort key); a null venue never leaves a
-// stray comma; every row keeps its note.
+// stray comma; a row with no known place says so instead of leaving an empty cell; every row keeps
+// its note. At phone width the table stacks (no horizontal scroll).
 import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
 import { showsView } from '../lib/views.ts';
 const v = showsView();
 ---
 <Base title="Shows" description="Known Luxury Liners shows, 1997–2008: Nashville clubs, SXSW, Las Vegas, Atlanta with Blues Traveler, and more.">
-  <h1>Shows</h1>
-  {v.introHtml && <p class="lede" set:html={v.introHtml} />}
-  {v.noteHtml && <p set:html={v.noteHtml} />}
-  <div class="table-scroll">
-    <table>
-      <thead><tr><th scope="col">When</th><th scope="col">Where</th><th scope="col">Notes</th></tr></thead>
-      <tbody>
-        {v.rows.map((s) => (
-          <tr>
-            <td><time datetime={s.datetime || undefined}>{s.when}</time></td>
-            <td set:html={s.whereHtml} />
-            <td><span set:html={s.noteHtml} />{s.href && <> <a href={s.href}>About the record</a></>}{s.photo && <> <a href={`/photos/#${s.photo}`}>See the photo</a></>}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  <PageHead title="Shows" kicker="1997–2008">
+    {v.introHtml && <p class="lede" set:html={v.introHtml} />}
+  </PageHead>
+  <div class="wrap page-body">
+    {v.noteHtml && <p class="intro" set:html={v.noteHtml} />}
+    <div class="table-scroll">
+      <table class="table table--stack">
+        <caption class="visually-hidden">Known shows, oldest first</caption>
+        <thead><tr><th scope="col">When</th><th scope="col">Where</th><th scope="col">Notes</th></tr></thead>
+        <tbody>
+          {v.rows.map((s) => (
+            <tr>
+              <td><time datetime={s.datetime || undefined}>{s.when}</time></td>
+              <td>{s.whereHtml ? <Fragment set:html={s.whereHtml} /> : <span class="muted">Place not recorded</span>}</td>
+              <td><span set:html={s.noteHtml} />{s.href && <> <a href={s.href}>About the record</a></>}{s.photo && <> <a href={`/photos/#${s.photo}`}>See the photo</a></>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 </Base>

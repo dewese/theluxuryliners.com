@@ -46,7 +46,7 @@ const slugs = new Set(Object.values(PAGES));
 const status = (file, xs) => xs.forEach((x, i) => { if (!['publish', 'pending'].includes(x.status)) fail(`${file}[${i}]: status must be "publish" or "pending"`); });
 const D = (n) => read(join(site, 'data', n));
 const people = D('people.json'), photos = D('photos.json'), artwork = D('artwork.json'), press = D('press.json'), shows = D('shows.json'), facts = D('facts.json'), vault = D('vault.json'), story = D('story.json');
-const PENDING_CREDITS = ['Amy Wilstermann']; // keep in step with src/lib/content.ts
+const PENDING_CREDITS = []; // keep in step with src/lib/content.ts (LL-45 cleared Amy Wilstermann, 2026-11-06)
 if (people) { status('people.forever', people.forever); status('people.early', people.early); status('people.records', people.records);
   if (people.forever.filter((p) => p.status === 'publish').length !== 4) fail('people.json: the four forever members must all be published (LL-9)');
   for (const r of people.records) if (!slugs.has(r.release)) fail(`people.json records: ${r.name}: release "${r.release}" has no page`); }
@@ -57,6 +57,8 @@ if (photos) { status('photos', photos.photos);
     if (!existsSync(join(root, p.src))) fail(`photos.json ${p.id}: file ${p.src} not found`);
     if (!p.alt || !p.caption) fail(`photos.json ${p.id}: needs a caption and alt text`);
     if (p.status === 'publish' && PENDING_CREDITS.includes(p.credit)) fail(`photos.json ${p.id}: the ${p.credit} credit is still pending; the photo cannot be published`);
+    if (p.cutout && !existsSync(join(site, 'public', p.cutout))) fail(`photos.json ${p.id}: cut-out ${p.cutout} not found in public/`);
+    if (p.status === 'publish' && !/^(?:19|20)\d\d$/.test(p.year ?? '')) fail(`photos.json ${p.id}: needs a four-digit year (photographer years on /people/ come from it)`);
     if (/line-up/i.test(p.caption)) fail(`photos.json ${p.id}: never caption a photo as a line-up`);
     if (p.src.endsWith('luxury-liners-2002.jpg') && p.caption !== 'David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter in 2002') fail('photos.json: the 2002 photo caption must be exactly the approved text (P23)');
   } }
@@ -70,7 +72,7 @@ if (shows) { status('shows', shows.shows); for (const s of shows.shows) {
   if (s.photo && !photos?.photos.some((p) => p.id === s.photo && p.status === 'publish')) fail(`shows.json: "${s.when}": photo "${s.photo}" is not a published photo`); } }
 if (facts) { status('facts', facts.facts); for (const f of facts.facts) if (f.status === 'publish' && !['confirmed-owner', 'verified-source'].includes(f.confidence) && !(f.confidence === 'single-source' && f.attributed)) fail(`facts.json: "${f.q}" is ${f.confidence} and cannot be published${f.confidence === 'single-source' ? ' unless the answer attributes it (attributed: true)' : ''}`); }
 if (vault) { status('vault.coverSongs', vault.coverSongs.songs);
-  for (const s of vault.oldMp3s.songs) { if (s.release && !slugs.has(s.release)) fail(`vault.json oldMp3s: "${s.title}": release "${s.release}" has no page`); if (/great day|new beginning/i.test(s.title)) fail('vault.json oldMp3s: "Great Day" and "New Beginning" stay off the old-MP3 list (LL-13)'); } }
+  for (const s of vault.oldMp3s.songs) { if (s.appearance && !ids.has(s.appearance)) fail(`vault.json oldMp3s: "${s.title}": appearance "${s.appearance}" is not in releases.json`); if (s.release && !slugs.has(s.release)) fail(`vault.json oldMp3s: "${s.title}": release "${s.release}" has no page`); if (/great day|new beginning/i.test(s.title)) fail('vault.json oldMp3s: "Great Day" and "New Beginning" stay off the old-MP3 list (LL-13)'); } }
 if (story) for (const c of story.chapters) if (c.photo && !photos?.photos.some((p) => p.id === c.photo && p.status === 'publish')) fail(`story.json ${c.id}: photo "${c.photo}" is not a published photo`);
 
 // ---- nothing in site/data holds an e-mail address or a mailto: link ----

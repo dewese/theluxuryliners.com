@@ -64,7 +64,7 @@
     ]
   },
   "oldMp3s": {
-    "_about": "The free MP3s the old site offered, by title only (LL-27: nothing is downloadable). Each links to where the song streams today, if it does. Never say a song was 'not released on a record'. 'Great Day' and 'New Beginning' are left off on purpose (LL-13).",
+    "_about": "The free MP3s the old site offered, by title only (LL-27: nothing is downloadable). Each links to where the song streams today, if it does. Never say a song was 'not released on a record'. 'Great Day' and 'New Beginning' are left off on purpose (LL-13). 'appearance': the compilation a song is on (/music/appearances/) when it is on no Luxury Liners record.",
     "songs": [
       {
         "title": "Think She’s Coming Around",
@@ -129,7 +129,8 @@
       {
         "title": "If I Cry",
         "oldPath": "/mp3/waco/luxury_liners_if_i_cry.mp3",
-        "release": null
+        "release": null,
+        "appearance": "ll-appearance-1998-nashpop"
       },
       {
         "title": "Be With You",

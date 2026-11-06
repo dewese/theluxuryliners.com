@@ -27,10 +27,12 @@ sources:
   - claim: David carried the band on as a trio with Scott and Larry
     source: daviddewese.com DECISIONS F4; research/01 §3.1
     confidence: confirmed-owner
-  - claim: Journal, August 2001, "the new three piece configuration"
+  - claim: Journal, August 2001, the band playing as a three-piece (paraphrased; the journal line is held for the LL-25 pass)
     source: research/01 §4.3; dd research/04 §5.2 journal table (2001-08-12, 12th & Porter)
     confidence: verified-source
 held:
+  - item: The journal line "the new three piece configuration" (August 2001)
+    why: LL-25 - journal quotes wait for the privacy pass and David's approval; the fact is paraphrased.
   - item: Matching gray slacks from Castner-Knott at Chad's last show
     why: Single-source (the description on one band-era photo, research/01 §2.3). Cut from the copy rather than attributed; it can return as a photo caption if the photo is used.
 notes_internal: >-
@@ -44,4 +46,4 @@ The *Believe* EP came out in March 2001 on Echomusic: “It’s You”, “Shake
 
 That March the band played the SESAC Showcase at SXSW in Austin, and “Shake It Up” went out on the CD that SESAC handed out there.
 
-The same month, Chad played his last show with the band and left Nashville. David carried the band on as a trio with Scott and Larry. By August the band’s journal was talking about “the new three piece configuration”.
+The same month, Chad played his last show with the band and left Nashville. David carried the band on as a trio with Scott and Larry. By August the band was playing as a three-piece.

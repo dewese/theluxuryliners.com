@@ -12,7 +12,7 @@ sources:
   - claim: Memphis debut at The Map Room (c. 2001-06-30)
     source: dd research/04 §5.2 journal table, month 2001_06
     confidence: verified-source
-  - claim: Music-conference showcase at House of Blues, Mandalay Bay, Las Vegas, 2002-05-31; "all of nevada was rocked last friday night"
+  - claim: Music-conference showcase at House of Blues, Mandalay Bay, Las Vegas, 2002-05-31
     source: dd research/04 §5.2 journal table, month 2002_06; research/01 §9 item 5
     confidence: verified-source
   - claim: Opened for Blues Traveler in Atlanta, August 2002
@@ -39,13 +39,13 @@ sources:
 held:
   - item: The July 2002 Washington DC trip's personal detail
     why: Personal, not a band fact; dropped (known issue from the lost run). The outdoor show itself is in content/shows.json.
-  - item: Journal quotations beyond one short line
-    why: LL-25 - the journal is privacy-passed and approved month by month before anything longer is quoted.
+  - item: Journal quotations, including the May 2002 Las Vegas line ("all of nevada was rocked last friday night")
+    why: LL-25 - no journal line is quoted until its month has had the privacy pass and David's approval; the facts stay, paraphrased.
 ---
 
 From June 2001 to March 2004 the band kept a journal on its website. It logs about 40 shows and trips: for a band that had just gone down to three, it was a busy stretch.
 
-The Luxury Liners made their Memphis debut at The Map Room. In May 2002 they played a music-conference showcase at the House of Blues at Mandalay Bay in Las Vegas, and the journal reported back that “all of nevada was rocked last friday night”. That August they opened for Blues Traveler in Atlanta.
+The Luxury Liners made their Memphis debut at The Map Room. In May 2002 they played a music-conference showcase at the House of Blues at Mandalay Bay in Las Vegas. That August they opened for Blues Traveler in Atlanta.
 
 The road kept going after that: an acoustic tour of Indiana, trips to Detroit and its suburbs, to Louisville and to Columbia, South Carolina. In 2003 they turned down International Pop Overthrow in Chicago to keep their date in Columbia, and that October brought a radio appearance near Detroit and a gig in Canada.
 

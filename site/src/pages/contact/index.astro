@@ -4,6 +4,8 @@
 // Turnstile appears when PUBLIC_TURNSTILE_SITE_KEY is set at build time (a release build
 // requires it: RELEASE=1 node scripts/check-dist.mjs).
 import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import SecHead from '../../components/SecHead.astro';
 import { TOPICS, LIMITS } from '../../lib/contact.ts';
 import { SOCIAL } from '../../lib/site.ts';
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
@@ -13,8 +15,10 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     {siteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
     <script src="/js/contact.js" defer></script>
   </Fragment>
-  <h1>Contact</h1>
-  <p class="lede">For booking, press, licensing or just to say hello, send a message. David reads every one.</p>
+  <PageHead title="Contact" tone="sky">
+    <p class="lede">For booking, press, licensing or just to say hello, send a message. David reads every one.</p>
+  </PageHead>
+  <div class="wrap page-body">
   <form method="post" action="/api/contact" novalidate data-contact>
     <div class="field">
       <label for="name">Name</label>
@@ -43,6 +47,9 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     {siteKey && <div class="cf-turnstile field" data-sitekey={siteKey} data-action="contact"></div>}
     <button type="submit">Send</button>
   </form>
-  <h2>Elsewhere</h2>
-  <ul class="inline-list">{SOCIAL.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+  <section aria-labelledby="elsewhere">
+    <SecHead id="elsewhere">Elsewhere</SecHead>
+    <ul class="inline-list">{SOCIAL.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+  </section>
+  </div>
 </Base>

@@ -2,6 +2,7 @@
 // PLACEHOLDER copy. Every string that can hold Markdown is returned as HTML ('...Html').
 import { json, md, live, inl, storyChapters, sections, PENDING_CREDITS } from './content.ts';
 import { mdToHtml } from './markdown.ts';
+import { smart } from './typo.ts';
 import { STATUS_LINE, DISAMBIGUATION } from './site.ts';
 import { SLUGS, BLURBS, bySlug } from './releases.ts';
 import { sortKey } from './dates.ts';
@@ -29,22 +30,39 @@ export const releaseHref = (releaseId?: string | null): string | undefined => {
 };
 
 // ---------- home ----------
-/** A home-page single blurb must say something particular (not filler) and carry no date: the
- *  date is printed once, next to it (the critics' notes on the lost run; tests/dist/pages.test.mjs). */
-export const blurbOk = (b: string) => b.replace(/[*“”"]/g, '').trim().length > 30 && !/\b(19|20)\d\d\b|January|February|March|April|May|June|July|August|September|October|November|December/.test(b);
+/** A home-page single blurb must say something particular and carry no date (the date is printed
+ *  once, next to it): not a bare track list, not the writers and players again (the singles intro
+ *  says those), not filler. tests/dist/pages.test.mjs checks the built cards. */
+export const blurbProblem = (b: string): string | null => {
+  const t = b.replace(/[*“”"]/g, '').trim();
+  if (t.length <= 30) return 'too short';
+  if (/\b(19|20)\d\d\b|January|February|March|April|May|June|July|August|September|October|November|December/.test(t)) return 'carries a date';
+  if (/^(?:one|two|three|four|\d+) (?:tracks?|songs?)\b[^.]*\.?$/i.test(t)) return 'only a track list';
+  if (/\bwritten by\b|\bforever members\b/i.test(t)) return 'repeats the singles intro (writers and players)';
+  return null;
+};
+export const blurbOk = (b: string) => blurbProblem(b) === null;
 export function homeView() {
   const h = md('home.md');
   const d = h?.data ?? {};
-  const blurb = (slug: string) => {
+  /** The copy track's blurb for a single, as HTML; null when the content says null (no blurb at
+   *  all). A thin or padded blurb fails the build: the site never swaps in words of its own
+   *  (critiques build-copy round 3, B-1; build-skeleton round 2, item 1). Without content/, the
+   *  site's own one-line blurbs are used. */
+  const blurb = (slug: string): string | null => {
+    if (!h) return esc(BLURBS[slug]);
     const s = (d.singles ?? []).find((x: any) => slugFor(x.release_id) === slug);
-    if (s?.blurb && blurbOk(s.blurb)) return inl(s.blurb);
-    if (s?.blurb) console.warn(`content: home.md: the blurb for ${slug} ("${s.blurb}") is too thin or carries a date; the site's own blurb is used (BUILD-LOG, "Home blurbs")`);
-    return esc(BLURBS[slug]);
+    if (!s || s.blurb == null || s.blurb === '') return null;
+    const why = blurbProblem(String(s.blurb));
+    if (why) throw new Error(`content/home.md: the blurb for ${slug} ("${s.blurb}") is ${why}; write a particular line or set it to null`);
+    return inl(s.blurb);
   };
   // Roles come from the one members source (members.ts), the same as /people/ and the JSON-LD.
-  const memberList = members().map((m) => ({ nameHtml: esc(m.name), roleHtml: esc(m.roles.join(', ')) }));
+  const memberList = members().map((m) => ({ nameHtml: esc(m.name), roleHtml: esc(m.roles.join(', ')), years: m.years, lineHtml: inl(m.line), url: m.url }));
   return {
-    statusLine: d.status_line ?? STATUS_LINE,
+    statusLine: smart(d.status_line ?? STATUS_LINE),
+    latestLabel: d.latest_release?.label ? smart(d.latest_release.label) : null,
+    singlesIntroHtml: d.singles_intro ? inl(d.singles_intro) : null,
     blurb,
     membersHeading: d.members_heading ?? 'The four forever members',
     members: memberList,
@@ -55,16 +73,23 @@ export function homeView() {
 }
 
 // ---------- story ----------
-export function storyView() {
+/** The record each chapter is about (its cover heads the chapter page; its card sits beside the
+ *  text). Chapters without one use their photo. */
+const CHAPTER_RELEASE: Record<number, string> = { 3: 'sound-as-ever', 4: 'believe-ep', 6: 'overbored', 7: 'nonetheless', 9: 'new-beginning' };
+/** The cut-out "jump" (design C) sits beside the chapter of its year. */
+const CHAPTER_CUTOUT: Record<number, string> = { 3: 'cartwheel-2000' };
+export interface Chapter { id: string; n: number; slug: string; href: string; titleHtml: string; titleText: string; years: string; summaryHtml: string | null; photo: string | null; release: string | null; cutout: string | null; html: string | null; facts: string[]; slot: string | null }
+export function storyView(): { introHtml: string | null; fromContent: boolean; chapters: Chapter[] } {
   const s = md('story.md');
   const chapters = storyChapters();
   const photoFor = (n: number) => siteStory.chapters[n - 1]?.photo ?? null;
+  const extra = (n: number) => ({ release: CHAPTER_RELEASE[n] ?? null, cutout: CHAPTER_CUTOUT[n] ?? null });
   if (chapters.length) {
     return { introHtml: s?.html || (s?.data.intro ? `<p>${inl(s.data.intro)}</p>` : null), fromContent: true,
-      chapters: chapters.map((c) => ({ id: `chapter-${c.n}`, n: c.n, titleHtml: inl(c.title), years: c.years, photo: photoFor(c.n), html: c.html, facts: [] as string[], slot: null as string | null })) };
+      chapters: chapters.map((c) => ({ id: `chapter-${c.n}`, n: c.n, slug: c.slug, href: `/story/${c.slug}/`, titleHtml: inl(c.title), titleText: smart(c.title), years: c.years, summaryHtml: c.summary ? inl(c.summary) : null, photo: photoFor(c.n), ...extra(c.n), html: c.html, facts: [] as string[], slot: null as string | null })) };
   }
   return { introHtml: null, fromContent: false,
-    chapters: siteStory.chapters.map((c, i) => ({ id: c.id, n: i + 1, titleHtml: esc(c.title), years: c.years, photo: c.photo, html: null as string | null, facts: c.facts, slot: `story/${c.id}` })) };
+    chapters: siteStory.chapters.map((c, i) => { const slug = c.id.replace(/^\d+-/, ''); return { id: c.id, n: i + 1, slug, href: `/story/${slug}/`, titleHtml: esc(c.title), titleText: c.title, years: c.years, summaryHtml: null, photo: c.photo, ...extra(i + 1), html: null as string | null, facts: c.facts, slot: `story/${c.id}` }; }) };
 }
 
 // ---------- facts ----------
@@ -150,7 +175,7 @@ export function showsView() {
     const rows = live(c.shows).slice().sort((a: any, b: any) => sortKey(String(a.sort_key).replace(/-00/g, '')).localeCompare(sortKey(String(b.sort_key).replace(/-00/g, ''))) || String(a.id).localeCompare(String(b.id)));
     return {
       introHtml: c.intro ? inl(c.intro) : null, noteHtml: c.journal_note ? inl(c.journal_note) : null,
-      rows: rows.map((s: any) => ({ when: s.date_display ?? '', datetime: String(s.sort_key ?? '').replace(/(-00)+$/, ''), whereHtml: inl(where({ venue: s.venue ?? null, city: s.place ?? null })), noteHtml: inl(s.note ?? ''), href: releaseHref(s.release_id), photo: photoBySrc(s.photo) })),
+      rows: rows.map((s: any) => ({ when: smart(s.date_display ?? ''), datetime: String(s.sort_key ?? '').replace(/(-00)+$/, ''), whereHtml: inl(where({ venue: s.venue ?? null, city: s.place ?? null })), noteHtml: inl(s.note ?? ''), href: releaseHref(s.release_id), photo: photoBySrc(s.photo) })),
     };
   }
   return {
@@ -162,7 +187,7 @@ export function showsView() {
 // ---------- covers ----------
 export function coversView() {
   const c = json('covers.json');
-  if (c?.covers) return { introHtml: inl(c.intro ?? siteVault.coverSongs.intro), rows: live(c.covers).map((s: any) => ({ title: s.title, artistHtml: inl(s.original_artist), whereHtml: inl(s.where ?? '') })) };
+  if (c?.covers) return { introHtml: inl(c.intro ?? siteVault.coverSongs.intro), rows: live(c.covers).map((s: any) => ({ title: smart(s.title), artistHtml: inl(s.original_artist), whereHtml: inl(s.where ?? '') })) };
   return { introHtml: esc(siteVault.coverSongs.intro), rows: siteVault.coverSongs.songs.filter((s) => s.status === 'publish').map((s) => ({ title: s.title, artistHtml: esc(s.artist), whereHtml: s.release ? `<a href="/music/${s.release}/">${esc(s.context)}</a>` : esc(s.context) })) };
 }
 

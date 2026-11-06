@@ -18,12 +18,21 @@ export const photo = (id: string | null | undefined): Photo | undefined => (id ?
 /** "Photo: Name" or null (P17: uncredited photos carry no credit line). */
 export const creditLine = (p: Pick<Photo, 'credit'>): string | null => (p.credit ? `Photo: ${p.credit}` : null);
 
-/** The photographers credited on photos the site actually shows, with the photos they took. */
-export function photographers(): { name: string; photos: Photo[] }[] {
+/** The photographers credited on photos the site actually shows, with the photos they took and
+ *  the years of those photos ("2000–2002"), so a photographer's years always match the dated
+ *  photos (critique build-skeleton round 2, item 7). */
+export function photographers(): { name: string; photos: Photo[]; years: string }[] {
   const m = new Map<string, Photo[]>();
-  for (const p of PHOTOS) if (p.credit) m.set(p.credit, [...(m.get(p.credit) ?? []), p]);
-  return [...m].map(([name, photos]) => ({ name, photos }));
+  for (const p of sortPhotos(PHOTOS)) if (p.credit) m.set(p.credit, [...(m.get(p.credit) ?? []), p]);
+  return [...m].map(([name, photos]) => {
+    const ys = photos.map((p) => Number(p.year)).sort();
+    return { name, photos, years: ys[0] === ys.at(-1) ? String(ys[0]) : `${ys[0]}–${ys.at(-1)}` };
+  });
 }
+
+/** Photos in date order (year, then the order they are listed in data/photos.json), for /photos/
+ *  and the photographer lists (critique build-skeleton round 2, item 3). */
+export const sortPhotos = (ps: Photo[]): Photo[] => ps.map((p, i) => [p, i] as const).sort((a, b) => String(a[0].year).localeCompare(String(b[0].year)) || a[1] - b[1]).map(([p]) => p);
 
 export const COLLAGE: Photo[] = PHOTOS.filter((p) => typeof (p as any).collage === 'number').sort((a, b) => (a as any).collage - (b as any).collage);
 

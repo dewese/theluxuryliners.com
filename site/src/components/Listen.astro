@@ -1,9 +1,11 @@
 ---
-interface Props { links: { label: string; href: string }[]; title: string }
-const { links, title } = Astro.props;
+// Listen links as roundel pills.
+import Dot from './Dot.astro';
+interface Props { links: { label: string; href: string }[]; title: string; variant?: 'hero' | 'small' }
+const { links, title, variant } = Astro.props;
 ---
 {links.length > 0 && (
-  <ul class="button-list" aria-label={`Listen to ${title}`}>
-    {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+  <ul class:list={['listen', variant && `listen--${variant}`]} aria-label={`Listen to ${title}`}>
+    {links.map((l) => <li><a class="pill" href={l.href}><Dot /><span>{l.label}</span></a></li>)}
   </ul>
 )}

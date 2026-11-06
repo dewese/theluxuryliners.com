@@ -2,12 +2,12 @@
 // A release cover: full colour, never cropped or recoloured. Covers carry the rights line where
 // they are shown large (release pages), not on every thumbnail.
 import { coverSizes } from '../lib/photos.ts';
-interface Props { slug: string; alt: string; sizes?: string; eager?: boolean }
-const { slug, alt, sizes = '(max-width: 40rem) 100vw, 20rem', eager = false } = Astro.props;
+interface Props { slug: string; alt: string; sizes?: string; eager?: boolean; class?: string }
+const { slug, alt, sizes = '(max-width: 40rem) 100vw, 20rem', eager = false, class: cls } = Astro.props;
 const s = coverSizes(slug);
 const set = (ext: string) => s.widths.map((w) => `/img/covers/${slug}-${w}.${ext} ${w}w`).join(', ');
 ---
-<picture>
+<picture class={cls}>
   <source type="image/webp" srcset={set('webp')} sizes={sizes} />
   <img class="cover" src={`/img/covers/${slug}-${s.widths[Math.min(1, s.widths.length - 1)]}.jpg`} srcset={set('jpg')} sizes={sizes} alt={alt} width={s.width} height={s.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
 </picture>

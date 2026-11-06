@@ -10,7 +10,7 @@
 //  - LL-13: the talent-show story; "Great Day" next to "demo" or "2008"; a link to the 2008
 //    bonus disc's Discogs page
 //  - LL-27: any .mp3 file or link; LL-40: a newsletter; LL-39: a logo designer credit
-//  - LL-6: the home page carries the one-liner word for word; LL-17: "reconnected" only in the
+//  - LL-6: the home page carries the one-liner byte for byte (entities decoded, quotes not folded); LL-17: "reconnected" only in the
 //    approved sentence; "dads with careers" never
 //  - privacy (plan §2.3, LL-7): the family page, phone numbers, "lives in", the Baptist Standard
 //    profile, the town named in the founding story; old dead hosts as links
@@ -101,6 +101,9 @@ const WARN = [
   ['a year next to Emmylou Harris’s Luxury Liner (contested; human check)', /Emmylou Harris['’]s? (?:album )?Luxury Liner[^.]{0,30}\b19\d\d\b/i, 'text'],
   ['British spelling on an American band’s site', /\b(?:colours?|travell(?:ed|ing)|licence|favourite|organis(?:e|ed|ing)|recognis(?:e|ed|ing)|behaviour|practis(?:e|ed|ing))\b/i, 'own'],
 ];
+// The fonts' SIL Open Font Licence files ship with the fonts (OFL §2). Their legal wording ("null
+// and void") is not template junk, so that one rule skips them; every other rule still applies.
+const SKIP_TEXT = { 'undefined / NaN / [object Object] / null as text': (f) => /\/fonts\/OFL-[\w-]+\.txt$/.test(f) };
 const SKIP_RAW = {
   // bundled code and generated config are not prose; _redirects is Cloudflare configuration (never served)
   'e-mail address': (f) => /\.(js|css)$/.test(f),
@@ -111,6 +114,7 @@ const hits = [], warns = [];
 const scan = (list, out, f, rel, raw, isHtml) => {
   for (const [name, re, scope] of list) {
     if (scope === 'raw' && SKIP_RAW[name]?.(f)) continue;
+    if (SKIP_TEXT[name]?.(f)) continue;
     if ((scope === 'html' || scope === 'own') && !isHtml) continue;
     let hay;
     if (scope === 'raw' || scope === 'html') hay = raw;
@@ -138,7 +142,7 @@ for (const f of textFiles) {
   }
 }
 // LL-6: the one-liner, word for word, on the home page
-if (!norm(visible(readFileSync(join(dist, 'index.html'), 'utf8'))).includes(ONE_LINER)) hits.push('index.html: the one-line description is missing or not word for word');
+if (!visible(readFileSync(join(dist, 'index.html'), 'utf8')).includes(ONE_LINER)) hits.push('index.html: the one-line description is missing or not byte for byte (straight quotes, LL-6)');
 // LL-27: no audio files at all
 for (const f of all) if (/\.(mp3|m4a|wav|ogg|ram|ra)$/i.test(f)) hits.push(`${relative(dist, f)}: audio file (LL-27: no downloads)`);
 // source maps and image metadata

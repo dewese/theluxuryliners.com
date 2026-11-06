@@ -1,12 +1,16 @@
 ---
 // LL-29: the band's known cover songs, by title and original artist.
 import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
 import { coversView } from '../../lib/views.ts';
 const v = coversView();
 ---
 <Base title="Cover songs" description="Songs by other writers that The Luxury Liners recorded or played, with the original artists.">
-  <h1>Cover songs</h1>
-  <p class="lede" set:html={v.introHtml} />
-  <ul>{v.rows.map((s) => <li>“{s.title}” by <span set:html={s.artistHtml} />{s.whereHtml && <>: <span set:html={s.whereHtml} /></>}</li>)}</ul>
-  <p><a href="/vault/">Back to the Vault</a></p>
+  <PageHead title="Cover songs" size="l" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'Cover songs' }]}>
+    <p class="lede" set:html={v.introHtml} />
+  </PageHead>
+  <div class="wrap page-body">
+    <ul class="rows">{v.rows.map((s) => <li>“{s.title}” by <span set:html={s.artistHtml} />{s.whereHtml && <>: <span set:html={s.whereHtml} /></>}</li>)}</ul>
+    <p><a href="/vault/">Back to the Vault</a></p>
+  </div>
 </Base>

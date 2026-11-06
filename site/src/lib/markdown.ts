@@ -1,12 +1,14 @@
 // A deliberately small Markdown subset for the copy files: paragraphs, ## and ### headings,
 // - lists, > quotations (rendered as <blockquote>), *em*, **strong** and [links](/path/).
-// Anything else is shown as text. Raw HTML is escaped.
+// Anything else is shown as text. Raw HTML is escaped. Quotes and apostrophes are curled (typo.ts),
+// except inside the LL-6 one-liner.
+import { smart } from './typo.ts';
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 export function mdInline(s: string): string { return inline(s); }
 
 function inline(s: string): string {
-  return esc(s)
+  return esc(smart(s))
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*])\*(?!\s)(.+?)\*/g, '$1<em>$2</em>')
     .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g, '<a href="$2">$1</a>');

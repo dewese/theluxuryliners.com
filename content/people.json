@@ -53,7 +53,7 @@
   ],
   "on_the_records": [
     { "id": "mike-poole", "name": "Mike Poole", "roles": ["producer and recordist, *Sound As Ever*", "producer, the 1998 *Fireworks Vol. 2* tracks"], "years": "1998–2000", "source": "data/releases.json luxury-liners-2000-sound-as-ever, ll-appearance-1998-fireworks-vol-2; research/01 §3.3", "confidence": "verified-source" },
-    { "id": "mark-montgomery", "name": "Mark Montgomery", "roles": ["co-producer and designer, *Sound As Ever*", "producer and engineer, *Believe* EP", "cover, *Believe* EP", "band photographs"], "years": "1999–2002", "source": "data/releases.json (production; cover_art); DECISIONS-2026-10-07.md LL-23; research/01 §3.3", "confidence": "verified-source" },
+    { "id": "mark-montgomery", "name": "Mark Montgomery", "roles": ["co-producer and designer, *Sound As Ever*", "producer and engineer, *Believe* EP", "cover, *Believe* EP", "band photographs"], "years": "2000–2002", "source": "data/releases.json (production; cover_art); DECISIONS-2026-10-07.md LL-23; research/01 §3.3", "confidence": "verified-source" },
     { "id": "shane-d-wilson", "name": "Shane D. Wilson", "roles": ["mixed the *Believe* EP"], "years": "2001", "source": "data/releases.json luxury-liners-2001-believe-ep", "confidence": "verified-source" },
     { "id": "chris-milfred", "name": "Chris Milfred", "roles": ["engineer and mastering, *Believe* EP"], "years": "2001", "source": "data/releases.json luxury-liners-2001-believe-ep", "confidence": "verified-source" },
     { "id": "doug-nightwine", "name": "Doug Nightwine", "roles": ["recorded *Overbored*"], "years": "2003", "source": "data/releases.json luxury-liners-2003-overbored (year = release year; no source dates the sessions)", "confidence": "verified-source" },
@@ -74,7 +74,7 @@
     { "release_id": "luxury-liners-2026-new-beginning", "title": "“New Beginning”", "credit": "David Dewese", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" }
   ],
   "photographs": [
-    { "id": "mark-montgomery-photos", "name": "Mark Montgomery", "roles": ["band photographs"], "years": "c. 2000–02", "source": "research/01 §3.3 (photo credits)", "confidence": "verified-source" },
+    { "id": "mark-montgomery-photos", "name": "Mark Montgomery", "roles": ["band photographs"], "years": "2000–2002", "source": "research/01 §3.3 (photo credits)", "confidence": "verified-source" },
     { "id": "amy-wilstermann", "name": "Amy Wilstermann", "roles": ["*Overbored* promotional photographs"], "years": "2003", "source": "research/01 §3.3 (Flickr album description)", "confidence": "verified-source", "notes_internal": "Credit line only; no relationship to anyone is stated, and none may be. Credit confirmed by Carly 2026-11-06 (LL-45). Never state or imply any relationship (LL-7)." },
     { "id": "kristina-marie-krug", "name": "Kristina Marie Krug", "roles": ["portraits of David"], "years": "c. 2000–03", "source": "research/01 §3.3", "confidence": "verified-source" }
   ],

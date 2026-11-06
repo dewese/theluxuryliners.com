@@ -1,7 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Dot from '../components/Dot.astro';
 ---
 <Base title="Page not found" noindex>
-  <h1>Page not found</h1>
-  <p>There’s no page at this address. Try the <a href="/">home page</a>, <a href="/music/">the music</a> or <a href="/story/">the story</a>.</p>
+  <PageHead title="Page not found" tone="red" kicker="404">
+    <p class="lede">There’s no page at this address.</p>
+  </PageHead>
+  <div class="band surface">
+    <div class="wrap">
+      <h2 class="visually-hidden">Where to go</h2>
+      <ul class="doors">
+        <li><a href="/"><Dot /><span>The home page</span></a></li>
+        <li><a href="/music/"><Dot /><span>The music</span></a></li>
+        <li><a href="/story/"><Dot /><span>The story</span></a></li>
+      </ul>
+    </div>
+  </div>
 </Base>

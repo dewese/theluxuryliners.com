@@ -1,25 +1,37 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Cover from '../../components/Cover.astro';
+import PageHead from '../../components/PageHead.astro';
+import SecHead from '../../components/SecHead.astro';
+import Dot from '../../components/Dot.astro';
 import { RELEASES, APPEARANCES } from '../../lib/releases.ts';
 ---
 <Base title="Music" description="Every Luxury Liners release, from Sound As Ever (2000) to the 2026 singles, with tracklists, writers and where to listen.">
-  <h1>Music</h1>
-  <p class="lede">Four records, a live single and two 2026 singles. Every release page has the tracklist, the writers and links to listen.</p>
-  <div class="grid">
-    {RELEASES.map((r) => (
-      <article class="card">
-        <a href={`/music/${r.slug}/`} aria-hidden="true" tabindex="-1"><Cover slug={r.slug} alt="" sizes="(max-width: 40rem) 100vw, 15rem" /></a>
-        <h2><a href={`/music/${r.slug}/`}>{r.title}</a></h2>
-        <p class="muted">{r.kind}, {r.dateLabel}</p>
-        <p>{r.blurb}</p>
-      </article>
-    ))}
+  <PageHead title="Music" tone="sky" kicker="2000–2026">
+    <p class="lede">Four records, a live single and two 2026 singles. Every release page has the tracklist, the writers and links to listen.</p>
+  </PageHead>
+  <div class="band">
+    <div class="wrap">
+      <ul class="cards">
+        {RELEASES.map((r) => (
+          <li class="card">
+            <a href={`/music/${r.slug}/`} aria-hidden="true" tabindex="-1"><Cover slug={r.slug} alt="" sizes="(max-width: 40rem) 100vw, 18rem" /></a>
+            <h2><a href={`/music/${r.slug}/`}>{r.title}</a></h2>
+            <p class="meta">{r.kind}, {r.dateLabel}</p>
+            <p>{r.blurb}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
-  <h2>Also</h2>
-  <ul>
-    <li><a href="/music/sound-as-ever/#lp-2026">Sound As Ever on vinyl (2026)</a></li>
-    <li><a href="/music/appearances/">Compilations</a> ({APPEARANCES.length})</li>
-    <li><a href="/vault/">The Vault</a>: the old free MP3s, the covers and the old websites, as history</li>
-  </ul>
+  <section class="band surface" aria-labelledby="also">
+    <div class="wrap">
+      <SecHead id="also">Also</SecHead>
+      <ul class="doors doors--list">
+        <li><a href="/music/sound-as-ever/#lp-2026"><Dot /><span>Sound As Ever on vinyl</span><span class="doors__sub">The 2026 LP.</span></a></li>
+        <li><a href="/music/appearances/"><Dot /><span>Compilations</span><span class="doors__sub">{APPEARANCES.length} compilations with Luxury Liners songs.</span></a></li>
+        <li><a href="/vault/"><Dot /><span>The Vault</span><span class="doors__sub">The old free MP3s, the covers and the old websites, as history.</span></a></li>
+      </ul>
+    </div>
+  </section>
 </Base>

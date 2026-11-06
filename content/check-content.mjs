@@ -2,7 +2,8 @@
 // check-content.mjs: copy-rule checker for theluxuryliners.com.
 //
 //   node content/check-content.mjs                 scan content/ (Markdown + JSON)
-//   node content/check-content.mjs --dist dist     also scan a built site (HTML, JSON-LD, JS, llms.txt, XML)
+//   node content/check-content.mjs --dist dist     also scan a built site (HTML, JSON-LD, JS, llms.txt, XML);
+//                                                  the LL-6 one-liner is compared byte for byte there
 //   node content/check-content.mjs --dist-only dist
 //   node content/check-content.mjs --self-test     prove every rule fires on a bad sample and not on a good one
 //   add --json for machine-readable output
@@ -338,6 +339,21 @@ function checkContent(root) {
   return issues;
 }
 
+// --dist: the LL-6 one-liner byte for byte (critique build-copy round 3, S1). The text rules above
+// compare after norm() folds quote glyphs, so a curled ‘Luxury Liner’ would pass them. Here every
+// occurrence in a built file, with HTML entities decoded and nothing else changed, must be the
+// exact approved string, straight quotes included.
+export function oneLinerRawHits(src) {
+  const t = decodeEntities(src);
+  const out = [];
+  const lead = 'The Luxury Liners are a ';
+  for (const m of t.matchAll(/power-pop band co-founded/gi)) {
+    const s0 = m.index - lead.length;
+    if (s0 < 0 || t.slice(s0, s0 + ONE_LINER.length) !== ONE_LINER) out.push(t.slice(Math.max(0, s0), m.index + 160).replace(/\s+/g, ' '));
+  }
+  return out;
+}
+
 function checkDist(dir) {
   const issues = [];
   for (const p of listFiles(dir, ['.html', '.json', '.jsonld', '.txt', '.xml', '.js', '.mjs', '.webmanifest'])) {
@@ -351,6 +367,7 @@ function checkDist(dir) {
     // privacy rules also run on the raw file (hrefs, mailto:, data attributes)
     segs.push({ file: rel, loc: 'raw', raw: decodeEntities(src), scope: 'internal', quote: false });
     for (const s of segs) issues.push(...applyRules(s));
+    for (const hit of oneLinerRawHits(src)) issues.push({ level: 'error', rule: 'one-liner-bytes', file: rel, loc: 'raw', msg: 'The LL-6 one-liner must appear byte for byte (straight quotes, no other glyphs) in the built site.', text: hit.slice(0, 200) });
   }
   return issues;
 }
@@ -418,7 +435,12 @@ function selfTest() {
   const h = htmlSegments('x.html', '<p>Hi</p><blockquote>former member Chad</blockquote><script type="application/ld+json">{"description":"a Nashville-based band"}</script>');
   const hi = h.flatMap(applyRules).map((i) => i.rule);
   if (hi.includes('former-member') || !hi.includes('nashville-based')) { fail++; console.log('FAIL html extraction', hi); }
-  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 6} checks passed`);
+  // raw one-liner check (--dist): entities are fine, curled quotes or a changed word are not
+  const enc = ONE_LINER.replace(/'/g, '&#39;');
+  if (oneLinerRawHits(`<p>${enc}</p><meta content="${ONE_LINER.replace(/'/g, '&#x27;')}">`).length) { fail++; console.log('FAIL one-liner-bytes: exact text with entities flagged'); }
+  if (!oneLinerRawHits(`<p>${ONE_LINER.replace(/'/g, '’')}</p>`).length) { fail++; console.log('FAIL one-liner-bytes: curled quotes not caught'); }
+  if (!oneLinerRawHits('The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese.').length) { fail++; console.log('FAIL one-liner-bytes: shortened text not caught'); }
+  console.log(fail ? `self-test: ${fail} failure(s)` : `self-test: all ${cases.length + 9} checks passed`);
   return fail;
 }
 

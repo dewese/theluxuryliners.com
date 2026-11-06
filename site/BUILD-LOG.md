@@ -1,7 +1,7 @@
 # Build log: theluxuryliners.com (track: build-skeleton)
 
 Rebuild of the approved-then-lost skeleton, 2026-11-06. Authority order: `DECISIONS-2026-10-07.md`
-(LL-1..LL-43) > daviddewese.com `DECISIONS-2026-09-29.md` > `plan/00-master-plan.md` > `research/`.
+(LL-1..LL-45) > daviddewese.com `DECISIONS-2026-09-29.md` > `plan/00-master-plan.md` > `research/`.
 Nothing is deployed.
 
 ## What exists
@@ -41,11 +41,11 @@ Nothing is deployed.
 Only public fields are read; `source`, `confidence`, `contested`, `notes_internal`, `held` and
 `"publish": false` records never render. Gates the build applies whatever a copy file says:
 - **Photographers on /people/** come only from the photos the site shows (`data/photos.json`), so
-  credits always match the captions on Home, Story, Photos and EPK. `content/people.json`
-  `photographs` is not rendered. Amy Wilstermann's credit is single-source: her 2003 promo is
-  `pending` and `PENDING_CREDITS` blocks it (data gate + dist test).
-- **Home blurbs** must say something particular and carry no date (`blurbOk`); a thin or dated
-  blurb is replaced by the site's own, with a build warning. Today's `content/home.md` blurbs pass.
+  credits always match the captions on Home, Story, Photos and EPK, and their years are the years
+  of those photos. `content/people.json` `photographs` is not rendered. Amy Wilstermann is credited
+  on the 2003 shoot since LL-45 (see "Design C" below).
+- **Home blurbs** render the copy track's value exactly; `null` renders no blurb. A thin, padded,
+  track-list-only or dated blurb fails the build (`blurbProblem`); the site never substitutes its own.
 - **YAML**: `story/04` and `story/05` still have front matter that is not valid YAML in their
   `sources` blocks. The importer drops the internal blocks and reads the public keys, with a build
   warning. Question for the copy track.
@@ -133,7 +133,77 @@ checked by eye at 1280 px.
 
 - Copy-track question above (YAML in two story files). B10: if Carly confirms the *Nonetheless*
   cover credit, set it to `publish` in `data/artwork.json` and `publish: true` in content/people.json.
-- Design direction: replace the tokens at the top of `src/styles/global.css`.
 - Hosting setup: Turnstile keys, `CONTACT_TO`, Email Routing, analytics token, Decap `base_url`.
 - The journal months (LL-25), `/vault/news/`, Trunk Box / Live Liners pages when material clears.
 - Contrast/reflow/motion suites beyond axe, Pa11y and Lighthouse are not ported yet (plan §7.4).
+
+## Design C "Roundel" applied (LL-44, 2026-11-06)
+
+Ported from `design/samples/c-roundel/` (approved, `critiques/design-c-round1.md`, 8.0) to every
+page type. Screenshots: `design/roundel-applied/` (home, Overbored, Story ch. 4, People at 1440 px
+light and 375 px dark; `overview.png` at deviceScaleFactor 2), made by `scripts/screenshots.mjs`
+with every off-site request blocked (0 attempted).
+
+| Part | Where |
+|---|---|
+| Tokens, light and dark themes, type, components | `src/styles/global.css` (sample palette and contrast figures unchanged; dark also follows `prefers-color-scheme` without JavaScript) |
+| Fonts (Archivo, Archivo Black, OFL, self-hosted) | `public/fonts/` (+ licences) |
+| Logo sprite, paths verbatim from the masters | `public/art/sprite.svg` (copied from the sample; dist test compares every `d` with `assets/derived/logos/`) |
+| Theme set before paint; switch, video facade, cut-out jump | `public/js/theme.js`, `public/js/site.js` (external files; the CSP still allows no inline script) |
+| Header (roundel + wordmark, nav, "Dark theme" toggle: aria-pressed only, hidden without JS) and footer (white roundel, links, colophon) | `src/layouts/Base.astro`, `src/components/Footer.astro` |
+| Roundel motifs | `Dot`, `SecHead`, `PageHead`, `Listen` (pills), `YouTube` (facade), `Cutout` (the c. 2000 cartwheel cut-out from the sample, `public/art/`) |
+| Templates | home (sky hero with the full mark as h1, singles, red collage, members, doors); release page (cover, factline, red-oval tracks, credits, red press band, video, pager); Story index + **one page per chapter** at `/story/<slug>/` (red chapter head with the record cover or photo, drop cap, record card aside, chapter list + pager); People, Facts, Press, Shows (stacked table on phones), Photos, Music, Compilations, Vault, MP3s, Covers, Journal, EPK, Listen, Contact, Accessibility, Privacy, 404, 410 |
+
+Critique design-c round 1 fixes: M1 the Overbored video block is about "Equasue" only (no TV copy;
+dist test); M2 the collage leads with the 1998 suits and the coats frame fills the left column (no
+red hole); M3 no video poster (plain roundel facade), one 2003 photo on Overbored, each single's
+cover at most twice on home; m1 "Chad had left Nashville in March 2001"; m2 the unused Hard Rock
+image is not shipped; m3 the theme switch is in the header; m4 chapter cards align on fixed rows;
+m5 nav "Music" goes to `/music/`. The YouTube facade loads nothing until pressed, then
+youtube-nocookie.com only (`frame-src` added to the CSP). Privacy now describes the theme memory
+(localStorage) and the click-to-load video; Accessibility mentions the themes and reduced motion.
+
+Should-fix items from the last critiques:
+
+| Item | Fix | Guard |
+|---|---|---|
+| Home blurbs thin/padded (skeleton r2 #1, copy r3 B-1) | content's value or nothing; `content/home.md` New Beginning blurb set to `null` (it was only a track list) | build error on a bad blurb; dist test compares the card with the content |
+| /photos/ order (skeleton r2 #3) | `sortPhotos()` by year within each era (also People photographers) | dist test |
+| Curly quotes (skeleton r2 #4) | `src/lib/typo.ts` curls quotes in all copy, titles from releases.json and covers; the LL-6 one-liner is now byte for byte as approved (straight 'Luxury Liner') everywhere, JSON-LD and llms.txt included | dist test (no straight quote in visible text outside the one-liner); `content/check-content.mjs --dist` rule `one-liner-bytes` (+3 self-test probes); check-dist home check no longer folds quotes |
+| Empty Where cell, March 2001 (skeleton r2 #5) | "Place not recorded" | dist test |
+| "If I Cry" (skeleton r2 #6) | `appearance` in `data/vault.json` → `/music/appearances/#ll-appearance-1998-nashpop` | validate-data + dist test |
+| Mark Montgomery years (skeleton r2 #7, copy r3 S4) | `content/people.json` 2000–2002 (both rows); photographers' years computed from the dated photos | dist test |
+| EPK logo links (skeleton r2 #8) | "Roundel wordmark (SVG)" etc.; photo links carry the caption | dist test |
+| shows.json sort keys (copy r3 S2) | Zanies `1997-09-00`; late September `2001-09-25` | dist test (Zanies datetime) |
+| Facts chad-2001 (copy r3 S5) | "In March 2001. His last show with the band was that month too." | dist test |
+| Amy Wilstermann (LL-45) | credited "Photo: Amy Wilstermann" on the 2003 shoot: `overbored-promo-2003` published, `recesses-2003` added (Overbored page, collage, EPK, Photos, People › Photographers "(2003)"); `PENDING_CREDITS` emptied | dist test: every mention is a credit line or the People row, and no text ties her to anyone |
+
+**Journal quotes removed pending David's approval (LL-25).** These lines from the band's 2001–04
+journal had not had the privacy pass; the quotes are gone and the facts stay, paraphrased. For
+David to approve (or not) when the months are reviewed:
+
+| Where | Quote removed | Now reads |
+|---|---|---|
+| /shows/, 2001-08-12, 12th & Porter | "The new three piece configuration." | One of the first shows as a trio. |
+| /shows/, late September 2001, Ohio and Michigan | "We lost a little money." | The first trip out of the region. |
+| /shows/, 2002-05-31, House of Blues, Las Vegas | "All of nevada was rocked last friday night." | A conference showcase. |
+| /shows/, mid-June 2003 | venue "“Our detroit tour”" | A Detroit tour |
+| /shows/, 2003-02-20 | "Part of “three shows in one week”." | Part of three shows in one week. |
+| Story ch. 4 (`content/story/04-believe.md`) | “the new three piece configuration” | By August the band was playing as a three-piece. |
+| Story ch. 5 (`content/story/05-journal-years.md`) | “all of nevada was rocked last friday night” | (sentence ends at the showcase) |
+
+Both story files record the held quotes in their `held:` blocks; a dist test keeps them off /shows/
+and the Story.
+
+Tests changed with owner decisions, not weakened: the Amy Wilstermann test now checks LL-45 (credit
+present on the 2003 photos, nothing more); the home-blurb test now checks the content's value or
+nothing; the collage test counts figures inside the collage. Added: `tests/dist/design.test.mjs`
+(14 tests); axe now runs in both themes (light and dark, JS on and off, 1280 and 375 px) plus a
+320 px reflow pass in both themes, and checks that the dark scheme really renders dark; check-dist
+skips only its "null as text" rule for the two OFL licence files ("null and void").
+
+Verification (2026-11-06): `npm run build` + `node tests/run.mjs`: data PASS; unit + dist tests
+PASS (pages 23, design 14, unit); dist PASS (check-dist 0 errors; content checker `--dist-only` 0
+errors, 13 deliberate warnings); jsonld PASS (38 pages); axe 370/370 (37 pages × 8 contexts, 0
+violations, no horizontal scroll at 375 or 320 px). `RELEASE=1` check-dist fails only on the two
+missing keys. `content/check-content.mjs`: 0 errors; self-test 45/45.

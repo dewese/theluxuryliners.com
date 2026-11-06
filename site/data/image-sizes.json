@@ -166,5 +166,40 @@
    960,
    1600
   ]
+ },
+ "photos/overbored-promo-2003": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "photos/cartwheel-2000": {
+  "width": 604,
+  "height": 578,
+  "widths": [
+   480,
+   604
+  ]
+ },
+ "photos/coats-2000": {
+  "width": 1584,
+  "height": 1307,
+  "widths": [
+   480,
+   960,
+   1584
+  ]
+ },
+ "photos/recesses-2003": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   960,
+   1600
+  ]
  }
 }

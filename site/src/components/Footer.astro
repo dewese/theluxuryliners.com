@@ -1,15 +1,26 @@
 ---
-import { FOOTER_NAV, SOCIAL, RELATED, COLOPHON, BAND } from '../lib/site.ts';
+// The footer: the black roundel in white, the secondary pages, the band's own accounts (LL-36) and
+// where to listen, related sites, and the colophon (LL-39: the logos are dated, no designer).
+import Dot from './Dot.astro';
+import { FOOTER_NAV, SOCIAL, RELATED, COLOPHON, BAND, ARTIST_LINKS } from '../lib/site.ts';
+const listen = ARTIST_LINKS.filter((l) => ['spotify', 'apple_music', 'bandcamp'].includes(l.key));
 ---
-<footer class="site-footer">
-  <div class="wrap">
-    <nav class="footer-nav" aria-label="More">
-      <ul>{FOOTER_NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__mark"><Dot ink class="foot__roundel" /></div>
+    <nav aria-labelledby="foot-more">
+      <h2 id="foot-more">More</h2>
+      <ul class="foot__links foot__links--two">{FOOTER_NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
     </nav>
-    <h2>Follow</h2>
-    <ul class="inline-list">{SOCIAL.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
-    <h2>Related</h2>
-    <ul class="inline-list">{RELATED.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
-    <p class="muted">© 1997–2026 {BAND}. {COLOPHON}</p>
+    <div>
+      <h2 id="foot-follow">Follow and listen</h2>
+      <ul class="foot__links" aria-labelledby="foot-follow">{[...SOCIAL, ...listen].map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+      <h2 id="foot-related">Related</h2>
+      <ul class="foot__links" aria-labelledby="foot-related">{RELATED.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+    </div>
+    <div class="foot__meta">
+      <p class="small">© 1997–2026 {BAND}.</p>
+      <p class="small">{COLOPHON}</p>
+    </div>
   </div>
 </footer>
