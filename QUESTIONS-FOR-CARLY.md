@@ -2,7 +2,7 @@
 
 Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every question now has a "why it matters" line and a proposed default; B2 also asks who is in the band now) for the new theluxuryliners.com, from the five approved research files (`research/01`–`05`) and the master plan (`plan/00-master-plan.md`).
 
-**Answered so far:** A1, A3, A11, A7, A7b and A8 (2026-10-07); C1, E1, B2, A5, A6, B1, B3, B4, B12 and B5 (2026-11-06), recorded in [`DECISIONS-2026-10-07.md`](DECISIONS-2026-10-07.md).
+**Answered so far:** A1, A3, A11, A7, A7b and A8 (2026-10-07); C1, E1, B2, A5, A6, B1, B3, B4, B12, B5, C3, C4, B11, B8, B6, B7, B10, C2, C5 and D1 (2026-11-06), recorded in [`DECISIONS-2026-10-07.md`](DECISIONS-2026-10-07.md).
 
 **How to answer.** Each question has a **proposed default**. If a default is fine, a reply of "OK" (or nothing, by the date the phase needs it) is enough, and the site follows the default. Answers are recorded the way the daviddewese.com decisions were (`DECISIONS-2026-09-29.md`), as new owner decisions that override the research.
 
@@ -118,14 +118,17 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **B8. Nudie suits, Manuel, Emmylou Harris and Phil Kaufman.** In a 2001 interview David said the band wore Nudie suits on stage, met the designer Manuel, and that Emmylou Harris and Phil Kaufman came to see them play. May the site tell this as fact, or as "David has said…"?
 - *Why it matters:* it is the best bridge between the band and the Gram Parsons song it is named after, and it helps engines tell the band apart from Emmylou Harris's album.
 - *Proposed default:* **"David has said…"**, quoting the 2001 interview.
+- **ANSWERED 2026-11-06 (LL-20: told as fact).**
 
 **B6. "Sound as ever".** The research notes that Gram Parsons signed his letters "Sound as ever". Is that why the first album has that name?
 - *Why it matters:* the plan uses "Sound as ever" as the Story's organizing idea; the Parsons link would make it richer, but only if it is true.
 - *Proposed default:* **don't claim the link**; use the album title on its own.
+- **ANSWERED 2026-11-06 (LL-21: yes).**
 
 **B7. *Billboard*, 1998.** Two band-side sources mention a 1998 *Billboard* item ("Hot Prospects", or "a buzz-bin article"), and David's Flickr has "Billboard Photo Shoot 1998" contact sheets. Does David have the clipping, or know the issue?
 - *Why it matters:* it would be the band's most important early press, but we have not found the item.
 - *Proposed default:* **not stated as fact** until found; the contact sheets can appear in the Vault as "the band's 1998 *Billboard* photo shoot".
+- **ANSWERED 2026-11-06 (LL-22: it happened; clipping to be found).**
 
 **B9. "Currently going by the name 'David Dewese'" (2012).** The band site said this in 2012. What did it mean?
 - *Why it matters:* it sits awkwardly with "the band never broke up".
@@ -134,14 +137,17 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **B10. Cover art credits.** Who painted the *Overbored* cover (Scott, as he did for *Nonetheless*?), and who made the *Believe* EP, "Great Day", "New Beginning" and "Shake It Up (Live)" covers? Is Jim Horan (credited "Cover" on the 2026 LP) the illustrator of the original *Sound As Ever* art? Please also confirm Scott's *Nonetheless* paintings and David's design.
 - *Why it matters:* credits appear on every release page; today most are unknown.
 - *Proposed default:* **show only sourced credits** (*Sound As Ever* design: Mark Montgomery; *Nonetheless*: paintings Scott Carpenter, design David Dewese, photos Kristin Barlowe; the LP: cover Jim Horan); no credit line elsewhere.
+- **ANSWERED 2026-11-06 (LL-23).**
 
 **B11. Where is the band based today?** David lives in Dallas (F3); David wrote that the members are "scattered across four different states".
 - *Why it matters:* old bios say "Nashville-based", which engines repeat in the present tense.
 - *Proposed default:* **no current base**; the band is described as formed in 1997 and based in Nashville until about 2010, with members now in several states.
+- **ANSWERED 2026-11-06 (LL-19: Nashville; members now in TN, MI and TX).**
 
 **C2. Former members.** The band's own 2005 roster lists Jeff LaFrate (drums, 1997–98), Mark W. Winchester (bass, 1997–98), Kyle Edgington (drums, summer 1998) and Scott Jeffries (tambourine, one show in 1997). May the People page list them with those roles and years?
 - *Why it matters:* a complete roster is what fans and Discogs editors look for; these are private people.
 - *Proposed default:* **list name, role and years only**, exactly as the band printed them in 2005.
+- **ANSWERED 2026-11-06 (LL-24: yes, plus later players).**
 
 **C3. Chad's college.** One source names the college where David and Chad met. You approved "college friend" (P21). May the site name the college?
 - *Why it matters:* it is a detail about a private person's life.
@@ -156,6 +162,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **C5. The band journal (2001–04).** The old site's journal has 33 months of posts: shows, trips and band life, plus some friends' names and personal news. Who should approve each month before it goes into the Vault?
 - *Why it matters:* it is the richest first-hand source, and it needs a privacy pass.
 - *Proposed default:* **our team does a first privacy pass, and David approves each month**; months go live as they clear.
+- **ANSWERED 2026-11-06 (LL-25).**
 
 **E5. Cover songs in the Vault.** The old site offered free MP3s of cover songs (Cher's "Believe", plus songs by Superdrag, The Lemonheads, Jetpack, Julie Miller and Big Star). Re-hosting them as free downloads means distributing other writers' songs.
 - *Why it matters:* free downloads of cover songs can need a licence; original songs do not have this problem.
@@ -164,6 +171,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 **D1. A recent photo of the band.** Is there any photo of the four (together or separately) from 2021–2026?
 - *Why it matters:* apart from the two 2026 covers, the newest band photo on file is from 2009, so the site would read as a closed archive.
 - *Proposed default:* launch without one; the home page leads with the 2026 releases and the four forever members.
+- **ANSWERED 2026-11-06 (LL-26: launch without one).**
 
 **D2. Logos.** Do vector or high-resolution files exist for the "THE LUXURY LINERS" condensed wordmark with the crossed X, or the red-and-white roundel from the *Believe* EP? Who designed them? If no files exist, may we redraw them as SVG?
 - *Why it matters:* no usable logo exists anywhere; the designs in the plan lean on these marks.

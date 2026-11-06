@@ -32,3 +32,18 @@ Carly's answers to the first Tier 1 questions in `QUESTIONS-FOR-CARLY.md`. **Aut
 | LL-14 | B4. Songwriting | *Nonetheless*: **David**. "Great Day" and "New Beginning": **Chad and David**. "The Duke Of Gloucester": **David** (possibly shared with Jerry James; not confirmed, so the site credits David until Jerry's share is confirmed). The Discogs credits for *Sound As Ever* and *Overbored* stand otherwise. |
 | LL-15 | B12. When Chad left | **March 2001.** The site says "March 2001" (David's Flickr photo "Chad's Last Show – March 2001"); the 2005 site's "April 2001" is corrected. |
 | LL-16 | B5. SXSW 2001 | **The band played the SESAC Showcase at SXSW 2001.** |
+
+## Round 3: 2026-11-06
+
+| # | Question | Decision |
+|---|---|---|
+| LL-17 | When the four came back together | Chad left in 2001. The band slowly stopped touring and releasing music in the late 2000s, and David left Nashville in 2009, but **the four never said the band was over**. Living in three different states, **they reconnected during COVID and started talking about music again**, which led to the 2026 singles. Site wording: "The band never broke up. The four forever members reconnected during the pandemic and started making music again." Carly's phrase "dads with careers" is not used on the site (LL-7: nothing about their lives outside the band). |
+| LL-18 | Live "Shake It Up" date | Recorded at the Texas Music Café in Waco in **October or November 2001** (owner's recollection; the site says "autumn 2001"). Chad had left Nashville by then (LL-15) but played this Texas show. |
+| LL-19 | Where the band is based | **Nashville** is the band's home town: the only city all four lived in together while pursuing the band. Members now live in Tennessee, Michigan and Texas. The site may say "now spread across Tennessee, Michigan and Texas", but never says which member lives where (LL-7). |
+| LL-20 | Nudie suits, Manuel, Emmylou Harris | **Told as fact.** Manuel suited the band for its **first full-band concert, at 12th & Porter in Nashville, July or August 1998, opening for Austin Hanks.** The band met **Emmylou Harris and Phil Kaufman** when it played **Billy Block's Western Beat Roots Revival at Zanies in Nashville, probably autumn 1997 or winter 1998.** |
+| LL-21 | "Sound as ever" | **Yes**: the first album is named after Gram Parsons's sign-off "Sound as ever". The Story can say so. |
+| LL-22 | *Billboard*, 1998 | **It happened**; the clipping exists and is to be found. The site says the band was **featured in *Billboard* in 1998**; the item's title and issue are added when the clipping turns up. |
+| LL-23 | Cover art | *Overbored*: **David Dewese**. *Believe* EP: **Mark Montgomery**. "Great Day": **David**. "New Beginning": **David**. "Shake It Up (Live)": **David, from a Mark Montgomery photo**. **Jim Horan restored the *Sound As Ever* art for the 2026 vinyl**; he is not the original artist (the original design credit stays Mark Montgomery). |
+| LL-24 | Early and guest players | The People page lists, by name, role and years only: **Jeff LaFrate** (drums, 1997–98), **Mark W. Winchester** (bass, 1997–98), **Kyle Edgington** (drums, summer 1998), **Scott Jeffries** (tambourine, one show, 1997), **Gary Ishee** (several shows, 2004–05; also guitar on *Nonetheless*), **Doli Stepniewski** (the *Nonetheless* CD release show, 2006), **Grant Johnson** and **Jeremy Stephens** (shows in 2007). |
+| LL-25 | The band journal (2001–04) | **Our team does a privacy pass first, then David approves each month**; months go live in the Vault as they clear. |
+| LL-26 | A recent photo | **Launch without one**; the home page leads with the 2026 singles. |

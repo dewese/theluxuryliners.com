@@ -657,7 +657,8 @@
   },
   "cover_art": {
    "credit": "Cover: Jim Horan. Art direction and design: David Dewese and Mark Montgomery (Discogs prints \"David DeWeese\").",
-   "confidence": "single-source (Discogs 37658859, read live 2026-10-07)"
+   "confidence": "single-source (Discogs 37658859, read live 2026-10-07)",
+   "restoration": "Jim Horan restored the original art for the vinyl (LL-23); not the original artist"
   },
   "identifiers": {
    "discogs_release_id": 37658859
@@ -899,9 +900,10 @@
   },
   "cover_art": {
    "description": "Red cover, black silhouette of a leaping guitarist over a white ring; \"THE LUXURY LINERS\" top, \"BELIEVE EP\" small.",
-   "credit": null,
+   "credit": "Mark Montgomery",
    "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/believe.jpg (1400x1400)",
-   "confidence": "unverified (no credit found)"
+   "confidence": "unverified (no credit found)",
+   "credit_confidence": "confirmed-owner (Carly, 2026-11-06); LL-23"
   },
   "editions": [
    {
@@ -1245,9 +1247,10 @@
   },
   "cover_art": {
    "description": "Painting of three upside-down figures in coats on off-white; small \"THE LUXURY LINERS OVERBORED\".",
-   "credit": null,
+   "credit": "David Dewese",
    "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/overbored.jpg (1400x1400)",
-   "confidence": "unverified (no credit found). Do not infer Scott Carpenter from the Nonetheless credit; open question to David: did Scott also paint the Overbored cover?"
+   "confidence": "unverified (no credit found). Do not infer Scott Carpenter from the Nonetheless credit; open question to David: did Scott also paint the Overbored cover?",
+   "credit_confidence": "confirmed-owner (Carly, 2026-11-06); LL-23"
   },
   "editions": [
    {
@@ -1750,15 +1753,16 @@
     "role": "drums"
    }
   ],
-  "personnel_note": "Owner, LL-10: recorded live at the Texas Music Café in Waco, Texas, with Chad on guitar, David on bass and Scott on drums. That line-up dates it to the Chad-and-Scott years (about 1998–2001); exact date still open.",
+  "personnel_note": "Owner, LL-10 and LL-18: recorded live at the Texas Music Café in Waco, Texas, in October or November 2001, with Chad on guitar, David on bass and Scott on drums.",
   "production": {
    "released_by": "Texas Music Café (Waco, TX), live TV/radio series"
   },
   "cover_art": {
-   "credit": null,
+   "credit": "David Dewese, from a photo by Mark Montgomery",
    "master_file": null,
    "reference_url": "https://i.scdn.co/image/ab67616d0000b27339732e51fd05e75ebe9fd74d",
-   "confidence": "unverified; no master supplied (P28)"
+   "confidence": "unverified; no master supplied (P28)",
+   "credit_confidence": "confirmed-owner (Carly, 2026-11-06); LL-23"
   },
   "notes": [
    "A different live recording of the song (ISRC US2762202822, 3:12) is on the 2023 Texas Music Cafe compilation."
@@ -1787,8 +1791,9 @@
   "recording": {
    "venue": "Texas Music Café",
    "city": "Waco, Texas",
-   "date": null,
-   "confidence": "confirmed-owner (LL-10)"
+   "date": "2001 (October or November)",
+   "confidence": "confirmed-owner (Carly, 2026-11-06); LL-18 recollection",
+   "date_precision": "season"
   }
  },
  {
@@ -1924,9 +1929,10 @@
   "production": {},
   "cover_art": {
    "description": "Red kite on a long string against a blue gradient sky; \"Great Day\" in white serif.",
-   "credit": null,
+   "credit": "David Dewese",
    "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/great-day-1-upscale.png (3000x3000, upscaled)",
-   "confidence": "unverified"
+   "confidence": "unverified",
+   "credit_confidence": "confirmed-owner (Carly, 2026-11-06); LL-23"
   },
   "other_links": {
    "spotify_track": "https://open.spotify.com/track/5VN9RMk9n83auNJvD8FF9G"
@@ -2117,9 +2123,10 @@
   "production": {},
   "cover_art": {
    "description": "A hand holds up a clear CD case showing a sunburst design and \"NEW BEGINNING\" lettering against a blue sky.",
-   "credit": null,
+   "credit": "David Dewese",
    "master_file": "daviddewese.com/daviddewese-com/assets/source/covers/new-beginning-3000x3000-final.jpg (3000x3000)",
-   "confidence": "unverified"
+   "confidence": "unverified",
+   "credit_confidence": "confirmed-owner (Carly, 2026-11-06); LL-23"
   },
   "notes": [
    "Owner-confirmed 2026 release (F6). Tidal and Apple track-level date 2026-04-10 (possible pre-release); public date is Spotify's 2026-04-17."
