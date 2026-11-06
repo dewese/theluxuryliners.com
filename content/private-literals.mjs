@@ -34,7 +34,10 @@ export function loadKey(env = process.env) {
   try { return readFileSync(KEY_FILE, 'utf8').trim() || null; } catch { return null; }
 }
 export const KEY = loadKey();
-export const STRICT = Boolean(process.env.CI) || process.env.RELEASE === '1';
+// CI is strict once the PRIVATE_LITERALS_KEY secret exists. Until the repo owner adds it, the CI
+// workflow sets PRIVATE_LITERALS_OPTIONAL=1 so pull-request checks run everything else (with a
+// warning) instead of failing; release builds (RELEASE=1) always refuse to run without the key.
+export const STRICT = process.env.RELEASE === '1' || (Boolean(process.env.CI) && process.env.PRIVATE_LITERALS_OPTIONAL !== '1');
 if (!KEY && STRICT) {
   throw new Error('content/private-literals.mjs: no key for the private-literal check. Set PRIVATE_LITERALS_KEY (CI secret) or create data/private/private-literals.key. The check fails closed in CI and release builds.');
 }
