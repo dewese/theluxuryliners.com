@@ -1,0 +1,545 @@
+{
+  "_about": "Shows page data. Rows are sorted by [sort_key, id]. sort_key is YYYY-MM-DD with 00 for an unknown month or day, so a row known only to the year sorts before the dated rows of that year, and a season or range sorts by its first possible month. Where a post says early, mid or late in a month, a representative day (about 05, 15 or 25) stands in so the row sorts sensibly; date_precision then stays \"month\" and the display text says early/mid/late. date_precision is one of: day, approx-day, month, month-range, season, season-range, year. Public fields: date_display, venue, place, note. Internal: source, confidence, notes_internal, and rows with \"publish\": false. The 2001-04 rows are the band's own journal: the band's account, not a verified gig list.",
+  "checked_on": "2026-11-06",
+  "intro": "Shows we can date, from the band’s own records and memories. The list grows as more turns up.",
+  "journal_note": "Shows from 2001 to 2004 come from the band’s journal.",
+  "shows": [
+    {
+      "id": "1997-western-beat-roots-revival-zanies",
+      "date_display": "Autumn 1997 or winter 1998",
+      "sort_key": "1997-10-00",
+      "date_precision": "season-range",
+      "venue": "Billy Block’s Western Beat Roots Revival, Zanies",
+      "place": "Nashville, Tennessee",
+      "note": "The band met Emmylou Harris and Phil Kaufman.",
+      "source": "DECISIONS-2026-10-07.md LL-20",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "1998-12th-and-porter-first-full-band",
+      "date_display": "July or August 1998",
+      "sort_key": "1998-07-00",
+      "date_precision": "month-range",
+      "venue": "12th & Porter",
+      "place": "Nashville, Tennessee",
+      "note": "The first full-band concert, opening for Austin Hanks, in suits by Manuel.",
+      "source": "DECISIONS-2026-10-07.md LL-20",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "1998-e-cleff-studios-trunk-box",
+      "date_display": "Autumn 1998",
+      "sort_key": "1998-09-00",
+      "date_precision": "season",
+      "venue": "E-Cleff Studios",
+      "place": "Waco, Texas",
+      "note": "A live set, later posted on the band’s website as *Trunk Box*.",
+      "release_id": "ll-archive-1998-trunk-box",
+      "source": "data/releases.json ll-archive-1998-trunk-box; research/01 §4.1 (2005 band music page: \"fall 1998\")",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "1998-texas-music-cafe-waco",
+      "date_display": "Autumn 1998",
+      "sort_key": "1998-09-00",
+      "date_precision": "season",
+      "venue": "Texas Music Café",
+      "place": "Waco, Texas",
+      "note": "Chad on guitar, David on bass, Scott on drums. “Shake It Up” from this show was released in 2021.",
+      "release_id": "luxury-liners-2021-shake-it-up-live",
+      "source": "DECISIONS-2026-10-07.md LL-10, LL-18",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "2001-03-chads-last-show",
+      "date_display": "March 2001",
+      "sort_key": "2001-03-00",
+      "date_precision": "month",
+      "venue": "Venue not recorded",
+      "place": null,
+      "note": "Chad’s last show with the band.",
+      "source": "DECISIONS-2026-10-07.md LL-15 (month); photo title \"Chad's Last Show - March 2001\" (research/01 §4.3)",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "2001-sxsw-sesac-showcase",
+      "date_display": "March 2001",
+      "sort_key": "2001-03-00",
+      "date_precision": "month",
+      "venue": "SESAC Showcase, SXSW",
+      "place": "Austin, Texas",
+      "note": "“Shake It Up” was on the CD handed out at the showcase.",
+      "source": "DECISIONS-2026-10-07.md LL-16; data/releases.json ll-appearance-2001-sesac-sxsw-promo",
+      "confidence": "confirmed-owner",
+      "notes_internal": "LL-16 gives SXSW 2001; the festival ran in March 2001."
+    },
+    {
+      "id": "2001-06-30-map-room-memphis",
+      "date_display": "c. June 30, 2001",
+      "sort_key": "2001-06-30",
+      "date_precision": "approx-day",
+      "venue": "The Map Room",
+      "place": "Memphis, Tennessee",
+      "note": "The band’s Memphis debut.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020203232010/http://theluxuryliners.com:80/2001_06_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-08-03-borders-brentwood",
+      "date_display": "August 3, 2001",
+      "sort_key": "2001-08-03",
+      "date_precision": "day",
+      "venue": "Borders Bookstore Cafe",
+      "place": "Brentwood, Tennessee",
+      "note": "An acoustic showcase, two sets.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20011213001845/http://theluxuryliners.com:80/2001_08_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-08-09-the-basement",
+      "date_display": "August 9, 2001",
+      "sort_key": "2001-08-09",
+      "date_precision": "day",
+      "venue": "The Basement",
+      "place": "Nashville, Tennessee",
+      "note": "A 14-song set.",
+      "source": "dd research/04 §5.2 journal table; 2001_08 archive (as above)",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-08-12-12th-and-porter",
+      "date_display": "August 12, 2001",
+      "sort_key": "2001-08-12",
+      "date_precision": "day",
+      "venue": "12th & Porter",
+      "place": "Nashville, Tennessee",
+      "note": "“The new three piece configuration.”",
+      "source": "dd research/04 §5.2 journal table; 2001_08 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-09-21-borders-acoustic",
+      "date_display": "September 21, 2001",
+      "sort_key": "2001-09-21",
+      "date_precision": "day",
+      "venue": "Borders (acoustic)",
+      "place": "Nashville area",
+      "note": "The first performances of “Sunshine” and “Dreaming”.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20011213002914/http://theluxuryliners.com:80/2001_09_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-09-ohio-michigan",
+      "date_display": "Late September 2001",
+      "sort_key": "2001-09-22",
+      "date_precision": "month",
+      "venue": "Shows in Ohio and Michigan",
+      "place": "Ohio and Michigan",
+      "note": "The first trip out of the region. “We lost a little money.”",
+      "source": "dd research/04 §5.2 journal table; months 2001_09 and 2001_10",
+      "confidence": "verified-source",
+      "notes_internal": "sort_key day 22 only places 'late September' after the 21 Sept row."
+    },
+    {
+      "id": "2001-10-06-alpharetta",
+      "date_display": "October 6, 2001",
+      "sort_key": "2001-10-06",
+      "date_precision": "day",
+      "venue": "A noon show",
+      "place": "Alpharetta, Georgia",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20011213005859/http://theluxuryliners.com:80/2001_10_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-10-11-12th-and-porter-showcase",
+      "date_display": "October 11, 2001",
+      "sort_key": "2001-10-11",
+      "date_precision": "day",
+      "venue": "12th & Porter",
+      "place": "Nashville, Tennessee",
+      "note": "A music-conference showcase.",
+      "source": "dd research/04 §5.2 journal table; 2001_10 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2001-11-14-jillians",
+      "date_display": "November 14, 2001",
+      "sort_key": "2001-11-14",
+      "date_precision": "day",
+      "venue": "Jillian’s",
+      "place": "Nashville, Tennessee",
+      "note": "A cancer-research benefit with Nashville Predators players.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020903202557/http://theluxuryliners.com:80/2001_11_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-03-01-the-basement",
+      "date_display": "March 1, 2002",
+      "sort_key": "2002-03-01",
+      "date_precision": "day",
+      "venue": "The Basement",
+      "place": "Nashville, Tennessee",
+      "note": "The first show of 2002.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020907041018/http://theluxuryliners.com:80/2002_03_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-03-30-the-sutler",
+      "date_display": "March 30, 2002",
+      "sort_key": "2002-03-30",
+      "date_precision": "day",
+      "venue": "The Sutler",
+      "place": "Nashville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020907155848/http://theluxuryliners.com:80/2002_04_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-05-borders-acoustic",
+      "date_display": "Mid-May 2002",
+      "sort_key": "2002-05-15",
+      "date_precision": "month",
+      "venue": "Two Borders acoustic shows",
+      "place": "Nashville area",
+      "note": "The first performances of “Breaking Out”.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020608024816/http://www.theluxuryliners.com:80/2002_05_01_archives.html",
+      "confidence": "verified-source",
+      "notes_internal": "sort_key day 15 stands for 'mid-May'."
+    },
+    {
+      "id": "2002-05-23-dancin-in-the-district",
+      "date_display": "May 23, 2002",
+      "sort_key": "2002-05-23",
+      "date_precision": "day",
+      "venue": "“Dancin’ in the District”",
+      "place": "Nashville, Tennessee",
+      "note": "A free outdoor concert.",
+      "source": "dd research/04 §5.2 journal table; 2002_05 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-05-31-house-of-blues-las-vegas",
+      "date_display": "May 31, 2002",
+      "sort_key": "2002-05-31",
+      "date_precision": "day",
+      "venue": "House of Blues, Mandalay Bay",
+      "place": "Las Vegas, Nevada",
+      "note": "A conference showcase. “All of nevada was rocked last friday night.”",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20020808065530/http://www.theluxuryliners.com:80/2002_06_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-06-07-the-end",
+      "date_display": "June 7, 2002",
+      "sort_key": "2002-06-07",
+      "date_precision": "day",
+      "venue": "The End",
+      "place": "Nashville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2002_06 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-06-27-exit-in",
+      "date_display": "June 27, 2002",
+      "sort_key": "2002-06-27",
+      "date_precision": "day",
+      "venue": "Exit/In",
+      "place": "Nashville, Tennessee",
+      "note": "A last-minute show.",
+      "source": "dd research/04 §5.2 journal table; 2002_06 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-07-dc-area-outdoor",
+      "date_display": "Early July 2002",
+      "sort_key": "2002-07-04",
+      "date_precision": "approx-day",
+      "venue": "An outdoor stage",
+      "place": "Washington, DC area",
+      "note": "Over the July 4 weekend.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20021008071758/http://www.theluxuryliners.com:80/2002_07_01_archives.html",
+      "confidence": "verified-source",
+      "notes_internal": "The journal's personal detail about this trip is deliberately left out."
+    },
+    {
+      "id": "2002-07-18-12th-and-porter-live-liners",
+      "date_display": "July 18, 2002",
+      "sort_key": "2002-07-18",
+      "date_precision": "day",
+      "venue": "12th & Porter",
+      "place": "Nashville, Tennessee",
+      "note": "Recorded for *Live Liners*.",
+      "release_id": "ll-archive-2002-live-liners",
+      "source": "dd research/04 §5.2 journal table; data/releases.json ll-archive-2002-live-liners",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-08-atlanta-blues-traveler",
+      "date_display": "August 2002",
+      "sort_key": "2002-08-00",
+      "date_precision": "month",
+      "venue": "Opening for Blues Traveler",
+      "place": "Atlanta, Georgia",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; months 2002_08 and 2002_09",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2002-11-17-12th-and-porter-acoustic",
+      "date_display": "November 17, 2002",
+      "sort_key": "2002-11-17",
+      "date_precision": "day",
+      "venue": "12th & Porter (acoustic)",
+      "place": "Nashville, Tennessee",
+      "note": "Recorded for *Live Liners*.",
+      "release_id": "ll-archive-2002-live-liners",
+      "source": "data/releases.json ll-archive-2002-live-liners; research/01 §4.4 (2005 band music page)",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-01-indiana-acoustic-tour",
+      "date_display": "c. January 31 – February 1, 2003",
+      "sort_key": "2003-01-31",
+      "date_precision": "approx-day",
+      "venue": "The House, Indianapolis; The Rev, Evansville",
+      "place": "Indiana",
+      "note": "The Indiana acoustic tour.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20030526114321/http://www.theluxuryliners.com:80/2003_02_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-02-knoxville",
+      "date_display": "February 2003",
+      "sort_key": "2003-02-00",
+      "date_precision": "month",
+      "venue": "An acoustic show",
+      "place": "Knoxville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2003_02 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-02-20-nashville",
+      "date_display": "February 20 and 21, 2003",
+      "sort_key": "2003-02-20",
+      "date_precision": "day",
+      "venue": "Two Nashville shows",
+      "place": "Nashville, Tennessee",
+      "note": "Part of “three shows in one week”.",
+      "source": "dd research/04 §5.2 journal table; 2003_02 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-03-columbia-sc",
+      "date_display": "March 2003",
+      "sort_key": "2003-03-00",
+      "date_precision": "month",
+      "venue": "A show",
+      "place": "Columbia, South Carolina",
+      "note": "The band turned down International Pop Overthrow in Chicago to keep this date.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20030527093643/http://www.theluxuryliners.com:80/2003_03_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-03-26-slow-bar",
+      "date_display": "March 26, 2003",
+      "sort_key": "2003-03-26",
+      "date_precision": "day",
+      "venue": "Slow Bar",
+      "place": "Nashville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2003_03 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-03-28-le-jive-coffee-house",
+      "date_display": "March 28, 2003",
+      "sort_key": "2003-03-28",
+      "date_precision": "day",
+      "venue": "Le Jive Coffee House",
+      "place": "Michigan",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2003_03 archive",
+      "confidence": "verified-source",
+      "notes_internal": "Town given in the post as \"wine-dot\" (Wyandotte?); only the state is shown."
+    },
+    {
+      "id": "2003-03-29-starbucks-detroit",
+      "date_display": "March 29, 2003",
+      "sort_key": "2003-03-29",
+      "date_precision": "day",
+      "venue": "Starbucks",
+      "place": "Detroit suburbs, Michigan",
+      "note": "Sold out.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20030529091448/http://www.theluxuryliners.com:80/2003_04_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-04-18-louisville",
+      "date_display": "April 18, 2003",
+      "sort_key": "2003-04-18",
+      "date_precision": "day",
+      "venue": "A show",
+      "place": "Louisville, Kentucky",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2003_04 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-04-rocketown",
+      "date_display": "Late April 2003",
+      "sort_key": "2003-04-25",
+      "date_precision": "month",
+      "venue": "Rocketown",
+      "place": "Nashville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2003_04 archive",
+      "confidence": "verified-source",
+      "notes_internal": "sort_key day 25 stands for 'late April'."
+    },
+    {
+      "id": "2003-06-detroit-tour",
+      "date_display": "Mid-June 2003",
+      "sort_key": "2003-06-15",
+      "date_precision": "month",
+      "venue": "“Our detroit tour”",
+      "place": "Detroit area, Michigan",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20030810183228/http://www.theluxuryliners.com:80/2003_06_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-06-19-french-quarter-cafe",
+      "date_display": "June 19, 2003",
+      "sort_key": "2003-06-19",
+      "date_precision": "day",
+      "venue": "The French Quarter Cafe",
+      "place": "Nashville, Tennessee",
+      "note": "An audience recording of this show is in the Live Music Archive.",
+      "source": "research/03 §5.3 (Internet Archive item lliners2003-06-19.at853.shnf); journal 2003_06",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-09-15-12-at-12th",
+      "date_display": "September 15, 2003",
+      "sort_key": "2003-09-15",
+      "date_precision": "day",
+      "venue": "“12@12th”, 12th & Porter",
+      "place": "Nashville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20040118154010/http://theluxuryliners.com:80/2003_09_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2003-10-columbia-sc",
+      "date_display": "Early October 2003",
+      "sort_key": "2003-10-04",
+      "date_precision": "month",
+      "venue": "A show",
+      "place": "Columbia, South Carolina",
+      "note": "The first performances of “Circles” and “Still In Love”.",
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20031218231614/http://www.theluxuryliners.com:80/2003_10_01_archives.html",
+      "confidence": "verified-source",
+      "notes_internal": "sort_key day 04 stands for 'early October' (post dated 10-05)."
+    },
+    {
+      "id": "2003-10-18-east-nashville",
+      "date_display": "October 18, 2003",
+      "sort_key": "2003-10-18",
+      "date_precision": "day",
+      "venue": "A show in East Nashville",
+      "place": "Nashville, Tennessee",
+      "note": "A surprise cover of Gram Parsons’s “Luxury Liner”.",
+      "source": "dd research/04 §5.2 journal table; 2003_10 archive",
+      "confidence": "verified-source",
+      "notes_internal": "The venue is probably the Radio Cafe; not shown until confirmed."
+    },
+    {
+      "id": "2003-10-detroit-radio-and-canada",
+      "date_display": "c. October 24–25, 2003",
+      "sort_key": "2003-10-24",
+      "date_precision": "approx-day",
+      "venue": "A radio appearance and a gig near Detroit, then a gig in Canada",
+      "place": "Michigan and Canada",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; 2003_10 archive",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2004-03-the-end",
+      "date_display": "Early March 2004",
+      "sort_key": "2004-03-05",
+      "date_precision": "month",
+      "venue": "The End",
+      "place": "Nashville, Tennessee",
+      "note": null,
+      "source": "dd research/04 §5.2 journal table; https://web.archive.org/web/20040331005053/http://www.theluxuryliners.com:80/2004_03_01_archives.html",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "2006-nonetheless-cd-release-show",
+      "date_display": "2006",
+      "sort_key": "2006-00-00",
+      "date_precision": "year",
+      "venue": "The *Nonetheless* CD release show",
+      "place": null,
+      "note": "With Doli Stepniewski.",
+      "release_id": "luxury-liners-2006-nonetheless",
+      "source": "DECISIONS-2026-10-07.md LL-24",
+      "confidence": "confirmed-owner",
+      "notes_internal": "Venue and month not recorded. Referenced by content/people.json doli-stepniewski.show_id; check-content.mjs checks the link."
+    },
+    {
+      "id": "2008-opening-bell-coffee-dallas",
+      "date_display": "2008",
+      "sort_key": "2008-00-00",
+      "date_precision": "year",
+      "venue": "Opening Bell Coffee",
+      "place": "Dallas, Texas",
+      "note": "David’s CD-release show for his solo album *Make The Best Of It*. Chad joined him for a few songs.",
+      "kind": "david-solo-with-chad",
+      "photo": "assets/source/photos/2008-texas-cd-release-david-and-chad.jpg",
+      "source": "DECISIONS-2026-10-07.md LL-37, LL-38",
+      "confidence": "confirmed-owner"
+    }
+  ],
+  "held": [
+    {
+      "publish": false,
+      "id": "1998-06-monsters-of-pop",
+      "why": "Known only from a search snippet; page never opened (unverified)."
+    },
+    {
+      "publish": false,
+      "id": "2005-12-codaphonic",
+      "why": "Single-source (photo set title)."
+    },
+    {
+      "publish": false,
+      "id": "2007-10-grand-rapids",
+      "why": "Single-source (photo album title); research debt RD6."
+    },
+    {
+      "publish": false,
+      "id": "2007-12-the-nobility",
+      "why": "Single-source (photo title)."
+    },
+    {
+      "publish": false,
+      "id": "2002-07-29-battle-of-the-bands",
+      "why": "Venue not named; left out to keep any contest story off the site (LL-13 caution)."
+    },
+    {
+      "publish": false,
+      "id": "2004-05-shows-with-gary-ishee",
+      "why": "LL-24 says several shows in 2004-05 but gives no dates or venues; listed on People instead."
+    },
+    {
+      "publish": false,
+      "id": "2007-shows-with-grant-johnson-and-jeremy-stephens",
+      "why": "LL-24 gives no dates or venues; listed on People and in Story chapter 7 instead."
+    }
+  ]
+}

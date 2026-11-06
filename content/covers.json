@@ -1,0 +1,72 @@
+{
+  "_about": "LL-29: the Vault keeps a list of the band's known cover songs by title and original artist. LL-27: no audio, no files, no downloads; this is a list only. Public fields: title, original_artist, where. Internal: source, confidence, notes_internal, and records with \"publish\": false.",
+  "checked_on": "2026-11-06",
+  "intro": "Songs by other people that The Luxury Liners recorded or played.",
+  "covers": [
+    {
+      "id": "believe",
+      "title": "Believe",
+      "original_artist": "Cher",
+      "where": "Recorded for the *Believe* EP (2001).",
+      "source": "daviddewese.com DECISIONS P27; data/releases.json luxury-liners-2001-believe-ep",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "luxury-liner",
+      "title": "Luxury Liner",
+      "original_artist": "Gram Parsons (The International Submarine Band)",
+      "where": "Played live as a surprise in East Nashville, October 2003.",
+      "source": "dd research/04 §5.2 journal table (2003-10-18); research/04 §5 (the song first recorded by the International Submarine Band, 1968)",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "babys-waiting",
+      "title": "Baby’s Waiting",
+      "original_artist": "Superdrag",
+      "where": "Recorded; posted on the band’s website in 2005.",
+      "source": "data/releases.json ll-archive-2005-covers-and-mp3s; dd research/04 §5.2 (2005 home page, 20050305090711)",
+      "confidence": "single-source (attributed in the sentence)"
+    },
+    {
+      "id": "purple-parallelogram",
+      "title": "Purple Parallelogram",
+      "original_artist": "The Lemonheads",
+      "where": "Recorded; posted on the band’s website in 2005.",
+      "source": "data/releases.json ll-archive-2005-covers-and-mp3s; dd research/04 §5.2",
+      "confidence": "single-source (attributed in the sentence)"
+    },
+    {
+      "id": "ride-with-me",
+      "title": "Ride With Me",
+      "original_artist": "The Lemonheads",
+      "where": "Recorded; posted on the band’s website in 2005.",
+      "source": "data/releases.json ll-archive-2005-covers-and-mp3s; dd research/04 §5.2",
+      "confidence": "single-source (attributed in the sentence)"
+    },
+    {
+      "id": "manger-throne",
+      "title": "Manger Throne",
+      "original_artist": "Julie Miller",
+      "where": "Recorded; posted on the band’s website in 2005.",
+      "source": "data/releases.json ll-archive-2005-covers-and-mp3s; dd research/04 §5.2",
+      "confidence": "single-source (attributed in the sentence)"
+    },
+    {
+      "id": "jesus-christ",
+      "title": "Jesus Christ",
+      "original_artist": "Big Star",
+      "where": "Recorded; posted on the band’s website in 2005.",
+      "source": "data/releases.json ll-archive-2005-covers-and-mp3s; dd research/04 §5.2",
+      "confidence": "single-source (attributed in the sentence)"
+    }
+  ],
+  "held": [
+    {
+      "publish": false,
+      "id": "lead-me-on",
+      "title": "Lead Me On",
+      "why": "Listed on the 2005 site as a Jetpack song, but which Jetpack is open (plan §4.3; research/02 D7). Add once David confirms."
+    }
+  ],
+  "notes_internal": "Not covers, never list them here: Shake It Up (a Luxury Liners original, P27); The Duke Of Gloucester (David's song, LL-14, recorded by both bands); Baby Blue (David's song that moved to The Foxymorons). The 2005-site rows are single-source (the daviddewese.com team's read of the 2005 home page; Wayback not re-opened 2026-10-07), so each carries its attribution in the sentence: 'posted on the band's website in 2005'."
+}
