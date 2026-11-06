@@ -73,3 +73,4 @@ Carly's answers to the first Tier 1 questions in `QUESTIONS-FOR-CARLY.md`. **Aut
 | LL-40 | Newsletter (A4) | **No newsletter.** |
 | LL-41 | AI crawlers (A9) and authority | **Allow all crawlers, AI included.** The goal is for **theluxuryliners.com to be the authoritative source of all information about The Luxury Liners**: full Facts page, JSON-LD, `llms.txt`, sitemap and the off-site fixes (LL-8). |
 | LL-42 | Analytics (A13) | Checked 2026-11-06: **the current Carrd site has no analytics of any kind** (no Google Analytics tag). Proposed, pending Carly's OK: Cloudflare Web Analytics (cookie-free, so no cookie banner) plus Google Search Console and Bing Webmaster Tools. |
+| LL-43 | Analytics and go-ahead | Carly, 2026-11-06: "yes build". Taken as approval of the analytics proposal (Cloudflare Web Analytics, cookie-free with no banner, plus Google Search Console and Bing Webmaster Tools) and as the **go-ahead to build the site**. |
