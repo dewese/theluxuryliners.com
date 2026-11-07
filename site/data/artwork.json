@@ -1,0 +1,62 @@
+{
+  "_about": "Cover-art credits (LL-23), shown on each release page and on /people/ (Artwork), always with the release named. 'pending' rows never render. The release slug must exist in releases.json (scripts/validate-data.mjs).",
+  "credits": [
+    {
+      "release": "sound-as-ever",
+      "name": "Mark Montgomery",
+      "role": "Original cover design",
+      "status": "publish",
+      "source": "LL-23; Discogs 6768612"
+    },
+    {
+      "release": "sound-as-ever",
+      "edition": "2026 LP",
+      "name": "Jim Horan",
+      "role": "Restored the cover art for the 2026 vinyl",
+      "status": "publish",
+      "source": "LL-23"
+    },
+    {
+      "release": "believe-ep",
+      "name": "Mark Montgomery",
+      "role": "Cover art",
+      "status": "publish",
+      "source": "LL-23"
+    },
+    {
+      "release": "overbored",
+      "name": "David Dewese",
+      "role": "Cover art",
+      "status": "publish",
+      "source": "LL-23"
+    },
+    {
+      "release": "nonetheless",
+      "name": "Scott Carpenter",
+      "role": "Cover painting",
+      "status": "pending",
+      "source": "single-source (2010 daviddewese.com discography page); not in LL-23; waits for Carly (B10)"
+    },
+    {
+      "release": "shake-it-up-live",
+      "name": "David Dewese, from a photo by Mark Montgomery",
+      "role": "Cover art",
+      "status": "publish",
+      "source": "LL-23"
+    },
+    {
+      "release": "great-day",
+      "name": "David Dewese",
+      "role": "Cover art",
+      "status": "publish",
+      "source": "LL-23"
+    },
+    {
+      "release": "new-beginning",
+      "name": "David Dewese",
+      "role": "Cover art",
+      "status": "publish",
+      "source": "LL-23"
+    }
+  ]
+}

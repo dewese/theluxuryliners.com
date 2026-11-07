@@ -1,0 +1,15 @@
+---
+// A release cover: full colour, never cropped or recoloured. Covers carry the rights line where
+// they are shown large (release pages), not on every thumbnail.
+import { coverSizes } from '../lib/photos.ts';
+// priority: the page's main image (fetchpriority="high"; audit-qa round 1, M3). The WebP source is
+// offered only when it is smaller than the JPEG (scripts/prepare-images.mjs, M5).
+interface Props { slug: string; alt: string; sizes?: string; eager?: boolean; priority?: boolean; class?: string }
+const { slug, alt, sizes = '(max-width: 40rem) 100vw, 20rem', eager = false, priority = false, class: cls } = Astro.props;
+const s = coverSizes(slug);
+const set = (ext: string) => s.widths.map((w) => `/img/covers/${slug}-${w}.${ext} ${w}w`).join(', ');
+---
+<picture class={cls}>
+  {s.webp !== false && <source type="image/webp" srcset={set('webp')} sizes={sizes} />}
+  <img class="cover" src={`/img/covers/${slug}-${s.widths[Math.min(1, s.widths.length - 1)]}.jpg`} srcset={set('jpg')} sizes={sizes} alt={alt} width={s.width} height={s.height} loading={eager || priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding={priority ? undefined : 'async'} />
+</picture>

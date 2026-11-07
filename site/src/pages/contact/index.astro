@@ -1,0 +1,74 @@
+---
+// Contact (LL-31): the form posts to the Worker (/api/contact), which checks Turnstile and sends
+// the message to the address in its CONTACT_TO secret. No address is printed anywhere.
+// Turnstile appears when PUBLIC_TURNSTILE_SITE_KEY is set at build time (a release build
+// requires it: RELEASE=1 node scripts/check-dist.mjs).
+// Errors (audit-a11y round 1, B2; audit-qa round 1, S4): the rules are stated next to each field;
+// public/js/contact.js checks them on submit (error summary, aria-invalid, the messages tied to
+// each field with aria-describedby, nothing typed is lost) and sends the form with fetch. Without
+// JavaScript the browser's own checks run, and the Worker answers a refused message with this
+// page again: the same markup, the errors filled into the [data-contact-errors] summary and the
+// *-error slots below, and the visitor's text put back (worker/api/contact.ts, formPage()).
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import SecHead from '../../components/SecHead.astro';
+import { TOPICS, LIMITS, MESSAGES, RULES_TEXT } from '../../lib/contact.ts';
+import { SOCIAL } from '../../lib/site.ts';
+import { safeJson } from '../../lib/json.ts';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+// the rules for contact.js, as a JSON data block (not executed; the CSP allows no inline script)
+const rules = safeJson({ limits: LIMITS, messages: MESSAGES });
+---
+<Base title="Contact" description="Contact The Luxury Liners: booking, press, licensing and fan mail.">
+  <Fragment slot="head">
+    {siteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+    <script src="/js/contact.js" defer></script>
+  </Fragment>
+  <PageHead title="Contact" tone="sky" kicker="Booking, press and hello">
+    <p class="lede">For booking, press, licensing or just to say hello, send a message. David reads every one.</p>
+  </PageHead>
+  <div class="wrap page-body">
+  <script type="application/json" id="contact-rules" set:html={rules} />
+  <form method="post" action="/api/contact" data-contact>
+    <div class="error-summary" data-contact-errors tabindex="-1" hidden></div>
+    <p class="hint" id="form-rules">{RULES_TEXT.form}</p>
+    <div class="field">
+      <label for="name">Name <span class="req">(required)</span></label>
+      <p class="hint" id="name-hint">{RULES_TEXT.name}</p>
+      <p class="field-error" id="name-error" hidden></p>
+      <input id="name" name="name" type="text" autocomplete="name" required maxlength={LIMITS.nameMax} pattern="[^<>`]*" aria-describedby="name-hint name-error" />
+    </div>
+    <div class="field">
+      <label for="email">Email <span class="req">(required)</span></label>
+      <p class="hint" id="email-hint">{RULES_TEXT.email}</p>
+      <p class="field-error" id="email-error" hidden></p>
+      <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-hint email-error" />
+    </div>
+    <div class="field">
+      <label for="topic">Topic <span class="req">(required)</span></label>
+      <p class="field-error" id="topic-error" hidden></p>
+      <select id="topic" name="topic" required aria-describedby="topic-error">
+        <option value="" disabled selected>Choose a topic</option>
+        {TOPICS.map((t) => <option value={t.value}>{t.label}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">Message <span class="req">(required)</span></label>
+      <p class="hint" id="message-hint">{RULES_TEXT.message}</p>
+      <p class="field-error" id="message-error" hidden></p>
+      <textarea id="message" name="message" required minlength={LIMITS.messageMin} maxlength={LIMITS.messageMax} aria-describedby="message-hint message-error"></textarea>
+    </div>
+    <div class="trap" aria-hidden="true">
+      <label for="website">Leave this empty</label>
+      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="elapsed" value="" />
+    {siteKey && <div class="cf-turnstile field" data-sitekey={siteKey} data-action="contact"></div>}
+    <button type="submit">Send</button>
+  </form>
+  <section aria-labelledby="elsewhere">
+    <SecHead id="elsewhere">Elsewhere</SecHead>
+    <ul class="inline-list">{SOCIAL.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+  </section>
+  </div>
+</Base>

@@ -1,0 +1,8 @@
+---
+import { copy } from '../lib/copy.ts';
+import Placeholder from './Placeholder.astro';
+interface Props { name: string }
+const { name: slot } = Astro.props;
+const html = copy(slot);
+---
+{html ? <div class="prose" data-copy={slot} set:html={html} /> : <Placeholder name={slot} />}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Editor | The Luxury Liners</title>
+  <!-- Decap CMS, pinned, with Subresource Integrity: the browser refuses the file if a single byte
+       changes. To upgrade, change the version here and in ADMIN_CSP (worker/headers.ts),
+       then recompute: curl -sL <url> | openssl dgst -sha384 -binary | openssl base64 -A.
+       The editor signs in with GitHub through the OAuth helper set up at hosting time
+       (docs/HANDBOOK.md, "The web editor"). -->
+</head>
+<body>
+  <!-- At the end of the body, not in the head: Decap appends its app to the document body when
+       the file runs, so in the head it failed before the body existed and the editor was a blank
+       page (audit-security round 2, B2; browser test in tests/browser/behaviour.mjs). -->
+  <script src="https://unpkg.com/decap-cms@3.17.1/dist/decap-cms.js" integrity="sha384-d2pbrhjc5asvSK35gKkrgRIk0Wq+2CQynWnXtSsYWQawXCgBXhcAK737jBAKXT4T" crossorigin="anonymous"></script>
+</body>
+</html>

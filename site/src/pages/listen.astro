@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Listen from '../components/Listen.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
+import { ARTIST_LINKS } from '../lib/site.ts';
+import { RELEASES } from '../lib/releases.ts';
+---
+<Base title="Listen" description="Where to hear The Luxury Liners: Spotify, Apple Music, Bandcamp, YouTube, Deezer and Tidal, record by record.">
+  <PageHead title="Listen" tone="sky" kicker="Streaming and Bandcamp">
+    <p class="lede">The Luxury Liners on the streaming services. The albums are also on Bandcamp, through David Dewese’s Bandcamp page.</p>
+    <Listen links={ARTIST_LINKS} title="The Luxury Liners" />
+  </PageHead>
+  <div class="wrap page-body">
+    <SecHead id="rbr">Record by record</SecHead>
+    <ul class="rows records">
+      {RELEASES.map((r) => (
+        <li>
+          <h3 id={`l-${r.slug}`} class="h3"><a href={`/music/${r.slug}/`}>{r.title}</a></h3>
+          <p class="meta">{r.kind}, {r.dateLabel}</p>
+          <Listen links={r.listen} title={r.title} variant="small" plain />
+        </li>
+      ))}
+    </ul>
+    <section aria-labelledby="vinyl">
+      <SecHead id="vinyl">On vinyl</SecHead>
+      <p class="intro">Sound As Ever came out on vinyl in 2026. See <a href="/music/sound-as-ever/#lp-2026">the record’s page</a>.</p>
+    </section>
+  </div>
+</Base>

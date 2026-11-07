@@ -1,0 +1,248 @@
+{
+  "_about": "Facts page and FAQ data (plan §5.4, §4.3). Each answer is visible on /facts/; faq_jsonld: true marks answers that may also go into FAQPage JSON-LD (only questions shown on the page). Public fields: question, answer. Internal: source, confidence, contested, notes_internal, and records with \"publish\": false. No row below is unverified.",
+  "checked_on": "2026-11-06",
+  "checked_by": "build-copy track (content/)",
+  "facts": [
+    {
+      "id": "what-is",
+      "question": "Who are The Luxury Liners?",
+      "answer": "The Luxury Liners are a power-pop band co-founded in 1997 by David Dewese and Chad Edgington, who took it to Nashville together. The name comes from the Gram Parsons song 'Luxury Liner'.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-6 (verbatim)",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "founders",
+      "question": "Who founded The Luxury Liners?",
+      "answer": "David Dewese and his college friend Chad Edgington co-founded the band in 1997.",
+      "faq_jsonld": true,
+      "source": "daviddewese.com DECISIONS F4, P21; LL-6",
+      "confidence": "confirmed-owner",
+      "contested": "Older accounts (a 2005 band web page, AllMusic, Discogs) tell the start differently. The site follows the owner decision and does not repeat them (plan §4.3; LL-13)."
+    },
+    {
+      "id": "when-where",
+      "question": "When and where did the band start?",
+      "answer": "David and Chad came up with the name over spring break 1997 in Texas, and moved the band to Nashville in May 1997. Nashville is the band’s home town.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-4, LL-5, LL-19",
+      "confidence": "confirmed-owner",
+      "contested": "Sources split between Texas and Nashville. Shown as: named in Texas, based in Nashville from May 1997; the town is never named (plan §4.3)."
+    },
+    {
+      "id": "name",
+      "question": "Where does the name come from?",
+      "answer": "From the Gram Parsons song “Luxury Liner”.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-6",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "not-emmylou",
+      "question": "Is this Emmylou Harris’s Luxury Liner?",
+      "answer": "No. Emmylou Harris made an album called *Luxury Liner*, named after the same Gram Parsons song. The Luxury Liners are a band, and the band met Emmylou Harris in Nashville in the late 1990s.",
+      "faq_jsonld": true,
+      "source": "research/04 §5 (collision table); DECISIONS-2026-10-07.md LL-20",
+      "confidence": "verified-source",
+      "contested": "The album's year is contested (1976 or 1977): no year is shown (plan §4.3)."
+    },
+    {
+      "id": "not-carter-tanton",
+      "question": "Is this Carter Tanton’s Luxury Liners?",
+      "answer": "No. Luxury Liners is also the recording name of the singer-songwriter Carter Tanton (*They’re Flowers*, 2013). That is a different act.",
+      "faq_jsonld": true,
+      "source": "research/04 §5; plan §8.4",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "members",
+      "question": "Who is in the band?",
+      "answer": "The four forever members: David Dewese, Chad Edgington, Scott Carpenter and David “Larry” Wilstermann. All four play on the 2026 singles “Great Day” and “New Beginning”.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-9; daviddewese.com DECISIONS P8",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "larry",
+      "question": "Why is David Wilstermann called Larry?",
+      "answer": "Because the band already had a David when he joined on bass in December 2000.",
+      "faq_jsonld": true,
+      "source": "daviddewese.com DECISIONS P8; 2005 roster",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "line-ups",
+      "question": "Who else has played in the band?",
+      "answer": "Jeff LaFrate (drums, 1997–98), Mark W. Winchester (bass, 1997–98), Kyle Edgington (drums, summer 1998) and Scott Jeffries (tambourine, one show, 1997) in the early days; later Gary Ishee (several shows in 2004–05, and guitar on *Nonetheless*), Doli Stepniewski (2006), and Grant Johnson and Jeremy Stephens (2007).",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-24",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "chad-2001",
+      "question": "When did Chad leave Nashville?",
+      "answer": "In March 2001. His last show with the band was that month too. David carried the band on as a trio with Scott and Larry. Chad is one of the four forever members, he is in the band again today, and he plays on both 2026 singles.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-15, LL-9; daviddewese.com DECISIONS F4",
+      "confidence": "confirmed-owner",
+      "contested": "March (photo title) versus April (2005 roster); LL-15 settles it as March 2001."
+    },
+    {
+      "id": "active",
+      "question": "Are they still a band?",
+      "answer": "Yes. The band never broke up. The four forever members reconnected during the pandemic and started making music again. They released “Great Day” and “New Beginning” in 2026.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-17 (verbatim sentences), LL-9; daviddewese.com DECISIONS F6",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "based",
+      "question": "Where is the band based?",
+      "answer": "Nashville is the band’s home town, the one city where all four forever members lived while pursuing the band. Today they are spread across Tennessee, Michigan and Texas.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-19",
+      "confidence": "confirmed-owner",
+      "notes_internal": "Never say which member lives where (LL-7, LL-19)."
+    },
+    {
+      "id": "releases",
+      "question": "What have they released?",
+      "answer": "*Sound As Ever* (album, May 2000), the *Believe* EP (March 2001), *Overbored* (album, May 2003), *Nonetheless* (album, October 2006), “Shake It Up (Live at the Texas Music Café)” (single, August 27, 2021), “Great Day” (single, February 13, 2026) and “New Beginning” (single, April 17, 2026). *Sound As Ever* came out on vinyl in 2026.",
+      "faq_jsonld": true,
+      "source": "data/releases.json (P6 Spotify dates: 2000-05-01, 2001-03-01, 2003-05-01, 2006-10-01, 2021-08-27, 2026-02-13, 2026-04-17); DECISIONS-2026-10-07.md LL-23 (vinyl)",
+      "confidence": "verified-source",
+      "notes_internal": "Older releases are given to the month: their Spotify day is the first of the month, which reads as a placeholder."
+    },
+    {
+      "id": "newest",
+      "question": "What is the newest release?",
+      "answer": "“New Beginning”, released on April 17, 2026. It pairs the song with “Great Day”.",
+      "faq_jsonld": true,
+      "source": "data/releases.json luxury-liners-2026-new-beginning; daviddewese.com DECISIONS F6, P6",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "labels",
+      "question": "Which labels released their records?",
+      "answer": "Litterbug Records released *Overbored*, *Nonetheless* and the 2026 singles, and released *Sound As Ever* with Echomusic. Echomusic released the *Believe* EP. Texas Music Café released the 2021 live single, and Sound Asleep Records in Sweden released *Sound As Ever* on vinyl in 2026.",
+      "faq_jsonld": true,
+      "source": "data/releases.json label fields",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "tv",
+      "question": "Has their music been on TV?",
+      "answer": "Yes. “Dreaming” was used in *One Tree Hill* (season 1, episode 15, “Suddenly Everything Has Changed”, The WB, February 24, 2004), and “Sunshine” became the theme of FOX Sports’ *US Youth Soccer Show*.",
+      "faq_jsonld": true,
+      "source": "research/02 §3.3; research/04 §2.3",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "producers",
+      "question": "Who produced the records?",
+      "answer": "Mike Poole produced most of *Sound As Ever*, and Mark Montgomery produced two of its tracks. Mark Montgomery produced the *Believe* EP with the band. Doug Nightwine recorded *Overbored* and Chris Henning mixed it, and Chris Henning mixed and mastered *Nonetheless*.",
+      "faq_jsonld": true,
+      "source": "data/releases.json production fields",
+      "confidence": "verified-source"
+    },
+    {
+      "id": "writers",
+      "question": "Who wrote the songs?",
+      "answer": "Chad and David wrote most of *Sound As Ever* and both 2026 singles. David wrote *Nonetheless* and wrote or co-wrote nearly all of *Overbored*, and David Wilstermann wrote “Restless”. “Believe” on the *Believe* EP is a cover of Cher’s song; “Shake It Up” is the band’s own.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-14 (Nonetheless, Great Day, New Beginning; Discogs credits for Sound As Ever and Overbored stand); daviddewese.com DECISIONS P27; data/releases.json songwriting",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "sound-as-ever-name",
+      "question": "What does “Sound As Ever” mean?",
+      "answer": "It was Gram Parsons’s sign-off, “Sound as ever”. The band named its first album after it.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-21",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "billboard",
+      "question": "Were they in Billboard?",
+      "answer": "Yes. The band was featured in *Billboard* in 1998.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-22",
+      "confidence": "confirmed-owner",
+      "contested": "Title and issue unknown until the clipping is found; none is shown (plan §4.3)."
+    },
+    {
+      "id": "sxsw",
+      "question": "Did they play SXSW?",
+      "answer": "Yes. The band played the SESAC Showcase at SXSW 2001.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-16",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "shake-it-up",
+      "question": "Is “Shake It Up” a cover?",
+      "answer": "No. It is a Luxury Liners original, first released on the *Believe* EP in 2001. The 2021 single is a live version, recorded live in Waco, Texas, in autumn 1998.",
+      "faq_jsonld": true,
+      "source": "daviddewese.com DECISIONS P27; DECISIONS-2026-10-07.md LL-18",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "foxymorons",
+      "question": "How is the band connected to The Foxymorons?",
+      "answer": "David Dewese co-founded both bands; he started The Foxymorons with Jerry James. Songs moved between them: both bands recorded David’s “The Duke Of Gloucester”, and Mike Poole recorded both bands’ first albums.",
+      "faq_jsonld": true,
+      "source": "daviddewese.com DECISIONS F5; DECISIONS-2026-10-07.md LL-14; research/01 §8",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "cover-art",
+      "question": "Who made the cover art?",
+      "answer": "Mark Montgomery designed *Sound As Ever* and made the *Believe* EP cover; Jim Horan restored the *Sound As Ever* art for the 2026 vinyl. David made the covers of *Overbored*, “Shake It Up (Live)” (from a Mark Montgomery photo), “Great Day” and “New Beginning”.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-23",
+      "confidence": "confirmed-owner",
+      "notes_internal": "The Nonetheless credit (paintings: Scott Carpenter; design: David) is single-source and outside LL-23: held until David confirms."
+    },
+    {
+      "id": "listen",
+      "question": "Where can I listen?",
+      "answer": "On Spotify, Apple Music, YouTube and the other streaming services, and on Bandcamp. The Listen page has the links.",
+      "faq_jsonld": true,
+      "source": "data/releases.json links; DECISIONS-2026-10-07.md LL-27, LL-36",
+      "confidence": "verified-source",
+      "notes_internal": "LL-27: no downloads; LL-36: Bandcamp is David's account (daviddewese.bandcamp.com), linked as the band's Bandcamp."
+    },
+    {
+      "id": "contact",
+      "question": "How do I contact the band?",
+      "answer": "Use the form on the Contact page.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-31",
+      "confidence": "confirmed-owner",
+      "notes_internal": "The address the form sends to is never printed (LL-31)."
+    },
+    {
+      "id": "texas-pop",
+      "question": "What is “Texas Pop”?",
+      "answer": "The band’s own name for its music, used on its website in the 2000s.",
+      "faq_jsonld": false,
+      "publish": false,
+      "source": "research/03 §4.3 (the 2005 history intro, which also carries the talent-show story)",
+      "confidence": "verified-source",
+      "notes_internal": "Held: the only read source for the phrase is the 2005 history intro, whose story LL-13 removes entirely; a poster with the phrase is unread. Publish once another source is confirmed."
+    },
+    {
+      "id": "lp",
+      "question": "Is Sound As Ever on vinyl?",
+      "answer": "Yes. It came out on vinyl in 2026, with the original art restored by Jim Horan.",
+      "faq_jsonld": true,
+      "source": "DECISIONS-2026-10-07.md LL-23",
+      "confidence": "confirmed-owner",
+      "notes_internal": "Label, edition size and remastering credit are single-source (Discogs 37658859); they go on the release page with attribution, not here."
+    }
+  ],
+  "dating_note": {
+    "heading": "How dates are given",
+    "text": "For the older records the site gives the month of release. Where only a season or a range is known, the site says so."
+  }
+}

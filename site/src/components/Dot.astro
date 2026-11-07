@@ -1,0 +1,10 @@
+---
+// The band's red "L" roundel (or the black one, drawn in currentColor, for red and dark grounds),
+// from the logo sprite: the paths are the logo masters' own, byte for byte (public/art/sprite.svg,
+// copied from design/samples/c-roundel/logos/sprite.svg). Always decorative.
+interface Props { ink?: boolean; class?: string }
+const { ink = false, class: cls = 'dot' } = Astro.props;
+---
+{ink
+  ? <svg class={cls} viewBox="0 0 88.77 135.47" aria-hidden="true" focusable="false"><use href="/art/sprite.svg#lx-roundel-ink" /></svg>
+  : <svg class={cls} viewBox="0 0 128.70 170.20" aria-hidden="true" focusable="false"><use href="/art/sprite.svg#lx-roundel" /></svg>}

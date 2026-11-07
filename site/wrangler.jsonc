@@ -1,0 +1,49 @@
+// Cloudflare Workers config. NOT DEPLOYED from this build: docs/HANDBOOK.md ("Cloudflare") has
+// the steps. `npm run build:production` first (it writes dist/ and worker/gone.ts), then
+// `npx wrangler deploy`. Secrets are set with `npx wrangler secret put TURNSTILE_SECRET` and
+// `npx wrangler secret put CONTACT_TO`, never in this file or anywhere in the repository.
+{
+  "name": "theluxuryliners-com",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "keep_vars": true,
+  "assets": {
+    "directory": "./dist/",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    // the Worker answers the contact API and the old query-string addresses on / and /index.php;
+    // every other request is served from dist/ (and dist/_redirects) first
+    "run_worker_first": ["/api/*", "/", "/index.php"]
+  },
+  // REQUIRE_TURNSTILE: every message needs a verified Turnstile token (audit-security round 1,
+  // S1; audit-qa round 1, S3). A release build requires the site key, and the deploy steps set
+  // TURNSTILE_SECRET before the first deploy (docs/HANDBOOK.md §9). The www host may send the form too.
+  "vars": {
+    "SITE_HOSTNAME": "theluxuryliners.com",
+    "CONTACT_HOSTNAMES": "theluxuryliners.com,www.theluxuryliners.com",
+    "CONTACT_FROM": "contact-form@theluxuryliners.com",
+    "REQUIRE_TURNSTILE": "1"
+  },
+  // a 60-second burst limit per connection (free plan)
+  "ratelimits": [{ "name": "RL_CONTACT", "namespace_id": "3001", "simple": { "limit": 3, "period": 60 } }],
+  "send_email": [{ "name": "SEND_EMAIL" }],
+  "env": {
+    "staging": {
+      "name": "theluxuryliners-com-staging",
+      "workers_dev": false,
+      "routes": [{ "pattern": "staging.theluxuryliners.com", "custom_domain": true }],
+      "assets": { "directory": "./dist/", "binding": "ASSETS", "html_handling": "auto-trailing-slash", "run_worker_first": true },
+      "vars": {
+        "SITE_HOSTNAME": "theluxuryliners.com",
+        "CONTACT_HOSTNAMES": "staging.theluxuryliners.com",
+        "CONTACT_FROM": "contact-form@theluxuryliners.com",
+        // staging also refuses a message without a verified token, so a missing staging secret
+        // fails closed (audit-security round 2, S2)
+        "REQUIRE_TURNSTILE": "1"
+      },
+      "ratelimits": [{ "name": "RL_CONTACT", "namespace_id": "3002", "simple": { "limit": 3, "period": 60 } }],
+      "send_email": [{ "name": "SEND_EMAIL" }]
+    }
+  }
+}

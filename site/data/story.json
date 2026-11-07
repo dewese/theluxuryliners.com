@@ -1,0 +1,105 @@
+{
+  "_about": "Story chapters (plan §4.2). 'facts' are short, owner-confirmed or verified lines that render as they are. The narrative for each chapter is imported from content/story/<id>.md when the copy track has written it; until then the page shows a PLACEHOLDER block (a release build fails on it). 'photo' is an id in photos.json.",
+  "chapters": [
+    {
+      "id": "01-two-texans",
+      "title": "Two Texans and a Gram Parsons song",
+      "years": "1997",
+      "photo": null,
+      "facts": [
+        "David Dewese and Chad Edgington wrote to each other through the winter and spring of 1997.",
+        "They chose the band’s name over spring break 1997, when they met up in Texas to record a stack of songs together on a 4-track.",
+        "The name comes from the Gram Parsons song “Luxury Liner”.",
+        "In May 1997 they moved to Nashville, the band’s home town from then on."
+      ]
+    },
+    {
+      "id": "02-powder-blue-suits",
+      "title": "Powder-blue suits and the first recordings",
+      "years": "1997–1998",
+      "photo": "blue-suits-1998",
+      "facts": [
+        "The first Nashville line-ups had Jeff LaFrate and then Kyle Edgington on drums, and Mark W. Winchester on bass.",
+        "Playing Billy Block’s Western Beat Roots Revival at Zanies in Nashville, probably in autumn 1997 or winter 1998, the band met Emmylou Harris and Phil Kaufman.",
+        "Scott Carpenter joined on drums in August 1998.",
+        "For its first full-band concert, at 12th & Porter in Nashville in July or August 1998, opening for Austin Hanks, the band wore suits by Manuel.",
+        "The band was featured in Billboard in 1998.",
+        "In autumn 1998 the band played the Texas Music Café in Waco, Texas: Chad on guitar, David on bass and Scott on drums."
+      ]
+    },
+    {
+      "id": "03-sound-as-ever",
+      "title": "Sound As Ever",
+      "years": "2000",
+      "photo": "studio-2000",
+      "facts": [
+        "Sound As Ever came out in May 2000.",
+        "The album is named after Gram Parsons’s sign-off, “Sound as ever”.",
+        "David “Larry” Wilstermann joined on bass in December 2000."
+      ]
+    },
+    {
+      "id": "04-believe",
+      "title": "Believe, SXSW and Chad’s last show",
+      "years": "2001",
+      "photo": "chads-last-show",
+      "facts": [
+        "The Believe EP came out in March 2001, with the band’s own “Shake It Up” and a cover of Cher’s “Believe”.",
+        "The band played the SESAC Showcase at SXSW 2001.",
+        "Chad Edgington played his last show with the band in March 2001 and left Nashville; David carried the band on as a trio with Scott and Larry."
+      ]
+    },
+    {
+      "id": "05-journal-years",
+      "title": "The journal years",
+      "years": "2001–2004",
+      "photo": "district-2002",
+      "facts": [
+        "The band kept a journal on its website from 2001 to 2004, logging shows from Memphis to Las Vegas.",
+        "In August 2002 the band opened for Blues Traveler in Atlanta."
+      ]
+    },
+    {
+      "id": "06-overbored",
+      "title": "Overbored",
+      "years": "2003",
+      "photo": "detroit-2003",
+      "facts": [
+        "Overbored came out in May 2003.",
+        "“Dreaming” was used in One Tree Hill, first aired on The WB on February 24, 2004.",
+        "“Sunshine” was the theme song of FOX Sports’ US Youth Soccer Show."
+      ]
+    },
+    {
+      "id": "07-nonetheless",
+      "title": "Nonetheless",
+      "years": "2004–2007",
+      "photo": null,
+      "facts": [
+        "Nonetheless came out in October 2006. David Dewese wrote the songs."
+      ]
+    },
+    {
+      "id": "08-quiet-years",
+      "title": "The quiet years",
+      "years": "2008–2020",
+      "photo": "2008-texas-david-and-chad",
+      "facts": [
+        "In 2008 Chad Edgington joined David on stage for a few songs at David’s solo CD-release show in Dallas.",
+        "The band slowly stopped touring and releasing music in the late 2000s, but the four never said it was over."
+      ]
+    },
+    {
+      "id": "09-great-day",
+      "title": "Great Day",
+      "years": "2021–2026",
+      "photo": "four-2002",
+      "facts": [
+        "In 2021 the band released “Shake It Up (Live at the Texas Music Café)”, recorded live in Waco, Texas, in autumn 1998.",
+        "The band never broke up. The four forever members reconnected during the pandemic and started making music again.",
+        "“Great Day” (February 2026) and “New Beginning” (April 2026), both written by Chad Edgington and David Dewese, have all four forever members playing on them.",
+        "In 2026 Sound As Ever came out on vinyl for the first time."
+      ]
+    }
+  ]
+}

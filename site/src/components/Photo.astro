@@ -1,0 +1,17 @@
+---
+// A photo with its one caption and its one credit (data/photos.json), the same on every page.
+import { photo, creditLine } from '../lib/photos.ts';
+interface Props { id: string; sizes?: string; caption?: boolean; eager?: boolean; priority?: boolean; class?: string; note?: string; anchor?: boolean }
+const { id, sizes = '(max-width: 40rem) 100vw, 40rem', caption = true, eager = false, priority = false, class: cls, note, anchor = false } = Astro.props;
+const p = photo(id);
+if (!p) throw new Error(`Photo ${id}: not found or not published`);
+const set = (ext: string) => p.widths.map((w) => `/img/photos/${p.id}-${w}.${ext} ${w}w`).join(', ');
+const credit = creditLine(p);
+---
+<figure class:list={[cls, p.height > p.width * 1.2 && 'is-tall']} id={anchor ? p.id : undefined}>
+  <picture>
+    {(p as any).webp !== false && <source type="image/webp" srcset={set('webp')} sizes={sizes} />}
+    <img src={`/img/photos/${p.id}-${p.widths[0]}.jpg`} srcset={set('jpg')} sizes={sizes} alt={p.alt} width={p.width} height={p.height} loading={eager || priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding={priority ? undefined : 'async'} />
+  </picture>
+  {caption && <figcaption>{p.caption}.{credit && <>{" "}<span class="credit">{credit}.</span></>}{note && <>{" "}<span class="col-note">{note}</span></>}</figcaption>}
+</figure>

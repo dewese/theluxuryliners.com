@@ -1,0 +1,39 @@
+---
+// The Story (plan §4.2): an index of the nine chapters, each on its own page (/story/<slug>/) in
+// design C's chapter template. The narrative comes from the copy track (content/story/NN-*.md);
+// without it each chapter shows its short owner-confirmed facts and a PLACEHOLDER block.
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import Copy from '../../components/Copy.astro';
+import Cutout from '../../components/Cutout.astro';
+import SecHead from '../../components/SecHead.astro';
+import { storyView } from '../../lib/views.ts';
+import { NEVER_BROKE_UP } from '../../lib/site.ts';
+const v = storyView();
+---
+<Base title="Story" description="The story of The Luxury Liners in nine chapters: two Texans, a Gram Parsons song, Nashville from 1997, four records, and the 2026 singles.">
+  <PageHead title="The story" tone="red" kicker={`${v.chapters.length} chapters · 1997–2026`}>
+    {v.introHtml ? <div class="lede" set:html={v.introHtml} /> : <Copy name="story/intro" />}
+  </PageHead>
+  <div class="band">
+    <div class="wrap">
+      <nav aria-labelledby="chs">
+        <SecHead id="chs">Chapter by chapter</SecHead>
+        <ol class="chapters chapters--big">
+          {v.chapters.map((c) => (
+            <li><a href={c.href}><span class="oval" aria-hidden="true">{c.n}</span><span class="chap__title"><span class="visually-hidden">Chapter {c.n}: </span><span set:html={c.titleHtml} /> <span class="chap__years">({c.years})</span></span>{c.summaryHtml && <span class="chap__summary" set:html={c.summaryHtml} />}</a></li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="band surface">
+    <div class="wrap two-col two-col--media">
+      <Cutout id="cartwheel-2000" variant="aside" />
+      <div>
+        <p class="intro">{NEVER_BROKE_UP}</p>
+        <p><a href={v.chapters[0].href}>Start at chapter 1: <span set:html={v.chapters[0].titleHtml} /></a></p>
+      </div>
+    </div>
+  </div>
+</Base>

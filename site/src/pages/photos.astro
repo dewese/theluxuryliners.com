@@ -1,0 +1,24 @@
+---
+// Photos by era, in date order within each era (critique build-skeleton round 2, item 3).
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
+import { PHOTOS, ERAS, sortPhotos } from '../lib/photos.ts';
+const groups = ERAS.map((e) => ({ ...e, photos: sortPhotos(PHOTOS.filter((p) => p.era === e.id)) })).filter((g) => g.photos.length);
+---
+<Base title="Photos" description="Photos of The Luxury Liners by era, 1998–2008, with captions and credits.">
+  <PageHead title="Photos" kicker="1998–2008, by era">
+    <p class="lede">Band-era photos with their captions and credits. Need one for an article? See the <a href="/epk/">press kit</a>.</p>
+  </PageHead>
+  <div class="wrap page-body">
+    {groups.map((g, gi) => (
+      <section class="era" aria-labelledby={`era-${g.id}`}>
+        <SecHead id={`era-${g.id}`}>{g.label}</SecHead>
+        <div class="gallery">
+          {g.photos.map((p, i) => <Photo id={p.id} anchor eager={gi === 0 && i < 3} sizes="(max-width: 40rem) calc(100vw - 2rem), (max-width: 64rem) 45vw, 25rem" />)}
+        </div>
+      </section>
+    ))}
+  </div>
+</Base>

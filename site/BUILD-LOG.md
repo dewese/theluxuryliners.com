@@ -1,0 +1,569 @@
+# Build log: theluxuryliners.com (track: build-skeleton)
+
+Rebuild of the approved-then-lost skeleton, 2026-11-06. Authority order: `DECISIONS-2026-10-07.md`
+(LL-1..LL-45) > daviddewese.com `DECISIONS-2026-09-29.md` > `plan/00-master-plan.md` > `research/`.
+Nothing is deployed.
+
+## What exists
+
+| Area | Files | Notes |
+|---|---|---|
+| Astro site (static, trailing slashes, one folder per page) | `astro.config.mjs`, `src/` | Astro ~7.3.5 (as daviddewese.com), sitemap integration, no inline scripts or styles |
+| Pages (plan §5.1, v1.0) | `src/pages/` | `/`, `/story/`, `/music/`, `/music/<7 releases>/`, `/music/appearances/`, `/people/`, `/facts/`, `/press/`, `/shows/`, `/photos/`, `/vault/`, `/vault/mp3s/`, `/vault/covers/`, `/vault/journal/`, `/epk/`, `/listen/`, `/contact/`, `/contact/sent/`, `/accessibility/`, `/privacy/`, `/404`, `/410/`, `/llms.txt`, `/robots.txt`, sitemap, `/admin/` (Decap) |
+| Release pages | `src/lib/releases.ts`, `src/pages/music/[slug].astro` | Generated from the master `data/releases.json` (LL-3). Writers LL-14 (overrides: Nonetheless = David; Great Day / New Beginning = Chad and David; Duke Of Gloucester = David). Cover credits LL-23 (`data/artwork.json`). Month-and-year dates. Believe EP and the live single carry "Writers as Discogs credits them" (single-source, attributed in the sentence) |
+| Content import | `src/lib/content.ts`, `src/lib/views.ts`, `src/lib/copy.ts` | Reads the copy track's `content/` (see below); falls back to `site/data/*.json` and PLACEHOLDER blocks. `CONTENT_DIR=/path` overrides |
+| Data | `data/*.json` | people, photos, artwork, press, shows, facts, vault, story (fallbacks + the build's own gates), `image-sizes.json` (generated) |
+| Images | `scripts/prepare-images.mjs` | sharp: JPEG + WebP at 3 widths, metadata stripped; covers from `assets/source/covers` (LL-30: live single from the 3000 px Apple copy). Logos: viewBox crops of `assets/derived/logos/*.svg`, artwork byte-for-byte (never redrawn); favicon.svg/.ico from the red roundel |
+| JSON-LD | `src/lib/jsonld.ts` | MusicGroup (home, People, Facts), WebSite, WebPage on every page, MusicAlbum per release, FAQPage on Facts (visible answers only) |
+| Worker | `worker/`, `wrangler.jsonc` | `/api/contact` (Turnstile, honeypot, origin/Sec-Fetch-Site, size cap, rate limit, send_email to the `CONTACT_TO` secret), 410s, old query-string redirects, staging noindex. Bundles with `npm run worker:check` (wrangler dry run, verified) |
+| Redirects | `scripts/build-redirects.mjs` → `dist/_redirects`, `worker/gone.ts` | From `data/legacy-urls.json` after the build |
+| Headers | `worker/headers.ts`, `scripts/build-headers.mjs` → `dist/_headers` | One CSP for static and Worker responses; `/admin/*` gets its own |
+| Analytics | `src/layouts/Base.astro` | Cloudflare Web Analytics beacon only when `PUBLIC_CF_ANALYTICS_TOKEN` is set at build |
+| Decap CMS | `public/admin/` | Story chapters, home, EPK bios, photo records; editorial workflow; `base_url` set at hosting setup |
+| Checks | `scripts/validate-data.mjs`, `scripts/check-dist.mjs`, `scripts/check-jsonld.mjs`, `tests/` | `npm test` = build + data, unit, dist (+ `content/check-content.mjs --dist-only`), jsonld, axe |
+| Handbook | `docs/HANDBOOK.md` | Setup, Cloudflare, Turnstile, analytics (Search Console, Bing), editor, release build, rollback, redirects |
+
+## Content import (the copy track's `content/`)
+
+`content/` appeared while this track was building (parallel copy track). The site reads:
+
+| content file | used for | fallback |
+|---|---|---|
+| `home.md` front matter | status line, single blurbs, members list, "Larry" line, disambiguation | `src/lib/site.ts`, `BLURBS` |
+| `story.md` + `story/NN-*.md` | Story intro, chapter titles, years, narrative | `data/story.json` facts + PLACEHOLDER |
+| `facts.json`, `facts.md` | Facts Q&A, FAQPage, dating note | `data/facts.json` |
+| `people.json`, `people.md` | members, early/guest players, records, cover art | `data/people.json`, `data/artwork.json` |
+| `press.json` | coverage, TV placements | `data/press.json` |
+| `shows.json` | the shows table | `data/shows.json` |
+| `covers.json` | `/vault/covers/` (LL-29) | `data/vault.json` |
+| `epk.md` | the three bios (`## Short bio` …) | PLACEHOLDER |
+
+Only public fields are read; `source`, `confidence`, `contested`, `notes_internal`, `held` and
+`"publish": false` records never render. Gates the build applies whatever a copy file says:
+- **Photographers on /people/** come only from the photos the site shows (`data/photos.json`), so
+  credits always match the captions on Home, Story, Photos and EPK, and their years are the years
+  of those photos. `content/people.json` `photographs` is not rendered. Amy Wilstermann is credited
+  on the 2003 shoot since LL-45 (see "Design C" below).
+- **Home blurbs** render the copy track's value exactly; `null` renders no blurb. A thin, padded,
+  track-list-only or dated blurb fails the build (`blurbProblem`); the site never substitutes its own.
+- **YAML**: `story/04` and `story/05` still have front matter that is not valid YAML in their
+  `sources` blocks. The importer drops the internal blocks and reads the public keys, with a build
+  warning. Question for the copy track.
+- `content/home.md` body repeats the one-liner and status line; the home page uses the front-matter
+  fields only.
+
+**Cover credits** are gated by `data/artwork.json` whatever a copy file says: a release whose
+credit is `pending` there gets no row in People › Artwork (`PENDING_COVER_SLUGS`), and check-dist
+fails on the pending name next to "painted"/"cover art"/"the cover", or "painted" next to the
+release title, on any page, in llms.txt or in JSON-LD (round 2).
+
+**Members**: `src/lib/members.ts` is the one source for the four forever members' roles and years
+(content/people.json, else data/people.json) used by home, /people/, the MusicGroup JSON-LD
+(`roleName` = the roles without "co-founder", which is the `founder` property) and llms.txt.
+
+## Owner decisions and the lost run's critic notes: how each is met
+
+| Item | How |
+|---|---|
+| LL-6 one-liner verbatim | `ONE_LINER` in `site.ts` (curly quotes); check-dist requires it word for word on home (quote glyphs normalised); JSON-LD `description` checked exactly; default meta description |
+| LL-17 wording exactly | `NEVER_BROKE_UP`; check-dist fails on "reconnected" anywhere outside the exact sentence |
+| LL-13 | no talent-show text; "Great Day" never near "demo"/"2008" (check-dist); the 2008 bonus disc is not listed on /music/appearances/ at all (its Discogs page lists the demo) and its Discogs id 15436127 fails the build; "Great Day"/"New Beginning" left off the old-MP3 list |
+| LL-27 no MP3s | no audio files or `.mp3` links (check-dist, dist test); old MP3 URLs 301 to `/vault/mp3s/`; the word "download" avoided (copy checker) |
+| `/vault/mp3s/` | titles only; each links to the release page where it streams, else nothing; intro points to /listen/; never "not released" (dist test) |
+| LL-29 | `/vault/covers/`, title + original artist; "Lead Me On" held (which Jetpack is contested) |
+| LL-39, LL-40 | colophon "The band's logos date from 1999–2002"; no newsletter; both checked |
+| LL-41 | robots.txt `Allow: /` for all; llms.txt |
+| LL-5, LL-9 JSON-LD | `foundingDate` 1997, `foundingLocation` Texas (no town), founders David (`daviddewese.com/#person`) and Chad; members the four forever members with **no endDate** (LL-9 supersedes plan §8.2's Chad endDate 2001: the four are the band today; Chad's 2001 departure is in the Story and Facts) |
+| sameAs and Bandcamp | Allow-list of plan §8.3 (Spotify, Apple, YouTube, Instagram, Facebook (LL-36), MusicBrainz, Discogs, Deezer, Tidal). **Bandcamp is not in sameAs**: daviddewese.bandcamp.com is David's account (LL-36), so as `sameAs` it would assert the band entity *is* David's page; it is linked from /listen/ and as each album's `sameAs`/listen link instead (plan §8.2). AllMusic, Last.fm, Wikidata wait for the human check / creation. check-jsonld refuses any Bandcamp URL in the band's sameAs |
+| People › Artwork names the release | each credit is "<release link>: <credit>" (dist test) |
+| No doubled parentheses; no "Photo: Cover art" | covers never use the photo component; check-dist + dist test |
+| Photo credits consistent; Amy Wilstermann pending | see "Content import" |
+| No Discogs link for the 2008 bonus disc row | the row is dropped entirely (stricter; the copy checker forbids naming the disc) |
+| `/shows/` notes, null venue, partial dates | `where()` joins only non-empty parts; rows sort by an ISO key padded with 00 (content `sort_key`, or `sort` in the fallback); unit + dist tests |
+| Privacy page describes what ships | analytics paragraph only when the beacon is built in, Turnstile paragraph only when the widget is; no embeds, cookies or storage exist; dist test compares page and build |
+| LL-3 test stub | `scripts/compare-releases.mjs` + `tests/unit/ll3-sync.test.mjs`: compares shared fields with daviddewese.com's `data/releases.json` (passes today; skipped where the file is absent; `DD_RELEASES` overrides) |
+| No sourcing notes in public copy | check-dist refuses "as credited on", "Source:", "per the 2005 site"; single-source facts carry attribution in the sentence ("Discogs lists…") |
+| Privacy (LL-7, plan §2.3) | check-dist refuses e-mail addresses, mailto:, "[the founding-story town]", "lives in", phone numbers, the family page, "[a later-life profile]", dead hosts as links. The contact address is only a Worker secret |
+
+## Legacy URLs (`data/legacy-urls.json`, 675 rows)
+
+315 redirect sources (query strings stripped; several `/go/?…` rows collapse into one), 288 paths
+answer 410, 9 query redirects in the Worker (`run_worker_first` for `/` and `/index.php`), bot and
+plugin probes, `/.well-known/` and `/cdn-cgi/` left as 404. No chains; every internal target is
+checked to exist in `dist/`. Targets not in v1.0 fall back to the nearest existing page: 33 journal
+months → `/vault/journal/` (they move to their month automatically once a month is published,
+LL-25); `/vault/news/`, `/vault/trunk-box/`, `/vault/live-liners/` → `/vault/`; `/lyrics/` →
+`/music/overbored/` (the old lyrics page held the Overbored lyrics). `/sitemap.xml` → 301 to
+`/sitemap-index.xml`. `/[the private family page]` → `/` only (private family page). Nothing is re-hosted (LL-27).
+
+## RELEASE mode
+
+`RELEASE=1 node scripts/check-dist.mjs` (and `npm run build:production`) also fails on PLACEHOLDER
+copy and on missing keys (`PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`). From round 3
+it also fails while launch gate G1 is open (`"journalDerivedApproved": false` in
+`content/shows.json`) and while `dist/admin/config.yml` has no `https://` backend `base_url`. So
+today it fails on four items: the two keys, G1 and the Decap sign-in helper. Verified:
+with dummy keys and today's `content/` it passes; with `CONTENT_DIR=/nonexistent` it fails on 13
+PLACEHOLDER blocks (Story, EPK) while the normal checks and axe still pass on the fallback site.
+
+## Verification (2026-11-06)
+
+`npm ci && npm test`: data PASS; unit 35/35 (round 2) (helpers, Worker contact/routing/MIME, LL-3, built-page
+rules); dist PASS (check-dist + `content/check-content.mjs --dist-only`: 0 errors); jsonld PASS
+(29 pages); axe 112/112 (28 pages × 1280/375 px × JS on/off; no horizontal scroll at 375 px).
+`wrangler deploy --dry-run` bundles the Worker. Screenshots of home, a release page and People
+checked by eye at 1280 px.
+
+## Round 2 (critiques/build-skeleton-round1.md, score 7)
+
+| Critique item | Fix | Guard |
+|---|---|---|
+| 1 (blocking) *Nonetheless* painting credit printed on People, Story, Facts (+FAQPage), EPK | copy track now holds it (`publish: false`, rewritten ch. 7, Facts, EPK); the build drops any cover row whose release is `pending` in `data/artwork.json` | check-dist rule per pending artwork row (raw, so JSON-LD and llms.txt too); dist test |
+| 2 (blocking) LL-9: Chad "1997–2001; on the 2026 singles" on People and llms.txt | one members source; Chad "1997–2001, and again today" (People, llms.txt, fallback data); llms.txt gives "(<year> to today)" for the others | dist test on /people/ and llms.txt |
+| 3 cover captions | "Cover art: David Dewese, from a photo by Mark Montgomery."; rights line is plain "All rights reserved by the rights holders." | dist test: "Cover art" once per release page |
+| 4 `/vault/mp3s/` "Shake It Up (live): on Believe EP" | every row reads "the song is on …" (an old demo or live MP3 is not the album recording) | dist test |
+| 5 `/shows/` "Ohio and Michigan, Ohio and Michigan" | `where()` drops the place when the venue contains it or ends with one of its parts | unit tests (incl. "The Canada Club, Toronto, Canada" kept); check-dist "place repeated" |
+| 6 no space before photo credits | `Photo.astro` emits a space; the credit ends with a full stop | dist test |
+| 7 unread Wayback links on `/vault/` | not rendered; kept in `data/vault.json` as `wayback_unchecked` until the human browser pass (plan §11) clears each | check-dist fails on any web.archive.org link |
+| 8 Turnstile skippable via Sec-Fetch-Site | `REQUIRE_TURNSTILE="1"` Worker var closes the no-token path; handbook §9 item 5 records the spam route and the switch | unit test |
+| 9 roles differ home / People / JSON-LD | `members.ts` (above) | dist test compares all three |
+| 10 Gary Ishee years | early players render the years after the first role only: "several shows, 2004–05; guitar on *Nonetheless*" | dist test |
+| 11 "address since 1998" | "has been at theluxuryliners.com since at least 2000" (1998 is only the registration) | dist test |
+| 12 privacy "keeps nothing in your browser" | with Turnstile built in, the page says the contact-page check, run by Cloudflare, may keep a little data in the browser | existing privacy test (paragraphs follow the build) |
+| 13 "catalogue" warning | dropped from the British-spelling warning: an accepted US spelling, and here part of a shop's own description ("shop catalogue listing") | none needed |
+
+## Open / next
+
+- Copy-track question above (YAML in two story files). B10: if Carly confirms the *Nonetheless*
+  cover credit, set it to `publish` in `data/artwork.json` and `publish: true` in content/people.json.
+- Hosting setup: Turnstile keys, `CONTACT_TO`, Email Routing, analytics token, Decap `base_url`.
+- The journal months (LL-25), `/vault/news/`, Trunk Box / Live Liners pages when material clears.
+- Contrast/reflow/motion suites beyond axe, Pa11y and Lighthouse are not ported yet (plan §7.4).
+
+## Design C "Roundel" applied (LL-44, 2026-11-06)
+
+Ported from `design/samples/c-roundel/` (approved, `critiques/design-c-round1.md`, 8.0) to every
+page type. Screenshots: `design/roundel-applied/` (home, Overbored, Story ch. 4, People at 1440 px
+light and 375 px dark; `overview.png` at deviceScaleFactor 2), made by `scripts/screenshots.mjs`
+with every off-site request blocked (0 attempted).
+
+| Part | Where |
+|---|---|
+| Tokens, light and dark themes, type, components | `src/styles/global.css` (sample palette and contrast figures unchanged; dark also follows `prefers-color-scheme` without JavaScript) |
+| Fonts (Archivo, Archivo Black, OFL, self-hosted) | `public/fonts/` (+ licences) |
+| Logo sprite, paths verbatim from the masters | `public/art/sprite.svg` (copied from the sample; dist test compares every `d` with `assets/derived/logos/`) |
+| Theme set before paint; switch, video facade, cut-out jump | `public/js/theme.js`, `public/js/site.js` (external files; the CSP still allows no inline script) |
+| Header (roundel + wordmark, nav, "Dark theme" toggle: aria-pressed only, hidden without JS) and footer (white roundel, links, colophon) | `src/layouts/Base.astro`, `src/components/Footer.astro` |
+| Roundel motifs | `Dot`, `SecHead`, `PageHead`, `Listen` (pills), `YouTube` (facade), `Cutout` (the c. 2000 cartwheel cut-out from the sample, `public/art/`) |
+| Templates | home (sky hero with the full mark as h1, singles, red collage, members, doors); release page (cover, factline, red-oval tracks, credits, red press band, video, pager); Story index + **one page per chapter** at `/story/<slug>/` (red chapter head with the record cover or photo, drop cap, record card aside, chapter list + pager); People, Facts, Press, Shows (stacked table on phones), Photos, Music, Compilations, Vault, MP3s, Covers, Journal, EPK, Listen, Contact, Accessibility, Privacy, 404, 410 |
+
+Critique design-c round 1 fixes: M1 the Overbored video block is about "Equasue" only (no TV copy;
+dist test); M2 the collage leads with the 1998 suits and the coats frame fills the left column (no
+red hole); M3 no video poster (plain roundel facade), one 2003 photo on Overbored, each single's
+cover at most twice on home; m1 "Chad had left Nashville in March 2001"; m2 the unused Hard Rock
+image is not shipped; m3 the theme switch is in the header; m4 chapter cards align on fixed rows;
+m5 nav "Music" goes to `/music/`. The YouTube facade loads nothing until pressed, then
+youtube-nocookie.com only (`frame-src` added to the CSP). Privacy now describes the theme memory
+(localStorage) and the click-to-load video; Accessibility mentions the themes and reduced motion.
+
+Should-fix items from the last critiques:
+
+| Item | Fix | Guard |
+|---|---|---|
+| Home blurbs thin/padded (skeleton r2 #1, copy r3 B-1) | content's value or nothing; `content/home.md` New Beginning blurb set to `null` (it was only a track list) | build error on a bad blurb; dist test compares the card with the content |
+| /photos/ order (skeleton r2 #3) | `sortPhotos()` by year within each era (also People photographers) | dist test |
+| Curly quotes (skeleton r2 #4) | `src/lib/typo.ts` curls quotes in all copy, titles from releases.json and covers; the LL-6 one-liner is now byte for byte as approved (straight 'Luxury Liner') everywhere, JSON-LD and llms.txt included | dist test (no straight quote in visible text outside the one-liner); `content/check-content.mjs --dist` rule `one-liner-bytes` (+3 self-test probes); check-dist home check no longer folds quotes |
+| Empty Where cell, March 2001 (skeleton r2 #5) | "Place not recorded" | dist test |
+| "If I Cry" (skeleton r2 #6) | `appearance` in `data/vault.json` → `/music/appearances/#ll-appearance-1998-nashpop` | validate-data + dist test |
+| Mark Montgomery years (skeleton r2 #7, copy r3 S4) | `content/people.json` 2000–2002 (both rows); photographers' years computed from the dated photos | dist test |
+| EPK logo links (skeleton r2 #8) | "Roundel wordmark (SVG)" etc.; photo links carry the caption | dist test |
+| shows.json sort keys (copy r3 S2) | Zanies `1997-09-00`; late September `2001-09-25` | dist test (Zanies datetime) |
+| Facts chad-2001 (copy r3 S5) | "In March 2001. His last show with the band was that month too." | dist test |
+| Amy Wilstermann (LL-45) | credited "Photo: Amy Wilstermann" on the 2003 shoot: `overbored-promo-2003` published, `recesses-2003` added (Overbored page, collage, EPK, Photos, People › Photographers "(2003)"); `PENDING_CREDITS` emptied | dist test: every mention is a credit line or the People row, and no text ties her to anyone |
+
+**Journal quotes removed pending David's approval (LL-25).** These lines from the band's 2001–04
+journal had not had the privacy pass; the quotes are gone and the facts stay, paraphrased. For
+David to approve (or not) when the months are reviewed:
+
+| Where | Quote removed | Now reads |
+|---|---|---|
+| /shows/, 2001-08-12, 12th & Porter | "The new three piece configuration." | One of the first shows as a trio. |
+| /shows/, late September 2001, Ohio and Michigan | "We lost a little money." | The band’s first trip to Ohio and Michigan. (round 2, copy B1) |
+| /shows/, 2002-05-31, House of Blues, Las Vegas | "All of nevada was rocked last friday night." | A conference showcase. |
+| /shows/, mid-June 2003 | venue "“Our detroit tour”" | A Detroit tour |
+| /shows/, 2003-02-20 | "Part of “three shows in one week”." | Part of three shows in one week. |
+| Story ch. 4 (`content/story/04-believe.md`) | “the new three piece configuration” | By August the band was playing as a three-piece. |
+| Story ch. 5 (`content/story/05-journal-years.md`) | “all of nevada was rocked last friday night” | (sentence ends at the showcase) |
+
+Both story files record the held quotes in their `held:` blocks; a dist test keeps them off /shows/
+and the Story.
+
+Tests changed with owner decisions, not weakened: the Amy Wilstermann test now checks LL-45 (credit
+present on the 2003 photos, nothing more); the home-blurb test now checks the content's value or
+nothing; the collage test counts figures inside the collage. Added: `tests/dist/design.test.mjs`
+(14 tests); axe now runs in both themes (light and dark, JS on and off, 1280 and 375 px) plus a
+320 px reflow pass in both themes, and checks that the dark scheme really renders dark; check-dist
+skips only its "null as text" rule for the two OFL licence files ("null and void").
+
+Verification (2026-11-06): `npm run build` + `node tests/run.mjs`: data PASS; unit + dist tests
+PASS (pages 23, design 14, unit); dist PASS (check-dist 0 errors; content checker `--dist-only` 0
+errors, 13 deliberate warnings); jsonld PASS (38 pages); axe 370/370 (37 pages × 8 contexts, 0
+violations, no horizontal scroll at 375 or 320 px). `RELEASE=1` check-dist fails only on the two
+missing keys. `content/check-content.mjs`: 0 errors; self-test 45/45.
+
+## Round 1 audits: fixes (2026-11-06)
+
+Reports: `critiques/audit-{a11y,copy,security,design,qa,seo-geo}-round1.md`. Owner decisions applied:
+LL-44 (design C "Roundel"), LL-45 (Amy Wilstermann credited for the 2003 photos, credit line only).
+
+### Blocking
+
+| Finding | Fix | Guard |
+|---|---|---|
+| a11y B1: the statement claimed axe runs on every build and that links are underlined | `build:production` now runs `node tests/run.mjs axe`; the statement says "before each release", "links in running text are underlined", and has a review date, a status (partially conforms, WCAG 2.2 AA) and known limitations; "works without JavaScript" is qualified when Turnstile is built in | dist test `a11y B1` |
+| a11y B2 / qa S4: unstated rules, no client checks, errors on a bare page that lost the text | rules stated on the page ("All fields are required", "(required)" on each label, the name and message rules); `public/js/contact.js` validates on submit (error summary with links, focus, `aria-invalid`, messages tied with `aria-describedby`, input kept) and sends with fetch (JSON errors shown the same way); the Worker answers a refused no-JS post with the built `/contact/` page, errors filled in and the visitor's text put back (`fillForm()`); a nickname in quotes (David "Larry") is now a valid name; the topic starts on an empty "Choose a topic" | unit tests (fillForm, JSON errors, nickname); browser suite `tests/browser/behaviour.mjs` |
+| copy B1/B2: Discogs sourcing notes | vinyl line reworded; both "Writers as Discogs credits them" notes deleted | `check-content --dist` rule `source-sentence` (a visible sentence naming Discogs, Wayback or Flickr outside a link; 3 self-test probes); dist test |
+| security B1: private literals in the public repository | one hashed matcher, `content/private-literals.mjs`, used by `check-content`, `check-dist`, the dist tests and `validate-data` (the Python sample checkers carry the same hashes); plain regexes removed; docs, data, research and critiques redacted (`[the founding-story town]`, `[a later-life profile]`, `[a college]`, `[the private family page]`, `[the contact address]`); the Flickr record's title, description and era made neutral; the five legacy rows that name the family page or its images moved to the git-ignored `data/private/legacy-urls.private.json` (merged by `build-redirects` when present; the generator writes them there), and three asset leads to `data/private/assets.private.json`; two more family-name hashes added | `check-content --repo` (every tracked file, also with regex escapes removed) in `npm test` as suite `repo`; `validate-data` refuses a private literal in `legacy-urls.json` |
+| design B1: no cover-rights line on home and /music/ | "Cover art: all rights reserved by the rights holders." in `.foot__meta` on every page | dist test: every page with `/img/covers/` carries it |
+
+Also found and fixed: the root `.gitignore` line `dist/` ignored `site/tests/dist/`, so `design.test.mjs`
+(round 2) was never committed. `!site/tests/dist/` re-includes the folder; both test files are now
+in the repository.
+
+### Should fix: done
+
+- **SEO.** S1 typed `MusicGroup` reference with its name everywhere, an `album` list on the band,
+  `byArtist` and `inAlbum` on every recording; S2 band-level `location` Nashville, TN (never per
+  member); S3 "Echomusic / Litterbug Records" is two `Organization`s; S4 this site's `sameAs` adds
+  `https://daviddewese.com/bands/the-luxury-liners/` (the other half is for daviddewese.com's own
+  process: its band reference should point at `https://theluxuryliners.com/#band`); S5 1200x630
+  card images (`public/img/cards/`, from `prepare-images`), `og:image:alt/width/height` and
+  `twitter:image:alt`, the summary card for square covers; S6 a 120–155-character `description`
+  per chapter (content/story), the chapter's own photo or cover as its card, titles like
+  "Overbored (2003): the story, chapter 6"; S7 `llms.txt` has a last-updated date, every section
+  with a description, the chapters and the Facts Q&A; S8 Facts `<dt>` ids from `content/facts.json`;
+  S9 no canonical or `og:url` on noindex pages; S10 the uncredited-photos line is content
+  (`content/people.md`), "from the band's own collection"; S11 a short title tag and description
+  for the live single, a fuller description for Compilations.
+- **Accessibility.** M1 forced-colours block (knob in CanvasText/Canvas, wordmark in CanvasText)
+  and a forced-colours browser test; M2 the knob has a ring in the page colour (3:1+ in both
+  themes); M3 "New Beginning on Spotify"; m1 iframe title "“Song” on YouTube (video player)";
+  m2 cover alt texts describe the art; m3 stacked table cells show their column names and
+  `<time datetime>` is no more precise than the text (Zanies is `1997`; the sort key is unchanged);
+  m4 `.people` uses `minmax(0, 1fr)`, the story grid an em breakpoint and a capped text column,
+  long names wrap at 200% text; m5 the home h1 has visually hidden text and the SVG is hidden;
+  m6/design S3 no `overflow-wrap: anywhere`: big headings are size containers and `fit-N`
+  classes (src/lib/typo.ts) size the longest word to the column; long titles step down.
+- **QA.** S1 `safeDecode()` (malformed escapes give a 404, not a 500); S2/security S4 the rate
+  limit runs right after the content-type and size checks; S3/security S1 `REQUIRE_TURNSTILE="1"`
+  in production vars, and a token-less post is refused whenever `TURNSTILE_SECRET` is set unless
+  `ALLOW_NO_JS_CONTACT="1"` (owner opt-in); S5 tests for hostname and action mismatches, a
+  siteverify failure, a missing secret, `respond()` (404, 410, fallback, query redirects) and the
+  staging path; S6 the test server never crashes on a missing `404.html` or a bad escape;
+  M1 as SEO S9; M3/M4 `fetchpriority="high"` on the page's main cover, the first images on
+  /photos/ and /music/ eager, `sizes` matched to the rendered widths; M5 a WebP copy is offered
+  only when it is smaller than the JPEG (`four-2002`'s is not); M6 empty first topic.
+- **Security.** S2 a top-level try/catch returns a 500 page with the security headers; S3 staging
+  responses get the security headers too (Cloudflare Access for staging is in the handbook, §8);
+  S5 `/admin/*` uses `Cross-Origin-Opener-Policy: same-origin-allow-popups`, and the handbook
+  requires the OAuth helper to `postMessage` to the site origin with the narrowest scope; S6 the
+  Decap script has an SRI hash and `crossorigin`, `ADMIN_CSP` allows only that file and adds
+  `object-src 'none'` and `base-uri 'self'`; S7 `.github/workflows/ci.yml` (`contents: read`;
+  `npm ci`, `npm test`, `check-content --dist`; uses the runner's own Chrome) and branch
+  protection for `main` documented (handbook §11); S8 `browsing-topics=()`, `payment=()`,
+  `usb=()`, HSTS `includeSubDomains`, `X-Frame-Options: DENY`, and the handbook tells operators
+  to turn off Rocket Loader, Email Obfuscation and automatic analytics injection. Minor: `remoteip`
+  only when Cloudflare gives one; the stale test reference in `mime.ts`; `www` added to
+  `CONTACT_HOSTNAMES`; the contact address redacted from the critiques.
+- **Copy.** "Mike Poole recorded both bands’ first albums" (daviddewese.com credits him as
+  recorder on *Calcutta*; David can restore "produced" if he prefers); "Precious To My Heart …
+  listed there as “Precious”"; ch. 9 summary "A 1998 live recording released in 2021, and two
+  singles in 2026."; /vault/mp3s/ also links the 2021 live single without saying it is the same
+  take; "Powder-blue suits about 1998" everywhere (alt texts too); the second Larry line removed
+  from home; EPK "1997 in Texas … based in Nashville from May 1997"; Facts labels add Sound Asleep
+  Records; "Six compilations"; the Billboard row no longer repeats itself; member years read
+  "1997 to today" on both pages.
+- **Design.** S1 below 700 px the latest single comes before the one-liner and the lockup is
+  190 px wide; under 480 px the theme switch shows only its knob (label kept for screen readers);
+  browser test: the New Beginning cover starts on the first screen at 375x667. S2 the 2002 photo
+  is the collage's two-thirds anchor (12-column grid), small frames two-up from 480 px. S4 the
+  video facade is capped at 640 px with an edge in dark. Polish: page-head rule written in
+  `PageHead.astro` (Vault children red, Compilations sky); /music/ "Also" cards on a grid (dot and
+  title on one row, text at the card edge); members in sentence case on home, People, JSON-LD and
+  llms.txt ("Co-founder. Guitar, bass, …"), no name linked on either page, years beside the name;
+  scan borders trimmed by per-photo `trim` boxes in `data/photos.json` (four photos); portrait
+  photos span two rows on /photos/ with dense packing; Overbored press dated, "Review of
+  Overbored" shortened to "Review", place outside the italic title, "More press" left-aligned;
+  space above NOTES; the factline separator trails each item; long release titles step down;
+  ch. 4 record card and home single cards show Tidal and Deezer; home cards show the exact
+  release date; Jim Horan's line no longer repeats 2026.
+
+### Skipped, with reasons
+
+- **Copy, LL-25 (journal-derived show details on /shows/ and ch. 5):** I cannot record an
+  approval David has not given, and holding every 2001–04 row would empty /shows/ and ch. 5 on
+  my own judgment. LL-25 governs publishing the journal months in the Vault; the derived facts
+  (dates, venues, paraphrased notes; the quotes were already held last round) stay until David
+  answers. Listed under "Owner decisions needed".
+- **SEO S4, daviddewese.com side:** that repository has its own process; not edited from here.
+- **Design S4 poster crop:** chose the other two fixes the audit offered (640 px cap, an edge in
+  dark) rather than a new poster image.
+- **Design polish 3, roundels on People:** People keeps its list beside the 2002 photo; names,
+  roles and years now match home in wording and style.
+- **Design polish 13, "Two tracks" line:** the card already lists the record's kind and date;
+  not added.
+- **Tests changed (not weakened):** the "Cover art once" test now counts inside `<main>` and
+  separately checks the footer line once; the Zanies test checks the first row and
+  `datetime="1997"` (the old assertion pinned the over-precise value a11y m3 asked to fix); the
+  /shows/ regexes accept `<td data-label>`; the legacy test checks every private row goes home
+  through the hashed matcher instead of a plain file name; the "good message" Worker test opts in
+  with `ALLOW_NO_JS_CONTACT`, and new tests prove a token-less post is refused otherwise.
+
+### Owner decisions needed
+
+1. **Private literals already in public history** (security B1): accept them, approve a history
+   purge (`git filter-repo`, which needs a force-push and invalidates clones), or make the
+   repository private. Nothing in the current tree names them. Round 2: this also covers the
+   contact address written into `critiques/audit-copy-round2.md` line 5 by commit `5eaab60`
+   (reworded in the tree, still in history) and the earlier unsalted digests.
+2. **`DECISIONS-2026-10-07.md`**: (round 3) the LL-4 and LL-31 cells now name the town and the
+   address by role; the exact wording is in the git-ignored `data/private/decisions-private.md`,
+   and `REPO_EXCEPTIONS` is empty. The owner's OK on the wording is launch gate G3.
+3. **LL-25**: approve (or hold) the journal-derived details on /shows/ and in Story ch. 5.
+4. **Contact without JavaScript**: production now requires Turnstile. To accept no-JS messages
+   again, set `ALLOW_NO_JS_CONTACT="1"` and drop `REQUIRE_TURNSTILE`.
+5. **GitHub**: turn on the branch protection described in handbook §11; **Cloudflare**: put
+   staging behind Access (handbook §8).
+
+Verification (2026-11-06): `npm test`: data, unit, dist, jsonld, repo and axe all PASS (axe
+370/370; behaviour 200/200). `node content/check-content.mjs --dist dist`: 0 errors.
+`node content/check-content.mjs --repo`: 0 errors. `--self-test`: all checks passed.
+
+## Round 2 audits: fixes (2026-11-06)
+
+Reports: `critiques/audit-{copy,security,a11y,design}-round2.md`. Owner decisions applied as
+before: LL-44 (design C "Roundel"), LL-45 (Amy Wilstermann credited for the 2003 photos, credit
+line only).
+
+### Blocking
+
+| Finding | Fix | Guard |
+|---|---|---|
+| copy B1: Ohio and Michigan "the first trip out of the region" (false: Waco 1998, SXSW 2001 came first) | "The band’s first trip to Ohio and Michigan." in `content/shows.json` (and the site fallback) | dist test `copy B1` (`tests/dist/audit2.test.mjs`) |
+| copy B2: /vault/ gave Live Liners one date | "two sets at 12th & Porter, Nashville: electric on July 18 and acoustic on November 17, 2002", as ch. 5, /shows/ and releases.json | dist test `copy B2` |
+| security B1 / design B1: `npm test` red, the contact address written in `critiques/audit-copy-round2.md` line 5 | reworded to "The contact address does not appear anywhere in dist"; the file is **not** in `REPO_EXCEPTIONS`; new rule in `critiques/README.md` and `content/CHECK.md`: critiques and logs name a private literal by its role, never by its value. The literal stays in history (commit `5eaab60`): added to "Owner decisions needed" item 1 | `repo` suite (`check-content --repo`) green |
+| security B2: /admin/ blank (Decap ran in `<head>` before `<body>` existed) | the pinned script (same SRI) moved to the end of `<body>` in `public/admin/index.html` | dist test (no script in `<head>`, Decap last in `<body>`); browser test in `behaviour.mjs`: the real pinned bundle under `ADMIN_CSP` shows "Login with GitHub" with no script error and no CSP violation (needs unpkg.com; prints a NOTE and does not run offline, the dist test runs either way) |
+
+### Should fix: done
+
+- **Accessibility.** S1 forced colours: nav links get `Canvas` underlines, the current (and
+  hovered) link `Highlight`; S2 submit buttons have `border: 2px solid transparent`, so forced
+  colours draw an edge (both browser-tested); m1 the live single's cover alt describes the art
+  (three members in Western stage suits, two leaping, under the band name with a red X); m2 the
+  statement says "We aim to reply within 10 working days" (S1/S2 are fixed, so they are not listed
+  as known limitations); m3 the Worker's no-JS error page puts `autofocus` on the error summary
+  (`role=alert` kept); m4 `contact.js` refuses a send before the Turnstile token arrives with "The
+  spam check is still running…" (`MESSAGES.checking`); m5 `.yt__label` wraps (`white-space:
+  normal; max-width: calc(100% - 24px); text-align: center`), browser-tested at 320 px, text 200%.
+- **Copy.** Ch. 9 "Precious To My Heart" (listed as "Precious" on *Sound As Ever*…); LL-25 is now
+  launch-gate question **G1** in `QUESTIONS-FOR-CARLY.md` (if David says no: `publish: false` on the
+  journal-derived rows and trim ch. 5); the /shows/ journal provenance note is gone (content and
+  fallback); the hero factline no longer repeats "The band never broke up." (`content/home.md`,
+  `STATUS_LINE`); the live single's blurb puts the 1998 take first and the 2001 EP second; Facts
+  "How dates are given" trimmed to the reader-facing sentences; /press/ drops "LN"; the 2001
+  *Nashville Scene* profile is listed without its title (question **G2**); the 2008 row reads "Not a
+  Luxury Liners show: …" (the page keeps 1997–2008); "Two shows, Nashville, Tennessee"; New
+  Beginning "Track 2 is “Great Day”, the February single." (no earlier version, LL-13); ch. 6
+  "Waiting For The Sun" outside the quotation; EPK press quotes dated (month and year); one EPK
+  contact link ("To reach the band, use the [contact form]"); ch. 2 is "1997–1998" (nothing in it
+  happens in 1999; no 1999 content invented).
+- **Security.** S1 private literals are matched by **HMAC-SHA256** under a key
+  (`PRIVATE_LITERALS_KEY`, else the git-ignored `data/private/private-literals.key`), with generic
+  labels `private literal P1…P8`; the plain literals and what each is are in the git-ignored
+  `data/private/private-literals.json`; `node content/private-literals.mjs --digest|--rebuild`.
+  Without the key, importing the matcher throws in CI and with `RELEASE=1` (fail closed) and warns
+  and matches nothing on a developer machine. The three Python sample checkers and
+  `research/tools/gen_legacy_urls.py` use the same digests and key. S2 `ADMIN_CSP`/`ADMIN_HEADERS`
+  live in `worker/headers.ts`; `withSecurityHeaders(res, pathname)` applies the editor CSP, COOP
+  `same-origin-allow-popups` and noindex under `/admin/` (staging runs the Worker first), and
+  `build-headers.mjs` uses the same constant; staging vars set `REQUIRE_TURNSTILE: "1"`. S3 the
+  contact body is stream-read and abandoned past `MAX_BODY` (`readCapped()`), so a chunked 5 MB body
+  is not read before the 413. Minor: CI actions pinned to commit SHAs (checkout v4.3.1,
+  setup-node v4.4.0) and the key passed from the `PRIVATE_LITERALS_KEY` secret; `check-content
+  --repo` refuses a tracked image with EXIF GPS data (`content/exif-gps.mjs`; JPEG, PNG, WebP; two
+  self-test probes) and the two tracked Flickr originals that had it
+  (`assets/source/photos/flickr/530769090_…`, `530879249_…`) had their GPS directory zeroed in
+  place (pixels and size unchanged; `data/assets.json` sha256 and status updated); a request with
+  no `cf-connecting-ip` logs `contact_no_client_ip`. Handbook §11: the secret, the pins, GPS.
+- **Design.** S1 below 480 px the masthead is a grid: logo and knob on row 1, the nav on row 2;
+  below 360 px tighter nav tracking and gap (browser test: at most 110 px and one nav row at
+  320x568, 375x667, 414x896, JS on and off; at least 250 px of the New Beginning cover on the first
+  screen at 320x568). S2 the home "Great Day" facade sits in a `two-col--media` row beside a short
+  "Watch “Great Day”" head and a link to the record (option b; option a would put the Great Day
+  cover on home a third time, against design-c round 1 M3). S3 the release-page video is its own
+  `band surface` band, top-aligned, with "More press" ending short above it (`band--short-end`)
+  and the pager on the page ground. m1 `.doors--list` cards are equal height (`li` flex, link
+  `height: 100%`). m2 /listen/: per-record pills are plain (`<Listen plain>`), record names are
+  `.h3` heading links in `--head`, underlined on hover, the date on its own meta line. m3 /contact/
+  kicker "Booking, press and hello". m4 a cover with no credit reads "Cover art: all rights reserved
+  by the rights holders." (release and chapter pages; no artist invented). m5 the 2003 frame sits
+  at the right of the last collage row and "All the photos" is a pill door in the freed cell. m6 at
+  360–479 px the four small collage frames go two-up. m7 `sizes` from the real layout (hero cover
+  `min(37vw, 532px)`; collage anchors `min(58vw, 800px)`, small frames `min(30vw, 400px)`, 50vw
+  when two-up). m8 release pages drop the press kind (": Review."); /press/ keeps it.
+
+### Skipped, with reasons
+
+- **a11y m2, "list S1/S2 under Known limitations until fixed":** both are fixed in this round, so
+  listing them would be untrue.
+- **Copy, /press/ "Catching Up Fast" title:** not confirmed with David here; listed without the title
+  (the audit's alternative) and asked as G2.
+
+### Tests added or changed (none weakened)
+
+`tests/dist/audit2.test.mjs` (15 tests); `tests/unit/worker.test.mjs` +4 (admin headers through the
+Worker on staging and production, staging `REQUIRE_TURNSTILE`, chunked body 413 after at most
+`MAX_BODY` + a few chunks, missing client IP logged); the fillForm test now also requires
+`autofocus` on the summary. `tests/browser/behaviour.mjs`: forced-colours nav marker and button
+edge, masthead height and nav rows at three phone sizes (JS on and off), cover on the first screen at
+320x568, the video label at 320 px / 200 %, and /admin/ with the real Decap bundle.
+`content/check-content.mjs --self-test`: +2 EXIF GPS probes; the private-literal probes use a keyed
+digest (a synthetic key when the machine has none).
+
+### Owner decisions needed (round 2 additions)
+
+1. **Private literals already in public history** (item 1 above) now also include the contact
+   address written into `critiques/audit-copy-round2.md` in commit `5eaab60` (removed from the
+   tree in this round), and the old unsalted SHA-256 digests in earlier commits of
+   `content/private-literals.mjs` and the Python checkers (reversible by a word-list attack). The
+   same three choices apply: accept, approve a history purge, or make the repository private.
+2. **CI secret:** add `PRIVATE_LITERALS_KEY` to the GitHub repository (handbook §11). Until then
+   the CI `checks` job fails closed.
+3. **G1 / G2** in `QUESTIONS-FOR-CARLY.md` (LL-25 journal-derived shows and ch. 5; the 2001
+   *Nashville Scene* title) are launch gates.
+
+Verification (2026-11-06, round 2): `npm test`: data, unit (86 tests), dist, jsonld, repo
+(self-test 53/53) and axe (370/370; behaviour 223/223, the /admin/ check ran with the real bundle)
+all PASS. `node content/check-content.mjs --dist site/dist`: 0 errors (12 deliberate warnings);
+`node content/check-content.mjs`: 0 errors. Not deployed.
+
+## Round 3 audits: fixes (2026-11-06)
+
+Reports: `critiques/audit-security-round3.md` (7.5, not approved), `critiques/audit-copy-round3.md`
+(8.7), `critiques/audit-design-round3.md` (8.0). The user confirmed design C "Roundel" (LL-44) and
+the Amy Wilstermann credit for the 2003 photos (LL-45); nothing here changes either.
+
+### Blocking
+
+- **Security B1 (private details in the public decisions file):** the two cells of
+  `DECISIONS-2026-10-07.md` now say the same thing by role: LL-4 "a Texas town (named in the
+  git-ignored `data/private/decisions-private.md` …)", LL-31 "the owner's address (the Worker secret
+  `CONTACT_TO` …)". No decision changed. The exact original cells are in
+  `data/private/decisions-private.md` (git-ignored, checked with `git check-ignore`).
+  `REPO_EXCEPTIONS` in `content/check-content.mjs` is now empty, so `--repo` scans every tracked
+  file: 0 errors. The owner could not be asked from this run, so the rewording was made (it only
+  removes two private literals, as LL-7 requires) and the owner's one-line OK is asked as launch
+  gate **G3** in `QUESTIONS-FOR-CARLY.md`; launch waits for it. The history question stays with the
+  owner ("Owner decisions needed", item 1). The repository's visibility was not changed: that is the
+  owner's call.
+
+### Should fix: done
+
+- **Copy S1 (LL-25 gate):** G1 now names every journal-derived place (the /shows/ 2001–04 rows,
+  chapter 5, the /shows/ meta description, the chapter 5 summary on the Story index and in
+  `llms.txt`, and the EPK long-bio sentence), with the fallback wording if David says no.
+  `"journalDerivedApproved": false` in `content/shows.json` makes `RELEASE=1 check-dist` fail until
+  David answers (test in `tests/dist/audit3.test.mjs`).
+- **Copy S2:** LP track A6 writers are `["David Dewese"]` in `data/releases.json`. New
+  `validate-data` rule: a reissue's track with a `cd_track` must carry the parent CD track's writers
+  (proved to fire on the old value). The now-redundant `sound-as-ever` override in
+  `src/lib/releases.ts` is gone. `compare-releases` still reports the shared fields match.
+- **Copy S3:** "A live “Shake It Up”, released as a separate track from the 2021 single." (page and
+  the master data note).
+- **Copy S4:** "A third album, two year-end lists, and the band still playing." (ch. 7 summary,
+  which feeds the Story index and `llms.txt`); the meta description says "two year-end lists" and
+  names the October 2006 Litterbug release to stay within the 120–155 character rule.
+- **Copy S5:** the early October 2003 row reads "The first performance of “Circles”."; whether
+  "Still In Love" is "So In Love" is asked under G1.
+- **Copy S6:** /accessibility/ "November 6, 2026"; /press/ "shop catalog listing".
+- **Copy S7:** the first /photos/ section is "1998–2000" (era id `1998-2000` in `photos.json`,
+  `photos.ts` and the editor's options).
+- **Copy S8:** the `brosephs` id, image files and card are now `white-shirts-1998`
+  (`site/data/photos.json`, `site/data/image-sizes.json`). No redirect: the site has never been
+  published, so the old image paths were never public.
+- **Copy S9 (test isolation):** `npm test` is now `node tests/run.mjs --build`. The run holds
+  `site/.build.lock` (`scripts/lock.mjs`; `npm run build` takes it too, a child of the holder does
+  not), so a second build or test run waits and says so; a lock left by a dead process is taken
+  over. The suites read a snapshot of `dist/` in a temporary directory (`LL_DIST`), never the live
+  `dist/`. Before the browser suite starts, `playwright-core` and `@axe-core/playwright` must
+  resolve; a missing one fails the suite with its name. Every suite stays mandatory.
+- **Copy polish:** a space before the 2002 photo's `col-note`.
+- **Security S1:** `src/lib/json.ts` `safeJson` (escapes `<`, `>`, U+2028, U+2029) in
+  `Base.astro` (JSON-LD) and the contact page's rules block; dist test: no JSON block holds a
+  literal `<`, and each parses.
+- **Security S2:** `markdown.ts` takes link targets out before `smart()` and escaping, curls only the
+  link text, and attribute-escapes the raw target (`&"<>`), keeping the `https?://` or `/`
+  allowlist. Unit test with `"` and `'` in targets. Every built page's visible text and link list
+  is unchanged by it (compared against the previous build).
+- **Security S3:** `RELEASE=1 check-dist` fails when `dist/admin/config.yml` has no `https://`
+  `base_url` under `backend`; the config comment says to set `auth_endpoint` with it once the
+  sign-in helper exists.
+- **Security minor:** `ADMIN_CSP` adds `form-action 'none'` and `upgrade-insecure-requests` (with
+  the reasons for `img-src https:` and `style-src 'unsafe-inline'` in the comment);
+  `/.well-known/security.txt` gives the contact page URL and an `Expires` date (2027-11-06; a dist
+  test fails once it has passed, so it gets renewed); QUESTIONS B11 reworded to "Where is the band
+  based today? (see F3)". `upload_source_maps` stays unset.
+- **Design S1:** `.stack__front` and the stack's pictures are blocks, so the 84% width and the −3°
+  tilt render; the base `.stack` rules come before the phone block, so the 300 px phone cap
+  applies. Measured: front/stack 0.84 at every size from 320 to 1440; the kite card overlaps the
+  lower-right corner. The hero `sizes` now follow the real layout (the browser picks 600w at 1440,
+  300w for a 252 px cover at 375 DPR 1). Behaviour test: front ≤ 0.86 × stack and a tilted block
+  at 1440 and 375, stack ≤ 300 px at 375.
+- **Design S2:** two columns from 640 px (lockup capped at 300 px); on short landscape screens
+  (`max-height: 500px` and landscape) the hero is two columns at any width, top-aligned, with a
+  150 px lockup. Cover on the first screen: 180 px at 667x375, 244 px at 844x390, 800 px at
+  768x1024 (behaviour test: at least 120 px at all three). 320x568 still shows 268 px.
+- **Design m1:** "Also" cards top-aligned, titles at line-height 1.15. **m2:** the four small
+  collage frames are 4:3 with `object-fit: cover` at 360–479 px (sources are 1.33–1.5, so the crop
+  stays under 15%). **m3:** the home "Watch “Great Day”" head is top-aligned, with a roundel and the
+  section-head type, kept an h3 under "The 2026 singles". **m4:** the collage note inherits the
+  caption size. **m5:** the ink (white) roundel in "All the photos" and in the outlined hero pills
+  on sky; the white primary pill keeps the red one. **m6:** "All releases" is a small plain pill
+  centred between the pager pills. **m7:** chapter heads `min(31rem, 90vw)`, EPK grid
+  `(min-width: 40rem) 24rem`. **m8:** the 2026 single cards keep a 120 px cover beside the text
+  down to 360 px.
+
+### Skipped, with reasons
+
+- **Security B1, "get the owner's OK first":** no owner could be asked from this run. The rewording
+  only removes two literals LL-7 already forbids in the public repository, so it was done now and
+  the OK is a launch gate (G3) rather than a precondition. Making the repository private was not
+  done: it is the owner's decision.
+- **Security S3, `auth_endpoint`:** the sign-in helper does not exist yet; left as a commented
+  instruction next to `base_url`.
+- **Copy polish (Le Jive city, the 2006 "Where" cell, "other people" vs "other writers"):** optional
+  and not asked for in this round's fix list.
+
+### Tests added or changed (none weakened)
+
+`tests/dist/audit3.test.mjs` (9 tests: JSON blocks, safeJson, ADMIN_CSP, security.txt, release
+gates, round-3 wording, the `brosephs` slug, the col-note space, the pager). `tests/unit/helpers`
++1 (Markdown link targets). `tests/browser/behaviour.mjs` +8 checks (stack inset and tilt at 1440
+and 375, phone cap, first screen at 667x375, 844x390 and 768x1024). Two assertions changed with the
+copy they pin: the accessibility date is now US style, and the hero `sizes` value follows the fixed
+layout. `scripts/validate-data.mjs` +1 rule (LP writers follow the CD). The dist suites, the Worker
+headers test and the browser harness read `LL_DIST` (the run's snapshot).
+
+### Owner decisions needed (round 3 additions)
+
+1. **G3:** a one-line OK on the role wording of LL-4 and LL-31 in the decisions file.
+2. **G1, widened:** David's approval of all journal-derived material, and whether "Still In Love" is
+   "So In Love". Then set `journalDerivedApproved` to `true`.
+3. **Decap sign-in helper:** set `backend.base_url` (and `auth_endpoint`) in
+   `public/admin/config.yml` once it exists; the release check enforces it.
+
+Verification (2026-11-06, round 3): `npm test`: data, unit (96 tests), dist, jsonld, repo
+(self-test 53/53) and axe (370/370; behaviour 231/231) all PASS. `node content/check-content.mjs`:
+0 errors; `--dist site/dist`: 0 errors (the same 12 deliberate warnings); `--repo`: 0 errors with
+no exempt file. `RELEASE=1 check-dist` fails only on the two keys, G1 and the Decap `base_url`.
+Not deployed.

@@ -1,0 +1,14 @@
+---
+// Listen links as roundel pills.
+import Dot from './Dot.astro';
+// `plain` drops the roundel from each pill, for long lists of pills (design r2 m2: roundels with restraint).
+// On the sky hero band the outlined pills carry the ink roundel (white, currentColor): a red dot on
+// sky reads as a smudge (design r3 m5). The first, white-filled pill keeps the red one.
+interface Props { links: { label: string; href: string }[]; title: string; variant?: 'hero' | 'small'; plain?: boolean }
+const { links, title, variant, plain = false } = Astro.props;
+---
+{links.length > 0 && (
+  <ul class:list={['listen', variant && `listen--${variant}`]} aria-label={`Listen to ${title}`}>
+    {links.map((l, i) => <li><a class:list={['pill', plain && 'pill--plain']} href={l.href}>{!plain && <Dot ink={variant === 'hero' && i > 0} />}<span>{l.label}</span></a></li>)}
+  </ul>
+)}

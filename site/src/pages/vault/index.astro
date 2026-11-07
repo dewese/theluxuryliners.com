@@ -1,0 +1,43 @@
+---
+// The Vault (plan §5.1; LL-27: history only, no MP3s or downloads of any kind). The old sites are
+// described, not linked: no Internet Archive snapshot has been read yet, and the early ones probably
+// show old contact details (plan R2, §11). 'wayback_unchecked' in data/vault.json is never rendered.
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import SecHead from '../../components/SecHead.astro';
+import Dot from '../../components/Dot.astro';
+import vault from '../../../data/vault.json';
+---
+<Base title="The Vault" description="The Luxury Liners archive: the old free MP3s and cover songs by title, the band journal, and the band’s websites since 2000.">
+  <PageHead title="The Vault" tone="red" kicker="The archive">
+    <p class="lede">The band’s history, kept as history. The music itself is on the streaming services (see <a href="/listen/">Listen</a>).</p>
+  </PageHead>
+  <section class="band surface" aria-labelledby="in-vault">
+    <div class="wrap">
+      <h2 id="in-vault" class="visually-hidden">In the Vault</h2>
+      <ul class="doors doors--list">
+        <li><a href="/vault/mp3s/"><Dot /><span>The old free MP3s</span><span class="doors__sub">The songs the band’s website used to give away, and where to hear them now.</span></a></li>
+        <li><a href="/vault/covers/"><Dot /><span>Cover songs</span><span class="doors__sub">Songs by other writers the band recorded or played.</span></a></li>
+        <li><a href="/vault/journal/"><Dot /><span>The band journal</span><span class="doors__sub">The journal the band kept from 2001 to 2004.</span></a></li>
+      </ul>
+    </div>
+  </section>
+  <div class="wrap page-body">
+    <section aria-labelledby="archive-recordings">
+      <SecHead id="archive-recordings">Archive recordings</SecHead>
+      <p class="intro">The band’s old website offered these recordings as free MP3s. They are listed here as history.</p>
+      <ul class="rows">
+        <li><strong>Trunk Box</strong> (1998): a live album from Waco, Texas.</li>
+        <li><strong>Live Liners</strong> (2002): two sets at 12th &amp; Porter, Nashville: electric on July 18 and acoustic on November 17, 2002.</li>
+        <li><strong>From The Vaults, 1997–2001</strong>: early recordings.</li>
+      </ul>
+    </section>
+    <section aria-labelledby="old-sites">
+      <SecHead id="old-sites">The band’s websites</SecHead>
+      <p class="intro">The band’s website has been at theluxuryliners.com since at least 2000. Its looks, in order:</p>
+      <ul class="rows">
+        {vault.oldSites.map((o) => <li><strong>{o.dates}</strong>: {o.design}</li>)}
+      </ul>
+    </section>
+  </div>
+</Base>

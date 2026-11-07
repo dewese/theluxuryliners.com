@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
+import { pressView } from '../lib/views.ts';
+const v = pressView();
+---
+<Base title="Press" description="Press about The Luxury Liners, 1998–2006, and the band’s songs on TV.">
+  <PageHead title="Press" kicker="1998–2006, and on TV">
+    {v.introHtml && <Fragment set:html={v.introHtml} />}
+  </PageHead>
+  <section class="band red" aria-labelledby="tv">
+    <div class="wrap">
+      <SecHead id="tv" ink>On TV</SecHead>
+      <ul class="rows">{v.placements.map((p) => <li set:html={p.html} />)}</ul>
+    </div>
+  </section>
+  <section class="band" aria-labelledby="coverage">
+    <div class="wrap">
+      <SecHead id="coverage">Coverage</SecHead>
+      <ul class="rows">
+        {v.items.map((p) => (
+          <li>
+            <time datetime={p.datetime}>{p.when}</time>. <span set:html={p.headHtml} />.
+            {p.aboutHtml && <> <span set:html={p.aboutHtml} /></>}
+            {p.excerptHtml && <blockquote><p set:html={p.excerptHtml} />{p.speakerHtml && <footer set:html={p.speakerHtml} />}</blockquote>}
+          </li>
+        ))}
+      </ul>
+      <p class="intro">Writing about the band? The <a href="/epk/">press kit</a> has bios, photos and logos, and the <a href="/facts/">Facts page</a> has short answers.</p>
+    </div>
+  </section>
+</Base>

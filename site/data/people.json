@@ -1,0 +1,73 @@
+{
+  "_about": "People on /people/ and in JSON-LD. Names, band roles and years only (LL-7): nothing about anyone's life outside the band. 'status': 'publish' renders; 'pending' never renders. Sources are for the team, never shown.",
+  "forever": [
+    {
+      "id": "david-dewese",
+      "name": "David Dewese",
+      "role": "Co-founder; guitar, bass, lead vocals, songs",
+      "years": "1997–",
+      "startDate": "1997",
+      "jsonldId": "https://daviddewese.com/#person",
+      "url": "https://daviddewese.com/",
+      "status": "publish",
+      "source": "F4, P8, LL-6, LL-9; 2005 band roster"
+    },
+    {
+      "id": "chad-edgington",
+      "name": "Chad Edgington",
+      "role": "Co-founder; guitar, bass, vocals, songs",
+      "years": "1997–2001, and again today",
+      "startDate": "1997",
+      "jsonldId": "https://theluxuryliners.com/#chad-edgington",
+      "status": "publish",
+      "source": "F4, LL-9, LL-14, LL-15"
+    },
+    {
+      "id": "scott-carpenter",
+      "name": "Scott Carpenter",
+      "role": "drums, percussion, vocals",
+      "years": "1998–",
+      "startDate": "1998-08",
+      "jsonldId": "https://theluxuryliners.com/#scott-carpenter",
+      "status": "publish",
+      "source": "P8, LL-9, LL-18; 2005 band roster"
+    },
+    {
+      "id": "david-wilstermann",
+      "name": "David “Larry” Wilstermann",
+      "plainName": "David Wilstermann",
+      "role": "bass, keyboards, vocals",
+      "years": "2000–",
+      "startDate": "2000-12",
+      "note": "The band called him “Larry” because it already had a David.",
+      "jsonldId": "https://theluxuryliners.com/#david-wilstermann",
+      "status": "publish",
+      "source": "P8, LL-9; 2005 band roster; Nonetheless credits"
+    }
+  ],
+  "early": [
+    { "name": "Jeff LaFrate", "role": "Drums", "years": "1997–98", "status": "publish", "source": "LL-24" },
+    { "name": "Mark W. Winchester", "role": "Bass", "years": "1997–98", "status": "publish", "source": "LL-24" },
+    { "name": "Kyle Edgington", "role": "Drums", "years": "Summer 1998", "status": "publish", "source": "LL-24" },
+    { "name": "Scott Jeffries", "role": "Tambourine, one show", "years": "1997", "status": "publish", "source": "LL-24" },
+    { "name": "Gary Ishee", "role": "Several shows; guitar on Nonetheless", "years": "2004–05", "status": "publish", "source": "LL-24" },
+    { "name": "Doli Stepniewski", "role": "The Nonetheless CD release show", "years": "2006", "status": "publish", "source": "LL-24" },
+    { "name": "Grant Johnson", "role": "Shows", "years": "2007", "status": "publish", "source": "LL-24" },
+    { "name": "Jeremy Stephens", "role": "Shows", "years": "2007", "status": "publish", "source": "LL-24" }
+  ],
+  "records": [
+    { "name": "Mike Poole", "role": "Producer", "work": "Sound As Ever", "release": "sound-as-ever", "status": "publish", "source": "Discogs 6768612 (verified-source)" },
+    { "name": "Mark Montgomery", "role": "Co-producer", "work": "Sound As Ever", "release": "sound-as-ever", "status": "publish", "source": "Discogs 6768612" },
+    { "name": "Mark Montgomery", "role": "Producer and engineer", "work": "Believe EP", "release": "believe-ep", "status": "publish", "source": "Discogs 6768660" },
+    { "name": "Chris Milfred", "role": "Engineer and mastering", "work": "Believe EP", "release": "believe-ep", "status": "publish", "source": "Discogs 6768660" },
+    { "name": "Shane D. Wilson", "role": "Mixing", "work": "Believe EP", "release": "believe-ep", "status": "publish", "source": "Discogs 6768660" },
+    { "name": "Doug Nightwine", "role": "Recording", "work": "Overbored", "release": "overbored", "status": "publish", "source": "Overbored credits" },
+    { "name": "Chris Henning", "role": "Mixing", "work": "Overbored", "release": "overbored", "status": "publish", "source": "Overbored credits" },
+    { "name": "Paul Seykora", "role": "Keyboards", "work": "Overbored", "release": "overbored", "status": "publish", "source": "Overbored credits" },
+    { "name": "Chris Henning", "role": "Mixing and mastering", "work": "Nonetheless", "release": "nonetheless", "status": "publish", "source": "Nonetheless credits" },
+    { "name": "Ryan Gilbert", "role": "Keyboards and vocals", "work": "Nonetheless", "release": "nonetheless", "status": "publish", "source": "Nonetheless credits" },
+    { "name": "Gary Ishee", "role": "Guitar", "work": "Nonetheless", "release": "nonetheless", "status": "publish", "source": "Nonetheless credits; LL-24" },
+    { "name": "Erika Proegler", "role": "Violin", "work": "Nonetheless", "release": "nonetheless", "status": "publish", "source": "Nonetheless credits" },
+    { "name": "Brent Milligan", "role": "Cello", "work": "Nonetheless", "release": "nonetheless", "status": "publish", "source": "Nonetheless credits" }
+  ]
+}

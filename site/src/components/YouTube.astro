@@ -1,0 +1,17 @@
+---
+// A click-to-load YouTube facade (LL-35). Nothing is requested from YouTube until the reader
+// presses play; then public/js/site.js swaps in a youtube-nocookie.com iframe. No thumbnail is
+// fetched or repeated (critique design-c round 1, M3): a white ring and the roundel on black.
+// Without JavaScript the facade is a plain link to the video on YouTube.
+import Dot from './Dot.astro';
+interface Props { id: string; song: string; caption: string }
+const { id, song, caption } = Astro.props;
+---
+<figure class="video">
+  <a class="yt" href={`https://www.youtube.com/watch?v=${id}`} data-yt={id} data-title={song}>
+    <span class="yt__plain" aria-hidden="true"></span>
+    <Dot class="yt__roundel" />
+    <span class="yt__label">Play “{song}”<span class="visually-hidden"> (loads YouTube)</span></span>
+  </a>
+  <figcaption>{caption} Nothing loads from YouTube until you press play.</figcaption>
+</figure>

@@ -1,0 +1,92 @@
+---
+// Press kit (plan §5.1). Bios come from content/epk.md (copy track) or PLACEHOLDER.
+// Photos: the approved photos with their credits; logos: the band's own artwork, verbatim, each
+// download link named for screen-reader link lists (critique build-skeleton round 2, item 8).
+import Base from '../layouts/Base.astro';
+import Copy from '../components/Copy.astro';
+import Photo from '../components/Photo.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
+import { ONE_LINER, NEVER_BROKE_UP, COLOPHON } from '../lib/site.ts';
+import { RELEASES } from '../lib/releases.ts';
+import { PHOTOS } from '../lib/photos.ts';
+import press from '../../data/press.json';
+import { monthYear } from '../lib/dates.ts';
+import { epkView } from '../lib/views.ts';
+const v = epkView();
+const quotes = press.items.filter((p: any) => p.status === 'publish' && p.excerpt && !p.excerptBy);
+const epkPhotos = PHOTOS.filter((p) => ['four-2002', 'studio-2000', 'blue-suits-1998', 'recesses-2003'].includes(p.id));
+const LOGOS = [
+  { name: 'Roundel wordmark', alt: 'The Luxury Liners wordmark over the red L roundel', file: 'roundel-wordmark', w: 331, h: 250, png: true },
+  { name: 'Spaced roundel', alt: 'The red L roundel with the spaced wordmark', file: 'roundel-spaced', w: 280, h: 170, png: false },
+  { name: 'Stacked LXL wordmark', alt: 'The stacked wordmark with the LXL oval', file: 'stacked-lxl', w: 184, h: 216, png: false },
+];
+---
+<Base title="Press kit" description="The Luxury Liners press kit: bios, fact sheet, photos with credits, logos and press quotes.">
+  <PageHead title="Press kit" tone="red" kicker="EPK">
+    {v.introHtml && <p class="lede" set:html={v.introHtml} />}
+  </PageHead>
+  <div class="wrap page-body">
+    <section aria-labelledby="one-line">
+      <SecHead id="one-line">In one line</SecHead>
+      <p class="intro">{ONE_LINER}</p>
+    </section>
+    {v.bios.map((b: any, i: number) => (
+      <section aria-labelledby={`bio-${i}`}>
+        <SecHead id={`bio-${i}`}>{b.heading}</SecHead>
+        {b.html ? <div class="prose" set:html={b.html} /> : <Copy name={b.slot ?? 'epk/bio'} />}
+      </section>
+    ))}
+  </div>
+  <section class="band surface" aria-labelledby="sheet">
+    <div class="wrap">
+      <SecHead id="sheet">Fact sheet</SecHead>
+      <dl class="credits measure">
+        <div><dt>Founded</dt><dd>1997 in Texas, by David Dewese and Chad Edgington; based in Nashville from May 1997</dd></div>
+        <div><dt>Members</dt><dd>David Dewese, Chad Edgington, Scott Carpenter, David “Larry” Wilstermann</dd></div>
+        <div><dt>Status</dt><dd>{NEVER_BROKE_UP}</dd></div>
+        <div><dt>Releases</dt><dd>{RELEASES.slice().reverse().map((r, i) => <>{i > 0 && '; '}<a href={`/music/${r.slug}/`}>{r.title}</a> ({r.dateLabel})</>)}</dd></div>
+        <div><dt>On TV</dt><dd>“Dreaming” in One Tree Hill (The WB, 2004); “Sunshine”, theme of FOX Sports’ US Youth Soccer Show</dd></div>
+        <div><dt>More</dt><dd><a href="/facts/">Facts</a>, <a href="/press/">Press</a>, <a href="/people/">People</a></dd></div>
+      </dl>
+    </div>
+  </section>
+  <section class="band red" aria-labelledby="quotes">
+    <div class="wrap">
+      <SecHead id="quotes" ink>Press quotes</SecHead>
+      <ul class="quotes">
+        {quotes.map((q: any) => <li><blockquote><p>“{q.excerpt}”</p></blockquote><p class="cite">{q.writer && <>{q.writer}, </>}<cite>{q.publication}</cite>, <time datetime={q.date}>{monthYear(q.date)}</time></p></li>)}
+      </ul>
+    </div>
+  </section>
+  <div class="wrap page-body">
+    <section aria-labelledby="photos">
+      <SecHead id="photos">Photos</SecHead>
+      <p class="intro">Use with the credit shown, where there is one. Larger files: ask through the <a href="/contact/?topic=press">contact form</a>.</p>
+      <div class="gallery">
+        {epkPhotos.map((p) => (
+          <div>
+            <Photo id={p.id} sizes="(min-width: 40rem) 24rem, 100vw" />
+            <p class="small"><a href={`/img/photos/${p.id}-${p.widths.at(-1)}.jpg`}>Open the {p.widths.at(-1)} px image<span class="visually-hidden">: {p.caption}</span></a></p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <section aria-labelledby="logos">
+      <SecHead id="logos">Logos</SecHead>
+      <div class="gallery">
+        {LOGOS.map((l) => (
+          <figure>
+            <div class="logo-tile"><img src={`/logos/${l.file}.svg`} alt={l.alt} width={l.w} height={l.h} /></div>
+            <figcaption><a href={`/logos/${l.file}.svg`}>{l.name} (SVG)</a>{l.png && <> · <a href={`/logos/${l.file}.png`}>{l.name} (PNG)</a></>}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="meta">{COLOPHON}</p>
+    </section>
+    <section aria-labelledby="contact">
+      <SecHead id="contact">Contact</SecHead>
+      <p class="intro">{v.contactHtml ? <span set:html={v.contactHtml} /> : <>Use the <a href="/contact/?topic=press">contact form</a>.</>}</p>
+    </section>
+  </div>
+</Base>

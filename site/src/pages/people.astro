@@ -1,0 +1,71 @@
+---
+// People (plan §5.1; LL-7: names, band roles and years only; LL-24 early and guest players).
+// Artwork names the release next to every credit. Photographers are taken from the photos the
+// site actually shows (data/photos.json), with the years of those photos, so the credits always
+// match the captions elsewhere.
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
+import Dot from '../components/Dot.astro';
+import { peopleView } from '../lib/views.ts';
+import { photographers } from '../lib/photos.ts';
+import { COLOPHON } from '../lib/site.ts';
+import { smart } from '../lib/typo.ts';
+const v = peopleView();
+const shooters = photographers();
+---
+<Base title="People" fullBand description="The four forever members of The Luxury Liners, the early and guest players, and the people behind the records, the covers and the photos.">
+  <PageHead title="People" tone="sky" kicker="Names, roles and years">
+    {v.introHtml && <div class="lede" set:html={v.introHtml} />}
+  </PageHead>
+
+  <section class="band" aria-labelledby="forever">
+    <div class="wrap">
+      <SecHead id="forever">The four forever members</SecHead>
+      <div class="two-col two-col--media">
+        <Photo id="four-2002" class="framed" sizes="(max-width: 56rem) 100vw, 32rem" />
+        <dl class="facts">
+          {v.forever.map((p) => (
+            <>
+              <dt><span set:html={p.nameHtml} />{p.years && <> <span class="years">({p.years.replace(/–$/, ' to today')})</span></>}</dt>
+              <dd>{p.roles}.{p.lineHtml && <> <span set:html={p.lineHtml} /></>}</dd>
+            </>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface" aria-labelledby="early">
+    <div class="wrap two-col">
+      <div>
+        <SecHead id="early">Early and guest players</SecHead>
+        <ul class="rows">{v.early.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} /></li>)}</ul>
+      </div>
+      <div>
+        <SecHead id="records">On the records</SecHead>
+        <ul class="rows">{v.records.map((p) => <li><strong set:html={p.nameHtml} />: <span set:html={p.rolesHtml} />{p.years && !p.rolesHtml.includes(p.years) && <>, {p.years}</>}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="artwork">
+    <div class="wrap two-col">
+      <div>
+        <SecHead id="artwork">Artwork</SecHead>
+        <ul class="rows">{v.artwork.map((a) => <li><a href={a.href} set:html={a.releaseHtml} />: <span set:html={a.creditHtml} /></li>)}</ul>
+        <p class="meta">{COLOPHON}</p>
+      </div>
+      <div>
+        <SecHead id="photographers">Photographers</SecHead>
+        <ul class="rows">
+          {shooters.map((s) => (
+            <li><strong>{s.name}</strong> ({s.years}): {s.photos.map((p, i) => <>{i > 0 && '; '}<a href={`/photos/#${p.id}`}>{p.caption}</a></>)}</li>
+          ))}
+        </ul>
+        {v.uncreditedNote && <p class="meta">{smart(v.uncreditedNote)}</p>}
+      </div>
+    </div>
+  </section>
+</Base>

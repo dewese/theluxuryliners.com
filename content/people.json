@@ -1,0 +1,87 @@
+{
+  "_about": "People page data. Public fields: name, roles, years, line. Internal (never rendered): source, confidence, notes_internal, and any record with \"publish\": false. LL-7: names, band roles, years and band-era photos only; no quotes; nothing about anyone's life outside the band. LL-33 (operations, not copy): on Wikidata, MusicBrainz and Discogs, Chad, Scott and Larry are listed as members by name only, with no profile entries of their own.",
+  "checked_on": "2026-11-06",
+  "forever_members": [
+    {
+      "id": "david-dewese",
+      "name": "David Dewese",
+      "roles": ["co-founder", "guitar", "bass", "lead vocals", "songs"],
+      "years": "1997–",
+      "line": "Co-founded the band with Chad in 1997 and carried it on as a trio from 2001.",
+      "link": "https://daviddewese.com/",
+      "source": "daviddewese.com DECISIONS F4, P8, P21; 2005 roster (research/01 §3.2); DECISIONS-2026-10-07.md LL-9",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "chad-edgington",
+      "name": "Chad Edgington",
+      "roles": ["co-founder", "guitar", "bass", "vocals", "songs"],
+      "years": "1997–2001, and again today",
+      "line": "Co-founded the band with David in 1997 and left Nashville in March 2001. He is in the band again today, and he plays on “Great Day” and “New Beginning”, which he wrote with David.",
+      "source": "daviddewese.com DECISIONS F4, P8; DECISIONS-2026-10-07.md LL-9 (in the band again now), LL-14, LL-15; plan §4.3 row \"Who is in the band now\"; 2005 roster",
+      "confidence": "confirmed-owner",
+      "notes_internal": "When Chad rejoined is an open question (plan §4.3); the copy does not date it. JSON-LD keeps endDate 2001 for his first stint (plan §8.2)."
+    },
+    {
+      "id": "scott-carpenter",
+      "name": "Scott Carpenter",
+      "roles": ["drums", "percussion", "vocals"],
+      "years": "1998–",
+      "line": "Joined on drums in August 1998, and plays on every Luxury Liners album and single from *Sound As Ever* on.",
+      "source": "daviddewese.com DECISIONS P8; 2005 roster; DECISIONS-2026-10-07.md LL-18 (joined August 1998), LL-9 (in the band today); plays on every album and single from Sound As Ever on (data/releases.json personnel); the line deliberately does not cover Nashpop (1998), Antarctic Antics (2001) or the SESAC promo, where his part is unknown",
+      "confidence": "confirmed-owner"
+    },
+    {
+      "id": "david-larry-wilstermann",
+      "name": "David “Larry” Wilstermann",
+      "roles": ["bass", "keyboards", "vocals"],
+      "years": "2000–",
+      "line": "Joined on bass in December 2000. The band already had a David, so he became Larry.",
+      "source": "daviddewese.com DECISIONS P8; 2005 roster; Nonetheless credits (research/01 §3.2)",
+      "confidence": "confirmed-owner"
+    }
+  ],
+  "early_and_guest_players": [
+    { "id": "jeff-lafrate", "name": "Jeff LaFrate", "roles": ["drums"], "years": "1997–98", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner" },
+    { "id": "mark-w-winchester", "name": "Mark W. Winchester", "roles": ["bass"], "years": "1997–98", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner" },
+    { "id": "kyle-edgington", "name": "Kyle Edgington", "roles": ["drums"], "years": "summer 1998", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner", "notes_internal": "No family link is stated anywhere on the site." },
+    { "id": "scott-jeffries", "name": "Scott Jeffries", "roles": ["tambourine (one show)"], "years": "1997", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner" },
+    { "id": "gary-ishee", "name": "Gary Ishee", "roles": ["several shows", "guitar on *Nonetheless*"], "years": "2004–05", "source": "DECISIONS-2026-10-07.md LL-24 (several shows 2004–05; guitar on Nonetheless as a separate role); data/releases.json luxury-liners-2006-nonetheless", "confidence": "confirmed-owner" },
+    { "id": "doli-stepniewski", "name": "Doli Stepniewski", "roles": ["the *Nonetheless* CD release show"], "years": "2006", "show_id": "2006-nonetheless-cd-release-show", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner" },
+    { "id": "grant-johnson", "name": "Grant Johnson", "roles": ["shows"], "years": "2007", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner" },
+    { "id": "jeremy-stephens", "name": "Jeremy Stephens", "roles": ["shows"], "years": "2007", "source": "DECISIONS-2026-10-07.md LL-24", "confidence": "confirmed-owner" }
+  ],
+  "on_the_records": [
+    { "id": "mike-poole", "name": "Mike Poole", "roles": ["producer and recordist, *Sound As Ever*", "producer, the 1998 *Fireworks Vol. 2* tracks"], "years": "1998–2000", "source": "data/releases.json luxury-liners-2000-sound-as-ever, ll-appearance-1998-fireworks-vol-2; research/01 §3.3", "confidence": "verified-source" },
+    { "id": "mark-montgomery", "name": "Mark Montgomery", "roles": ["co-producer and designer, *Sound As Ever*", "producer and engineer, *Believe* EP", "cover, *Believe* EP", "band photographs"], "years": "2000–2002", "source": "data/releases.json (production; cover_art); DECISIONS-2026-10-07.md LL-23; research/01 §3.3", "confidence": "verified-source" },
+    { "id": "shane-d-wilson", "name": "Shane D. Wilson", "roles": ["mixed the *Believe* EP"], "years": "2001", "source": "data/releases.json luxury-liners-2001-believe-ep", "confidence": "verified-source" },
+    { "id": "chris-milfred", "name": "Chris Milfred", "roles": ["engineer and mastering, *Believe* EP"], "years": "2001", "source": "data/releases.json luxury-liners-2001-believe-ep", "confidence": "verified-source" },
+    { "id": "doug-nightwine", "name": "Doug Nightwine", "roles": ["recorded *Overbored*"], "years": "2003", "source": "data/releases.json luxury-liners-2003-overbored (year = release year; no source dates the sessions)", "confidence": "verified-source" },
+    { "id": "chris-henning", "name": "Chris Henning", "roles": ["mixed *Overbored*", "mixed and mastered *Nonetheless*"], "years": "2003–06", "source": "data/releases.json luxury-liners-2003-overbored, luxury-liners-2006-nonetheless", "confidence": "verified-source" },
+    { "id": "paul-seykora", "name": "Paul Seykora", "roles": ["keyboards, *Overbored*"], "years": "2003", "source": "research/01 §3.3 (album credits)", "confidence": "verified-source" },
+    { "id": "ryan-gilbert", "name": "Ryan Gilbert", "roles": ["keyboards and vocals, *Nonetheless*", "“Promise Ring”"], "years": "2005–06", "source": "research/01 §3.3; data/releases.json ll-appearance-2005-between-goodlettsville-and-murfreesboro", "confidence": "verified-source" },
+    { "id": "erika-proegler", "name": "Erika Proegler", "roles": ["violin, *Nonetheless*"], "years": "2006", "source": "research/01 §3.3 (album credits)", "confidence": "verified-source" },
+    { "id": "brent-milligan", "name": "Brent Milligan", "roles": ["cello, *Nonetheless*"], "years": "2006", "source": "research/01 §3.3 (album credits)", "confidence": "verified-source" },
+    { "id": "jim-horan", "name": "Jim Horan", "roles": ["restored the *Sound As Ever* art for the 2026 vinyl"], "years": "2026", "source": "DECISIONS-2026-10-07.md LL-23 (restorer, not the original artist)", "confidence": "confirmed-owner" }
+  ],
+  "cover_art": [
+    { "release_id": "luxury-liners-2000-sound-as-ever", "title": "*Sound As Ever*", "credit": "Design: Mark Montgomery. Restored for the 2026 vinyl by Jim Horan.", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" },
+    { "release_id": "luxury-liners-2001-believe-ep", "title": "*Believe* EP", "credit": "Mark Montgomery", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" },
+    { "release_id": "luxury-liners-2003-overbored", "title": "*Overbored*", "credit": "David Dewese", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" },
+    { "release_id": "luxury-liners-2006-nonetheless", "title": "*Nonetheless*", "credit": "Paintings: Scott Carpenter. Design: David Dewese.", "publish": false, "source": "data/releases.json luxury-liners-2006-nonetheless cover_art (2010 daviddewese.com discography page only)", "confidence": "single-source", "notes_internal": "Held: single-source and not covered by LL-23. Publish only after David confirms; the cover is one painting, so word it as a painting, not pictures." },
+    { "release_id": "luxury-liners-2021-shake-it-up-live", "title": "“Shake It Up (Live at the Texas Music Café)”", "credit": "David Dewese, from a photo by Mark Montgomery", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" },
+    { "release_id": "luxury-liners-2026-great-day", "title": "“Great Day”", "credit": "David Dewese", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" },
+    { "release_id": "luxury-liners-2026-new-beginning", "title": "“New Beginning”", "credit": "David Dewese", "source": "DECISIONS-2026-10-07.md LL-23", "confidence": "confirmed-owner" }
+  ],
+  "photographs": [
+    { "id": "mark-montgomery-photos", "name": "Mark Montgomery", "roles": ["band photographs"], "years": "2000–2002", "source": "research/01 §3.3 (photo credits)", "confidence": "verified-source" },
+    { "id": "amy-wilstermann", "name": "Amy Wilstermann", "roles": ["*Overbored* promotional photographs"], "years": "2003", "source": "research/01 §3.3 (Flickr album description)", "confidence": "verified-source", "notes_internal": "Credit line only; no relationship to anyone is stated, and none may be. Credit confirmed by Carly 2026-11-06 (LL-45). Never state or imply any relationship (LL-7)." },
+    { "id": "kristina-marie-krug", "name": "Kristina Marie Krug", "roles": ["portraits of David"], "years": "c. 2000–03", "source": "research/01 §3.3", "confidence": "verified-source" }
+  ],
+  "held": [
+    { "publish": false, "name": "Nonetheless band-photo photographer", "why": "First-name spelling differs between sources (research/01 D12); confirm before crediting." },
+    { "publish": false, "name": "Jeff Grant", "why": "Role at a 2007 show unverified (research/01 §3.3)." },
+    { "publish": false, "name": "1998 Billboard shoot photographer", "why": "Unverified (research/01 §3.3)." },
+    { "publish": false, "name": "Logo designer", "why": "LL-39: no designer credit until a name is confirmed; the colophon says only that the logos date from 1999–2002." }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+ "covers/sound-as-ever": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "covers/believe-ep": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "covers/overbored": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "covers/nonetheless": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "covers/shake-it-up-live": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "covers/great-day": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "covers/new-beginning": {
+  "width": 1200,
+  "height": 1200,
+  "widths": [
+   300,
+   600,
+   1200
+  ],
+  "webp": true
+ },
+ "photos/four-2002": {
+  "width": 1096,
+  "height": 848,
+  "widths": [
+   480,
+   960,
+   1096
+  ],
+  "webp": false
+ },
+ "photos/studio-2000": {
+  "width": 1600,
+  "height": 1058,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "webp": true,
+  "trim": [
+   0,
+   0.6,
+   0,
+   0
+  ]
+ },
+ "photos/blue-suits-1998": {
+  "width": 880,
+  "height": 591,
+  "widths": [
+   480,
+   880
+  ],
+  "webp": true,
+  "trim": [
+   0,
+   8.6,
+   1.5,
+   0
+  ]
+ },
+ "photos/hard-rock-1998": {
+  "width": 594,
+  "height": 891,
+  "widths": [
+   480,
+   594
+  ],
+  "webp": true,
+  "trim": [
+   1.6,
+   0,
+   1.4,
+   1
+  ]
+ },
+ "photos/backstage-1998": {
+  "width": 837,
+  "height": 594,
+  "widths": [
+   480,
+   837
+  ],
+  "webp": true,
+  "trim": [
+   4,
+   0.8,
+   0,
+   0
+  ]
+ },
+ "photos/white-shirts-1998": {
+  "width": 894,
+  "height": 600,
+  "widths": [
+   480,
+   894
+  ],
+  "webp": true
+ },
+ "photos/chads-last-show": {
+  "width": 1600,
+  "height": 1067,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "webp": true
+ },
+ "photos/district-2001": {
+  "width": 1025,
+  "height": 1515,
+  "widths": [
+   480,
+   960,
+   1025
+  ],
+  "webp": true
+ },
+ "photos/district-2002": {
+  "width": 1110,
+  "height": 1700,
+  "widths": [
+   480,
+   960,
+   1110
+  ],
+  "webp": false
+ },
+ "photos/basement": {
+  "width": 1200,
+  "height": 1600,
+  "widths": [
+   480,
+   960,
+   1200
+  ],
+  "webp": true
+ },
+ "photos/detroit-2003": {
+  "width": 963,
+  "height": 805,
+  "widths": [
+   480,
+   960,
+   963
+  ],
+  "webp": true
+ },
+ "photos/2008-texas-david-and-chad": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "webp": true
+ },
+ "photos/overbored-promo-2003": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "webp": true
+ },
+ "photos/cartwheel-2000": {
+  "width": 604,
+  "height": 578,
+  "widths": [
+   480,
+   604
+  ],
+  "webp": true
+ },
+ "photos/coats-2000": {
+  "width": 1584,
+  "height": 1307,
+  "widths": [
+   480,
+   960,
+   1584
+  ],
+  "webp": true
+ },
+ "photos/recesses-2003": {
+  "width": 1600,
+  "height": 1200,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "webp": true
+ }
+}

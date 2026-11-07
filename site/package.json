@@ -1,0 +1,38 @@
+{
+  "name": "theluxuryliners-com",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "theluxuryliners.com: the official site of The Luxury Liners. Astro static site + a Cloudflare Worker (contact form, 410s). Scaffolded from the daviddewese.com site.",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-data.mjs",
+    "prepare:images": "node scripts/prepare-images.mjs",
+    "redirects": "node scripts/build-redirects.mjs",
+    "dev": "astro dev",
+    "build": "node scripts/lock.mjs npm run build:steps",
+    "build:steps": "node scripts/validate-data.mjs --quiet && node scripts/prepare-images.mjs && astro build && node scripts/build-headers.mjs && node scripts/build-redirects.mjs && node scripts/build-redirects.mjs --check",
+    "preview": "astro preview",
+    "test": "node tests/run.mjs --build",
+    "test:unit": "node tests/run.mjs data unit dist jsonld",
+    "test:a11y": "node tests/run.mjs axe",
+    "check:dist": "node scripts/check-dist.mjs",
+    "check:jsonld": "node scripts/check-jsonld.mjs",
+    "check:release": "RELEASE=1 node scripts/check-dist.mjs",
+    "build:production": "RELEASE=1 npm run build && RELEASE=1 node scripts/check-dist.mjs && node tests/run.mjs axe",
+    "worker:check": "wrangler deploy --dry-run --outdir .wrangler/dry-run"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "~7.3.5",
+    "sharp": "^0.35.5",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "playwright-core": "^1.63.0",
+    "wrangler": "^4.147.0"
+  }
+}

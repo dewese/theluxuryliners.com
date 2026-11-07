@@ -1,0 +1,81 @@
+---
+// Every page: <head> (title, description, canonical, social card, JSON-LD), header, footer, in
+// design direction C "Roundel" (LL-44). Pages fill <main> with their own bands (PageHead, .band);
+// the theme is set before first paint by /js/theme.js (no inline script: the CSP forbids it).
+// Cloudflare Web Analytics loads only when PUBLIC_CF_ANALYTICS_TOKEN is set at build time
+// (docs/HANDBOOK.md, "Analytics"); it is cookie-free, so there is no cookie banner.
+import '../styles/global.css';
+import { SITE, BAND, ONE_LINER, NAV } from '../lib/site.ts';
+import { graph, musicGroup, website, bandRef } from '../lib/jsonld.ts';
+import { safeJson } from '../lib/json.ts';
+import Footer from '../components/Footer.astro';
+import Dot from '../components/Dot.astro';
+
+// Social card (audit-seo round 1, S5): `image` is a 1200x630 card (summary_large_image) unless
+// `square` (a 1200x1200 cover: the summary card, which shows a square uncropped). Every card has
+// its alt text and size. Noindex pages (404, 410, the thank-you page) have no canonical or og:url (S9).
+interface Props { title: string; description?: string; jsonld?: object[]; noindex?: boolean; fullBand?: boolean; image?: string; imageAlt?: string; square?: boolean }
+const { title, description = ONE_LINER, jsonld = [], noindex = false, fullBand = false, image, imageAlt, square = false } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, SITE).href;
+const fullTitle = path === '/' ? `${BAND}: power pop since 1997` : `${title} | ${BAND}`;
+const ogImage = image ?? `${SITE}/img/cards/four-2002.jpg`;
+const ogAlt = imageAlt ?? (image ? fullTitle : 'David Wilstermann, Chad Edgington, David Dewese and Scott Carpenter in 2002.');
+const [ogW, ogH] = square ? [1200, 1200] : [1200, 630];
+// the full MusicGroup node on home, /facts/ and /people/; a reference elsewhere (plus the WebPage)
+const page = { '@type': 'WebPage', '@id': `${canonical}#page`, url: canonical, name: fullTitle, isPartOf: { '@id': `${SITE}/#website` }, about: bandRef };
+const ld = graph(...(fullBand ? [musicGroup(), website()] : []), page, ...jsonld);
+const token = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const beacon = token ? JSON.stringify({ token }) : null;
+const current = (href: string) => (path === href || (href !== '/' && path.startsWith(href)) ? 'page' : undefined);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline src="/js/theme.js"></script>
+    <link rel="preload" href="/fonts/archivo-black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/archivo-text.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="description" content={description} />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={BAND} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(ogW)} />
+    <meta property="og:image:height" content={String(ogH)} />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta name="twitter:card" content={square ? 'summary' : 'summary_large_image'} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+    <script type="application/ld+json" set:html={safeJson(ld)} />
+    {beacon && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon}></script>}
+    <script src="/js/site.js" defer></script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+      <div class="wrap masthead__bar">
+        <a class="brand" href="/"><Dot /><svg class="brand__word" viewBox="0 0 331.15 82.36" aria-hidden="true" focusable="false"><use href="/art/sprite.svg#lx-wordmark" /></svg><span class="visually-hidden">The Luxury Liners, home</span></a>
+        <div class="masthead__right">
+          <nav class="nav" aria-label="Main">
+            <ul>{NAV.map((n) => <li><a href={n.href} aria-current={current(n.href)}>{n.label}</a></li>)}</ul>
+          </nav>
+          <button class="theme-switch" type="button" aria-pressed="false" hidden><span class="theme-switch__knob" aria-hidden="true"></span><span class="theme-switch__text">Dark theme</span></button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

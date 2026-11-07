@@ -1,0 +1,7 @@
+---
+// Shown where long-form copy has not been written yet (content/<slot>.md missing). The word
+// PLACEHOLDER is in the page on purpose: a release build (RELEASE=1 check-dist) fails on it.
+interface Props { name: string }
+const { name: slot } = Astro.props;
+---
+<div class="placeholder" data-placeholder={slot}><p>PLACEHOLDER: this text is still being written.</p></div>

@@ -1,0 +1,132 @@
+---
+// Home (plan §5.3; LL-26: lead with the 2026 singles, no recent photo; LL-32: an era collage),
+// in design C: a sky-blue hero with the full mark as the h1, the singles, the collage on Believe
+// red, the four forever members, the three doors.
+import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
+import Photo from '../components/Photo.astro';
+import Cutout from '../components/Cutout.astro';
+import Listen from '../components/Listen.astro';
+import SecHead from '../components/SecHead.astro';
+import Dot from '../components/Dot.astro';
+import YouTube from '../components/YouTube.astro';
+import { ONE_LINER, SPREAD, NEVER_BROKE_UP } from '../lib/site.ts';
+import { homeView } from '../lib/views.ts';
+import { bySlug, LATEST, VIDEOS } from '../lib/releases.ts';
+import { COLLAGE } from '../lib/photos.ts';
+
+const singles = [bySlug('new-beginning'), bySlug('great-day')];
+const v = homeView();
+const latestLabel = v.latestLabel ?? `Latest release: ${LATEST.title}, ${LATEST.dateLabel}`;
+const heroListen = [
+  ...LATEST.listen.filter((l) => l.key === 'spotify').map((l) => ({ ...l, label: `${LATEST.title} on Spotify` })),
+  ...LATEST.listen.filter((l) => l.key === 'apple_music'),
+];
+const shortListen = (r: typeof singles[number]) => r.listen.filter((l) => ['spotify', 'apple_music', 'youtube_music', 'bandcamp', 'tidal', 'deezer'].includes(l.key));
+// the 2026 singles keep their exact release dates on their cards (design polish 13; LL-26)
+const fullDate = (iso: string) => /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : iso;
+const fourNote = 'Chad had left Nashville in March 2001. All four play on the 2026 singles.';
+const video = VIDEOS['great-day'];
+// sizes from the real layout (design r2 m7). From 1000 px the 2002 anchor (index 1) and the 2003
+// frame (last) are two-thirds wide and the four small frames a third; below 1000 px the anchor is
+// full width; the small frames go two-up from 360 px (design r2 m6) and the 2003 frame from 480 px.
+const collageSizes = (i: number) => i === 1
+  ? '(max-width: 62.49rem) calc(100vw - 2rem), min(58vw, 800px)'
+  : i === COLLAGE.length - 1
+    ? '(max-width: 29.99rem) calc(100vw - 2rem), (max-width: 62.49rem) 50vw, min(58vw, 800px)'
+    : '(max-width: 22.49rem) calc(100vw - 2rem), (max-width: 62.49rem) 50vw, min(30vw, 400px)';
+---
+<Base title="Home" fullBand>
+  <section class="hero sky" aria-labelledby="h1t">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <h1 class="hero__logo" id="h1t"><span class="visually-hidden">The Luxury Liners</span><svg class="logo-full" viewBox="0 0 331.15 259.42" aria-hidden="true" focusable="false"><use href="/art/sprite.svg#lx-full" /></svg></h1>
+        <p class="lede">{ONE_LINER}</p>
+        <p class="status">{v.statusLine}</p>
+      </div>
+      <div class="hero__latest">
+        <p class="kicker">{latestLabel}</p>
+        <div class="stack">
+          <a href={`/music/${LATEST.slug}/`} class="stack__front"><Cover slug={LATEST.slug} eager priority alt={LATEST.coverAlt} sizes="(max-width: 39.99rem) min(calc(84vw - 27px), 252px), (max-width: 56.24rem) calc(42vw - 40px), min(calc(40vw - 48px), 447px)" /></a>
+          <a href="/music/great-day/" class="stack__back"><Cover slug="great-day" eager alt={bySlug('great-day').coverAlt} sizes="(max-width: 39.99rem) 120px, (max-width: 56.24rem) calc(20vw - 19px), 14rem" /></a>
+        </div>
+        <Listen links={heroListen} title={LATEST.title} variant="hero" />
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="singles">
+    <div class="wrap">
+      <SecHead id="singles">The 2026 singles</SecHead>
+      <p class="intro">{v.singlesIntroHtml && <><span set:html={v.singlesIntroHtml} /> </>}{NEVER_BROKE_UP}</p>
+      <div class="singles">
+        {singles.map((r) => {
+          const blurb = v.blurb(r.slug);
+          return (
+            <article class="single" aria-labelledby={`s-${r.slug}`}>
+              <a href={`/music/${r.slug}/`} aria-hidden="true" tabindex="-1"><Cover slug={r.slug} alt="" sizes="(max-width: 33rem) 160px, 12rem" /></a>
+              <div>
+                <h3 id={`s-${r.slug}`}><a href={`/music/${r.slug}/`}>{r.title}</a></h3>
+                <p class="meta">{r.kind}, {fullDate(r.date)} · {r.label}</p>
+                {blurb && <p class="blurb" set:html={blurb} />}
+                {r.artwork.map((a) => <p class="meta">{a.role}: {a.name}</p>)}
+                <Listen links={shortListen(r)} title={r.title} variant="small" />
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      {video && (
+        <div class="two-col two-col--media home-video">
+          <div>
+            <h3 class="h3"><Dot /><span>Watch “{video.song}”</span></h3>
+            <p>The first of the two 2026 singles. <a href="/music/great-day/">About the record</a></p>
+          </div>
+          <YouTube {...video} />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="band red" aria-labelledby="eras">
+    <div class="wrap">
+      <SecHead id="eras" ink>Through the years</SecHead>
+      <p class="intro">Powder-blue suits about 1998, the white-studio sessions around 2000, all four forever members in 2002 and the trio in 2003.</p>
+      <div class="collage">
+        {COLLAGE.map((p, i) => (p as any).cutout
+          ? <Cutout id={p.id} class={`col-${i + 1}`} />
+          : <Photo id={p.id} class={`col-${i + 1}`} sizes={collageSizes(i)} note={p.id === 'four-2002' ? fourNote : undefined} />)}
+        <p class="col-more"><a class="pill" href="/photos/"><Dot ink /><span>All the photos</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="members">
+    <div class="wrap">
+      <SecHead id="members">{v.membersHeading}</SecHead>
+      <ul class="people">
+        {v.members.map((m) => (
+          <li>
+            <h3><Dot /><span set:html={m.nameHtml} /></h3>
+            <p class="roles"><span set:html={m.roleHtml} />. <span class="years">{m.years.replace(/–$/, ' to today')}</span></p>
+            {m.lineHtml && <p set:html={m.lineHtml} />}
+          </li>
+        ))}
+      </ul>
+      <p class="intro"><span set:html={v.membersNoteHtml} /> {SPREAD}</p>
+      <p><a href="/people/">Everyone who has played in the band</a></p>
+    </div>
+  </section>
+
+  <section class="band surface" aria-labelledby="more">
+    <div class="wrap">
+      <h2 id="more" class="visually-hidden">Go further</h2>
+      <ul class="doors">
+        <li><a href="/story/"><Dot /><span>Read the story</span></a></li>
+        <li><a href="/music/"><Dot /><span>Hear the records</span></a></li>
+        <li><a href="/vault/"><Dot /><span>Open the Vault</span></a></li>
+      </ul>
+      <p class="meta disamb" set:html={v.disambiguationHtml} />
+    </div>
+  </section>
+</Base>

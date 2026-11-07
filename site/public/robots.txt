@@ -1,0 +1,6 @@
+# All crawlers welcome, AI crawlers included (owner decision: theluxuryliners.com should be the
+# authoritative source about The Luxury Liners).
+User-agent: *
+Allow: /
+
+Sitemap: https://theluxuryliners.com/sitemap-index.xml

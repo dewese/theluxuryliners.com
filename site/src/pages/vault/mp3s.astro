@@ -1,0 +1,26 @@
+---
+// The old free MP3s, by title only (LL-27). Each song links to where it streams today, when it
+// does: its record, or the compilation it is on (/music/appearances/). The page never says a song
+// was not released. It says "the song", never "the recording": an old MP3 (a demo or a live take)
+// is not the recording it points to. `alsoLive` adds a live release of the song, without saying it
+// is the same take as the old MP3 (audit-copy round 1).
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import vault from '../../../data/vault.json';
+import { bySlug, APPEARANCES } from '../../lib/releases.ts';
+import { smart } from '../../lib/typo.ts';
+const songs = vault.oldMp3s.songs.map((s: any) => ({ ...s, title: smart(s.title), app: s.appearance ? APPEARANCES.find((a) => a.id === s.appearance) : undefined }));
+---
+<Base title="The old free MP3s" description="The songs The Luxury Liners’ old website gave away as MP3s, and where to hear them today.">
+  <PageHead title="The old free MP3s" size="l" tone="red" crumbs={[{ href: '/vault/', label: 'Vault' }, { label: 'The old free MP3s' }]}>
+    <p class="lede">In the early 2000s the band’s website gave away MP3s. The files are long gone; most of these songs stream today on the records below, and the rest of the band’s music is on <a href="/listen/">the streaming services</a>.</p>
+  </PageHead>
+  <div class="wrap page-body">
+    <ul class="rows">
+      {songs.map((s) => (
+        <li>“{s.title}”{s.release ? <>: the song is on <a href={`/music/${s.release}/`}>{bySlug(s.release).title}</a></> : s.app ? <>: the song is on <a href={`/music/appearances/#${s.app.id}`}>{s.app.title}</a>, a compilation</> : null}{s.alsoLive && <>, and a live recording of it is on <a href={`/music/${s.alsoLive}/`}>{bySlug(s.alsoLive).title}</a></>}</li>
+      ))}
+    </ul>
+    <p><a href="/vault/">Back to the Vault</a></p>
+  </div>
+</Base>

@@ -1,0 +1,16 @@
+---
+// The Believe-cover device (design C): the c. 2000 cartwheel, cut out of its white backdrop
+// (design/samples/c-roundel/tools/build_images.py, nothing painted), leaping out of a ring. It
+// carries the photo's own caption and credit from data/photos.json.
+import { photo, creditLine } from '../lib/photos.ts';
+interface Props { id: string; variant?: 'collage' | 'aside'; class?: string }
+const { id, variant = 'collage', class: cls } = Astro.props;
+const p = photo(id);
+if (!p || !(p as any).cutout) throw new Error(`Cutout ${id}: no published photo with a cut-out`);
+const credit = creditLine(p);
+---
+<figure class:list={[variant === 'collage' ? 'col-jump' : 'aside-jump', cls]}>
+  <div class:list={['ring', variant === 'aside' && 'ring--small']} aria-hidden="true"></div>
+  <img class="jump" src={(p as any).cutout} width="527" height="535" alt={p.alt} loading="lazy" decoding="async" />
+  <figcaption>{p.caption}.{credit && <>{' '}<span class="credit">{credit}.</span></>}</figcaption>
+</figure>

@@ -1,0 +1,10 @@
+---
+// A section head: the roundel and the heading (white roundel on red and sky bands).
+import Dot from './Dot.astro';
+interface Props { id: string; ink?: boolean; html?: string }
+const { id, ink = false, html } = Astro.props;
+---
+<div class="sec-head">
+  <h2 id={id}><Dot ink={ink} />{html ? <span set:html={html} /> : <span><slot /></span>}</h2>
+  <slot name="after" />
+</div>

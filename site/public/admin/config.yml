@@ -1,0 +1,112 @@
+# Decap CMS (the web editor at /admin/), as on daviddewese.com. Editorial workflow: every change
+# is a draft pull request (Draft -> In review -> Ready); the checks run on it and nothing is
+# published until a second person merges it. See docs/HANDBOOK.md, "The web editor".
+backend:
+  name: github
+  repo: dewese/theluxuryliners.com
+  branch: main
+  # Set at hosting setup to the GitHub sign-in helper (a small Cloudflare Worker), e.g.
+  # base_url: https://decap-auth.theluxuryliners.com
+  # and, once that helper exists, its path explicitly, e.g.
+  # auth_endpoint: auth
+  # A release build (RELEASE=1 node scripts/check-dist.mjs) fails until base_url is an https URL,
+  # because without it Decap signs in through api.netlify.com.
+  squash_merges: true
+publish_mode: editorial_workflow
+site_url: https://theluxuryliners.com
+media_folder: assets/source/photos
+public_folder: /img/photos
+
+collections:
+  - name: story
+    label: Story chapters
+    label_singular: Story chapter
+    folder: content/story
+    extension: md
+    format: frontmatter
+    create: false
+    delete: false
+    slug: "{{fields.chapter}}-{{fields.slug}}"
+    identifier_field: title
+    fields:
+      - { name: chapter, label: Chapter number, widget: number }
+      - { name: slug, label: Short name (in the file name), widget: string }
+      - { name: title, label: Title, widget: string }
+      - { name: years, label: Years, widget: string }
+      - { name: era, label: Era, widget: string, required: false }
+      - { name: summary, label: One-line summary, widget: string, required: false }
+      - name: sources
+        label: Sources (never shown on the site)
+        widget: list
+        required: false
+        fields:
+          - { name: claim, label: Claim, widget: string }
+          - { name: source, label: Source, widget: string }
+          - { name: confidence, label: Confidence, widget: select, options: [confirmed-owner, verified-source, single-source, plan] }
+      - { name: notes_internal, label: Internal notes (never shown), widget: text, required: false }
+      - { name: body, label: Text, widget: markdown, buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, quote], editor_components: [] }
+
+  - name: pages
+    label: Page text
+    files:
+      - name: home
+        label: Home page
+        file: content/home.md
+        fields:
+          - { name: page, widget: hidden, default: home }
+          - { name: title, label: Title, widget: string }
+          - { name: one_liner, label: One-line description (owner-approved; do not change), widget: string }
+          - { name: status_line, label: Status line, widget: string, hint: "One short line that will still be true in a year. No dated news." }
+          - name: singles
+            label: The 2026 singles
+            widget: list
+            fields:
+              - { name: release_id, label: Release id (from data/releases.json), widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: blurb, label: Blurb (no dates), widget: string }
+          - { name: members_note, label: The “Larry” line, widget: string }
+          - { name: disambiguation, label: Not-to-be-confused-with line, widget: text }
+          - { name: notes_internal, label: Internal notes (never shown), widget: text, required: false }
+          - { name: body, label: Extra text (optional), widget: markdown, required: false }
+      - name: epk
+        label: Press kit bios
+        file: content/epk.md
+        fields:
+          - { name: page, widget: hidden, default: epk }
+          - { name: title, label: Title, widget: string }
+          - { name: intro, label: Intro, widget: string }
+          - { name: contact_line, label: Contact line, widget: string }
+          - name: bios
+            label: Bio headings
+            widget: list
+            fields:
+              - { name: id, widget: string }
+              - { name: heading, widget: string }
+              - { name: target_words, widget: number }
+          - { name: notes_internal, label: Internal notes (never shown), widget: text, required: false }
+          - { name: body, label: "Bios (each starts with a “## Heading” line matching the list above)", widget: markdown }
+
+  - name: photos
+    label: Photos
+    files:
+      - name: photos
+        label: Photo records (captions and credits)
+        file: site/data/photos.json
+        fields:
+          - { name: _about, widget: hidden }
+          - name: photos
+            label: Photos
+            widget: list
+            summary: "{{fields.caption}}"
+            fields:
+              - { name: id, label: Id (letters and dashes), widget: string }
+              - { name: src, label: Master file (in assets/source/photos), widget: string }
+              - { name: assetId, label: Inventory id (data/assets.json), widget: string, required: false }
+              - { name: era, label: Era, widget: select, options: ["1998-2000", "2001-2004", "2005-2007", "2008-"] }
+              - { name: year, label: Year, widget: string }
+              - { name: caption, label: Caption, widget: string, hint: "Name people only where the band has confirmed who they are." }
+              - { name: alt, label: Description for screen readers, widget: string }
+              - { name: credit, label: "Photographer (leave empty for no credit line)", widget: string, required: false }
+              - { name: collage, label: Home collage position (1-4, optional), widget: number, required: false }
+              - { name: status, label: Status, widget: select, options: [publish, pending] }
+              - { name: pendingReason, label: Why pending, widget: string, required: false }

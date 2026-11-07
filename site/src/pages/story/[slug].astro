@@ -1,0 +1,99 @@
+---
+// A Story chapter (design C, "story-believe" template): a Believe-red head with the chapter's record
+// cover (or its photo), the narrative with a drop cap, an aside with the record card, and the
+// chapter list with a pager. One page per chapter in content/story/.
+import { fitClasses } from '../../lib/typo.ts';
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import Cover from '../../components/Cover.astro';
+import Copy from '../../components/Copy.astro';
+import Cutout from '../../components/Cutout.astro';
+import Listen from '../../components/Listen.astro';
+import Dot from '../../components/Dot.astro';
+import SecHead from '../../components/SecHead.astro';
+import { storyView, type Chapter } from '../../lib/views.ts';
+import { bySlug } from '../../lib/releases.ts';
+import { COVER_RIGHTS, COVER_RIGHTS_LINE, SITE } from '../../lib/site.ts';
+import { photo } from '../../lib/photos.ts';
+
+export function getStaticPaths() {
+  const v = storyView();
+  return v.chapters.map((c, i) => ({ params: { slug: c.slug }, props: { c, prev: v.chapters[i - 1] ?? null, next: v.chapters[i + 1] ?? null, all: v.chapters } }));
+}
+const { c, prev, next, all } = Astro.props as { c: Chapter; prev: Chapter | null; next: Chapter | null; all: Chapter[] };
+const r = c.release ? bySlug(c.release) : null;
+const listen = r ? r.listen.filter((l) => ['spotify', 'apple_music', 'bandcamp', 'youtube_music', 'tidal', 'deezer'].includes(l.key)) : []; // the release page's services (design-c m6)
+// the head shows the record's cover; the chapter photo then sits in the text. Without a record, the
+// photo heads the chapter.
+const headPhoto = !r && c.photo ? c.photo : null;
+const textPhoto = r && c.photo ? c.photo : null;
+// SEO (audit-seo round 1, S6): a written summary per chapter (content/story/*.md description), the
+// chapter's own lead photo (or its record's cover) as the social card, and a title that does not
+// compete with the release page ("Overbored (2003): the story, chapter 6").
+const desc = c.description ?? `Chapter ${c.n} of the story of The Luxury Liners: ${c.titleText} (${c.years}).`;
+const leadPhoto = headPhoto ?? textPhoto;
+const card = leadPhoto ? { image: `${SITE}/img/cards/${leadPhoto}.jpg`, imageAlt: photo(leadPhoto)?.alt } : r ? { image: `${SITE}${r.cover}-1200.jpg`, imageAlt: r.coverAlt, square: true } : {};
+---
+<Base title={`${c.titleText} (${c.years}): the story, chapter ${c.n}`} description={desc} {...card}>
+  <article aria-labelledby="h1t">
+    <header class="chapter red">
+      <div class="wrap chapter__grid">
+        <div class="fit-box">
+          <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/story/">Story</a></li><li><span aria-current="page">Chapter {c.n}</span></li></ol></nav>
+          <p class="kicker">Chapter {c.n} · {c.years}</p>
+          <h1 id="h1t" class:list={['title-xl', ...fitClasses(c.titleHtml)]} set:html={c.titleHtml} />
+          {c.summaryHtml && <p class="lede" set:html={c.summaryHtml} />}
+        </div>
+        {r && (
+          <figure class="chapter__cover">
+            <a href={`/music/${r.slug}/`}><Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) 90vw, min(31rem, 90vw)" /></a>
+            <figcaption>{r.artwork.length ? <>{r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)} {COVER_RIGHTS}</> : COVER_RIGHTS_LINE}</figcaption>
+          </figure>
+        )}
+        {headPhoto && <Photo id={headPhoto} eager class="chapter__cover" sizes="(max-width: 56rem) 90vw, min(31rem, 90vw)" />}
+      </div>
+    </header>
+    <div class="band">
+      <div class="wrap story">
+        <div>
+          {c.html ? <div class="prose dropcap" set:html={c.html} /> : (
+            <>
+              <ul class="prose bullets">{c.facts.map((f) => <li>{f}</li>)}</ul>
+              <Copy name={c.slot!} />
+            </>
+          )}
+          {textPhoto && <Photo id={textPhoto} class="inline-photo" sizes="(max-width: 60rem) 100vw, 40rem" />}
+        </div>
+        {(r || c.cutout) && (
+          <aside class="story__aside" aria-label="Alongside this chapter">
+            {r && (
+              <div class="ep-card">
+                <h2><Dot /><a href={`/music/${r.slug}/`}>{r.title}</a></h2>
+                <p class="meta">{r.kind} · {r.dateLabel} · {r.label}</p>
+                <ol class="mini-tracks">
+                  {r.tracks.map((t) => <li>{t.title}{t.coverOf && <span class="meta"> ({t.coverOf})</span>}{t.duration && <span class="track__dur">{t.duration}</span>}</li>)}
+                </ol>
+                <Listen links={listen} title={r.title} variant="small" />
+              </div>
+            )}
+            {c.cutout && <Cutout id={c.cutout} variant="aside" />}
+          </aside>
+        )}
+      </div>
+    </div>
+    <nav class="band surface" aria-labelledby="chs">
+      <div class="wrap">
+        <SecHead id="chs">The story, chapter by chapter</SecHead>
+        <ol class="chapters">
+          {all.map((x) => (
+            <li><a href={x.href} aria-current={x.n === c.n ? 'page' : undefined}><span class="oval" aria-hidden="true">{x.n}</span><span class="chap__title"><span class="visually-hidden">Chapter {x.n}: </span><span set:html={x.titleHtml} /></span><span class="chap__years">{x.years}</span></a></li>
+          ))}
+        </ol>
+        <div class="pager">
+          {prev && <a class="prev" href={prev.href}><span class="meta">Previous</span><span>{prev.n}. <span set:html={prev.titleHtml} /></span></a>}
+          {next && <a class="next" href={next.href}><span class="meta">Next</span><span>{next.n}. <span set:html={next.titleHtml} /></span></a>}
+        </div>
+      </div>
+    </nav>
+  </article>
+</Base>

@@ -1,0 +1,189 @@
+{
+  "_about": "The Vault: history only. No audio files and no downloads of any kind (LL-27). 'pending' rows never render.",
+  "coverSongs": {
+    "_about": "LL-29: the band's known cover songs, by title and original artist. Single-source rows (the band's 2005 website) are introduced with that attribution on the page.",
+    "intro": "Songs by other writers that The Luxury Liners recorded or played. Most of them were posted on the band’s 2005 website.",
+    "songs": [
+      {
+        "title": "Believe",
+        "artist": "Cher",
+        "context": "Recorded for the Believe EP (2001)",
+        "release": "believe-ep",
+        "status": "publish",
+        "source": "P27"
+      },
+      {
+        "title": "Luxury Liner",
+        "artist": "Gram Parsons",
+        "context": "Played live in East Nashville, October 18, 2003",
+        "status": "publish",
+        "source": "band journal 2003-10 (dd LL_SHOWS)"
+      },
+      {
+        "title": "Baby’s Waiting",
+        "artist": "Superdrag",
+        "context": "Posted on the band’s 2005 website",
+        "status": "publish",
+        "source": "2005 site (single-source, attributed)"
+      },
+      {
+        "title": "Purple Parallelogram",
+        "artist": "The Lemonheads",
+        "context": "Posted on the band’s 2005 website",
+        "status": "publish",
+        "source": "2005 site"
+      },
+      {
+        "title": "Ride With Me",
+        "artist": "The Lemonheads",
+        "context": "Posted on the band’s 2005 website",
+        "status": "publish",
+        "source": "2005 site"
+      },
+      {
+        "title": "Manger Throne",
+        "artist": "Julie Miller",
+        "context": "Posted on the band’s 2005 website",
+        "status": "publish",
+        "source": "2005 site"
+      },
+      {
+        "title": "Jesus Christ",
+        "artist": "Big Star",
+        "context": "Posted on the band’s 2005 website",
+        "status": "publish",
+        "source": "2005 site"
+      },
+      {
+        "title": "Lead Me On",
+        "artist": "Jetpack",
+        "context": "Posted on the band’s 2005 website",
+        "status": "pending",
+        "pendingReason": "Which Jetpack is contested (plan §4.3, LL02 D7); shown once David says."
+      }
+    ]
+  },
+  "oldMp3s": {
+    "_about": "The free MP3s the old site offered, by title only (LL-27: nothing is downloadable). Each links to where the song streams today, if it does. Never say a song was 'not released on a record'. 'Great Day' and 'New Beginning' are left off on purpose (LL-13). 'appearance': the compilation a song is on (/music/appearances/) when it is on no Luxury Liners record.",
+    "songs": [
+      {
+        "title": "Think She’s Coming Around",
+        "oldPath": "/mp3/luxury_liners_coming_around.mp3",
+        "release": "sound-as-ever"
+      },
+      {
+        "title": "Just A Girl",
+        "oldPath": "/mp3/luxury_liners_just_a_girl.mp3",
+        "release": "sound-as-ever"
+      },
+      {
+        "title": "Since You Met Me",
+        "oldPath": "/mp3/luxury_liners_since_met_me.mp3",
+        "release": "sound-as-ever"
+      },
+      {
+        "title": "The Duke Of Gloucester",
+        "oldPath": "/mp3/luxury_liners_gloucester.mp3",
+        "release": "sound-as-ever"
+      },
+      {
+        "title": "Breezy",
+        "oldPath": "/mp3/luxury_liners_breezy.mp3",
+        "release": "sound-as-ever"
+      },
+      {
+        "title": "It’s You",
+        "oldPath": "/mp3/luxury_liners_its_you.mp3",
+        "release": "believe-ep"
+      },
+      {
+        "title": "Believe (Cher)",
+        "oldPath": "/mp3/luxury_liners_believe_cher.mp3",
+        "release": "believe-ep"
+      },
+      {
+        "title": "Sunshine",
+        "oldPath": "/mp3/luxury_liners_sunshine.mp3",
+        "release": "overbored"
+      },
+      {
+        "title": "Restless",
+        "oldPath": "/mp3/luxury_liners_restless.mp3",
+        "release": "overbored"
+      },
+      {
+        "title": "Breaking Out",
+        "oldPath": "/mp3/luxury_liners_breaking_out.mp3",
+        "release": "nonetheless"
+      },
+      {
+        "title": "Breakaway",
+        "oldPath": "/mp3/misc/luxury_liners_breakaway.mp3",
+        "release": null
+      },
+      {
+        "title": "Shake It Up (live)",
+        "oldPath": "/mp3/waco/luxury_liners_shake_it_up.mp3",
+        "release": "believe-ep",
+        "alsoLive": "shake-it-up-live"
+      },
+      {
+        "title": "If I Cry",
+        "oldPath": "/mp3/waco/luxury_liners_if_i_cry.mp3",
+        "release": null,
+        "appearance": "ll-appearance-1998-nashpop"
+      },
+      {
+        "title": "Be With You",
+        "oldPath": "/mp3/waco/luxury_liners_be_with_you.mp3",
+        "release": null
+      },
+      {
+        "title": "Blockbuster",
+        "oldPath": "/mp3/waco/luxury_liners_blockbuster.mp3",
+        "release": null
+      }
+    ]
+  },
+  "oldSites": [
+    {
+      "era": "2000",
+      "dates": "April–September 2000",
+      "design": "A white FrontPage site with GIF buttons and circle-cropped member photos.",
+      "wayback_unchecked": "https://web.archive.org/web/20000407063254/http://theluxuryliners.com/"
+    },
+    {
+      "era": "2000–02",
+      "dates": "October 2000 – March 2002",
+      "design": "A blue table layout with rotating band photos and the tagline “el rock band de mucho luxurious”.",
+      "wayback_unchecked": "https://web.archive.org/web/20010308175130/http://theluxuryliners.com/"
+    },
+    {
+      "era": "2002–04",
+      "dates": "April 2002 – September 2004",
+      "design": "A khaki photo-collage frame with the journal, photo galleries and lyrics.",
+      "wayback_unchecked": "https://web.archive.org/web/20030523111724/http://theluxuryliners.com/"
+    },
+    {
+      "era": "2004–05",
+      "dates": "September 2004 – November 2005",
+      "design": "A full-window rotating photo on red, with a long list of songs to hear."
+    },
+    {
+      "era": "2005–09",
+      "dates": "December 2005 – June 2009",
+      "design": "A white page with the logo, then a store and a Flash photo gallery."
+    },
+    {
+      "era": "2009–24",
+      "dates": "July 2009 – September 2024",
+      "design": "A short list of links, then in 2024 a hand-coded page.",
+      "wayback_unchecked": "https://web.archive.org/web/20200814053240/http://theluxuryliners.com/"
+    },
+    {
+      "era": "2024–26",
+      "dates": "October 2024 – 2026",
+      "design": "A one-page link site."
+    }
+  ]
+}

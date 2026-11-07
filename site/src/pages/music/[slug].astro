@@ -1,0 +1,181 @@
+---
+// One page per release, generated from the master data/releases.json (LL-3), with writers (LL-14)
+// and cover-art credits (LL-23), in design C: the cover and a big title, the facts as a roundel-
+// dotted line, the tracks in red ovals, the credits, press quotes on Believe red, a click-to-load
+// video where there is one, and a pager to the neighbouring releases. The date is shown once.
+import { fitClasses } from '../../lib/typo.ts';
+import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+import Listen from '../../components/Listen.astro';
+import SecHead from '../../components/SecHead.astro';
+import Photo from '../../components/Photo.astro';
+import YouTube from '../../components/YouTube.astro';
+import { RELEASES, VIDEOS, neighbours, totalTime, type Release } from '../../lib/releases.ts';
+import { storyView } from '../../lib/views.ts';
+import { musicAlbum } from '../../lib/jsonld.ts';
+import { COVER_RIGHTS, COVER_RIGHTS_LINE, SITE } from '../../lib/site.ts';
+import { monthYear } from '../../lib/dates.ts';
+
+export function getStaticPaths() {
+  return RELEASES.map((r) => ({ params: { slug: r.slug }, props: { r } }));
+}
+const { r } = Astro.props as { r: Release };
+const writers = (w: string[]) => w.join(' and ').replace(/ and (?=.* and )/g, ', ');
+// search snippets: title tags within about 60 characters and descriptions within about 160
+// (audit-seo round 1, S11); a long title gets a short form in the title tag only
+const SHORT_TITLE: Record<string, string> = { 'shake-it-up-live': 'Shake It Up (live, 2021)' };
+const pageTitle = SHORT_TITLE[r.slug] ?? `${r.title} (${r.year})`;
+const longDesc = `${r.title} by The Luxury Liners: ${r.kind === 'EP' ? 'an EP' : r.kind === 'Album' ? 'an album' : 'a single'} (${r.year}). ${r.blurb}`;
+const desc = longDesc.length <= 160 ? longDesc : r.blurb && r.blurb.length <= 160 ? r.blurb : `${r.title} by The Luxury Liners (${r.year}): ${r.blurb.split(/(?<=\.)\s/)[0]}`;
+const { prev, next } = neighbours(r.slug);
+const total = totalTime(r);
+const video = VIDEOS[r.slug];
+const quotes = r.press.filter((p: any) => p.excerpt);
+// Press lines (audit-design polish 8): the place goes outside the italic title, each item is dated,
+// and the kind ("Review") is left out on the record's own page; /press/ keeps it (design r2 m8).
+const pubParts = (pub: string): [string, string | null] => { const m = /^(.*?) \(([^()]+)\)$/.exec(pub); return m ? [m[1], m[2]] : [pub, null]; };
+const otherPress = r.press.filter((p: any) => !p.excerpt);
+// the Story chapter about this record, if there is one
+const chapter = storyView().chapters.find((c) => c.release === r.slug || (r.slug === 'great-day' && c.release === 'new-beginning'));
+// one 2003 photo on the Overbored page (critique design-c round 1, M3: not two near-identical ones)
+const photoId = r.slug === 'overbored' ? 'recesses-2003' : null;
+const trackNote = (t: Release['tracks'][number]) => t.coverOf ? `${t.coverOf} cover` : t.writers.length ? `Written by ${writers(t.writers)}` : null;
+---
+<Base title={pageTitle} description={desc} jsonld={[musicAlbum(r)]} image={`${SITE}${r.cover}-1200.jpg`} imageAlt={r.coverAlt} square>
+  <section class="release" aria-labelledby="h1t">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/music/">Music</a></li><li><span aria-current="page">{r.title}</span></li></ol></nav>
+      <div class="release__grid">
+        <div class="release__text fit-box">
+          <p class="kicker">{r.kind} · {r.year} · The Luxury Liners</p>
+          <h1 id="h1t" class:list={['title-xl', ...fitClasses(r.title)]}>{r.title}</h1>
+          <ul class="factline">
+            <li>{r.dateLabel}</li>
+            <li>{r.label}</li>
+            {r.catalog && <li>{r.catalog}</li>}
+            <li>{r.tracks.length} {r.tracks.length === 1 ? 'track' : 'tracks'}</li>
+            {total && <li>{total}</li>}
+          </ul>
+          <p class="lede">{r.blurb}</p>
+          <h2 class="visually-hidden">Listen</h2>
+          <Listen links={r.listen} title={r.title} />
+        </div>
+        <figure class="release__cover">
+          <Cover slug={r.slug} alt={r.coverAlt} priority sizes="(max-width: 56rem) calc(100vw - 2rem), 36rem" />
+          <figcaption>
+            {r.artwork.length
+              ? <>{r.artwork.map((a) => <span class="credit">{a.role}: {a.name}.</span>)}{' '}<span>{COVER_RIGHTS}</span></>
+              : <span>{COVER_RIGHTS_LINE}</span>}
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface" aria-labelledby="tl">
+    <div class="wrap two-col">
+      <div>
+        <SecHead id="tl">Tracks</SecHead>
+        <ol class="tracks">
+          {r.tracks.map((t) => (
+            <li class="track">
+              <span class="oval" aria-hidden="true">{t.n}</span>
+              <span class="track__title"><span class="visually-hidden">{t.n}. </span>{t.title}</span>
+              <span class="track__dur">{t.duration}</span>
+              {trackNote(t) && <p class="track__note">{trackNote(t)}</p>}
+            </li>
+          ))}
+        </ol>
+        {r.notes.length > 0 && (
+          <>
+            <h3 class="h3">Notes</h3>
+            <ul class="bullets">{r.notes.map((p) => <li>{p}</li>)}</ul>
+          </>
+        )}
+      </div>
+      <div>
+        <SecHead id="cr">Credits</SecHead>
+        {r.players.length > 0 && (
+          <>
+            <h3 class="h3">Who plays</h3>
+            <ul class="bullets">{r.players.map((p) => <li>{p}</li>)}</ul>
+          </>
+        )}
+        {r.production.length > 0 && (
+          <>
+            <h3 class="h3">Production</h3>
+            <ul class="bullets">{r.production.map((p) => <li>{p}</li>)}</ul>
+          </>
+        )}
+        <h3 class="h3">Details</h3>
+        <dl class="credits">
+          <div><dt>Released</dt><dd>{r.dateLabel}</dd></div>
+          <div><dt>Label</dt><dd>{r.label}</dd></div>
+          {r.catalog && <div><dt>Catalog number</dt><dd>{r.catalog}</dd></div>}
+          {r.upc && <div><dt>UPC</dt><dd>{r.upc}</dd></div>}
+          {r.discogs && <div><dt>Discogs</dt><dd><a href={r.discogs}>{r.title} on Discogs</a></dd></div>}
+        </dl>
+        {photoId && <Photo id={photoId} class="framed" sizes="(max-width: 56rem) 100vw, 30rem" />}
+      </div>
+    </div>
+  </section>
+
+  {r.lp && (
+    <section id="lp-2026" class="band" aria-labelledby="lp-h">
+      <div class="wrap"><div class="measure">
+        <SecHead id="lp-h">On vinyl ({r.lp.year})</SecHead>
+        <p class="intro">In {r.lp.year} Sound As Ever came out on vinyl for the first time, with {r.lp.tracks} tracks (the hidden tracks are not on it). The pressing is a limited edition of 100 copies on Sweden’s {r.lp.label.replace(' (Sweden)', '')}.</p>
+        {r.lp.artwork.length > 0 && <ul class="bullets">{r.lp.artwork.map((a) => <li>{a.name} {a.role.charAt(0).toLowerCase() + a.role.slice(1)}.</li>)}</ul>}
+      </div></div>
+    </section>
+  )}
+
+  {quotes.length > 0 && (
+    <section class="band red" aria-labelledby="said">
+      <div class="wrap">
+        <SecHead id="said" ink>Press</SecHead>
+        <ul class="quotes">
+          {quotes.map((p: any) => (
+            <li>
+              <blockquote><p>“{p.excerpt}”</p></blockquote>
+              <p class="cite">{p.writer && <>{p.writer}, </>}<cite>{pubParts(p.publication)[0]}</cite>{pubParts(p.publication)[1] && <> ({pubParts(p.publication)[1]})</>}{p.date && <>, {monthYear(p.date)}</>}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+  {otherPress.length > 0 && (
+    <section class:list={['band', video && 'band--short-end']} aria-labelledby="more-press">
+      <div class="wrap"><div class="measure">
+        <SecHead id="more-press">{quotes.length ? 'More press' : 'Press'}</SecHead>
+        <ul class="rows">
+          {otherPress.map((p: any) => <li><cite>{pubParts(p.publication)[0]}</cite>{pubParts(p.publication)[1] && <> ({pubParts(p.publication)[1]})</>}{p.writer && <>, {p.writer}</>}{p.date && <>, {monthYear(p.date)}</>}.{p.text && <> {p.text}</>}</li>)}
+        </ul>
+      </div></div>
+    </section>
+  )}
+
+  {video && (
+    <section class="band band--tight surface" aria-labelledby="vid">
+      <div class="wrap two-col two-col--media two-col--top">
+        <div>
+          <SecHead id="vid">Watch “{video.song}”</SecHead>
+          {chapter && <p>Chapter {chapter.n} of the Story tells this part of the band’s history: <a href={chapter.href}>read “<span set:html={chapter.titleHtml} />”</a>.</p>}
+        </div>
+        <YouTube {...video} />
+      </div>
+    </section>
+  )}
+
+  <nav class:list={['band band--tight', !video && 'surface']} aria-label="Releases">
+    <div class="wrap">
+      {!video && chapter && <p>Chapter {chapter.n} of the Story tells this part of the band’s history: <a href={chapter.href}>read “<span set:html={chapter.titleHtml} />”</a>.</p>}
+      <div class="pager">
+        {prev && <a class="prev" href={`/music/${prev.slug}/`}><span class="meta">Earlier</span><span>{prev.title} ({prev.year})</span></a>}
+        <a class="all" href="/music/">All releases</a>
+        {next && <a class="next" href={`/music/${next.slug}/`}><span class="meta">Later</span><span>{next.title} ({next.year})</span></a>}
+      </div>
+    </div>
+  </nav>
+</Base>

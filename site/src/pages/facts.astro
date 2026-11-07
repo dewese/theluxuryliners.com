@@ -1,0 +1,34 @@
+---
+// Facts (plan §5.4): short answers, the same text in FAQPage JSON-LD (visible answers only).
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import SecHead from '../components/SecHead.astro';
+import { factsView } from '../lib/views.ts';
+import { faqPage } from '../lib/jsonld.ts';
+import { DISAMBIGUATION } from '../lib/site.ts';
+import { smart } from '../lib/typo.ts';
+const v = factsView();
+---
+<Base title="Facts" fullBand description="Short answers about The Luxury Liners: who founded the band, when and where, who is in it, what it released and where to listen." jsonld={[faqPage(v.rows.filter((r) => r.faq).map((r) => ({ q: r.q, a: r.aText })))]}>
+  <PageHead title="Facts" kicker="Short answers">
+    {v.introHtml && <div class="lede" set:html={v.introHtml} />}
+  </PageHead>
+  <div class="band surface">
+    <div class="wrap">
+      <dl class="facts">
+        {/* stable ids from content/facts.json, so one answer can be linked to and cited (audit-seo S8) */}
+        {v.rows.map((f) => <><dt id={f.id}>{smart(f.q)}</dt><dd set:html={f.aHtml} /></>)}
+      </dl>
+    </div>
+  </div>
+  <div class="wrap page-body">
+    <section aria-labelledby="nc">
+      <SecHead id="nc">Not to be confused with</SecHead>
+      <p class="measure">{DISAMBIGUATION}</p>
+    </section>
+    <section aria-labelledby="dating">
+      <SecHead id="dating">{v.datingHeading}</SecHead>
+      <p class="measure">{smart(v.dating)}</p>
+    </section>
+  </div>
+</Base>
