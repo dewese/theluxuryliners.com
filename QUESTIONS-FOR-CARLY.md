@@ -25,7 +25,7 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 
 ## Launch gate: must be answered before launch (added 2026-11-06, audits round 2)
 
-**G1. Journal-derived material (LL-25).** These were taken from the band's 2001–04 journal (dates, venues and short paraphrased notes; the quotes are already held). LL-25 says David approves each journal month before it goes live. Does David approve all of them as they stand?
+**G1. Journal-derived material (LL-25).** ANSWERED 2026-11-07 (LL-46: approved).  These were taken from the band's 2001–04 journal (dates, venues and short paraphrased notes; the quotes are already held). LL-25 says David approves each journal month before it goes live. Does David approve all of them as they stand?
   - the 2001–04 rows on the Shows page (`content/shows.json`), including the early October 2003 row (see the "Still In Love" question below);
   - Story chapter 5, "The journal years" (`content/story/05-journal-years.md`);
   - the Shows page meta description ("…SXSW, Las Vegas, Atlanta with Blues Traveler…", `site/src/pages/shows.astro`);
@@ -40,11 +40,11 @@ Written 2026-10-07 (revised in round 2 after `critiques/plan-round1.md`: every q
 - *Why it matters:* the title helps readers find the piece, but the piece itself goes beyond the band (LL-7).
 - *Proposed default:* listed without the title (as now).
 
-**G3. Two cells of the decisions file are now worded by role (public repository).** The repository is public. `DECISIONS-2026-10-07.md` LL-4 named the town from the founding story and LL-31 printed the contact address. Both cells now say the same thing by role ("a Texas town"; "the owner's address, the Worker secret `CONTACT_TO`"), and the exact original wording is kept in the git-ignored `data/private/decisions-private.md`. No decision changed. Please reply with a one-line OK to keep this wording (or say how to word it). Separately, the old wording is still in the git history: purge it, accept it, or make the repository private until launch (`site/BUILD-LOG.md`, "Owner decisions needed", item 1).
+**G3. Two cells of the decisions file are now worded by role (public repository).** ANSWERED 2026-11-07 (LL-47: repo private until launch; keep history; role wording stays).  The repository is public. `DECISIONS-2026-10-07.md` LL-4 named the town from the founding story and LL-31 printed the contact address. Both cells now say the same thing by role ("a Texas town"; "the owner's address, the Worker secret `CONTACT_TO`"), and the exact original wording is kept in the git-ignored `data/private/decisions-private.md`. No decision changed. Please reply with a one-line OK to keep this wording (or say how to word it). Separately, the old wording is still in the git history: purge it, accept it, or make the repository private until launch (`site/BUILD-LOG.md`, "Owner decisions needed", item 1).
 - *Why it matters:* LL-7 says the founding town is never public, and the address lives only in the Worker.
 - *Proposed default:* keep the role wording. Launch waits for this OK and the history answer.
 
-**G4. The CI secret `PRIVATE_LITERALS_KEY`.** The automatic check on pull requests scans for the private words (contact address, founding town and the like) using a secret key. Until the key is added as a GitHub Actions secret, CI runs everything else and only warns, so a CMS edit that added a private word would pass CI (release builds still refuse to run without the key). Add the secret in the repository's Settings, Secrets and variables, Actions; then remove the two `PRIVATE_LITERALS_OPTIONAL` lines from `.github/workflows/ci.yml` (security audit round 4).
+**G4. The CI secret `PRIVATE_LITERALS_KEY`.** ANSWERED 2026-11-07 (LL-48: okay; secret to be added).  The automatic check on pull requests scans for the private words (contact address, founding town and the like) using a secret key. Until the key is added as a GitHub Actions secret, CI runs everything else and only warns, so a CMS edit that added a private word would pass CI (release builds still refuse to run without the key). Add the secret in the repository's Settings, Secrets and variables, Actions; then remove the two `PRIVATE_LITERALS_OPTIONAL` lines from `.github/workflows/ci.yml` (security audit round 4).
 - *Proposed default:* add the secret before launch. Launch waits for it.
 
 ---
